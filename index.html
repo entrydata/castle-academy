@@ -162,6 +162,15 @@ input[type=radio],input[type=checkbox]{width:auto}
 .lg{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--mute)}.lg i{display:inline-block;width:10px;height:10px;border-radius:99px;margin-right:6px}.lchart{width:100%}
 .sc{flex-wrap:wrap;justify-content:flex-end}.sc button{width:34px;height:34px}
 @media(prefers-reduced-motion:reduce){.rd,.rdp{animation:none}}
+.sym{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px;align-items:center}.rdc{min-width:0}
+.pfw{display:flex;flex-direction:column;align-items:center;text-align:center}
+.pfr{width:220px;height:220px;border-radius:26px;padding:6px;background:linear-gradient(135deg,var(--royal),var(--brass));box-shadow:0 12px 28px color-mix(in srgb,var(--royal) 28%,transparent);position:relative;margin:10px}
+.pfr::after{content:"";position:absolute;inset:-9px;border-radius:34px;border:2px dashed color-mix(in srgb,var(--royal) 40%,transparent);pointer-events:none}
+.pfr img,.pfn{width:100%;height:100%;border-radius:21px;object-fit:cover;background:#fff;border:3px solid #fff;display:block}
+.pfn{display:grid;place-items:center;font:800 64px 'Bricolage Grotesque';color:var(--royal);background:var(--mist)}
+.infw{display:flex;gap:20px;align-items:center;flex-wrap:wrap}.infc{flex:1 1 320px;min-width:0}
+.prg{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:18px;align-items:center;margin-bottom:12px}
+@media(max-width:760px){.sym,.prg{grid-template-columns:1fr}}
 /* modal & toast */
 .ov{position:fixed;inset:0;background:rgba(23,34,77,.55);display:grid;place-items:center;padding:16px;z-index:20}
 .modal{background:#fff;border-radius:18px;padding:26px;width:100%;max-width:760px;max-height:92vh;overflow:auto}
@@ -188,7 +197,7 @@ input[type=radio],input[type=checkbox]{width:auto}
     <h1 class="bn">Castle Academy</h1>
     <p class="sub">English &amp; Mathematics Learning Center</p>
     <div class="rule"></div>
-    <p class="quote">Learn Together, Grow Forever.</p>
+    <p class="quote">Learn Together, Grow Together.</p>
   </div>
   <div class="rside">
     <div class="lcard">
@@ -198,7 +207,8 @@ input[type=radio],input[type=checkbox]{width:auto}
       <label for="lp">Password</label><input id="lp" type="password" autocomplete="current-password">
       <div class="err" id="lerr"></div>
       <button class="btn full" id="lbtn">Masuk</button>
-      <div id="setup" class="hide"><p style="color:var(--mute);font-size:13px;margin-top:16px">Alamat server belum diatur. Tempel URL Web App Apps Script (berakhiran /exec) sekali saja di perangkat ini.</p><input id="apiu" placeholder="https://script.google.com/macros/s/.../exec"><button class="btn ghost full" id="apis" type="button" style="margin-top:10px">Simpan alamat server</button></div>
+      <div id="setup" class="hide"><p style="color:var(--mute);font-size:13px;margin-top:16px">Alamat server belum diatur. Tempel URL Web App Apps Script (berakhiran /exec) sekali di perangkat ini, atau isi file config.json di repositori GitHub agar tidak perlu menempel lagi.</p><input id="apiu" placeholder="https://script.google.com/macros/s/.../exec"><button class="btn ghost full" id="apis" type="button" style="margin-top:10px">Simpan alamat server</button></div>
+      <p id="diag" style="font-size:12px;margin-top:12px;min-height:16px"></p>
     </div>
   </div>
 </section>
@@ -219,17 +229,29 @@ input[type=radio],input[type=checkbox]{width:auto}
 let S = {token: null, user: null, view: 'dash'};
 const $ = s => document.querySelector(s);
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-(function () { try { const q = new URLSearchParams(location.search).get('api'); if (q && /^https:\/\/script\.google\.com\/macros\/(a\/[^\/]+\/)?s\/[\w-]+\/exec$/.test(q)) { localStorage.setItem('ca_api', q); history.replaceState(null, '', location.pathname + location.hash); } } catch (e) {} })();
+const API_RX = /^https:\/\/script\.google\.com\/macros\/(a\/[^\/]+\/)?s\/[\w-]+\/exec$/;
+(function () { try { const q = new URLSearchParams(location.search).get('api'); if (q && API_RX.test(q)) { localStorage.setItem('ca_api', q); history.replaceState(null, '', location.pathname + location.hash); } } catch (e) {} })();
 const GAS = typeof google !== 'undefined' && !!(google.script && google.script.run);
-let API = window.API_URL || ''; try { API = API || localStorage.getItem('ca_api') || ''; } catch (e) {}
-const call = (fn, ...a) => GAS ? new Promise((ok, no) => google.script.run
-  .withSuccessHandler(r => r.ok ? ok(r.data) : no(new Error(r.error)))
-  .withFailureHandler(e => no(new Error(e.message))) [fn](...a))
-  : !API ? Promise.reject(new Error('Alamat server belum diatur.'))
-  : fetch(API, {method: 'POST', headers: {'Content-Type': 'text/plain;charset=utf-8'}, body: JSON.stringify({fn, a}), redirect: 'follow'})
-      .then(r => r.json(), () => { throw new Error('Tidak dapat menghubungi server. Periksa internet dan pengaturan Web App (akses: Anyone).'); })
-      .then(r => { if (r && r.ok) return r.data; throw new Error((r && r.error) || 'Kesalahan server'); });
+// ====== ISI SEKALI: tempel alamat Web App Apps Script (berakhiran /exec) di antara tanda kutip berikut ======
+const API_TETAP = 'https://script.google.com/macros/s/AKfycbwn7xnNKKsX0uFobOFmFIjmRfDPSsRcd0LvkyxBayZyOEy3o-HMM0ZWYFuJ9Qvmf9qF/exec';
+let API = API_TETAP || window.API_URL || ''; try { API = API || localStorage.getItem('ca_api') || ''; } catch (e) {}
+// config.json (di repositori GitHub, sebelah index.html) berisi {"api": "alamat /exec"} agar login langsung tanpa menempel alamat server
+const CFG = GAS ? Promise.resolve() : fetch('config.json', {cache: 'no-store'}).then(r => r.ok ? r.json() : null).then(c => { if (c && API_RX.test(c.api || '')) API = c.api; }).catch(() => {});
+const diagSet = (txt, ok) => { const d = $('#diag'); if (!d) return; d.style.color = ok ? 'var(--ok)' : 'var(--bad)'; d.innerHTML = esc(txt) + (GAS ? '' : ' <a href="#" id="rst">Ganti alamat server</a>'); const r = $('#rst'); if (r) r.onclick = ev => { ev.preventDefault(); try { localStorage.removeItem('ca_api'); } catch (x) {} $('#setup').classList.remove('hide'); }; };
+const call = (fn, ...a) => GAS ? new Promise((ok, no) => {
+    const t = setTimeout(() => no(new Error('Server Apps Script tidak merespons. Coba lagi beberapa saat.')), 60000);
+    google.script.run.withSuccessHandler(r => { clearTimeout(t); if (r && r.ok) ok(r.data); else no(new Error((r && r.error) || 'Respons server kosong.')); })
+      .withFailureHandler(e => { clearTimeout(t); no(new Error((e && e.message) || 'Gagal memanggil server.')); })[fn](...a);
+  })
+  : CFG.then(() => {
+    if (!API) throw new Error('Alamat server belum diatur.');
+    return fetch(API, {method: 'POST', headers: {'Content-Type': 'text/plain;charset=utf-8'}, body: JSON.stringify({fn, a}), redirect: 'follow'})
+      .then(r => r.text(), () => { throw new Error('Tidak dapat menghubungi server. Periksa internet dan pastikan Web App memakai akses "Anyone".'); })
+      .then(t => { let r; try { r = JSON.parse(t); } catch (e) { throw new Error('Server mengembalikan halaman, bukan data. Deploy ulang Code.gs terbaru (Manage deployments > Edit > New version) dengan akses "Anyone".'); }
+        if (r && r.ok) return r.data; throw new Error((r && r.error) || 'Kesalahan server'); });
+  });
 const api = (a, p) => call('api', a, S.token, p || {}).catch(e => { if (/Sesi berakhir/.test(e.message) && S.token) doLogout('Sesi berakhir. Silakan login kembali.'); throw e; });
+addEventListener('error', e => { const d = $('#lerr'); if (d && !$('#login').classList.contains('hide')) d.textContent = 'Kesalahan aplikasi: ' + e.message; });
 const JENJANG = ['TK–SD kelas 2', 'SD kelas 3–4', 'SD kelas 5–6', 'SMP', 'SMA'];
 const PROGRAM = ['English', 'Mathematics', 'English, Mathematics'];
 const KEHADIRAN = ['Hadir', 'Izin', 'Sakit', 'Absen', 'Reschedule'];
@@ -283,7 +305,7 @@ function doLogout(msg) {
   $('#lu').value = ''; $('#lp').value = ''; $('#lerr').textContent = msg || ''; window.scrollTo(0, 0); $('#lu').focus();
 }
 $('#out').onclick = () => doLogout();
-if (!GAS && !API) $('#setup').classList.remove('hide');
+CFG.then(() => { if (!GAS && !API) $('#setup').classList.remove('hide'); });
 $('#apis').onclick = () => { const v = $('#apiu').value.trim(); if (!/^https:\/\/script\.google\.com\/macros\/(a\/[^\/]+\/)?s\/[\w-]+\/exec$/.test(v)) return toast('URL Web App tidak valid. Harus berakhiran /exec.', true); try { localStorage.setItem('ca_api', v); } catch (e) {} location.reload(); };
 $('#burger').onclick = () => $('#side').classList.toggle('open');
 
@@ -352,19 +374,24 @@ async function vUsers(filter) {
   });
 }
 function userForm(u, filter) {
-  const admin = S.user.Role === 'admin', edit = !!u.Username;
+  const admin = S.user.Role === 'admin', edit = !!u.Username, PH = {};
   modal(edit ? 'Ubah pengguna' : 'Tambah pengguna',
     `<div class="row">${fld('fu', 'Username', u.Username)}${fld('fp', edit ? 'Password (kosongkan jika tetap)' : 'Password', '', 'password')}</div>
      <div class="row">${fld('fn', 'Nama lengkap', u.Nama)}${admin ? sel('fr', 'Peran', opts(['siswa', 'pegawai', 'admin'], u.Role || (filter !== 'semua' ? filter : 'siswa'))) : ''}</div>
      <div class="row">${sel('fj', 'Jenjang (siswa)', '<option value="">-</option>' + opts(JENJANG, u.Jenjang))}${fld('fg', 'Program (terisi otomatis dari paket)', u.Program)}</div>
      <div class="row">${fld('fk', 'Kelompok, mis. English A', u.Kelompok)}${fld('fm', 'Tanggal mulai', u.Mulai, 'date')}</div>
      <div class="row">${fld('fh', 'No. HP siswa', u.HP, 'tel')}${fld('fo', 'No. HP orang tua', u.HPOrtu, 'tel')}${fld('fe', 'Gmail', u.Gmail, 'email')}${fld('fz', 'Kode registrasi (kosong = otomatis)', u.KodeReg)}</div>
-     <div class="act" style="margin-top:12px"><button class="btn ghost sm" id="fscan" type="button">Scan kode registrasi (kamera)</button></div><label for="fa">Alamat</label><textarea id="fa" rows="2">${esc(u.Alamat)}</textarea>`,
+     <div class="act" style="margin-top:12px"><button class="btn ghost sm" id="fscan" type="button">Scan kode registrasi (kamera)</button></div><label for="fa">Alamat</label><textarea id="fa" rows="2">${esc(u.Alamat)}</textarea>
+     <label>Foto (opsional, otomatis dikecilkan dan dipotong persegi)</label><div class="act" style="align-items:center"><img id="fprev" alt="" style="width:64px;height:64px;border-radius:14px;object-fit:cover;background:var(--mist);border:2px solid var(--line)"><input type="file" id="ff" accept="image/*"><button class="btn del sm" id="fdel" type="button">Hapus foto</button></div>`,
     async () => {
       await api('saveUser', {Username: val('fu'), Password: $('#fp').value, Nama: val('fn'), Role: admin ? val('fr') : 'siswa', Jenjang: val('fj'), Program: val('fg'), Kelompok: val('fk'), Mulai: val('fm'), HP: val('fh'), HPOrtu: val('fo'), Gmail: val('fe'), Alamat: val('fa'), KodeReg: val('fz')});
+      if (PH.d || PH.del) await api('savePhoto', {Username: val('fu'), Data: PH.d || ''});
       toast('Tersimpan'); vUsers(filter);
     });
   if (edit) $('#fu').readOnly = true;
+  $('#ff').onchange = async e => { const f = e.target.files[0]; if (!f) return; try { PH.d = await fotoResize(f); PH.del = false; $('#fprev').src = PH.d; } catch (x) { fail(x); } };
+  $('#fdel').onclick = () => { PH.d = ''; PH.del = true; $('#fprev').removeAttribute('src'); };
+  if (edit) api('foto', {Username: u.Username}).then(d => { if (d && !PH.d && !PH.del) $('#fprev').src = d; }).catch(() => {});
   $('#fscan').onclick = () => scanCode(c => { $('#fz').value = c; });
 }
 
@@ -373,7 +400,7 @@ const SC = ['', 'Perlu bimbingan', 'Kurang', 'Cukup', 'Baik', 'Sangat baik'];
 const vals = (rows, g, nm) => rows.map(r => Number(((r.N || {})[g] || {})[nm])).filter(v => v > 0);
 const mean = a => a.length ? Math.round(a.reduce((s, x) => s + x, 0) / a.length * 10) / 10 : null;
 const spark = a => a.length < 2 ? '' : `<svg width="90" height="22" viewBox="0 0 90 22"><polyline fill="none" style="stroke:var(--royal)" stroke-width="2" stroke-linejoin="round" points="${a.map((v, i) => `${(i / (a.length - 1) * 86 + 2).toFixed(1)},${(20 - (v - 1) / 9 * 18).toFixed(1)}`).join(' ')}"/></svg>`;
-const aspek = (title, g, names, rows) => `<h3>${title}</h3>${names.length ? `<div class="tw"><table><tr><th>Aspek</th><th>Rata-rata (1-10)</th><th>Kategori</th><th>Tren per pertemuan</th></tr>${names.map(n => { const v = vals(rows, g, n), m = mean(v); return `<tr><td>${esc(n)}</td><td><b>${m == null ? '-' : m}</b> <small>(${v.length}x dinilai)</small></td><td>${m == null ? '-' : SC[Math.max(1, Math.ceil(m / 2))]}</td><td>${spark(v)}</td></tr>`; }).join('')}</table></div>` : '<p>Belum ada aspek penilaian pada paket ini.</p>'}`;
+const aspek = (title, g, names, rows) => `<h3>${title}</h3>${names.length ? `<div class="tw"><table><tr><th>Aspek</th><th>Nilai akhir (1-10)</th><th>Kategori</th><th>Perkembangan</th><th>Tren per pertemuan</th></tr>${names.map(n => { const v = vals(rows, g, n), l = lastVal(rows, g, n), f = firstVal(rows, g, n), d = l != null && f != null ? l - f : null; return `<tr><td>${esc(n)}</td><td><b>${l == null ? '-' : l}</b> <small>(${v.length}x dinilai)</small></td><td>${l == null ? '-' : SC[Math.max(1, Math.ceil(l / 2))]}</td><td>${d == null || v.length < 2 ? '-' : `${f} → ${l} <b style="color:${d > 0 ? 'var(--ok)' : d < 0 ? 'var(--bad)' : 'var(--mute)'}">(${d > 0 ? '+' : ''}${d})</b>`}</td><td>${spark(v)}</td></tr>`; }).join('')}</table></div>` : '<p>Belum ada aspek penilaian pada paket ini.</p>'}`;
 const uniq = ls => [...new Map(ls.map(l => [l.Username, l.Nama])).entries()];
 const listEd = (box, arr, ph, add) => {
   const draw = () => { $(box).innerHTML = arr.map((v, i) => `<div class="qo"><input data-i="${i}" value="${esc(v)}" placeholder="${ph} ${i + 1}"><button class="btn del sm" data-x="${i}" type="button">×</button></div>`).join(''); $(add).disabled = arr.length >= 6; };
@@ -388,7 +415,7 @@ async function vProgress() {
     `<div class="panel"><div class="row">${sel('ps', 'Siswa', us.map(u => `<option value="${esc(u[0])}">${esc(u[1])}</option>`).join(''))}${sel('pl2', 'Paket aktif', '')}</div><button class="btn ghost sm" id="pscan" type="button" style="margin-top:10px">Scan kartu siswa</button><div id="pinfo" style="margin-top:10px"></div></div><div id="pform"></div><div id="plist"></div>` :
     '<div class="panel empty">Belum ada siswa dengan paket aktif. Catat pembayaran paket di menu Keuangan.</div>');
   if (!ls.length) return;
-  let L = null, rows = [];
+  let L = null, rows = [], FOTO = '', FU = '';
   const draw = () => {
     const next = Math.min(L.Total, rows.reduce((m, r) => Math.max(m, Number(r.Pertemuan)), 0) + 1);
     $('#pinfo').innerHTML = `<span class="tag">${esc(L.Program)}</span> <span class="tag">${esc(L.PaketNama)}</span> ${stTag(L.Status)} <small>Termin ${L.Dibayar}/${L.Termin} • pertemuan tercatat ${rows.length}/${L.Total}</small>`;
@@ -405,11 +432,12 @@ async function vProgress() {
       const N = {P: {}, K: {}}; document.querySelectorAll('#pform .sc').forEach(s => { const a = s.querySelector('.on'); if (a) N[s.dataset.g][nm(s)] = +a.dataset.v; });
       try { await api('saveProgress', {Username: L.Username, LID: L.ID, Pertemuan: val('pm'), Tanggal: val('pt'), Kehadiran: val('pk'), Catatan: val('pc'), Nilai: N}); toast('Catatan tersimpan'); await load(); } catch (e) { fail(e); }
     };
-    const ov = overall(rows, L.P, L.K), allN = L.P.concat(L.K), avs = L.P.map(n => mean(vals(rows, 'P', n))).concat(L.K.map(n => mean(vals(rows, 'K', n))));
-    $('#plist').innerHTML = `<div class="panel"><h3>Rata-rata sementara</h3><div class="rdw">${radarSVG(allN, avs, 10)}<div>${ov == null ? '<p>Belum ada nilai.</p>' : `<div class="score" style="font-size:48px;color:var(--royal)">${ov}</div><small>skor rata-rata keseluruhan (1-10)</small><div style="margin-top:8px">${bdg(ov)}</div>`}</div></div>${aspek('Pemahaman materi', 'P', L.P, rows)}${aspek('Keterampilan', 'K', L.K, rows)}</div>
-      <div class="panel tw"><h3>Riwayat pertemuan</h3>${ov == null ? '' : `<p>Skor rata-rata keseluruhan: <b>${ov}</b> ${bdg(ov)}</p>`}<table><tr><th>Ke</th><th>Tanggal</th><th>Hadir</th><th>Skor</th><th>Badge</th><th>Catatan</th></tr>${rows.slice().reverse().map(r => { const a = rowAvg(r); return `<tr><td>${r.Pertemuan}</td><td>${esc(r.Tanggal)}</td><td>${esc(r.Kehadiran)}</td><td><b>${a == null ? '-' : a}</b></td><td>${bdg(a)}</td><td>${esc(r.Catatan)}</td></tr>`; }).join('') || '<tr><td colspan="6" class="empty">Belum ada catatan.</td></tr>'}</table></div>`;
+    const allN = L.P.concat(L.K), lv = L.P.map(n => lastVal(rows, 'P', n)).concat(L.K.map(n => lastVal(rows, 'K', n))), fin = mean(lv.filter(v => v != null)), pr = progres(rows);
+    const hist = rows.map((r, i) => { const a = rowAvg(r); let pv = null; for (let k = i - 1; k >= 0; k--) { const x = rowAvg(rows[k]); if (x != null) { pv = x; break; } } return {r, a, d: a != null && pv != null ? Math.round((a - pv) * 10) / 10 : null}; }).reverse();
+    $('#plist').innerHTML = `<div class="panel"><h3>Nilai terakhir</h3><div class="sym"><div class="rdc">${radarSVG(allN, lv.map(v => v || 0), 10)}</div>${photoFrame(FOTO, L.Nama, fin, L.PaketNama)}</div>${aspek('Pemahaman materi', 'P', L.P, rows)}${aspek('Keterampilan', 'K', L.K, rows)}</div>
+      <div class="panel tw"><h3>Riwayat pertemuan</h3>${progresHtml(pr)}<table><tr><th>Ke</th><th>Tanggal</th><th>Hadir</th><th>Skor</th><th>Perubahan</th><th>Catatan</th></tr>${hist.map(x => `<tr><td>${x.r.Pertemuan}</td><td>${esc(x.r.Tanggal)}</td><td>${esc(x.r.Kehadiran)}</td><td><b>${x.a == null ? '-' : x.a}</b></td><td>${x.d == null ? '-' : x.d > 0 ? `<b style="color:var(--ok)">▲ +${x.d}</b>` : x.d < 0 ? `<b style="color:var(--bad)">▼ ${x.d}</b>` : '='}</td><td>${esc(x.r.Catatan)}</td></tr>`).join('') || '<tr><td colspan="6" class="empty">Belum ada catatan.</td></tr>'}</table></div>`;
   };
-  const load = async () => { L = ls.find(l => l.ID === val('pl2')); rows = await api('progress', {Username: L.Username, LID: L.ID}); draw(); };
+  const load = async () => { L = ls.find(l => l.ID === val('pl2')); rows = await api('progress', {Username: L.Username, LID: L.ID}); if (FU !== L.Username) { FOTO = await api('foto', {Username: L.Username}).catch(() => ''); FU = L.Username; } draw(); };
   const fillPk = () => { $('#pl2').innerHTML = ls.filter(l => l.Username === val('ps')).map(l => `<option value="${l.ID}">${esc(l.Program + ' – ' + l.PaketNama)}</option>`).join(''); load().catch(fail); };
   $('#ps').onchange = fillPk; $('#pl2').onchange = () => load().catch(fail); fillPk();
   $('#pscan').onclick = () => scanCode(c => { const l = ls.find(x => x.KodeReg === c); if (!l) return toast('Kode tidak dikenali atau siswa belum punya paket aktif.', true); $('#ps').value = l.Username; fillPk(); });
@@ -448,7 +476,7 @@ function applyTheme(s) {
   r.setProperty('--royal', s.WarnaUtama); r.setProperty('--brass', s.WarnaAksen); r.setProperty('--mist', s.WarnaLatar);
   document.title = s.Nama; document.querySelectorAll('.bn').forEach(e => e.textContent = s.Nama);
 }
-call('publicSettings').then(applyTheme).catch(() => {});
+call('publicSettings').then(s => { applyTheme(s); if (!GAS) diagSet('Server terhubung.', true); }).catch(e => diagSet(e.message, false));
 
 /* ---------- Daftar Program Paket ---------- */
 const termAmt = pk => Math.ceil(pk.Harga / pk.Termin);
@@ -596,12 +624,12 @@ async function vAktif() {
 /* ---------- Laporan individual ---------- */
 const repBody = d => {
   const l = d.l, u = d.user, rows = d.prog, hadir = rows.filter(r => r.Kehadiran === 'Hadir').length;
-  const ap = mean(d.pk.P.map(n => mean(vals(rows, 'P', n))).concat(d.pk.K.map(n => mean(vals(rows, 'K', n)))).filter(v => v != null));
+  const lvr = d.pk.P.map(n => lastVal(rows, 'P', n)).concat(d.pk.K.map(n => lastVal(rows, 'K', n))), ap = mean(lvr.filter(v => v != null)), pgr = progres(rows);
   const as = d.res.length ? Math.round(d.res.reduce((s, r) => s + Number(r.Skor), 0) / d.res.length) : null;
   const comb = ap != null && as != null ? (ap / 10 * 100 + as) / 2 : ap != null ? ap / 10 * 100 : as, rc = rec(comb == null ? null : Math.round(comb));
   const info = [['Nama', u.Nama], ['Jenjang', u.Jenjang], ['Kelompok', u.Kelompok], ['Program', l.Program], ['Paket belajar', l.PaketNama], ['Mulai', l.Mulai], ['Termin dibayar', `${l.Dibayar} dari ${l.Termin}`], ['Pertemuan tercatat', `${l.Tercatat} dari ${l.Total}`], ['Kehadiran', `${hadir} hadir dari ${rows.length} tercatat`]];
-  return `<h3>Informasi siswa</h3><table>${info.map(r => `<tr><td style="width:150px;color:var(--mute)">${r[0]}</td><td><b>${esc(r[1])}</b></td></tr>`).join('')}</table>
-    ${ap != null ? `<p>Skor rata-rata keseluruhan: <b>${ap}</b> ${bdg(ap)}</p>` : ''}${d.pk.P.length + d.pk.K.length >= 3 ? radarSVG(d.pk.P.concat(d.pk.K), d.pk.P.map(n => mean(vals(rows, 'P', n))).concat(d.pk.K.map(n => mean(vals(rows, 'K', n)))), 10) : ''}${aspek('Pemahaman materi', 'P', d.pk.P, rows)}${aspek('Keterampilan', 'K', d.pk.K, rows)}
+  return `<h3>Informasi siswa</h3><div class="infw"><div class="infc"><table>${info.map(r => `<tr><td style="width:150px;color:var(--mute)">${r[0]}</td><td><b>${esc(r[1])}</b></td></tr>`).join('')}</table></div>${d.foto ? photoFrame(d.foto, u.Nama, null) : ''}</div>
+    ${ap != null ? `<p>Nilai akhir siswa (rata-rata nilai terakhir tiap aspek): <b>${ap}</b> ${bdg(ap)}</p>` : ''}${pgr ? `<p>Kemajuan pertemuan ${pgr.fk} sampai ${pgr.lk}: ${pbdg(pgr.d)} <b>${pgr.f}</b> menjadi <b>${pgr.l}</b> (${pgr.d > 0 ? '+' : ''}${pgr.d})</p>` : ''}${d.pk.P.length + d.pk.K.length >= 3 ? radarSVG(d.pk.P.concat(d.pk.K), lvr.map(v => v || 0), 10) : ''}${aspek('Pemahaman materi', 'P', d.pk.P, rows)}${aspek('Keterampilan', 'K', d.pk.K, rows)}
     <h3>Catatan tutor</h3>${rows.filter(r => r.Catatan).slice(-10).map(r => `<div class="note"><b>Pertemuan ${r.Pertemuan}</b> <small>${esc(r.Tanggal)} • ${esc(r.Tutor)}</small><br>${esc(r.Catatan)}</div>`).join('') || '<p>Belum ada catatan.</p>'}
     <h3>Hasil asesmen</h3>${d.res.length ? `<div class="tw"><table><tr><th>Asesmen</th><th>Tanggal</th><th>Nilai</th><th>Kategori</th></tr>${d.res.map(r => `<tr><td>${esc(r.Judul || r.Program)}</td><td>${esc(r.Tanggal)}</td><td><b>${r.Skor}</b>${Number(r.Pending) > 0 ? '*' : ''}</td><td>${kat(r.Skor)}</td></tr>`).join('')}</table></div>` : '<p>Belum ada hasil asesmen pada paket ini.</p>'}
     <h3>Rekomendasi</h3><p>${comb == null ? 'Rekomendasi diberikan setelah ada nilai progres atau asesmen.' : `<b>${rc}</b>: ${REC[rc]} pada tahap berikutnya.`}</p>
@@ -637,7 +665,9 @@ async function vSettings() {
     <label>Alamat API Apps Script (terisi otomatis)</label><input id="s_api" value="${esc(s.ApiURL)}" readonly>
     <label>Tautan siap bagikan ke pegawai dan siswa</label><input id="s_link" readonly>
     <div class="act" style="margin-top:10px"><button class="btn ghost sm" id="cl" type="button">Salin tautan</button><button class="btn ghost sm" id="ql" type="button">Tampilkan QR</button></div>
-    <p style="color:var(--mute);font-size:13px">Buka tautan ini sekali di perangkat siswa. Alamat API tersimpan otomatis di browser, sehingga kamera, scan QR, dan printer dapat dipakai.</p></div>
+    <p style="color:var(--mute);font-size:13px">Buka tautan ini sekali di perangkat siswa. Alamat API tersimpan otomatis di browser, sehingga kamera, scan QR, dan printer dapat dipakai.</p>
+    <label>Isi file <b>config.json</b> di repositori GitHub (agar semua perangkat langsung bisa login tanpa menempel alamat server)</label><textarea id="s_cfg" rows="2" readonly>{"api": "${esc(s.ApiURL)}"}</textarea>
+    <div class="act" style="margin-top:10px"><button class="btn ghost sm" id="cc" type="button">Salin isi config.json</button></div></div>
     <div class="panel"><h3>Server TURN (video live pemantauan ujian)</h3><div class="row">${f('TurnURL', 'Alamat TURN, mis. turn.contoh.com:3478')}${f('TurnUser', 'Username TURN')}${f('TurnPass', 'Password TURN', 'password')}</div>
     <div class="act"><button class="btn ghost" id="tt" type="button">Uji TURN</button></div><p id="tp" style="font-weight:600"></p></div>
     <button class="btn" id="sv">Simpan pengaturan</button>`;
@@ -646,6 +676,7 @@ async function vSettings() {
   $('#s_GithubURL').oninput = mk; mk();
   $('#cl').onclick = async () => { try { await navigator.clipboard.writeText($('#s_link').value); toast('Tautan disalin'); } catch (e) { $('#s_link').select(); document.execCommand('copy'); toast('Tautan disalin'); } };
   $('#ql').onclick = () => $('#s_link').value ? showQR($('#s_link').value, 'Tautan aplikasi') : toast('Isi alamat GitHub terlebih dahulu.', true);
+  $('#cc').onclick = async () => { try { await navigator.clipboard.writeText($('#s_cfg').value); toast('Isi config.json disalin'); } catch (e) { $('#s_cfg').select(); document.execCommand('copy'); toast('Isi config.json disalin'); } };
   $('#tt').onclick = async () => { $('#tp').textContent = 'Menguji server TURN...'; const r = await testTurn(val('s_TurnURL'), val('s_TurnUser'), $('#s_TurnPass').value); $('#tp').style.color = r.ok ? 'var(--ok)' : 'var(--bad)'; $('#tp').textContent = r.m; };
   $('#sv').onclick = async () => { try { const o = get(); await api('saveSettings', o); applyTheme(Object.assign({}, S.cfg, o)); toast('Pengaturan tersimpan'); } catch (e) { fail(e); } };
   $('#tc').onclick = async () => { try { await api('saveSettings', get()); const r = await api('testConn'); $('#tr').textContent = `Terhubung. Spreadsheet: ${r.sheet} • Folder: ${r.folder} • Akun script: ${r.akun}`; } catch (e) { $('#tr').textContent = e.message; } };
@@ -660,7 +691,7 @@ async function vAsesmen() {
     `<div class="panel tw"><table><tr><th>Kode</th><th>Asesmen</th><th>Program</th><th>Sasaran</th><th>Tipe</th><th>Soal</th><th>Durasi</th><th>Periode Paket</th><th>Status</th><th></th></tr>${as.map((a, i) => `<tr><td><b>${esc(a.Kode)}</b></td><td>${esc(a.Nama)}</td><td>${esc(a.Program)}</td><td>${esc([a.Jenjang, a.Kelompok].filter(Boolean).join(' / ') || 'Semua')}</td><td>${esc(a.Tipe)}</td><td>${a.soal.length}</td><td>${a.Durasi}m</td><td>${esc(perLabel(a.Periode, per))}</td><td><span class="tag ${a.Status === 'Aktif' ? 'g' : 'y'}">${esc(a.Status)}</span></td>
     <td class="act"><button class="btn ghost sm" data-w="${i}">Preview</button><button class="btn ghost sm" data-e="${i}">Ubah</button><button class="btn ghost sm" data-c="${i}">Salin</button><button class="btn ghost sm" data-p="${i}">Pantau</button><button class="btn ghost sm" data-h="${i}">Hasil</button><button class="btn del sm" data-d="${i}">Hapus</button></td></tr>`).join('') || '<tr><td colspan="10" class="empty">Belum ada asesmen. Buat asesmen pertama.</td></tr>'}</table></div>`;
   $('#add').onclick = () => asmForm({}, per);
-  const bind = (s, f) => document.querySelectorAll(s).forEach(b => b.onclick = () => f(as[b.dataset[s.slice(2, 3)]]));
+  const bind = (s, f) => document.querySelectorAll(s).forEach(b => b.onclick = () => f(as[b.dataset[s.slice(6, 7)]]));
   bind('[data-e]', a => asmForm(a, per));
   bind('[data-w]', a => examIntro({Nama: a.Nama, Program: a.Program, Jumlah: a.soal.length, Durasi: a.Durasi, Tema: a.Tema || 'def', Kamera: 'Tidak', soal: a.soal}, true));
   bind('[data-c]', a => asmForm(Object.assign({}, a, {Kode: '', Nama: 'Salinan ' + a.Nama}), per));
@@ -978,6 +1009,29 @@ function examRun(r, ex, a, pv, stream, needFs) {
   if (!pv) { lock(); ping(); }
   draw();
 }
+
+/* ---------- Nilai akhir, kemajuan, foto ---------- */
+const lastVal = (rows, g, nm) => { for (let i = rows.length - 1; i >= 0; i--) { const v = Number(((rows[i].N || {})[g] || {})[nm]); if (v > 0) return v; } return null; };
+const firstVal = (rows, g, nm) => { for (const r of rows) { const v = Number(((r.N || {})[g] || {})[nm]); if (v > 0) return v; } return null; };
+const progres = rows => { const s = rows.map(r => ({k: Number(r.Pertemuan), v: rowAvg(r)})).filter(x => x.v != null); if (s.length < 2) return null; const f = s[0], l = s[s.length - 1]; return {s, f: f.v, fk: f.k, l: l.v, lk: l.k, d: Math.round((l.v - f.v) * 10) / 10}; };
+const PBADGE = d => d >= 4 ? ['🚀', 'Melesat', '#7c5cf0'] : d >= 2 ? ['📈', 'Naik Pesat', '#1f9d78'] : d >= 0.5 ? ['🌱', 'Berkembang', '#3f9e6a'] : d > -0.5 ? ['⚖️', 'Stabil', '#2f7de1'] : d > -2 ? ['🔻', 'Menurun Ringan', '#e08a00'] : ['⚠️', 'Perlu Pendampingan', '#dc2f4a'];
+const pbdg = d => { const b = PBADGE(d); return `<span class="bdg" style="--bc:${b[2]}">${b[0]} ${b[1]}</span>`; };
+const trendSVG = s => {
+  const W = 560, H = 150, L = 28, B = 24, T = 10, n = s.length, x = i => L + i * (W - L - 16) / (n - 1), y = v => T + (H - T - B) * (1 - v / 10), st = Math.max(1, Math.ceil(n / 10));
+  return `<svg viewBox="0 0 ${W} ${H}" class="lchart">${[0, 5, 10].map(v => `<line x1="${L}" x2="${W - 8}" y1="${y(v)}" y2="${y(v)}" style="stroke:var(--line)"/><text x="${L - 5}" y="${y(v) + 4}" text-anchor="end" font-size="10" style="fill:var(--mute)">${v}</text>`).join('')}<polyline fill="none" style="stroke:var(--royal)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="${s.map((p, i) => x(i).toFixed(1) + ',' + y(p.v).toFixed(1)).join(' ')}"/>${s.map((p, i) => `<circle cx="${x(i).toFixed(1)}" cy="${y(p.v).toFixed(1)}" r="3.5" style="fill:var(--royal)"><title>Pertemuan ${p.k}: ${p.v}</title></circle>${i % st === 0 || i === n - 1 ? `<text x="${x(i).toFixed(1)}" y="${H - 6}" text-anchor="middle" font-size="10" style="fill:var(--mute)">${p.k}</text>` : ''}`).join('')}</svg>`;
+};
+const progresHtml = p => p ? `<div class="prg"><div><div style="margin-bottom:8px">${pbdg(p.d)}</div><p style="margin:0">Kemajuan dari pertemuan ${p.fk} sampai ${p.lk}: <b>${p.f}</b> menjadi <b>${p.l}</b> (<b>${p.d > 0 ? '+' : ''}${p.d}</b> poin).</p></div>${trendSVG(p.s)}</div>` : '<p style="color:var(--mute)">Kemajuan dihitung setelah minimal 2 pertemuan dinilai.</p>';
+const photoFrame = (foto, nama, fin, sub) => `<div class="pfw"><div class="pfr">${foto ? `<img src="${esc(foto)}" alt="Foto ${esc(nama)}">` : `<div class="pfn">${esc(String(nama || '?').split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase())}</div>`}</div><h3 style="margin:12px 0 2px;font-size:18px">${esc(nama)}</h3>${sub ? `<small style="color:var(--mute)">${esc(sub)}</small>` : ''}${fin != null ? `<div style="margin-top:6px"><small style="color:var(--mute)">Nilai akhir (rata-rata nilai terakhir): <b>${fin}</b></small><br>${bdg(fin)}</div>` : ''}</div>`;
+const fotoResize = file => new Promise((res, rej) => {
+  const img = new Image(), url = URL.createObjectURL(file);
+  img.onload = () => {
+    const Z = 320, c = document.createElement('canvas'); c.width = c.height = Z; const m = Math.min(img.width, img.height), x = c.getContext('2d');
+    x.fillStyle = '#fff'; x.fillRect(0, 0, Z, Z); x.drawImage(img, (img.width - m) / 2, (img.height - m) / 2, m, m, 0, 0, Z, Z);
+    let q = .85, d = c.toDataURL('image/jpeg', q); while (d.length > 44000 && q > .3) { q -= .1; d = c.toDataURL('image/jpeg', q); }
+    URL.revokeObjectURL(url); if (d.length > 44000) rej(new Error('Foto terlalu besar, pilih foto lain.')); else res(d);
+  };
+  img.onerror = () => rej(new Error('File bukan gambar yang valid.')); img.src = url;
+});
 </script>
 </body>
 </html>
