@@ -5,6 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Castle Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
 <style>
 :root{--ink:#12315c;--royal:#2a7de1;--brass:#f4b740;--mist:#f0f6fd;--line:color-mix(in srgb,var(--royal) 16%,#fff);--ok:#1f9d78;--bad:#d64545;--mute:#5d7394;--r:14px}
@@ -171,6 +172,54 @@ input[type=radio],input[type=checkbox]{width:auto}
 .infw{display:flex;gap:20px;align-items:center;flex-wrap:wrap}.infc{flex:1 1 320px;min-width:0}
 .prg{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:18px;align-items:center;margin-bottom:12px}
 @media(max-width:760px){.sym,.prg{grid-template-columns:1fr}}
+html{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+#app>div,main{min-width:0}main{margin:0 auto}
+.panel,.paper{overflow-x:auto}img,svg,video{max-width:100%}
+.spn{display:inline-block;width:16px;height:16px;border:2.5px solid var(--line);border-top-color:var(--royal);border-radius:50%;animation:spin .7s linear infinite;vertical-align:-3px}@keyframes spin{to{transform:rotate(360deg)}}
+#scrim{position:fixed;inset:0;background:rgba(18,49,92,.45);z-index:14}
+.rpt,.panel.rpt{padding:0;overflow:hidden}
+.rhd{background:linear-gradient(135deg,var(--royal),color-mix(in srgb,var(--royal) 55%,#8fd0ff));color:#fff;padding:22px 26px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center;border-bottom:6px solid var(--brass)}
+.rhd .rl{font-size:13px;opacity:.92}.rhd h1{font:800 30px/1.15 'Bricolage Grotesque';margin:4px 0 14px}
+.idg{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.idg div{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);border-radius:12px;padding:7px 11px;min-width:0}.idg small{display:block;font-size:11px;opacity:.85}.idg b{font-size:14px;word-break:break-word}
+.rhd .pfr{width:170px;height:170px;margin:8px;background:linear-gradient(135deg,#fff,var(--brass))}.rhd .pfr::after{border-color:rgba(255,255,255,.6)}
+.rbd{padding:20px 26px}.rbd h3{font-size:17px;margin:22px 0 8px;padding-bottom:4px;border-bottom:2px solid var(--royal)}
+.ach{display:flex;gap:30px;justify-content:center;flex-wrap:wrap;margin:6px 0 18px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch;margin-bottom:12px}
+.chc{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;display:flex;flex-direction:column;min-width:0}.chc h4{margin:0 0 6px;font-size:14px;color:var(--mute)}.chc svg{width:100%;height:auto;flex:1}
+.mdl{display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px}.bd3{height:170px;width:auto}.mdt b{display:block;font:700 16px 'Bricolage Grotesque'}.mdt small{color:var(--mute)}
+.prg{display:grid;grid-template-columns:minmax(200px,.6fr) 1.6fr;gap:18px;align-items:stretch;margin-bottom:10px}
+.prgb{display:grid;place-items:center;border:1px solid var(--line);border-radius:14px;padding:10px;background:linear-gradient(180deg,var(--mist),#fff)}
+.prgc{border:1px solid var(--line);border-radius:14px;padding:10px 12px;min-width:0;display:flex;flex-direction:column;justify-content:center}.prgc h4{margin:0 0 4px;font-size:14px;color:var(--mute)}.prgc svg{width:100%;height:auto}
+.prgt{margin:0 0 14px;color:var(--mute)}
+.lpt{border-collapse:separate;border-spacing:0;font-size:13px;width:100%}
+.lpt th,.lpt td{text-align:center;padding:9px 8px;border-bottom:1px solid var(--line)}
+.lpt thead th{color:#fff;font-size:12px;border-bottom:0;background:var(--ink)}.lpt thead th.gp{background:var(--royal)}.lpt thead th.gk{background:#d98a00}.lpt thead th.ga{background:var(--ok)}
+.lpt thead tr.g2 th{font-weight:600;font-size:11px;line-height:1.25;min-width:78px}
+.lpt tbody tr:nth-child(even){background:color-mix(in srgb,var(--mist) 65%,#fff)}
+.lpt td.c{min-width:78px}.lpt td.c b{font-size:15px;display:block}
+.dl{display:block;font-size:11px;font-weight:700;color:var(--mute)}.dl.up{color:var(--ok)}.dl.dn{color:var(--bad)}
+.lpt .sk{position:sticky;left:0;z-index:2;text-align:left;min-width:130px;background:#fff;box-shadow:2px 0 4px rgba(18,49,92,.06)}.lpt thead th.sk{background:var(--ink)}
+.lpt tbody tr:nth-child(even) .sk{background:color-mix(in srgb,var(--mist) 65%,#fff)}
+.lpt tfoot td{background:var(--mist);font-weight:700;border-top:2px solid var(--royal);border-bottom:0}.lpt tfoot .sk{background:var(--mist)}
+@media(max-width:1180px){.two{grid-template-columns:1fr}}
+@media(max-width:900px){
+ #app{grid-template-columns:1fr}
+ aside{position:fixed;left:0;top:0;width:270px;z-index:15;transform:translateX(-100%);transition:transform .25s}aside.open{transform:none;box-shadow:0 0 40px rgba(18,49,92,.3)}
+ .mbar{display:flex;align-items:center;gap:12px;background:var(--royal);color:#fff;padding:12px 16px;position:sticky;top:0;z-index:10;font:700 18px 'Bricolage Grotesque'}
+ .mbar button{background:none;border:0;color:#fff;font-size:24px;cursor:pointer;min-width:40px;min-height:40px}
+ main{padding:20px 16px}.top h2{font-size:24px}
+}
+@media(max-width:760px){.rhd{grid-template-columns:1fr;justify-items:center;text-align:center}.rhd>.pfr{order:-1}.idg{width:100%;text-align:left;grid-template-columns:repeat(2,minmax(0,1fr))}.pair,.prg,.sym{grid-template-columns:1fr}.rbd{padding:16px}.rhd h1{font-size:24px}}
+@media(max-width:640px){
+ main{padding:16px 12px}.top h2{font-size:21px}.top{margin-bottom:16px}.panel{padding:14px}
+ .stats{grid-template-columns:repeat(2,1fr);gap:10px}.stat{padding:12px}.stat b{font-size:24px}
+ .row{grid-template-columns:1fr}.btn{min-height:42px}.btn.sm{min-height:38px;padding:7px 12px}.act{flex-wrap:wrap}
+ table{font-size:13px}th,td{padding:8px 7px}.tabs{overflow-x:auto;flex-wrap:nowrap}.tabs button{flex:none}
+ input,select,textarea{font-size:16px}.modal{padding:16px;border-radius:14px}.ov{padding:8px}
+ .pfr{width:180px;height:180px}.bd3{height:150px}
+}
+@media print{.rhd,.pfr,.mdl,.bdg,.lpt thead th{-webkit-print-color-adjust:exact;print-color-adjust:exact}.pair,.ach,.prg{break-inside:avoid}.panel,.paper{overflow:visible}}
 /* modal & toast */
 .ov{position:fixed;inset:0;background:rgba(23,34,77,.55);display:grid;place-items:center;padding:16px;z-index:20}
 .modal{background:#fff;border-radius:18px;padding:26px;width:100%;max-width:760px;max-height:92vh;overflow:auto}
@@ -187,7 +236,7 @@ input[type=radio],input[type=checkbox]{width:auto}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
 </head>
 <body>
 
@@ -214,6 +263,7 @@ input[type=radio],input[type=checkbox]{width:auto}
 </section>
 
 <div id="app" class="hide">
+  <div id="scrim" class="hide"></div>
   <aside id="side">
     <div class="logo"><b class="bn">Castle Academy</b><span>Group Learning System</span></div>
     <nav id="nav"></nav>
@@ -250,7 +300,15 @@ const call = (fn, ...a) => GAS ? new Promise((ok, no) => {
       .then(t => { let r; try { r = JSON.parse(t); } catch (e) { throw new Error('Server mengembalikan halaman, bukan data. Deploy ulang Code.gs terbaru (Manage deployments > Edit > New version) dengan akses "Anyone".'); }
         if (r && r.ok) return r.data; throw new Error((r && r.error) || 'Kesalahan server'); });
   });
-const api = (a, p) => call('api', a, S.token, p || {}).catch(e => { if (/Sesi berakhir/.test(e.message) && S.token) doLogout('Sesi berakhir. Silakan login kembali.'); throw e; });
+const RC = new Map(), RTTL = {users: 30000, pakets: 30000, langganan: 15000, asesmen: 20000, keuangan: 10000}, MUT = /^(save|del|set|reset|stop|nilai|exam)/;
+const api = (a, p) => {
+  const ttl = RTTL[a], key = ttl ? a + JSON.stringify(p || {}) : '';
+  if (ttl) { const c = RC.get(key); if (c && Date.now() - c.t < ttl) return c.p; }
+  const mut = MUT.test(a); if (mut) RC.clear();
+  const pr = call('api', a, S.token, p || {}).then(x => { if (mut) RC.clear(); return x; }).catch(e => { if (ttl) RC.delete(key); if (/Sesi berakhir/.test(e.message) && S.token) doLogout('Sesi berakhir. Silakan login kembali.'); throw e; });
+  if (ttl) RC.set(key, {t: Date.now(), p: pr});
+  return pr;
+};
 addEventListener('error', e => { const d = $('#lerr'); if (d && !$('#login').classList.contains('hide')) d.textContent = 'Kesalahan aplikasi: ' + e.message; });
 const JENJANG = ['TK–SD kelas 2', 'SD kelas 3–4', 'SD kelas 5–6', 'SMP', 'SMA'];
 const PROGRAM = ['English', 'Mathematics', 'English, Mathematics'];
@@ -296,7 +354,7 @@ async function doLogin() {
 $('#lbtn').onclick = doLogin;
 $('#lp').onkeydown = e => { if (e.key === 'Enter') doLogin(); };
 function doLogout(msg) {
-  const t = S.token; S.token = null; S.user = null; S.view = 'dash'; S.busy = false; clearInterval(S.tm);
+  const t = S.token; S.token = null; S.user = null; S.view = 'dash'; S.busy = false; clearInterval(S.tm); RC.clear();
   if (t) call('logout', t).catch(() => {});
   document.querySelectorAll('.ov,.xroot').forEach(e => e.remove());
   try { if (document.fullscreenElement) document.exitFullscreen(); } catch (e) {}
@@ -307,7 +365,8 @@ function doLogout(msg) {
 $('#out').onclick = () => doLogout();
 CFG.then(() => { if (!GAS && !API) $('#setup').classList.remove('hide'); });
 $('#apis').onclick = () => { const v = $('#apiu').value.trim(); if (!/^https:\/\/script\.google\.com\/macros\/(a\/[^\/]+\/)?s\/[\w-]+\/exec$/.test(v)) return toast('URL Web App tidak valid. Harus berakhiran /exec.', true); try { localStorage.setItem('ca_api', v); } catch (e) {} location.reload(); };
-$('#burger').onclick = () => $('#side').classList.toggle('open');
+$('#burger').onclick = () => { const o = $('#side').classList.toggle('open'); $('#scrim').classList.toggle('hide', !o); };
+$('#scrim').onclick = () => { $('#side').classList.remove('open'); $('#scrim').classList.add('hide'); };
 
 /* ---------- Shell ---------- */
 function start() {
@@ -321,12 +380,13 @@ function start() {
   $('#nav').innerHTML = items.map(i => `<button data-v="${i[0]}">${i[1]} ${i[2]}</button>`).join('');
   $('#nav').onclick = e => { const v = e.target.closest('button')?.dataset.v; if (v) go(v); };
   go('dash');
+  if (S.user.Role !== 'siswa') setTimeout(() => ['pakets', 'langganan', 'users'].forEach(a => api(a).catch(() => {})), 900);
 }
 function go(v) {
   if (S.busy) { if (!confirm('Ujian sedang berlangsung. Jika keluar, ujian dihentikan dan jawaban tidak tersimpan. Tetap keluar?')) return; S.busy = false; }
-  clearInterval(S.tm); S.view = v; $('#side').classList.remove('open');
+  clearInterval(S.tm); S.view = v; $('#side').classList.remove('open'); $('#scrim').classList.add('hide');
   document.querySelectorAll('#nav button').forEach(b => b.classList.toggle('on', b.dataset.v === v));
-  $('#main').innerHTML = '<div class="empty">Memuat...</div>';
+  $('#main').innerHTML = '<div class="empty"><span class="spn"></span> Memuat...</div>';
   const f = {dash: S.user.Role === 'siswa' ? vStudentDash : vStaffDash, users: vUsers, progress: vProgress, results: vResults, exam: vExam, paket: vPaket, keuangan: vKeuangan, aktif: vAktif, report: vReport, settings: vSettings, asesmen: vAsesmen, lap: vLap, pantau: vPantau, lpp: vLpp}[v];
   f().catch(e => { $('#main').innerHTML = `<div class="empty">${esc(e.message)}</div>`; });
 }
@@ -447,7 +507,7 @@ async function vProgress() {
 async function vResults() {
   const [d, r] = await Promise.all([api('dashboard'), api('results')]), reps = await Promise.all(d.pakets.map(p => api('report', {LID: p.ID})));
   $('#main').innerHTML = head('Hasil & progres', 'Perkembangan belajar per paket dan nilai ujianmu.') +
-    reps.map(x => `<div class="panel"><h3 style="font-size:20px">${esc(x.l.Program)} – ${esc(x.l.PaketNama)}</h3>${repBody(x)}</div>`).join('') + `<div class="panel tw"><h3>Nilai ujian</h3><table>${resHead()}${resRows(r)}</table></div>`;
+    reps.map(x => `<div class="panel rpt">${repBody(x)}</div>`).join('') + `<div class="panel tw"><h3>Nilai ujian</h3><table>${resHead()}${resRows(r)}</table></div>`;
 }
 async function vStudentDash() {
   const d = await api('dashboard'), t = d.terakhir;
@@ -623,17 +683,20 @@ async function vAktif() {
 
 /* ---------- Laporan individual ---------- */
 const repBody = d => {
-  const l = d.l, u = d.user, rows = d.prog, hadir = rows.filter(r => r.Kehadiran === 'Hadir').length;
-  const lvr = d.pk.P.map(n => lastVal(rows, 'P', n)).concat(d.pk.K.map(n => lastVal(rows, 'K', n))), ap = mean(lvr.filter(v => v != null)), pgr = progres(rows);
+  const l = d.l, u = d.user, rows = d.prog, hadir = rows.filter(r => r.Kehadiran === 'Hadir').length, all = d.pk.P.map(n => ['P', n]).concat(d.pk.K.map(n => ['K', n]));
+  const lv = all.map(a => lastVal(rows, a[0], a[1])), fv = all.map(a => firstVal(rows, a[0], a[1])), names = all.map(a => a[1]);
+  const ap = mean(lv.filter(v => v != null)), pgr = progres(rows);
   const as = d.res.length ? Math.round(d.res.reduce((s, r) => s + Number(r.Skor), 0) / d.res.length) : null;
   const comb = ap != null && as != null ? (ap / 10 * 100 + as) / 2 : ap != null ? ap / 10 * 100 : as, rc = rec(comb == null ? null : Math.round(comb));
-  const info = [['Nama', u.Nama], ['Jenjang', u.Jenjang], ['Kelompok', u.Kelompok], ['Program', l.Program], ['Paket belajar', l.PaketNama], ['Mulai', l.Mulai], ['Termin dibayar', `${l.Dibayar} dari ${l.Termin}`], ['Pertemuan tercatat', `${l.Tercatat} dari ${l.Total}`], ['Kehadiran', `${hadir} hadir dari ${rows.length} tercatat`]];
-  return `<h3>Informasi siswa</h3><div class="infw"><div class="infc"><table>${info.map(r => `<tr><td style="width:150px;color:var(--mute)">${r[0]}</td><td><b>${esc(r[1])}</b></td></tr>`).join('')}</table></div>${d.foto ? photoFrame(d.foto, u.Nama, null) : ''}</div>
-    ${ap != null ? `<p>Nilai akhir siswa (rata-rata nilai terakhir tiap aspek): <b>${ap}</b> ${bdg(ap)}</p>` : ''}${pgr ? `<p>Kemajuan pertemuan ${pgr.fk} sampai ${pgr.lk}: ${pbdg(pgr.d)} <b>${pgr.f}</b> menjadi <b>${pgr.l}</b> (${pgr.d > 0 ? '+' : ''}${pgr.d})</p>` : ''}${d.pk.P.length + d.pk.K.length >= 3 ? radarSVG(d.pk.P.concat(d.pk.K), lvr.map(v => v || 0), 10) : ''}${aspek('Pemahaman materi', 'P', d.pk.P, rows)}${aspek('Keterampilan', 'K', d.pk.K, rows)}
+  const info = [['Jenjang', u.Jenjang], ['Kelas / kelompok', u.Kelompok], ['Program', l.Program], ['Paket belajar', l.PaketNama], ['Mulai', l.Mulai], ['Termin dibayar', `${l.Dibayar} dari ${l.Termin}`], ['Pertemuan', `${l.Tercatat} dari ${l.Total}`], ['Kehadiran', `${hadir} hadir dari ${rows.length}`]];
+  return `<div class="rhd"><div><div class="rl">${esc(d.lembaga)} • Laporan perkembangan belajar</div><h1>${esc(u.Nama)}</h1><div class="idg">${info.map(r => `<div><small>${r[0]}</small><b>${esc(r[1] || '-')}</b></div>`).join('')}</div></div>${pfImg(d.foto, u.Nama)}</div>
+    <div class="rbd"><div class="ach">${ap != null ? smedal(ap) : ''}${pgr ? pmedal(pgr) : ''}</div>
+    ${all.length >= 3 ? `<div class="pair"><div class="chc"><h4>Radar nilai terakhir</h4>${radarSVG(names, lv.map(v => v || 0), 10)}</div><div class="chc"><h4>Nilai awal dan nilai akhir</h4>${barSVG(names, fv, lv)}</div></div>` : ''}
+    ${aspek('Pemahaman materi', 'P', d.pk.P, rows)}${aspek('Keterampilan', 'K', d.pk.K, rows)}
     <h3>Catatan tutor</h3>${rows.filter(r => r.Catatan).slice(-10).map(r => `<div class="note"><b>Pertemuan ${r.Pertemuan}</b> <small>${esc(r.Tanggal)} • ${esc(r.Tutor)}</small><br>${esc(r.Catatan)}</div>`).join('') || '<p>Belum ada catatan.</p>'}
     <h3>Hasil asesmen</h3>${d.res.length ? `<div class="tw"><table><tr><th>Asesmen</th><th>Tanggal</th><th>Nilai</th><th>Kategori</th></tr>${d.res.map(r => `<tr><td>${esc(r.Judul || r.Program)}</td><td>${esc(r.Tanggal)}</td><td><b>${r.Skor}</b>${Number(r.Pending) > 0 ? '*' : ''}</td><td>${kat(r.Skor)}</td></tr>`).join('')}</table></div>` : '<p>Belum ada hasil asesmen pada paket ini.</p>'}
     <h3>Rekomendasi</h3><p>${comb == null ? 'Rekomendasi diberikan setelah ada nilai progres atau asesmen.' : `<b>${rc}</b>: ${REC[rc]} pada tahap berikutnya.`}</p>
-    <p style="color:var(--mute);font-size:13px">Nilai progres adalah rata-rata skala 1-10 dari seluruh pertemuan. Nilai bukan satu-satunya ukuran keberhasilan; perhatikan juga partisipasi dan perkembangan dari kemampuan awal. * = nilai sementara.</p>`;
+    <p style="color:var(--mute);font-size:13px">Nilai akhir adalah rata-rata nilai terakhir tiap aspek (skala 1-10). Kemajuan membandingkan skor pertemuan pertama dan terakhir. Nilai bukan satu-satunya ukuran keberhasilan. * = nilai sementara.</p></div>`;
 };
 async function vReport() {
   const staff = S.user.Role !== 'siswa', ls = staff ? (await api('langganan')).filter(l => l.Status !== 'Nonaktif') : [];
@@ -644,7 +707,7 @@ async function vReport() {
   const show = async keep => {
     const d = await api('report', {Username: staff ? val('rs') : '', LID: keep ? val('rl') : (S.sl || '')}); S.sl = '';
     $('#rl').innerHTML = d.ls.map(x => `<option value="${x.ID}" ${x.ID === d.l.ID ? 'selected' : ''}>${esc(x.Program + ' – ' + x.PaketNama)}</option>`).join('');
-    $('#rp').innerHTML = `<div class="paper"><h2>${esc(d.lembaga)}</h2><p style="color:var(--mute);margin:2px 0 0">Laporan perkembangan belajar individual • dicetak ${esc(d.tgl)}</p>${repBody(d)}<div style="display:flex;justify-content:space-between;margin-top:46px"><div>Tutor<br><br><br>________________</div><div>Pengelola<br><br><br>________________</div></div></div>`;
+    $('#rp').innerHTML = `<div class="paper rpt">${repBody(d)}<div class="rbd" style="padding-top:0"><div style="display:flex;justify-content:space-between;margin-top:36px;gap:20px"><div>Tutor<br><br><br>________________</div><div style="text-align:right">Dicetak ${esc(d.tgl)}<br>Pengelola<br><br>________________</div></div></div></div>`;
   };
   if (staff && S.su) { $('#rs').value = S.su; S.su = ''; }
   $('#rl').onchange = () => show(true).catch(fail); if (staff) $('#rs').onchange = () => show().catch(fail);
@@ -688,13 +751,14 @@ const TJ = {pg: 'Pilihan Ganda', js: 'Jawaban Singkat', es: 'Essay Uraian'}, PTS
 async function vAsesmen() {
   const [as, per] = await Promise.all([api('asesmen'), api('pakets')]);
   $('#main').innerHTML = head('Daftar asesmen', 'Buat soal Pilihan Ganda, Jawaban Singkat, dan Essay. Siswa mengerjakan sekali per asesmen.', '<button class="btn" id="add">+ Buat asesmen</button>') +
-    `<div class="panel tw"><table><tr><th>Kode</th><th>Asesmen</th><th>Program</th><th>Sasaran</th><th>Tipe</th><th>Soal</th><th>Durasi</th><th>Periode Paket</th><th>Status</th><th></th></tr>${as.map((a, i) => `<tr><td><b>${esc(a.Kode)}</b></td><td>${esc(a.Nama)}</td><td>${esc(a.Program)}</td><td>${esc([a.Jenjang, a.Kelompok].filter(Boolean).join(' / ') || 'Semua')}</td><td>${esc(a.Tipe)}</td><td>${a.soal.length}</td><td>${a.Durasi}m</td><td>${esc(perLabel(a.Periode, per))}</td><td><span class="tag ${a.Status === 'Aktif' ? 'g' : 'y'}">${esc(a.Status)}</span></td>
+    `<div class="panel tw"><table><tr><th>Kode</th><th>Asesmen</th><th>Program</th><th>Sasaran</th><th>Tipe</th><th>Soal</th><th>Durasi</th><th>Periode Paket</th><th>Status</th><th></th></tr>${as.map((a, i) => `<tr><td><b>${esc(a.Kode)}</b></td><td>${esc(a.Nama)}</td><td>${esc(a.Program)}</td><td>${esc([a.Jenjang, a.Kelompok].filter(Boolean).join(' / ') || 'Semua')}</td><td>${esc(a.Tipe)}</td><td>${a.Jumlah}</td><td>${a.Durasi}m</td><td>${esc(perLabel(a.Periode, per))}</td><td><span class="tag ${a.Status === 'Aktif' ? 'g' : 'y'}">${esc(a.Status)}</span></td>
     <td class="act"><button class="btn ghost sm" data-w="${i}">Preview</button><button class="btn ghost sm" data-e="${i}">Ubah</button><button class="btn ghost sm" data-c="${i}">Salin</button><button class="btn ghost sm" data-p="${i}">Pantau</button><button class="btn ghost sm" data-h="${i}">Hasil</button><button class="btn del sm" data-d="${i}">Hapus</button></td></tr>`).join('') || '<tr><td colspan="10" class="empty">Belum ada asesmen. Buat asesmen pertama.</td></tr>'}</table></div>`;
   $('#add').onclick = () => asmForm({}, per);
   const bind = (s, f) => document.querySelectorAll(s).forEach(b => b.onclick = () => f(as[b.dataset[s.slice(6, 7)]]));
-  bind('[data-e]', a => asmForm(a, per));
-  bind('[data-w]', a => examIntro({Nama: a.Nama, Program: a.Program, Jumlah: a.soal.length, Durasi: a.Durasi, Tema: a.Tema || 'def', Kamera: 'Tidak', soal: a.soal}, true));
-  bind('[data-c]', a => asmForm(Object.assign({}, a, {Kode: '', Nama: 'Salinan ' + a.Nama}), per));
+  const det = async a => { try { return await api('asesmenDetail', {Kode: a.Kode}); } catch (e) { fail(e); return null; } };
+  bind('[data-e]', async a => { const d = await det(a); if (d) asmForm(d, per); });
+  bind('[data-w]', async a => { const d = await det(a); if (d) examIntro({Nama: d.Nama, Program: d.Program, Jumlah: d.soal.length, Durasi: d.Durasi, Tema: d.Tema || 'def', Kamera: 'Tidak', soal: d.soal}, true); });
+  bind('[data-c]', async a => { const d = await det(a); if (d) asmForm(Object.assign({}, d, {Kode: '', Nama: 'Salinan ' + d.Nama}), per); });
   bind('[data-p]', a => { S.sel = a.Kode; go('pantau'); });
   bind('[data-h]', a => { S.sel = a.Kode; go('lap'); });
   bind('[data-d]', async a => { if (!confirm(`Hapus asesmen ${a.Nama}? Hasil siswa yang sudah ada tetap tersimpan.`)) return; try { await api('delAsesmen', {Kode: a.Kode}); toast('Asesmen dihapus'); vAsesmen(); } catch (e) { fail(e); } });
@@ -770,20 +834,26 @@ async function vPantau() {
 /* ---------- Laporan Periode Program ---------- */
 async function vLpp() {
   const pks = await api('pakets');
-  $('#main').innerHTML = head('Laporan periode program', 'Nilai progres tiap pertemuan dan nilai asesmen siswa pada paket dan periode tertentu.', '<button class="btn" id="pr">Cetak / PDF</button>') +
+  $('#main').innerHTML = head('Laporan periode program', 'Kemajuan tiap aspek (nilai akhir dan perubahannya) serta nilai asesmen pada paket dan periode tertentu.', '<button class="btn" id="pr">Cetak / PDF</button>') +
     (pks.length ? `<div class="panel noprint"><div class="row">${sel('lg', 'Program', [...new Set(pks.map(p => p.Program))].map(x => `<option>${esc(x)}</option>`).join(''))}${sel('lk2', 'Paket belajar', '')}${sel('ln', 'Periode paket', '')}${fld('lq', 'Kelompok', '')}</div></div><div id="lr"></div>` : '<div class="panel empty">Belum ada paket. Buat di menu Daftar Program Paket.</div>');
   $('#pr').onclick = () => window.print();
   if (!pks.length) return;
   let D = null;
-  const comb = r => { const a = r.avgProg == null ? null : r.avgProg / 10 * 100; return a != null && r.avgAs != null ? (a + r.avgAs) / 2 : a != null ? a : r.avgAs; };
+  const sg = d => d > 0 ? '+' + d : String(d);
+  const comb = r => { const a = r.akhir == null ? null : r.akhir * 10; return a != null && r.avgAs != null ? (a + r.avgAs) / 2 : a != null ? a : r.avgAs; };
+  const cell = a => !a ? '<td class="c">-</td>' : `<td class="c"><b>${a.l}</b>${a.d == null ? '<span class="dl">baru 1x</span>' : `<span class="dl ${a.d > 0 ? 'up' : a.d < 0 ? 'dn' : ''}">${a.d > 0 ? '▲' : a.d < 0 ? '▼' : '='} ${sg(a.d)}</span>`}</td>`;
   const draw = () => {
-    const q = val('lq').toLowerCase(), R = D.rows.filter(r => !q || String(r.Kelompok).toLowerCase().includes(q)), pk = D.pk;
-    $('#lr').innerHTML = `<div class="stats">${[[R.length, 'Siswa'], [mean(R.map(r => r.avgProg).filter(v => v != null)) ?? '-', 'Rata-rata progres (1-10)'], [mean(R.map(r => r.avgAs).filter(v => v != null)) ?? '-', 'Rata-rata asesmen']].map(s => `<div class="stat"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('')}</div>
-      <div class="panel tw"><h3>${esc(pk.Program)} – ${esc(pk.Nama)} • ${D.n ? 'Bulan ' + D.n : 'Seluruh paket'} <small style="color:var(--mute)">(pertemuan ${D.lo}–${D.hi})</small></h3><table>
-      <tr><th rowspan="2">Siswa</th><th rowspan="2">Hadir</th>${pk.P.length ? `<th colspan="${pk.P.length}">Pemahaman materi</th>` : ''}${pk.K.length ? `<th colspan="${pk.K.length}">Keterampilan</th>` : ''}${D.asesmen.length ? `<th colspan="${D.asesmen.length}">Asesmen</th>` : ''}<th rowspan="2">Progres</th><th rowspan="2">Asesmen</th><th rowspan="2">Rekomendasi</th><th rowspan="2" class="noprint"></th></tr>
-      <tr>${pk.P.concat(pk.K).map(n => `<th><small>${esc(n)}</small></th>`).join('')}${D.asesmen.map(a => `<th><small>${esc(a.Nama)}</small></th>`).join('')}</tr>
-      ${R.map((r, i) => { const c = comb(r); return `<tr><td><b>${esc(r.Nama)}</b><br><small>${esc(r.Kelompok)}</small></td><td>${r.Hadir}/${r.Tercatat}</td>${r.P.concat(r.K).map(v => `<td>${v == null ? '-' : v}</td>`).join('')}${r.nilai.map(n => `<td>${!n ? '-' : n.n + (n.p > 0 ? '*' : '')}</td>`).join('')}<td><b>${r.avgProg == null ? '-' : r.avgProg}</b></td><td><b>${r.avgAs == null ? '-' : r.avgAs}</b></td><td>${c == null ? '-' : `<span class="tag ${rec(Math.round(c)) === 'Reinforcement' ? 'y' : 'g'}">${rec(Math.round(c))}</span>`}</td><td class="noprint"><button class="btn ghost sm" data-u="${i}">Laporan siswa</button></td></tr>`; }).join('') || '<tr><td colspan="9" class="empty">Belum ada siswa pada paket ini. Siswa muncul setelah pembayaran paket dicatat.</td></tr>'}</table>
-      <p style="color:var(--mute);font-size:13px">Nilai progres = rata-rata skala 1-10 dari pertemuan dalam periode. Rekomendasi menggabungkan progres (dikonversi ke 100) dan nilai asesmen. * = nilai asesmen sementara.</p></div>`;
+    const q = val('lq').toLowerCase(), R = D.rows.filter(r => !q || String(r.Kelompok).toLowerCase().includes(q)), pk = D.pk, nP = pk.P.length, nK = pk.K.length, nA = D.asesmen.length;
+    const km = mean(R.map(r => r.kem).filter(v => v != null)), up = R.filter(r => r.kem != null && r.kem > 0).length, wk = R.filter(r => r.kem != null).length, as = mean(R.map(r => r.avgAs).filter(v => v != null));
+    const colAvg = (arr, k) => { const v = R.map(r => r[arr][k]).filter(Boolean); return { l: mean(v.map(x => x.l)), d: mean(v.map(x => x.d).filter(x => x != null)) }; };
+    const foot = (arr, n) => Array.from({length: n}, (_, k) => { const a = colAvg(arr, k); return a.l == null ? '<td class="c">-</td>' : `<td class="c"><b>${a.l}</b>${a.d == null ? '' : `<span class="dl ${a.d > 0 ? 'up' : a.d < 0 ? 'dn' : ''}">${sg(a.d)}</span>`}</td>`; }).join('');
+    $('#lr').innerHTML = `<div class="stats">${[[R.length, 'Siswa'], [km == null ? '-' : sg(km), 'Rata-rata kemajuan (poin)'], [wk ? `${up} dari ${wk}` : '-', 'Siswa yang naik'], [as ?? '-', 'Rata-rata asesmen']].map(s => `<div class="stat"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('')}</div>
+      <div class="panel"><h3>${esc(pk.Program)} – ${esc(pk.Nama)} • ${D.n ? 'Bulan ' + D.n : 'Seluruh paket'} <small style="color:var(--mute);font-weight:500">(pertemuan ${D.lo}–${D.hi})</small></h3><div class="tw"><table class="lpt"><thead>
+      <tr><th rowspan="2" class="sk">Siswa</th><th rowspan="2">Hadir</th>${nP ? `<th colspan="${nP}" class="gp">Pemahaman materi</th>` : ''}${nK ? `<th colspan="${nK}" class="gk">Keterampilan</th>` : ''}${nA ? `<th colspan="${nA}" class="ga">Asesmen</th>` : ''}<th rowspan="2">Kemajuan</th><th rowspan="2">Asesmen</th><th rowspan="2">Rekomendasi</th><th rowspan="2" class="noprint"></th></tr>
+      <tr class="g2">${pk.P.concat(pk.K).map(n => `<th>${esc(n)}</th>`).join('')}${D.asesmen.map(a => `<th>${esc(a.Nama)}</th>`).join('')}</tr></thead><tbody>
+      ${R.map((r, i) => { const c = comb(r), rc = c == null ? null : rec(Math.round(c)); return `<tr><td class="sk"><b>${esc(r.Nama)}</b><br><small style="color:var(--mute)">${esc(r.Kelompok)}</small></td><td>${r.Hadir}/${r.Tercatat}</td>${r.P.map(cell).join('')}${r.K.map(cell).join('')}${r.nilai.map(n => `<td class="c">${!n ? '-' : `<b>${n.n}${n.p > 0 ? '*' : ''}</b>`}</td>`).join('')}<td class="c">${r.kem == null ? '-' : `<b>${sg(r.kem)}</b>${pbdg(r.kem)}`}</td><td class="c"><b>${r.avgAs == null ? '-' : r.avgAs}</b></td><td>${rc ? `<span class="tag ${rc === 'Reinforcement' ? 'y' : 'g'}">${rc}</span>` : '-'}</td><td class="noprint"><button class="btn ghost sm" data-u="${i}">Laporan siswa</button></td></tr>`; }).join('') || `<tr><td colspan="${nP + nK + nA + 5}" class="empty">Belum ada siswa pada paket ini. Siswa muncul setelah pembayaran paket dicatat.</td></tr>`}</tbody>
+      ${R.length ? `<tfoot><tr><td class="sk">Rata-rata kelas</td><td></td>${foot('P', nP)}${foot('K', nK)}${D.asesmen.map((a, k) => { const v = R.map(r => r.nilai[k]).filter(Boolean); return `<td class="c">${v.length ? '<b>' + mean(v.map(x => x.n)) + '</b>' : '-'}</td>`; }).join('')}<td class="c">${km == null ? '-' : sg(km)}</td><td class="c">${as ?? '-'}</td><td></td><td class="noprint"></td></tr></tfoot>` : ''}</table></div>
+      <p style="color:var(--mute);font-size:13px">Sel aspek: nilai akhir (besar) dan perubahan dari pertemuan pertama ke terakhir pada periode ini. Kemajuan = rata-rata perubahan seluruh aspek. * = nilai asesmen sementara.</p></div>`;
     document.querySelectorAll('[data-u]').forEach(b => b.onclick = () => { const r = R[b.dataset.u]; S.su = r.Username; S.sl = r.LID; go('report'); });
   };
   const load = async () => { D = await api('lapProgram', {pid: val('lk2'), n: val('ln')}); draw(); };
@@ -1017,10 +1087,10 @@ const progres = rows => { const s = rows.map(r => ({k: Number(r.Pertemuan), v: r
 const PBADGE = d => d >= 4 ? ['🚀', 'Melesat', '#7c5cf0'] : d >= 2 ? ['📈', 'Naik Pesat', '#1f9d78'] : d >= 0.5 ? ['🌱', 'Berkembang', '#3f9e6a'] : d > -0.5 ? ['⚖️', 'Stabil', '#2f7de1'] : d > -2 ? ['🔻', 'Menurun Ringan', '#e08a00'] : ['⚠️', 'Perlu Pendampingan', '#dc2f4a'];
 const pbdg = d => { const b = PBADGE(d); return `<span class="bdg" style="--bc:${b[2]}">${b[0]} ${b[1]}</span>`; };
 const trendSVG = s => {
-  const W = 560, H = 150, L = 28, B = 24, T = 10, n = s.length, x = i => L + i * (W - L - 16) / (n - 1), y = v => T + (H - T - B) * (1 - v / 10), st = Math.max(1, Math.ceil(n / 10));
+  const W = 560, H = 190, L = 28, B = 26, T = 12, n = s.length, x = i => L + i * (W - L - 16) / (n - 1), y = v => T + (H - T - B) * (1 - v / 10), st = Math.max(1, Math.ceil(n / 10));
   return `<svg viewBox="0 0 ${W} ${H}" class="lchart">${[0, 5, 10].map(v => `<line x1="${L}" x2="${W - 8}" y1="${y(v)}" y2="${y(v)}" style="stroke:var(--line)"/><text x="${L - 5}" y="${y(v) + 4}" text-anchor="end" font-size="10" style="fill:var(--mute)">${v}</text>`).join('')}<polyline fill="none" style="stroke:var(--royal)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="${s.map((p, i) => x(i).toFixed(1) + ',' + y(p.v).toFixed(1)).join(' ')}"/>${s.map((p, i) => `<circle cx="${x(i).toFixed(1)}" cy="${y(p.v).toFixed(1)}" r="3.5" style="fill:var(--royal)"><title>Pertemuan ${p.k}: ${p.v}</title></circle>${i % st === 0 || i === n - 1 ? `<text x="${x(i).toFixed(1)}" y="${H - 6}" text-anchor="middle" font-size="10" style="fill:var(--mute)">${p.k}</text>` : ''}`).join('')}</svg>`;
 };
-const progresHtml = p => p ? `<div class="prg"><div><div style="margin-bottom:8px">${pbdg(p.d)}</div><p style="margin:0">Kemajuan dari pertemuan ${p.fk} sampai ${p.lk}: <b>${p.f}</b> menjadi <b>${p.l}</b> (<b>${p.d > 0 ? '+' : ''}${p.d}</b> poin).</p></div>${trendSVG(p.s)}</div>` : '<p style="color:var(--mute)">Kemajuan dihitung setelah minimal 2 pertemuan dinilai.</p>';
+const progresHtml = p => p ? `<div class="prg"><div class="prgb">${pmedal(p)}</div><div class="prgc"><h4>Kemajuan skor rata-rata per pertemuan</h4>${trendSVG(p.s)}</div></div><p class="prgt">Dari pertemuan ${p.fk} sampai ${p.lk}: <b>${p.f}</b> menjadi <b>${p.l}</b> (<b>${p.d > 0 ? '+' : ''}${p.d}</b> poin).</p>` : '<p style="color:var(--mute)">Kemajuan dihitung setelah minimal 2 pertemuan dinilai.</p>';
 const photoFrame = (foto, nama, fin, sub) => `<div class="pfw"><div class="pfr">${foto ? `<img src="${esc(foto)}" alt="Foto ${esc(nama)}">` : `<div class="pfn">${esc(String(nama || '?').split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase())}</div>`}</div><h3 style="margin:12px 0 2px;font-size:18px">${esc(nama)}</h3>${sub ? `<small style="color:var(--mute)">${esc(sub)}</small>` : ''}${fin != null ? `<div style="margin-top:6px"><small style="color:var(--mute)">Nilai akhir (rata-rata nilai terakhir): <b>${fin}</b></small><br>${bdg(fin)}</div>` : ''}</div>`;
 const fotoResize = file => new Promise((res, rej) => {
   const img = new Image(), url = URL.createObjectURL(file);
@@ -1032,6 +1102,32 @@ const fotoResize = file => new Promise((res, rej) => {
   };
   img.onerror = () => rej(new Error('File bukan gambar yang valid.')); img.src = url;
 });
+
+/* ---------- Medali 3D & grafik batang ---------- */
+let _mid = 0;
+const hexMix = (c, t) => { const n = parseInt(c.slice(1), 16), m = t > 0 ? 255 : 0, a = Math.abs(t); return '#' + [n >> 16, n >> 8 & 255, n & 255].map(v => Math.round(v + (m - v) * a).toString(16).padStart(2, '0')).join(''); };
+const medal3D = (c, ico, label, sub) => { const i = ++_mid; return `<div class="mdl"><svg class="bd3" viewBox="0 0 140 170" role="img" aria-label="${esc(label)}"><defs>
+  <linearGradient id="mr${i}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff6c8"/><stop offset=".45" stop-color="#e5b53a"/><stop offset="1" stop-color="#8d6410"/></linearGradient>
+  <radialGradient id="mc${i}" cx=".32" cy=".25" r=".95"><stop offset="0" stop-color="${hexMix(c, .55)}"/><stop offset=".5" stop-color="${c}"/><stop offset="1" stop-color="${hexMix(c, -.45)}"/></radialGradient>
+  <linearGradient id="mb${i}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${hexMix(c, .1)}"/><stop offset="1" stop-color="${hexMix(c, -.4)}"/></linearGradient>
+  <filter id="ms${i}" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="3" stdDeviation="3" flood-opacity=".35"/></filter></defs>
+  <ellipse cx="70" cy="162" rx="38" ry="5" fill="#000" opacity=".14"/>
+  <path d="M42 96 L26 150 L48 142 L60 160 L74 104Z" fill="url(#mb${i})"/><path d="M98 96 L114 150 L92 142 L80 160 L66 104Z" fill="url(#mb${i})"/>
+  <g filter="url(#ms${i})"><circle cx="70" cy="64" r="54" fill="url(#mr${i})"/><circle cx="70" cy="64" r="44" fill="url(#mc${i})" stroke="#fff6c8" stroke-opacity=".7" stroke-width="2"/><circle cx="70" cy="64" r="36" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="1.5" stroke-dasharray="3 4"/></g>
+  <path d="M36 50 Q50 22 84 20 Q60 30 48 58Z" fill="#fff" opacity=".4"/>
+  <text x="70" y="79" text-anchor="middle" font-size="40" style="filter:drop-shadow(0 2px 2px rgba(0,0,0,.35))">${ico}</text>
+  <path d="M106 18 l2 6 6 2 -6 2 -2 6 -2 -6 -6 -2 6 -2z" fill="#fff" opacity=".9"/><path d="M24 90 l1.5 4 4 1.5 -4 1.5 -1.5 4 -1.5 -4 -4 -1.5 4 -1.5z" fill="#fff" opacity=".8"/></svg>
+  <div class="mdt"><b>${esc(label)}</b>${sub ? `<small>${esc(sub)}</small>` : ''}</div></div>`; };
+const smedal = a => { const b = BADGE[Math.min(10, Math.max(1, Math.round(a)))]; return medal3D(b[2], b[0], b[1], 'Nilai akhir ' + a); };
+const pmedal = p => { const b = PBADGE(p.d); return medal3D(b[2], b[0], b[1], `${p.f} menjadi ${p.l} (${p.d > 0 ? '+' : ''}${p.d})`); };
+const pfImg = (foto, nama) => `<div class="pfr">${foto ? `<img src="${esc(foto)}" alt="Foto ${esc(nama)}">` : `<div class="pfn">${esc(String(nama || '?').split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase())}</div>`}</div>`;
+const barSVG = (labels, f, l) => {
+  const n = labels.length, W = 440, H = 300, L = 30, B = 70, T = 16, gw = (W - L - 10) / n, bw = Math.min(16, gw / 2.6), y = v => T + (H - T - B) * (1 - v / 10);
+  const grid = [0, 5, 10].map(v => `<line x1="${L}" x2="${W - 6}" y1="${y(v)}" y2="${y(v)}" style="stroke:var(--line)"/><text x="${L - 5}" y="${y(v) + 4}" text-anchor="end" font-size="10" style="fill:var(--mute)">${v}</text>`).join('');
+  const bar = (x, v, c, t) => v == null ? '' : `<rect x="${(x - bw / 2).toFixed(1)}" y="${y(v).toFixed(1)}" width="${bw.toFixed(1)}" height="${(y(0) - y(v)).toFixed(1)}" rx="3" style="fill:${c}"><title>${esc(t)}: ${v}</title></rect><text x="${x.toFixed(1)}" y="${(y(v) - 3).toFixed(1)}" text-anchor="middle" font-size="9" style="fill:var(--ink)">${v}</text>`;
+  const bars = labels.map((t, i) => { const cx = L + gw * i + gw / 2; return bar(cx - bw / 2 - 1, f[i], 'color-mix(in srgb,var(--royal) 35%,#fff)', t) + bar(cx + bw / 2 + 1, l[i], 'var(--royal)', t) + `<text transform="translate(${cx.toFixed(1)} ${H - B + 12}) rotate(-35)" text-anchor="end" font-size="10" style="fill:var(--ink)">${esc(t.length > 14 ? t.slice(0, 13) + '…' : t)}</text>`; }).join('');
+  return `<svg viewBox="0 0 ${W} ${H}" role="img">${grid}${bars}<g font-size="10"><rect x="${L}" y="${H - 14}" width="10" height="10" rx="2" style="fill:color-mix(in srgb,var(--royal) 35%,#fff)"/><text x="${L + 14}" y="${H - 5}" style="fill:var(--mute)">Nilai awal</text><rect x="${L + 84}" y="${H - 14}" width="10" height="10" rx="2" style="fill:var(--royal)"/><text x="${L + 98}" y="${H - 5}" style="fill:var(--mute)">Nilai akhir</text></g></svg>`;
+};
 </script>
 </body>
 </html>
