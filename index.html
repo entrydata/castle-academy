@@ -180,28 +180,39 @@ html{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .rpt,.panel.rpt{padding:0;overflow:hidden}
 .rhd{background:linear-gradient(135deg,var(--royal),color-mix(in srgb,var(--royal) 55%,#8fd0ff));color:#fff;padding:22px 26px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center;border-bottom:6px solid var(--brass)}
 .rhd .rl{font-size:13px;opacity:.92}.rhd h1{font:800 30px/1.15 'Bricolage Grotesque';margin:4px 0 14px}
-.idg{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.idg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .idg div{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);border-radius:12px;padding:7px 11px;min-width:0}.idg small{display:block;font-size:11px;opacity:.85}.idg b{font-size:14px;word-break:break-word}
 .rhd .pfr{width:170px;height:170px;margin:8px;background:linear-gradient(135deg,#fff,var(--brass))}.rhd .pfr::after{border-color:rgba(255,255,255,.6)}
 .rbd{padding:20px 26px}.rbd h3{font-size:17px;margin:22px 0 8px;padding-bottom:4px;border-bottom:2px solid var(--royal)}
-.ach{display:flex;gap:30px;justify-content:center;flex-wrap:wrap;margin:6px 0 18px}
+.nts{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;align-items:stretch}
+.nt{border:1px solid var(--line);border-left:4px solid var(--brass);border-radius:12px;padding:9px 13px;background:#fff;min-width:0}
+.nt .nth{display:flex;justify-content:space-between;gap:8px;align-items:baseline}.nt .nth small{color:var(--mute)}.nt p{margin:4px 0 2px;overflow-wrap:anywhere}.nt>small{color:var(--mute)}
+.recw{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:22px;align-items:center;border:1px solid var(--line);border-radius:16px;padding:16px 20px;background:linear-gradient(135deg,color-mix(in srgb,var(--royal) 6%,#fff),#fff)}
+.recw p{margin:8px 0 0}.recw .mut{color:var(--mute);font-size:13px}.reca{display:grid;place-items:center}
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch;margin-bottom:12px}
 .chc{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;display:flex;flex-direction:column;min-width:0}.chc h4{margin:0 0 6px;font-size:14px;color:var(--mute)}.chc svg{width:100%;height:auto;flex:1}
-.mdl{display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px}.bd3{height:170px;width:auto}.mdt b{display:block;font:700 16px 'Bricolage Grotesque'}.mdt small{color:var(--mute)}
+.mdl{display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px}.bd3{height:190px;width:auto}.mdt b{display:block;font:700 16px 'Bricolage Grotesque'}.mdt small{color:var(--mute)}
 .prg{display:grid;grid-template-columns:minmax(200px,.6fr) 1.6fr;gap:18px;align-items:stretch;margin-bottom:10px}
 .prgb{display:grid;place-items:center;border:1px solid var(--line);border-radius:14px;padding:10px;background:linear-gradient(180deg,var(--mist),#fff)}
 .prgc{border:1px solid var(--line);border-radius:14px;padding:10px 12px;min-width:0;display:flex;flex-direction:column;justify-content:center}.prgc h4{margin:0 0 4px;font-size:14px;color:var(--mute)}.prgc svg{width:100%;height:auto}
 .prgt{margin:0 0 14px;color:var(--mute)}
-.lpt{border-collapse:separate;border-spacing:0;font-size:13px;width:100%}
-.lpt th,.lpt td{text-align:center;padding:9px 8px;border-bottom:1px solid var(--line)}
-.lpt thead th{color:#fff;font-size:12px;border-bottom:0;background:var(--ink)}.lpt thead th.gp{background:var(--royal)}.lpt thead th.gk{background:#d98a00}.lpt thead th.ga{background:var(--ok)}
-.lpt thead tr.g2 th{font-weight:600;font-size:11px;line-height:1.25;min-width:78px}
-.lpt tbody tr:nth-child(even){background:color-mix(in srgb,var(--mist) 65%,#fff)}
-.lpt td.c{min-width:78px}.lpt td.c b{font-size:15px;display:block}
+.lpw{border:1px solid var(--line);border-radius:16px;background:#fff}
+.lpt{border-collapse:separate;border-spacing:0;font-size:13px;width:100%;color:var(--ink)}
+.lpt th,.lpt td{text-align:center;padding:11px 8px;border-bottom:1px solid var(--line);background:#fff}
+.lpt thead th{font-size:12px;font-weight:700;color:var(--ink);background:color-mix(in srgb,var(--royal) 5%,#fff);border-bottom:1px solid var(--line)}
+.lpt thead th.gp{background:color-mix(in srgb,var(--royal) 15%,#fff);color:var(--royal);border-top:3px solid var(--royal)}
+.lpt thead th.gk{background:color-mix(in srgb,var(--brass) 24%,#fff);color:#8a5a00;border-top:3px solid var(--brass)}
+.lpt thead th.ga{background:color-mix(in srgb,var(--ok) 14%,#fff);color:#157a5c;border-top:3px solid var(--ok)}
+.lpt thead tr.g2 th{font-weight:600;font-size:11px;line-height:1.25;min-width:84px;color:var(--mute);background:#fff}
+.lpt thead th:first-child{border-top-left-radius:15px}.lpt thead th:last-child{border-top-right-radius:15px}
+.lpt tbody tr:nth-child(even) td{background:#f8fbff}
+.lpt tbody tr:hover td{background:color-mix(in srgb,var(--royal) 6%,#fff)}
+.lpt td.c{min-width:84px}.lpt td.c b{font-size:15px;display:block}
 .dl{display:block;font-size:11px;font-weight:700;color:var(--mute)}.dl.up{color:var(--ok)}.dl.dn{color:var(--bad)}
-.lpt .sk{position:sticky;left:0;z-index:2;text-align:left;min-width:130px;background:#fff;box-shadow:2px 0 4px rgba(18,49,92,.06)}.lpt thead th.sk{background:var(--ink)}
-.lpt tbody tr:nth-child(even) .sk{background:color-mix(in srgb,var(--mist) 65%,#fff)}
-.lpt tfoot td{background:var(--mist);font-weight:700;border-top:2px solid var(--royal);border-bottom:0}.lpt tfoot .sk{background:var(--mist)}
+.lpt .sk{position:sticky;left:0;z-index:2;text-align:left;min-width:132px;box-shadow:2px 0 4px rgba(18,49,92,.05)}
+.lpt thead th.sk{background:color-mix(in srgb,var(--royal) 5%,#fff)}.lpt tbody tr:nth-child(even) .sk{background:#f8fbff}
+.lpt tfoot td{background:color-mix(in srgb,var(--royal) 7%,#fff);font-weight:700;border-top:2px solid color-mix(in srgb,var(--royal) 35%,#fff);border-bottom:0}.lpt tfoot .sk{background:color-mix(in srgb,var(--royal) 7%,#fff)}
+.lpt tfoot td:first-child{border-bottom-left-radius:15px}.lpt tfoot td:last-child{border-bottom-right-radius:15px}
 @media(max-width:1180px){.two{grid-template-columns:1fr}}
 @media(max-width:900px){
  #app{grid-template-columns:1fr}
@@ -210,7 +221,7 @@ html{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
  .mbar button{background:none;border:0;color:#fff;font-size:24px;cursor:pointer;min-width:40px;min-height:40px}
  main{padding:20px 16px}.top h2{font-size:24px}
 }
-@media(max-width:760px){.rhd{grid-template-columns:1fr;justify-items:center;text-align:center}.rhd>.pfr{order:-1}.idg{width:100%;text-align:left;grid-template-columns:repeat(2,minmax(0,1fr))}.pair,.prg,.sym{grid-template-columns:1fr}.rbd{padding:16px}.rhd h1{font-size:24px}}
+@media(max-width:760px){.idg>div:last-child{grid-column:1/-1}.recw{grid-template-columns:1fr!important;justify-items:center;text-align:center}.reca{order:-1}.nts{grid-template-columns:1fr!important}.rhd{grid-template-columns:1fr;justify-items:center;text-align:center}.rhd>.pfr{order:-1}.idg{width:100%;text-align:left;grid-template-columns:repeat(2,minmax(0,1fr))}.pair,.prg,.sym{grid-template-columns:1fr}.rbd{padding:16px}.rhd h1{font-size:24px}}
 @media(max-width:640px){
  main{padding:16px 12px}.top h2{font-size:21px}.top{margin-bottom:16px}.panel{padding:14px}
  .stats{grid-template-columns:repeat(2,1fr);gap:10px}.stat{padding:12px}.stat b{font-size:24px}
@@ -685,17 +696,22 @@ async function vAktif() {
 const repBody = d => {
   const l = d.l, u = d.user, rows = d.prog, hadir = rows.filter(r => r.Kehadiran === 'Hadir').length, all = d.pk.P.map(n => ['P', n]).concat(d.pk.K.map(n => ['K', n]));
   const lv = all.map(a => lastVal(rows, a[0], a[1])), fv = all.map(a => firstVal(rows, a[0], a[1])), names = all.map(a => a[1]);
-  const ap = mean(lv.filter(v => v != null)), pgr = progres(rows);
+  const ap = mean(lv.filter(v => v != null)), pgr = progres(rows), sg = x => (x > 0 ? '+' : '') + x;
   const as = d.res.length ? Math.round(d.res.reduce((s, r) => s + Number(r.Skor), 0) / d.res.length) : null;
   const comb = ap != null && as != null ? (ap / 10 * 100 + as) / 2 : ap != null ? ap / 10 * 100 : as, rc = rec(comb == null ? null : Math.round(comb));
-  const info = [['Jenjang', u.Jenjang], ['Kelas / kelompok', u.Kelompok], ['Program', l.Program], ['Paket belajar', l.PaketNama], ['Mulai', l.Mulai], ['Termin dibayar', `${l.Dibayar} dari ${l.Termin}`], ['Pertemuan', `${l.Tercatat} dari ${l.Total}`], ['Kehadiran', `${hadir} hadir dari ${rows.length}`]];
+  const last = d.res.slice().sort((a, b) => String(b.Tanggal).localeCompare(String(a.Tanggal)))[0];
+  const info = [['Jenjang', u.Jenjang], ['Kelas / kelompok', u.Kelompok], ['Program', l.Program], ['Paket belajar', l.PaketNama], ['Mulai', l.Mulai], ['Termin dibayar', `${l.Dibayar} dari ${l.Termin}`], ['Pertemuan', `${l.Tercatat} dari ${l.Total}`], ['Kehadiran', `${hadir} hadir dari ${rows.length}`],
+    ['Hasil asesmen terakhir', last ? `${last.Skor}${Number(last.Pending) > 0 ? '*' : ''} • ${last.Judul || last.Program}` : '-']];
+  const notes = rows.filter(r => r.Catatan), half = Math.ceil(notes.length / 2), nt = r => `<div class="nt"><div class="nth"><b>Pertemuan ${r.Pertemuan}</b><small>${esc(r.Tanggal)}</small></div><p>${esc(r.Catatan)}</p><small>${esc(r.Tutor)}</small></div>`, ng = [];
+  for (let i = 0; i < half; i++) { ng.push(nt(notes[i])); if (notes[half + i]) ng.push(nt(notes[half + i])); }
+  const emb = pgr ? pmedal(pgr) : ap != null ? smedal(ap) : '';
   return `<div class="rhd"><div><div class="rl">${esc(d.lembaga)} • Laporan perkembangan belajar</div><h1>${esc(u.Nama)}</h1><div class="idg">${info.map(r => `<div><small>${r[0]}</small><b>${esc(r[1] || '-')}</b></div>`).join('')}</div></div>${pfImg(d.foto, u.Nama)}</div>
-    <div class="rbd"><div class="ach">${ap != null ? smedal(ap) : ''}${pgr ? pmedal(pgr) : ''}</div>
+    <div class="rbd">
     ${all.length >= 3 ? `<div class="pair"><div class="chc"><h4>Radar nilai terakhir</h4>${radarSVG(names, lv.map(v => v || 0), 10)}</div><div class="chc"><h4>Nilai awal dan nilai akhir</h4>${barSVG(names, fv, lv)}</div></div>` : ''}
     ${aspek('Pemahaman materi', 'P', d.pk.P, rows)}${aspek('Keterampilan', 'K', d.pk.K, rows)}
-    <h3>Catatan tutor</h3>${rows.filter(r => r.Catatan).slice(-10).map(r => `<div class="note"><b>Pertemuan ${r.Pertemuan}</b> <small>${esc(r.Tanggal)} • ${esc(r.Tutor)}</small><br>${esc(r.Catatan)}</div>`).join('') || '<p>Belum ada catatan.</p>'}
+    <h3>Catatan tutor</h3>${notes.length ? `<div class="nts">${ng.join('')}</div>` : '<p>Belum ada catatan.</p>'}
     <h3>Hasil asesmen</h3>${d.res.length ? `<div class="tw"><table><tr><th>Asesmen</th><th>Tanggal</th><th>Nilai</th><th>Kategori</th></tr>${d.res.map(r => `<tr><td>${esc(r.Judul || r.Program)}</td><td>${esc(r.Tanggal)}</td><td><b>${r.Skor}</b>${Number(r.Pending) > 0 ? '*' : ''}</td><td>${kat(r.Skor)}</td></tr>`).join('')}</table></div>` : '<p>Belum ada hasil asesmen pada paket ini.</p>'}
-    <h3>Rekomendasi</h3><p>${comb == null ? 'Rekomendasi diberikan setelah ada nilai progres atau asesmen.' : `<b>${rc}</b>: ${REC[rc]} pada tahap berikutnya.`}</p>
+    <h3>Rekomendasi</h3><div class="recw"><div>${comb == null ? '<p style="margin:0">Rekomendasi diberikan setelah ada nilai progres atau asesmen.</p>' : `<span class="tag ${rc === 'Reinforcement' ? 'y' : 'g'}" style="font-size:15px;padding:5px 16px">${rc}</span><p><b>${rc}</b>: ${REC[rc]} pada tahap berikutnya.</p>`}<p class="mut">Nilai akhir ${ap ?? '-'} (skala 10) • Kemajuan ${pgr ? sg(pgr.d) + ' poin' : '-'} • Rata-rata asesmen ${as ?? '-'}</p></div>${emb ? `<div class="reca">${emb}</div>` : ''}</div>
     <p style="color:var(--mute);font-size:13px">Nilai akhir adalah rata-rata nilai terakhir tiap aspek (skala 1-10). Kemajuan membandingkan skor pertemuan pertama dan terakhir. Nilai bukan satu-satunya ukuran keberhasilan. * = nilai sementara.</p></div>`;
 };
 async function vReport() {
@@ -848,7 +864,7 @@ async function vLpp() {
     const colAvg = (arr, k) => { const v = R.map(r => r[arr][k]).filter(Boolean); return { l: mean(v.map(x => x.l)), d: mean(v.map(x => x.d).filter(x => x != null)) }; };
     const foot = (arr, n) => Array.from({length: n}, (_, k) => { const a = colAvg(arr, k); return a.l == null ? '<td class="c">-</td>' : `<td class="c"><b>${a.l}</b>${a.d == null ? '' : `<span class="dl ${a.d > 0 ? 'up' : a.d < 0 ? 'dn' : ''}">${sg(a.d)}</span>`}</td>`; }).join('');
     $('#lr').innerHTML = `<div class="stats">${[[R.length, 'Siswa'], [km == null ? '-' : sg(km), 'Rata-rata kemajuan (poin)'], [wk ? `${up} dari ${wk}` : '-', 'Siswa yang naik'], [as ?? '-', 'Rata-rata asesmen']].map(s => `<div class="stat"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('')}</div>
-      <div class="panel"><h3>${esc(pk.Program)} – ${esc(pk.Nama)} • ${D.n ? 'Bulan ' + D.n : 'Seluruh paket'} <small style="color:var(--mute);font-weight:500">(pertemuan ${D.lo}–${D.hi})</small></h3><div class="tw"><table class="lpt"><thead>
+      <div class="panel"><h3>${esc(pk.Program)} – ${esc(pk.Nama)} • ${D.n ? 'Bulan ' + D.n : 'Seluruh paket'} <small style="color:var(--mute);font-weight:500">(pertemuan ${D.lo}–${D.hi})</small></h3><div class="tw lpw"><table class="lpt"><thead>
       <tr><th rowspan="2" class="sk">Siswa</th><th rowspan="2">Hadir</th>${nP ? `<th colspan="${nP}" class="gp">Pemahaman materi</th>` : ''}${nK ? `<th colspan="${nK}" class="gk">Keterampilan</th>` : ''}${nA ? `<th colspan="${nA}" class="ga">Asesmen</th>` : ''}<th rowspan="2">Kemajuan</th><th rowspan="2">Asesmen</th><th rowspan="2">Rekomendasi</th><th rowspan="2" class="noprint"></th></tr>
       <tr class="g2">${pk.P.concat(pk.K).map(n => `<th>${esc(n)}</th>`).join('')}${D.asesmen.map(a => `<th>${esc(a.Nama)}</th>`).join('')}</tr></thead><tbody>
       ${R.map((r, i) => { const c = comb(r), rc = c == null ? null : rec(Math.round(c)); return `<tr><td class="sk"><b>${esc(r.Nama)}</b><br><small style="color:var(--mute)">${esc(r.Kelompok)}</small></td><td>${r.Hadir}/${r.Tercatat}</td>${r.P.map(cell).join('')}${r.K.map(cell).join('')}${r.nilai.map(n => `<td class="c">${!n ? '-' : `<b>${n.n}${n.p > 0 ? '*' : ''}</b>`}</td>`).join('')}<td class="c">${r.kem == null ? '-' : `<b>${sg(r.kem)}</b>${pbdg(r.kem)}`}</td><td class="c"><b>${r.avgAs == null ? '-' : r.avgAs}</b></td><td>${rc ? `<span class="tag ${rc === 'Reinforcement' ? 'y' : 'g'}">${rc}</span>` : '-'}</td><td class="noprint"><button class="btn ghost sm" data-u="${i}">Laporan siswa</button></td></tr>`; }).join('') || `<tr><td colspan="${nP + nK + nA + 5}" class="empty">Belum ada siswa pada paket ini. Siswa muncul setelah pembayaran paket dicatat.</td></tr>`}</tbody>
@@ -1106,20 +1122,32 @@ const fotoResize = file => new Promise((res, rej) => {
 /* ---------- Medali 3D & grafik batang ---------- */
 let _mid = 0;
 const hexMix = (c, t) => { const n = parseInt(c.slice(1), 16), m = t > 0 ? 255 : 0, a = Math.abs(t); return '#' + [n >> 16, n >> 8 & 255, n & 255].map(v => Math.round(v + (m - v) * a).toString(16).padStart(2, '0')).join(''); };
-const medal3D = (c, ico, label, sub) => { const i = ++_mid; return `<div class="mdl"><svg class="bd3" viewBox="0 0 140 170" role="img" aria-label="${esc(label)}"><defs>
-  <linearGradient id="mr${i}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff6c8"/><stop offset=".45" stop-color="#e5b53a"/><stop offset="1" stop-color="#8d6410"/></linearGradient>
-  <radialGradient id="mc${i}" cx=".32" cy=".25" r=".95"><stop offset="0" stop-color="${hexMix(c, .55)}"/><stop offset=".5" stop-color="${c}"/><stop offset="1" stop-color="${hexMix(c, -.45)}"/></radialGradient>
-  <linearGradient id="mb${i}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${hexMix(c, .1)}"/><stop offset="1" stop-color="${hexMix(c, -.4)}"/></linearGradient>
-  <filter id="ms${i}" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="3" stdDeviation="3" flood-opacity=".35"/></filter></defs>
-  <ellipse cx="70" cy="162" rx="38" ry="5" fill="#000" opacity=".14"/>
-  <path d="M42 96 L26 150 L48 142 L60 160 L74 104Z" fill="url(#mb${i})"/><path d="M98 96 L114 150 L92 142 L80 160 L66 104Z" fill="url(#mb${i})"/>
-  <g filter="url(#ms${i})"><circle cx="70" cy="64" r="54" fill="url(#mr${i})"/><circle cx="70" cy="64" r="44" fill="url(#mc${i})" stroke="#fff6c8" stroke-opacity=".7" stroke-width="2"/><circle cx="70" cy="64" r="36" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="1.5" stroke-dasharray="3 4"/></g>
-  <path d="M36 50 Q50 22 84 20 Q60 30 48 58Z" fill="#fff" opacity=".4"/>
-  <text x="70" y="79" text-anchor="middle" font-size="40" style="filter:drop-shadow(0 2px 2px rgba(0,0,0,.35))">${ico}</text>
-  <path d="M106 18 l2 6 6 2 -6 2 -2 6 -2 -6 -6 -2 6 -2z" fill="#fff" opacity=".9"/><path d="M24 90 l1.5 4 4 1.5 -4 1.5 -1.5 4 -1.5 -4 -4 -1.5 4 -1.5z" fill="#fff" opacity=".8"/></svg>
-  <div class="mdt"><b>${esc(label)}</b>${sub ? `<small>${esc(sub)}</small>` : ''}</div></div>`; };
-const smedal = a => { const b = BADGE[Math.min(10, Math.max(1, Math.round(a)))]; return medal3D(b[2], b[0], b[1], 'Nilai akhir ' + a); };
-const pmedal = p => { const b = PBADGE(p.d); return medal3D(b[2], b[0], b[1], `${p.f} menjadi ${p.l} (${p.d > 0 ? '+' : ''}${p.d})`); };
+const medal3D = (c, ico, label, sub, rib) => {
+  const i = ++_mid, SH = 'M80 24C98 32 116 34 130 34L130 88C130 120 108 142 80 156C52 142 30 120 30 88L30 34C44 34 62 32 80 24Z';
+  let lv = ''; const leaf = (x, y, a) => `<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="9" ry="3.8" transform="rotate(${a.toFixed(0)} ${x.toFixed(1)} ${y.toFixed(1)})" fill="url(#ml${i})" stroke="#8a5d08" stroke-opacity=".45" stroke-width=".6"/>`;
+  for (let k = 0; k < 8; k++) { const th = (108 + k * 14) * Math.PI / 180, x = 80 + 63 * Math.cos(th), y = 92 + 63 * Math.sin(th), a = 108 + k * 14 + 75; lv += leaf(x, y, a) + leaf(160 - x, y, 180 - a); }
+  return `<div class="mdl"><svg class="bd3" viewBox="0 0 160 190" role="img" aria-label="${esc(label)}"><defs>
+  <linearGradient id="mg${i}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff3c0"/><stop offset=".5" stop-color="#e6ac1f"/><stop offset="1" stop-color="#8a5d08"/></linearGradient>
+  <linearGradient id="ml${i}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f8e38e"/><stop offset="1" stop-color="#c2901a"/></linearGradient>
+  <radialGradient id="mc${i}" cx=".3" cy=".2" r="1"><stop offset="0" stop-color="${hexMix(c, .6)}"/><stop offset=".45" stop-color="${c}"/><stop offset="1" stop-color="${hexMix(c, -.5)}"/></radialGradient>
+  <linearGradient id="mr${i}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${hexMix(c, .15)}"/><stop offset="1" stop-color="${hexMix(c, -.42)}"/></linearGradient>
+  <linearGradient id="mh${i}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".7"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+  <clipPath id="mk${i}"><path d="${SH}" transform="translate(80 90) scale(.86) translate(-80 -90)"/></clipPath>
+  <filter id="ms${i}" x="-20%" y="-15%" width="140%" height="145%"><feDropShadow dx="0" dy="4" stdDeviation="3.2" flood-opacity=".38"/></filter></defs>
+  <ellipse cx="80" cy="184" rx="48" ry="5" fill="#000" opacity=".15"/>
+  <g>${lv}</g>
+  <g filter="url(#ms${i})"><path d="${SH}" fill="url(#mg${i})" stroke="#7a5206" stroke-width="1.2"/>
+  <path d="${SH}" fill="url(#mc${i})" stroke="#fff3c0" stroke-opacity=".85" stroke-width="2.4" transform="translate(80 90) scale(.86) translate(-80 -90)"/></g>
+  <g clip-path="url(#mk${i})"><ellipse cx="60" cy="52" rx="48" ry="30" fill="url(#mh${i})" transform="rotate(-20 60 52)"/></g>
+  <polygon points="80,2 84.4,11.6 94.4,12.8 87,19.6 89,29.6 80,24.6 71,29.6 73,19.6 65.6,12.8 75.6,11.6" fill="url(#mg${i})" stroke="#7a5206" stroke-width=".9" filter="url(#ms${i})"/>
+  <text x="80" y="104" text-anchor="middle" font-size="44" style="filter:drop-shadow(0 3px 2px rgba(0,0,0,.4))">${ico}</text>
+  <g filter="url(#ms${i})"><path d="M26 150H134L142 163L134 176H26L18 163Z" fill="url(#mr${i})" stroke="#fff3c0" stroke-opacity=".7" stroke-width="1.4"/></g>
+  <text x="80" y="168" text-anchor="middle" font-size="13" font-weight="800" fill="#fff" style="paint-order:stroke;stroke:rgba(0,0,0,.4);stroke-width:2.4px;stroke-linejoin:round">${esc(rib || '')}</text>
+  <path d="M130 44l2 6 6 2-6 2-2 6-2-6-6-2 6-2z" fill="#fff" opacity=".9"/><path d="M24 70l1.5 4.5 4.5 1.5-4.5 1.5-1.5 4.5-1.5-4.5-4.5-1.5 4.5-1.5z" fill="#fff" opacity=".8"/></svg>
+  <div class="mdt"><b>${esc(label)}</b>${sub ? `<small>${esc(sub)}</small>` : ''}</div></div>`;
+};
+const smedal = a => { const b = BADGE[Math.min(10, Math.max(1, Math.round(a)))]; return medal3D(b[2], b[0], b[1], 'Nilai akhir ' + a, String(a)); };
+const pmedal = p => { const b = PBADGE(p.d); return medal3D(b[2], b[0], b[1], `${p.f} menjadi ${p.l}`, (p.d > 0 ? '+' : '') + p.d); };
 const pfImg = (foto, nama) => `<div class="pfr">${foto ? `<img src="${esc(foto)}" alt="Foto ${esc(nama)}">` : `<div class="pfn">${esc(String(nama || '?').split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase())}</div>`}</div>`;
 const barSVG = (labels, f, l) => {
   const n = labels.length, W = 440, H = 300, L = 30, B = 70, T = 16, gw = (W - L - 10) / n, bw = Math.min(16, gw / 2.6), y = v => T + (H - T - B) * (1 - v / 10);
