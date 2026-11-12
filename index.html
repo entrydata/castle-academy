@@ -163,6 +163,7 @@ input[type=radio],input[type=checkbox]{width:auto}
 .lg{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--mute)}.lg i{display:inline-block;width:10px;height:10px;border-radius:99px;margin-right:6px}.lchart{width:100%}
 .sc{flex-wrap:wrap;justify-content:flex-end}.sc button{width:34px;height:34px}
 @media(prefers-reduced-motion:reduce){.rd,.rdp{animation:none}}
+#prt .rdp,#prt .rd,.jpgbox .rdp,.jpgbox .rd{animation:none!important;opacity:1!important;transform:none!important}
 .sym{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px;align-items:center}.rdc{min-width:0}
 .pfw{display:flex;flex-direction:column;align-items:center;text-align:center}
 .pfr{width:220px;height:220px;border-radius:26px;padding:6px;background:linear-gradient(135deg,var(--royal),var(--brass));box-shadow:0 12px 28px color-mix(in srgb,var(--royal) 28%,transparent);position:relative;margin:10px}
@@ -184,9 +185,6 @@ html{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .idg div{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);border-radius:12px;padding:7px 11px;min-width:0}.idg small{display:block;font-size:11px;opacity:.85}.idg b{font-size:14px;word-break:break-word}
 .rhd .pfr{width:170px;height:170px;margin:8px;background:linear-gradient(135deg,#fff,var(--brass))}.rhd .pfr::after{border-color:rgba(255,255,255,.6)}
 .rbd{padding:20px 26px}.rbd h3{font-size:17px;margin:22px 0 8px;padding-bottom:4px;border-bottom:2px solid var(--royal)}
-.nts{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;align-items:stretch}
-.nt{border:1px solid var(--line);border-left:4px solid var(--brass);border-radius:12px;padding:9px 13px;background:#fff;min-width:0}
-.nt .nth{display:flex;justify-content:space-between;gap:8px;align-items:baseline}.nt .nth small{color:var(--mute)}.nt p{margin:4px 0 2px;overflow-wrap:anywhere}.nt>small{color:var(--mute)}
 .recw{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:22px;align-items:center;border:1px solid var(--line);border-radius:16px;padding:16px 20px;background:linear-gradient(135deg,color-mix(in srgb,var(--royal) 6%,#fff),#fff)}
 .recw p{margin:8px 0 0}.recw .mut{color:var(--mute);font-size:13px}.reca{display:grid;place-items:center}
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch;margin-bottom:12px}
@@ -231,6 +229,36 @@ html{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
  .pfr{width:180px;height:180px}.bd3{height:150px}
 }
 @media print{.rhd,.pfr,.mdl,.bdg,.lpt thead th{-webkit-print-color-adjust:exact;print-color-adjust:exact}.pair,.ach,.prg{break-inside:avoid}.panel,.paper{overflow:visible}}
+#prt{display:none}
+@page f4p{size:215mm 330mm;margin:8mm}
+@page f4l{size:330mm 215mm;margin:8mm}
+@media print{body.prt>:not(#prt){display:none!important}body.prt{background:#fff}body.prt #prt{display:block}#prt.f4p{page:f4p}#prt.f4l{page:f4l}#prt,#prt *{-webkit-print-color-adjust:exact;print-color-adjust:exact}.pgbrk{break-before:page}.nt,.chc,.recw,.lpt tr,.sig{break-inside:avoid}.lpt thead{display:table-header-group}}
+.rhd.mini{padding:14px 22px}.rhd.mini h1{font-size:24px;margin:2px 0 4px}.rhd.mini small{color:#e8f3ff}.rhd.mini .pfr{width:92px;height:92px;margin:4px}
+.nts{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;align-items:stretch}
+.nt{display:flex;gap:11px;align-items:flex-start;border:1px solid var(--line);border-radius:14px;padding:10px 13px;background:linear-gradient(135deg,#fff,color-mix(in srgb,var(--mist) 70%,#fff));min-width:0}
+.nn{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:#fff;font:800 14px 'Bricolage Grotesque';background:linear-gradient(135deg,var(--royal),color-mix(in srgb,var(--royal) 55%,#8fd0ff));box-shadow:0 3px 8px color-mix(in srgb,var(--royal) 30%,transparent)}
+.nb{min-width:0;flex:1}.nt .nth{display:flex;justify-content:space-between;gap:8px;align-items:baseline}.nt .nth small{color:var(--mute)}.nt p{margin:3px 0 2px;overflow-wrap:anywhere}.nb>small{color:var(--mute)}
+.sig{display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:end;text-align:center;margin-top:14px}.sigl{height:18mm;border-bottom:1.5px solid var(--ink);margin:0 12%}.sig small{color:var(--mute)}
+.pgf{margin-top:12px;text-align:center;color:var(--mute);font-size:11px}
+.f4p{font-size:11px;line-height:1.38}
+.f4p .rhd{padding:12px 18px}.f4p .rhd h1{font-size:21px;margin:2px 0 7px}.f4p .idg{gap:5px}.f4p .idg div{padding:4px 8px}.f4p .idg small{font-size:9px}.f4p .idg b{font-size:11px}.f4p .rhd .pfr{width:112px;height:112px;margin:5px}
+.f4p .rhd.mini .pfr{width:78px;height:78px}.f4p .rhd.mini h1{font-size:20px}
+.f4p .rbd{padding:10px 14px}.f4p .rbd h3{font-size:12.5px;margin:10px 0 4px}
+.f4p .pair{gap:10px;margin-bottom:6px}.f4p .chc{padding:7px}.f4p .chc h4{font-size:11px;margin-bottom:2px}.f4p .chc svg{max-height:54mm}
+.f4p th,.f4p td{padding:3px 6px;font-size:10.5px}.f4p .bd3{height:104px}.f4p .mdt b{font-size:13px}.f4p .recw{padding:8px 14px;gap:14px}.f4p .recw p{margin:4px 0 0}
+.f4p .nts{gap:6px 10px}.f4p .nt{padding:6px 9px;gap:8px}.f4p .nn{width:28px;height:28px;font-size:12px}.f4p .sigl{height:14mm}.f4p .prg{margin-bottom:4px}
+.tabs2{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}.f4p .tabs2 th,.f4p .tabs2 td{padding:2px 6px}
+.f4p .panel{box-shadow:none;margin-bottom:8px;padding:10px}.f4p .sym{gap:12px}.f4p .pfr{width:150px;height:150px}.f4p .radar{max-height:54mm}
+.f4l{font-size:10px;line-height:1.35}
+.f4l .rhd{padding:10px 18px}.f4l .rhd h1{font-size:19px;margin:2px 0 3px}.f4l .rbd{padding:10px 14px}
+.lpst{display:flex;gap:10px}.lpsi{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);border-radius:10px;padding:5px 14px;text-align:center}.lpsi b{display:block;font-size:17px}.lpsi small{font-size:9px;color:#fff!important}
+.f4l .lpw{border-radius:8px;overflow:visible}.f4l .lpt{table-layout:fixed;font-size:9.5px}.f4l .lpt th,.f4l .lpt td{padding:4px 3px}
+.f4l .lpt .sk{position:static;box-shadow:none;min-width:0}.f4l .lpt td.c,.f4l .lpt thead tr.g2 th{min-width:0}.f4l .lpt thead tr.g2 th{font-size:8.5px;overflow-wrap:anywhere}
+.f4l .lpt td.c b{font-size:11px}.f4l .dl{font-size:8.5px}.f4l .lpt .bdg{font-size:8px;padding:1px 6px}.f4l .lpt .tag{font-size:8.5px;padding:1px 6px}.f4l .lpt thead th:first-child{border-top-left-radius:6px}.f4l .lpt thead th:last-child{border-top-right-radius:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 4px}.chip{margin:0;font-weight:600;cursor:pointer;position:relative}.chip input{position:absolute;opacity:0}
+.chip span{display:inline-block;padding:7px 14px;border:1.5px solid var(--line);border-radius:99px;background:#fff}.chip input:checked+span{background:var(--royal);border-color:var(--royal);color:#fff}.chip input:focus-visible+span{outline:3px solid var(--brass)}
+.rdnav{display:flex;gap:12px;justify-content:center;align-items:center;margin-top:8px;color:var(--mute);font-size:13px}
+.mut{color:var(--mute)}
 /* modal & toast */
 .ov{position:fixed;inset:0;background:rgba(23,34,77,.55);display:grid;place-items:center;padding:16px;z-index:20}
 .modal{background:#fff;border-radius:18px;padding:26px;width:100%;max-width:760px;max-height:92vh;overflow:auto}
@@ -387,7 +415,7 @@ function start() {
   const adm = S.user.Role === 'admin';
   const items = staff
     ? [['dash', '🏫', 'Dashboard'], ['users', '👥', adm ? 'Pengguna' : 'Siswa'], ['paket', '🎓', 'Daftar Program Paket'], ['progress', '📈', 'Catatan Progres'], ['keuangan', '💳', 'Keuangan'], ['aktif', '✅', 'Paket Aktif'], ['asesmen', '📚', 'Daftar asesmen'], ['lap', '📊', 'Laporan hasil asesmen'], ['pantau', '📡', 'Pantau ujian'], ['lpp', '🗓️', 'Laporan Periode Program']].concat(adm ? [['settings', '⚙️', 'Pengaturan']] : [])
-    : [['dash', '🏫', 'Beranda'], ['exam', '✏️', 'Ujian'], ['results', '📈', 'Hasil & progres'], ['report', '🖨️', 'Laporan saya']];
+    : [['dash', '🏫', 'Beranda'], ['exam', '✏️', 'Ujian'], ['catprog', '📈', 'Catatan Progres'], ['results', '🏅', 'Hasil ujian & laporan'], ['report', '🖨️', 'Laporan saya']];
   $('#nav').innerHTML = items.map(i => `<button data-v="${i[0]}">${i[1]} ${i[2]}</button>`).join('');
   $('#nav').onclick = e => { const v = e.target.closest('button')?.dataset.v; if (v) go(v); };
   go('dash');
@@ -398,7 +426,7 @@ function go(v) {
   clearInterval(S.tm); S.view = v; $('#side').classList.remove('open'); $('#scrim').classList.add('hide');
   document.querySelectorAll('#nav button').forEach(b => b.classList.toggle('on', b.dataset.v === v));
   $('#main').innerHTML = '<div class="empty"><span class="spn"></span> Memuat...</div>';
-  const f = {dash: S.user.Role === 'siswa' ? vStudentDash : vStaffDash, users: vUsers, progress: vProgress, results: vResults, exam: vExam, paket: vPaket, keuangan: vKeuangan, aktif: vAktif, report: vReport, settings: vSettings, asesmen: vAsesmen, lap: vLap, pantau: vPantau, lpp: vLpp}[v];
+  const f = {dash: S.user.Role === 'siswa' ? vStudentDash : vStaffDash, users: vUsers, progress: vProgress, results: vResults, exam: vExam, paket: vPaket, keuangan: vKeuangan, aktif: vAktif, report: vReport, settings: vSettings, asesmen: vAsesmen, catprog: vCatProg, lap: vLap, pantau: vPantau, lpp: vLpp}[v];
   f().catch(e => { $('#main').innerHTML = `<div class="empty">${esc(e.message)}</div>`; });
 }
 const head = (t, sub, btn) => `<div class="top"><div><h2>${t}</h2><p>${sub || ''}</p></div>${btn || ''}</div>`;
@@ -414,19 +442,24 @@ async function vStaffDash() {
     <div class="panel"><h3>Nilai siswa terkini</h3><div id="rdr"></div></div>
     <div class="two"><div class="panel"><h3>Perlu tindak lanjut</h3>${d.hampir.length ? `<div class="tw"><table><tr><th>Siswa</th><th>Paket</th><th>Pertemuan</th><th>Status</th></tr>${d.hampir.map(h => `<tr><td>${esc(h.Nama)}</td><td>${esc(h.PaketNama)}</td><td>${h.Tercatat}/${h.Total}</td><td>${stTag(h.Status)}</td></tr>`).join('')}</table></div>` : '<div class="empty">Belum ada paket yang perlu tindak lanjut.</div>'}</div>
     <div class="panel"><h3>Hasil ujian terbaru</h3><div class="tw"><table>${resHead()}${resRows(d.terbaru)}</table></div></div></div>`;
-  const R = d.radar; let i = 0;
+  const R = d.radar; let i = 0; const PHC = new Map();
+  const photo = u => { if (!PHC.has(u)) PHC.set(u, api('foto', {Username: u}).catch(() => '')); return PHC.get(u); };
   const show = () => {
     if (!$('#rdr')) return clearInterval(S.tm);
-    const x = R[i % R.length]; i++;
-    const m = mean(x.items.map(t => Number(t.v)));
-    $('#rdr').innerHTML = `<div class="rd"><div>${radarSVG(x.items.map(t => t.n), x.items.map(t => Number(t.v)), 10)}</div><div><h3 style="margin:0;font-size:22px">${esc(x.Nama)}</h3><small style="color:var(--mute)">${esc(x.Paket)} • pertemuan ${x.Pertemuan} • ${esc(x.Tanggal)}</small><div class="score" style="font-size:48px;color:var(--royal);margin-top:8px">${m}</div><small>rata-rata pertemuan terakhir (1-10)</small><div style="margin-top:8px">${bdg(m)}</div></div></div>`;
+    const x = R[i], m = mean(x.items.map(t => Number(t.v)));
+    $('#rdr').innerHTML = `<div class="sym rd"><div class="rdc">${radarSVG(x.items.map(t => t.n), x.items.map(t => Number(t.v)), 10)}</div><div class="pfw" id="rdp">${pfImg('', x.Nama)}<h3 style="margin:10px 0 2px;font-size:20px">${esc(x.Nama)}</h3><small class="mut">${esc([x.Jenjang, x.Kelompok].filter(Boolean).join(' • '))}</small><small class="mut">${esc(x.Paket)} • pertemuan ${x.Pertemuan} • ${esc(x.Tanggal)}</small><div class="score" style="font-size:44px;color:var(--royal);margin-top:6px">${m}</div><small class="mut">rata-rata nilai pertemuan terakhir</small><div style="margin-top:6px">${bdg(m)}</div></div></div>
+      <div class="rdnav"><button class="btn ghost sm" id="rprev" type="button">‹ Sebelumnya</button><span>${i + 1} dari ${R.length}</span><button class="btn ghost sm" id="rnext" type="button">Berikutnya ›</button></div>`;
+    photo(x.Username).then(f => { const p = $('#rdp .pfr'); if (f && p && R[i] === x) p.outerHTML = pfImg(f, x.Nama); });
+    photo(R[(i + 1) % R.length].Username);
+    $('#rprev').onclick = () => step(-1); $('#rnext').onclick = () => step(1);
   };
+  const step = k => { i = (i + k + R.length) % R.length; show(); clearInterval(S.tm); S.tm = setInterval(() => step(1), 6000); };
   if (!R.length) $('#rdr').innerHTML = '<div class="empty">Belum ada catatan progres dengan minimal 3 aspek penilaian.</div>';
-  else { show(); if (R.length > 1) S.tm = setInterval(show, 6000); }
+  else { show(); if (R.length > 1) S.tm = setInterval(() => step(1), 6000); }
 }
 
 async function vUsers(filter) {
-  const all = await api('users'), admin = S.user.Role === 'admin';
+  const [all, pks] = await Promise.all([api('users'), api('pakets').catch(() => [])]), admin = S.user.Role === 'admin';
   filter = filter || 'semua';
   const list = all.filter(u => filter === 'semua' || u.Role === filter);
   $('#main').innerHTML = head(admin ? 'Pengguna' : 'Siswa', admin ? 'Kelola akun admin, pegawai, dan siswa.' : 'Kelola data siswa dan akun login mereka.', '<button class="btn" id="add">+ Tambah</button>') +
@@ -434,32 +467,39 @@ async function vUsers(filter) {
     `<div class="panel tw"><table><tr><th>Nama</th><th>Username</th><th>Peran</th><th>Jenjang</th><th>Program</th><th>Kelompok</th><th>Kontak</th><th>Kode reg.</th><th>Paket Aktif</th><th></th></tr>
     ${list.map((u, i) => `<tr><td><b>${esc(u.Nama)}</b></td><td>${esc(u.Username)}</td><td><span class="tag">${ROLE[u.Role]}</span></td><td>${esc(u.Jenjang)}</td><td>${esc(u.Program)}</td><td>${esc(u.Kelompok)}</td><td>${esc(u.HP)}${u.HPOrtu ? '<br><small>Ortu ' + esc(u.HPOrtu) + '</small>' : ''}</td><td>${esc(u.KodeReg)}${u.KodeReg ? ` <button class="btn ghost sm" data-q="${esc(u.KodeReg)}|${esc(u.Nama)}" type="button">QR</button>` : ''}</td><td>${u.Role === 'siswa' ? (u.PaketAktif.map(x => `<span class="tag">${esc(x)}</span>`).join(' ') || '<small>-</small>') : ''}</td>
     <td class="act"><button class="btn ghost sm" data-e="${i}">Ubah</button><button class="btn del sm" data-d="${i}">Hapus</button></td></tr>`).join('') || '<tr><td colspan="10" class="empty">Belum ada data.</td></tr>'}</table></div>`;
-  $('#add').onclick = () => userForm({}, filter);
+  $('#add').onclick = () => userForm({}, filter, all, pks);
   document.querySelectorAll('[data-q]').forEach(b => b.onclick = () => { const [c, n] = b.dataset.q.split('|'); showQR(c, n); });
   document.querySelectorAll('.tabs button').forEach(b => b.onclick = () => vUsers(b.dataset.t));
-  document.querySelectorAll('[data-e]').forEach(b => b.onclick = () => userForm(list[b.dataset.e], filter));
+  document.querySelectorAll('[data-e]').forEach(b => b.onclick = () => userForm(list[b.dataset.e], filter, all, pks));
   document.querySelectorAll('[data-d]').forEach(b => b.onclick = async () => {
     const u = list[b.dataset.d];
     if (!confirm(`Hapus ${u.Nama}? Data login akan dihapus.`)) return;
     try { await api('delUser', {Username: u.Username}); toast('Pengguna dihapus'); vUsers(filter); } catch (e) { fail(e); }
   });
 }
-function userForm(u, filter) {
-  const admin = S.user.Role === 'admin', edit = !!u.Username, PH = {};
+function userForm(u, filter, all, pks) {
+  all = all || []; pks = pks || [];
+  const admin = S.user.Role === 'admin', edit = !!u.Username, PH = {}, sp = s => String(s || '').split(',').map(x => x.trim()).filter(Boolean);
+  const cur = new Set(sp(u.Program)), progs = [...new Set([].concat(pks.map(p => p.Program), ...all.map(x => sp(x.Program)), [...cur]).filter(Boolean))].sort();
+  const kels = [...new Set(all.map(x => String(x.Kelompok || '').trim()).concat(u.Kelompok ? [String(u.Kelompok)] : []).filter(Boolean))].sort();
+  const kelSel = sel('fk', 'Kelompok', '<option value="">- Tanpa kelompok -</option>' + kels.map(k => `<option ${k === u.Kelompok ? 'selected' : ''}>${esc(k)}</option>`).join('') + '<option value="__new__">+ Buat kelompok baru...</option>');
+  const chips = `<label>Program yang diikuti (pilih dari program yang sudah ada)</label><div class="chips" id="fgc">${progs.map(p => `<label class="chip"><input type="checkbox" value="${esc(p)}" ${cur.has(p) ? 'checked' : ''}><span>${esc(p)}</span></label>`).join('') || '<small class="mut">Belum ada program. Buat di menu Daftar Program Paket.</small>'}</div>`;
   modal(edit ? 'Ubah pengguna' : 'Tambah pengguna',
     `<div class="row">${fld('fu', 'Username', u.Username)}${fld('fp', edit ? 'Password (kosongkan jika tetap)' : 'Password', '', 'password')}</div>
      <div class="row">${fld('fn', 'Nama lengkap', u.Nama)}${admin ? sel('fr', 'Peran', opts(['siswa', 'pegawai', 'admin'], u.Role || (filter !== 'semua' ? filter : 'siswa'))) : ''}</div>
-     <div class="row">${sel('fj', 'Jenjang (siswa)', '<option value="">-</option>' + opts(JENJANG, u.Jenjang))}${fld('fg', 'Program (terisi otomatis dari paket)', u.Program)}</div>
-     <div class="row">${fld('fk', 'Kelompok, mis. English A', u.Kelompok)}${fld('fm', 'Tanggal mulai', u.Mulai, 'date')}</div>
+     <div class="row">${sel('fj', 'Jenjang (siswa)', '<option value="">-</option>' + opts(JENJANG, u.Jenjang))}${kelSel}</div>
+     <div id="fkn" class="hide">${fld('fk2', 'Nama kelompok baru, mis. English A', '')}</div>${chips}
+     <div class="row">${fld('fm', 'Tanggal mulai', u.Mulai, 'date')}</div>
      <div class="row">${fld('fh', 'No. HP siswa', u.HP, 'tel')}${fld('fo', 'No. HP orang tua', u.HPOrtu, 'tel')}${fld('fe', 'Gmail', u.Gmail, 'email')}${fld('fz', 'Kode registrasi (kosong = otomatis)', u.KodeReg)}</div>
      <div class="act" style="margin-top:12px"><button class="btn ghost sm" id="fscan" type="button">Scan kode registrasi (kamera)</button></div><label for="fa">Alamat</label><textarea id="fa" rows="2">${esc(u.Alamat)}</textarea>
      <label>Foto (opsional, otomatis dikecilkan dan dipotong persegi)</label><div class="act" style="align-items:center"><img id="fprev" alt="" style="width:64px;height:64px;border-radius:14px;object-fit:cover;background:var(--mist);border:2px solid var(--line)"><input type="file" id="ff" accept="image/*"><button class="btn del sm" id="fdel" type="button">Hapus foto</button></div>`,
     async () => {
-      await api('saveUser', {Username: val('fu'), Password: $('#fp').value, Nama: val('fn'), Role: admin ? val('fr') : 'siswa', Jenjang: val('fj'), Program: val('fg'), Kelompok: val('fk'), Mulai: val('fm'), HP: val('fh'), HPOrtu: val('fo'), Gmail: val('fe'), Alamat: val('fa'), KodeReg: val('fz')});
+      await api('saveUser', {Username: val('fu'), Password: $('#fp').value, Nama: val('fn'), Role: admin ? val('fr') : 'siswa', Jenjang: val('fj'), Program: [...document.querySelectorAll('#fgc input:checked')].map(x => x.value).join(', '), Kelompok: val('fk') === '__new__' ? val('fk2') : val('fk'), Mulai: val('fm'), HP: val('fh'), HPOrtu: val('fo'), Gmail: val('fe'), Alamat: val('fa'), KodeReg: val('fz')});
       if (PH.d || PH.del) await api('savePhoto', {Username: val('fu'), Data: PH.d || ''});
       toast('Tersimpan'); vUsers(filter);
     });
   if (edit) $('#fu').readOnly = true;
+  $('#fk').onchange = () => { $('#fkn').classList.toggle('hide', val('fk') !== '__new__'); if (val('fk') === '__new__') $('#fk2').focus(); };
   $('#ff').onchange = async e => { const f = e.target.files[0]; if (!f) return; try { PH.d = await fotoResize(f); PH.del = false; $('#fprev').src = PH.d; } catch (x) { fail(x); } };
   $('#fdel').onclick = () => { PH.d = ''; PH.del = true; $('#fprev').removeAttribute('src'); };
   if (edit) api('foto', {Username: u.Username}).then(d => { if (d && !PH.d && !PH.del) $('#fprev').src = d; }).catch(() => {});
@@ -482,7 +522,7 @@ const listEd = (box, arr, ph, add) => {
 };
 async function vProgress() {
   const ls = (await api('langganan')).filter(l => l.Status !== 'Nonaktif'), us = uniq(ls);
-  $('#main').innerHTML = head('Catatan progres', 'Nilai pemahaman materi dan keterampilan siswa di setiap pertemuan (skala 1-10).') + (ls.length ?
+  $('#main').innerHTML = head('Catatan progres', 'Nilai pemahaman materi dan keterampilan siswa di setiap pertemuan (skala 1-10).', progBar) + (ls.length ?
     `<div class="panel"><div class="row">${sel('ps', 'Siswa', us.map(u => `<option value="${esc(u[0])}">${esc(u[1])}</option>`).join(''))}${sel('pl2', 'Paket aktif', '')}</div><button class="btn ghost sm" id="pscan" type="button" style="margin-top:10px">Scan kartu siswa</button><div id="pinfo" style="margin-top:10px"></div></div><div id="pform"></div><div id="plist"></div>` :
     '<div class="panel empty">Belum ada siswa dengan paket aktif. Catat pembayaran paket di menu Keuangan.</div>');
   if (!ls.length) return;
@@ -503,14 +543,13 @@ async function vProgress() {
       const N = {P: {}, K: {}}; document.querySelectorAll('#pform .sc').forEach(s => { const a = s.querySelector('.on'); if (a) N[s.dataset.g][nm(s)] = +a.dataset.v; });
       try { await api('saveProgress', {Username: L.Username, LID: L.ID, Pertemuan: val('pm'), Tanggal: val('pt'), Kehadiran: val('pk'), Catatan: val('pc'), Nilai: N}); toast('Catatan tersimpan'); await load(); } catch (e) { fail(e); }
     };
-    const allN = L.P.concat(L.K), lv = L.P.map(n => lastVal(rows, 'P', n)).concat(L.K.map(n => lastVal(rows, 'K', n))), fin = mean(lv.filter(v => v != null)), pr = progres(rows);
-    const hist = rows.map((r, i) => { const a = rowAvg(r); let pv = null; for (let k = i - 1; k >= 0; k--) { const x = rowAvg(rows[k]); if (x != null) { pv = x; break; } } return {r, a, d: a != null && pv != null ? Math.round((a - pv) * 10) / 10 : null}; }).reverse();
-    $('#plist').innerHTML = `<div class="panel"><h3>Nilai terakhir</h3><div class="sym"><div class="rdc">${radarSVG(allN, lv.map(v => v || 0), 10)}</div>${photoFrame(FOTO, L.Nama, fin, L.PaketNama)}</div>${aspek('Pemahaman materi', 'P', L.P, rows)}${aspek('Keterampilan', 'K', L.K, rows)}</div>
-      <div class="panel tw"><h3>Riwayat pertemuan</h3>${progresHtml(pr)}<table><tr><th>Ke</th><th>Tanggal</th><th>Hadir</th><th>Skor</th><th>Perubahan</th><th>Catatan</th></tr>${hist.map(x => `<tr><td>${x.r.Pertemuan}</td><td>${esc(x.r.Tanggal)}</td><td>${esc(x.r.Kehadiran)}</td><td><b>${x.a == null ? '-' : x.a}</b></td><td>${x.d == null ? '-' : x.d > 0 ? `<b style="color:var(--ok)">▲ +${x.d}</b>` : x.d < 0 ? `<b style="color:var(--bad)">▼ ${x.d}</b>` : '='}</td><td>${esc(x.r.Catatan)}</td></tr>`).join('') || '<tr><td colspan="6" class="empty">Belum ada catatan.</td></tr>'}</table></div>`;
+    $('#plist').innerHTML = progBlock(L, rows, FOTO);
   };
   const load = async () => { L = ls.find(l => l.ID === val('pl2')); rows = await api('progress', {Username: L.Username, LID: L.ID}); if (FU !== L.Username) { FOTO = await api('foto', {Username: L.Username}).catch(() => ''); FU = L.Username; } draw(); };
   const fillPk = () => { $('#pl2').innerHTML = ls.filter(l => l.Username === val('ps')).map(l => `<option value="${l.ID}">${esc(l.Program + ' – ' + l.PaketNama)}</option>`).join(''); load().catch(fail); };
   $('#ps').onchange = fillPk; $('#pl2').onchange = () => load().catch(fail); fillPk();
+  $('#pdfb').onclick = () => L && printEl(progPrint(L, rows, FOTO), 'f4p');
+  $('#jpgb').onclick = () => L && downloadJpg(progPrint(L, rows, FOTO, 1), fname('Catatan-Progres', L.Nama) + '.jpg', 980);
   $('#pscan').onclick = () => scanCode(c => { const l = ls.find(x => x.KodeReg === c); if (!l) return toast('Kode tidak dikenali atau siswa belum punya paket aktif.', true); $('#ps').value = l.Username; fillPk(); });
 }
 
@@ -693,37 +732,17 @@ async function vAktif() {
 }
 
 /* ---------- Laporan individual ---------- */
-const repBody = d => {
-  const l = d.l, u = d.user, rows = d.prog, hadir = rows.filter(r => r.Kehadiran === 'Hadir').length, all = d.pk.P.map(n => ['P', n]).concat(d.pk.K.map(n => ['K', n]));
-  const lv = all.map(a => lastVal(rows, a[0], a[1])), fv = all.map(a => firstVal(rows, a[0], a[1])), names = all.map(a => a[1]);
-  const ap = mean(lv.filter(v => v != null)), pgr = progres(rows), sg = x => (x > 0 ? '+' : '') + x;
-  const as = d.res.length ? Math.round(d.res.reduce((s, r) => s + Number(r.Skor), 0) / d.res.length) : null;
-  const comb = ap != null && as != null ? (ap / 10 * 100 + as) / 2 : ap != null ? ap / 10 * 100 : as, rc = rec(comb == null ? null : Math.round(comb));
-  const last = d.res.slice().sort((a, b) => String(b.Tanggal).localeCompare(String(a.Tanggal)))[0];
-  const info = [['Jenjang', u.Jenjang], ['Kelas / kelompok', u.Kelompok], ['Program', l.Program], ['Paket belajar', l.PaketNama], ['Mulai', l.Mulai], ['Termin dibayar', `${l.Dibayar} dari ${l.Termin}`], ['Pertemuan', `${l.Tercatat} dari ${l.Total}`], ['Kehadiran', `${hadir} hadir dari ${rows.length}`],
-    ['Hasil asesmen terakhir', last ? `${last.Skor}${Number(last.Pending) > 0 ? '*' : ''} • ${last.Judul || last.Program}` : '-']];
-  const notes = rows.filter(r => r.Catatan), half = Math.ceil(notes.length / 2), nt = r => `<div class="nt"><div class="nth"><b>Pertemuan ${r.Pertemuan}</b><small>${esc(r.Tanggal)}</small></div><p>${esc(r.Catatan)}</p><small>${esc(r.Tutor)}</small></div>`, ng = [];
-  for (let i = 0; i < half; i++) { ng.push(nt(notes[i])); if (notes[half + i]) ng.push(nt(notes[half + i])); }
-  const emb = pgr ? pmedal(pgr) : ap != null ? smedal(ap) : '';
-  return `<div class="rhd"><div><div class="rl">${esc(d.lembaga)} • Laporan perkembangan belajar</div><h1>${esc(u.Nama)}</h1><div class="idg">${info.map(r => `<div><small>${r[0]}</small><b>${esc(r[1] || '-')}</b></div>`).join('')}</div></div>${pfImg(d.foto, u.Nama)}</div>
-    <div class="rbd">
-    ${all.length >= 3 ? `<div class="pair"><div class="chc"><h4>Radar nilai terakhir</h4>${radarSVG(names, lv.map(v => v || 0), 10)}</div><div class="chc"><h4>Nilai awal dan nilai akhir</h4>${barSVG(names, fv, lv)}</div></div>` : ''}
-    ${aspek('Pemahaman materi', 'P', d.pk.P, rows)}${aspek('Keterampilan', 'K', d.pk.K, rows)}
-    <h3>Catatan tutor</h3>${notes.length ? `<div class="nts">${ng.join('')}</div>` : '<p>Belum ada catatan.</p>'}
-    <h3>Hasil asesmen</h3>${d.res.length ? `<div class="tw"><table><tr><th>Asesmen</th><th>Tanggal</th><th>Nilai</th><th>Kategori</th></tr>${d.res.map(r => `<tr><td>${esc(r.Judul || r.Program)}</td><td>${esc(r.Tanggal)}</td><td><b>${r.Skor}</b>${Number(r.Pending) > 0 ? '*' : ''}</td><td>${kat(r.Skor)}</td></tr>`).join('')}</table></div>` : '<p>Belum ada hasil asesmen pada paket ini.</p>'}
-    <h3>Rekomendasi</h3><div class="recw"><div>${comb == null ? '<p style="margin:0">Rekomendasi diberikan setelah ada nilai progres atau asesmen.</p>' : `<span class="tag ${rc === 'Reinforcement' ? 'y' : 'g'}" style="font-size:15px;padding:5px 16px">${rc}</span><p><b>${rc}</b>: ${REC[rc]} pada tahap berikutnya.</p>`}<p class="mut">Nilai akhir ${ap ?? '-'} (skala 10) • Kemajuan ${pgr ? sg(pgr.d) + ' poin' : '-'} • Rata-rata asesmen ${as ?? '-'}</p></div>${emb ? `<div class="reca">${emb}</div>` : ''}</div>
-    <p style="color:var(--mute);font-size:13px">Nilai akhir adalah rata-rata nilai terakhir tiap aspek (skala 1-10). Kemajuan membandingkan skor pertemuan pertama dan terakhir. Nilai bukan satu-satunya ukuran keberhasilan. * = nilai sementara.</p></div>`;
-};
 async function vReport() {
-  const staff = S.user.Role !== 'siswa', ls = staff ? (await api('langganan')).filter(l => l.Status !== 'Nonaktif') : [];
-  $('#main').innerHTML = head('Laporan individual', 'Cetak langsung atau pilih Simpan sebagai PDF di dialog cetak.', '<button class="btn" id="pr">Cetak / PDF</button>') +
+  const staff = S.user.Role !== 'siswa', ls = staff ? (await api('langganan')).filter(l => l.Status !== 'Nonaktif') : []; let CUR = null;
+  $('#main').innerHTML = head('Laporan individual', 'Cetak PDF ukuran F4 (halaman 1 laporan, halaman berikutnya catatan tutor) atau simpan sebagai JPG.', '<div class="act"><button class="btn" id="pr">Cetak PDF (F4)</button><button class="btn ghost" id="pj">JPG</button></div>') +
     `<div class="panel noprint"><div class="row">${staff ? sel('rs', 'Siswa', uniq(ls).map(u => `<option value="${esc(u[0])}">${esc(u[1])}</option>`).join('')) : ''}${sel('rl', 'Paket belajar', '')}</div></div><div id="rp"></div>`;
-  $('#pr').onclick = () => window.print();
+  $('#pr').onclick = () => CUR && printEl(repPrint(CUR), 'f4p');
+  $('#pj').onclick = () => CUR && downloadJpg(`<div class="paper rpt">${repBody(CUR)}</div>`, fname('Laporan', CUR.user.Nama) + '.jpg', 980);
   if (staff && !ls.length) { $('#rp').innerHTML = '<div class="panel empty">Belum ada siswa dengan paket aktif.</div>'; return; }
   const show = async keep => {
-    const d = await api('report', {Username: staff ? val('rs') : '', LID: keep ? val('rl') : (S.sl || '')}); S.sl = '';
+    const d = await api('report', {Username: staff ? val('rs') : '', LID: keep ? val('rl') : (S.sl || '')}); S.sl = ''; CUR = d;
     $('#rl').innerHTML = d.ls.map(x => `<option value="${x.ID}" ${x.ID === d.l.ID ? 'selected' : ''}>${esc(x.Program + ' – ' + x.PaketNama)}</option>`).join('');
-    $('#rp').innerHTML = `<div class="paper rpt">${repBody(d)}<div class="rbd" style="padding-top:0"><div style="display:flex;justify-content:space-between;margin-top:36px;gap:20px"><div>Tutor<br><br><br>________________</div><div style="text-align:right">Dicetak ${esc(d.tgl)}<br>Pengelola<br><br>________________</div></div></div></div>`;
+    $('#rp').innerHTML = `<div class="paper rpt">${repBody(d)}${sigHtml(d).replace('class="sig"', 'class="sig rbd"')}</div>`;
   };
   if (staff && S.su) { $('#rs').value = S.su; S.su = ''; }
   $('#rl').onchange = () => show(true).catch(fail); if (staff) $('#rs').onchange = () => show().catch(fail);
@@ -850,28 +869,38 @@ async function vPantau() {
 /* ---------- Laporan Periode Program ---------- */
 async function vLpp() {
   const pks = await api('pakets');
-  $('#main').innerHTML = head('Laporan periode program', 'Kemajuan tiap aspek (nilai akhir dan perubahannya) serta nilai asesmen pada paket dan periode tertentu.', '<button class="btn" id="pr">Cetak / PDF</button>') +
+  $('#main').innerHTML = head('Laporan periode program', 'Kemajuan tiap aspek (nilai akhir dan perubahannya) serta nilai asesmen pada paket dan periode tertentu.', '<div class="act"><button class="btn" id="pr">Cetak PDF (F4 landscape)</button><button class="btn ghost" id="pj">JPG</button></div>') +
     (pks.length ? `<div class="panel noprint"><div class="row">${sel('lg', 'Program', [...new Set(pks.map(p => p.Program))].map(x => `<option>${esc(x)}</option>`).join(''))}${sel('lk2', 'Paket belajar', '')}${sel('ln', 'Periode paket', '')}${fld('lq', 'Kelompok', '')}</div></div><div id="lr"></div>` : '<div class="panel empty">Belum ada paket. Buat di menu Daftar Program Paket.</div>');
-  $('#pr').onclick = () => window.print();
   if (!pks.length) return;
   let D = null;
   const sg = d => d > 0 ? '+' + d : String(d);
   const comb = r => { const a = r.akhir == null ? null : r.akhir * 10; return a != null && r.avgAs != null ? (a + r.avgAs) / 2 : a != null ? a : r.avgAs; };
   const cell = a => !a ? '<td class="c">-</td>' : `<td class="c"><b>${a.l}</b>${a.d == null ? '<span class="dl">baru 1x</span>' : `<span class="dl ${a.d > 0 ? 'up' : a.d < 0 ? 'dn' : ''}">${a.d > 0 ? '▲' : a.d < 0 ? '▼' : '='} ${sg(a.d)}</span>`}</td>`;
-  const draw = () => {
-    const q = val('lq').toLowerCase(), R = D.rows.filter(r => !q || String(r.Kelompok).toLowerCase().includes(q)), pk = D.pk, nP = pk.P.length, nK = pk.K.length, nA = D.asesmen.length;
-    const km = mean(R.map(r => r.kem).filter(v => v != null)), up = R.filter(r => r.kem != null && r.kem > 0).length, wk = R.filter(r => r.kem != null).length, as = mean(R.map(r => r.avgAs).filter(v => v != null));
-    const colAvg = (arr, k) => { const v = R.map(r => r[arr][k]).filter(Boolean); return { l: mean(v.map(x => x.l)), d: mean(v.map(x => x.d).filter(x => x != null)) }; };
+  const rows = () => { const q = val('lq').toLowerCase(); return D.rows.filter(r => !q || String(r.Kelompok).toLowerCase().includes(q)); };
+  const stats = R => { const km = mean(R.map(r => r.kem).filter(v => v != null)), up = R.filter(r => r.kem != null && r.kem > 0).length, wk = R.filter(r => r.kem != null).length, as = mean(R.map(r => r.avgAs).filter(v => v != null));
+    return {km, as, list: [[R.length, 'Siswa'], [km == null ? '-' : sg(km), 'Rata-rata kemajuan (poin)'], [wk ? `${up} dari ${wk}` : '-', 'Siswa yang naik'], [as ?? '-', 'Rata-rata asesmen']]}; };
+  const tbl = (R, pr) => {
+    const pk = D.pk, nP = pk.P.length, nK = pk.K.length, nA = D.asesmen.length, st = stats(R);
+    const colAvg = (arr, k) => { const v = R.map(r => r[arr][k]).filter(Boolean); return {l: mean(v.map(x => x.l)), d: mean(v.map(x => x.d).filter(x => x != null))}; };
     const foot = (arr, n) => Array.from({length: n}, (_, k) => { const a = colAvg(arr, k); return a.l == null ? '<td class="c">-</td>' : `<td class="c"><b>${a.l}</b>${a.d == null ? '' : `<span class="dl ${a.d > 0 ? 'up' : a.d < 0 ? 'dn' : ''}">${sg(a.d)}</span>`}</td>`; }).join('');
-    $('#lr').innerHTML = `<div class="stats">${[[R.length, 'Siswa'], [km == null ? '-' : sg(km), 'Rata-rata kemajuan (poin)'], [wk ? `${up} dari ${wk}` : '-', 'Siswa yang naik'], [as ?? '-', 'Rata-rata asesmen']].map(s => `<div class="stat"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('')}</div>
-      <div class="panel"><h3>${esc(pk.Program)} – ${esc(pk.Nama)} • ${D.n ? 'Bulan ' + D.n : 'Seluruh paket'} <small style="color:var(--mute);font-weight:500">(pertemuan ${D.lo}–${D.hi})</small></h3><div class="tw lpw"><table class="lpt"><thead>
-      <tr><th rowspan="2" class="sk">Siswa</th><th rowspan="2">Hadir</th>${nP ? `<th colspan="${nP}" class="gp">Pemahaman materi</th>` : ''}${nK ? `<th colspan="${nK}" class="gk">Keterampilan</th>` : ''}${nA ? `<th colspan="${nA}" class="ga">Asesmen</th>` : ''}<th rowspan="2">Kemajuan</th><th rowspan="2">Asesmen</th><th rowspan="2">Rekomendasi</th><th rowspan="2" class="noprint"></th></tr>
+    const cg = pr ? `<colgroup><col style="width:32mm"><col style="width:13mm">${'<col>'.repeat(nP + nK + nA)}<col style="width:25mm"><col style="width:17mm"><col style="width:26mm"></colgroup>` : '';
+    return `<div class="tw lpw"><table class="lpt">${cg}<thead>
+      <tr><th rowspan="2" class="sk">Siswa</th><th rowspan="2">Hadir</th>${nP ? `<th colspan="${nP}" class="gp">Pemahaman materi</th>` : ''}${nK ? `<th colspan="${nK}" class="gk">Keterampilan</th>` : ''}${nA ? `<th colspan="${nA}" class="ga">Asesmen</th>` : ''}<th rowspan="2">Kemajuan</th><th rowspan="2">Asesmen</th><th rowspan="2">Rekomendasi</th>${pr ? '' : '<th rowspan="2" class="noprint"></th>'}</tr>
       <tr class="g2">${pk.P.concat(pk.K).map(n => `<th>${esc(n)}</th>`).join('')}${D.asesmen.map(a => `<th>${esc(a.Nama)}</th>`).join('')}</tr></thead><tbody>
-      ${R.map((r, i) => { const c = comb(r), rc = c == null ? null : rec(Math.round(c)); return `<tr><td class="sk"><b>${esc(r.Nama)}</b><br><small style="color:var(--mute)">${esc(r.Kelompok)}</small></td><td>${r.Hadir}/${r.Tercatat}</td>${r.P.map(cell).join('')}${r.K.map(cell).join('')}${r.nilai.map(n => `<td class="c">${!n ? '-' : `<b>${n.n}${n.p > 0 ? '*' : ''}</b>`}</td>`).join('')}<td class="c">${r.kem == null ? '-' : `<b>${sg(r.kem)}</b>${pbdg(r.kem)}`}</td><td class="c"><b>${r.avgAs == null ? '-' : r.avgAs}</b></td><td>${rc ? `<span class="tag ${rc === 'Reinforcement' ? 'y' : 'g'}">${rc}</span>` : '-'}</td><td class="noprint"><button class="btn ghost sm" data-u="${i}">Laporan siswa</button></td></tr>`; }).join('') || `<tr><td colspan="${nP + nK + nA + 5}" class="empty">Belum ada siswa pada paket ini. Siswa muncul setelah pembayaran paket dicatat.</td></tr>`}</tbody>
-      ${R.length ? `<tfoot><tr><td class="sk">Rata-rata kelas</td><td></td>${foot('P', nP)}${foot('K', nK)}${D.asesmen.map((a, k) => { const v = R.map(r => r.nilai[k]).filter(Boolean); return `<td class="c">${v.length ? '<b>' + mean(v.map(x => x.n)) + '</b>' : '-'}</td>`; }).join('')}<td class="c">${km == null ? '-' : sg(km)}</td><td class="c">${as ?? '-'}</td><td></td><td class="noprint"></td></tr></tfoot>` : ''}</table></div>
-      <p style="color:var(--mute);font-size:13px">Sel aspek: nilai akhir (besar) dan perubahan dari pertemuan pertama ke terakhir pada periode ini. Kemajuan = rata-rata perubahan seluruh aspek. * = nilai asesmen sementara.</p></div>`;
+      ${R.map((r, i) => { const c = comb(r), rc = c == null ? null : rec(Math.round(c)); return `<tr><td class="sk"><b>${esc(r.Nama)}</b><br><small style="color:var(--mute)">${esc(r.Kelompok)}</small></td><td>${r.Hadir}/${r.Tercatat}</td>${r.P.map(cell).join('')}${r.K.map(cell).join('')}${r.nilai.map(n => `<td class="c">${!n ? '-' : `<b>${n.n}${n.p > 0 ? '*' : ''}</b>`}</td>`).join('')}<td class="c">${r.kem == null ? '-' : `<b>${sg(r.kem)}</b>${pbdg(r.kem)}`}</td><td class="c"><b>${r.avgAs == null ? '-' : r.avgAs}</b></td><td>${rc ? `<span class="tag ${rc === 'Reinforcement' ? 'y' : 'g'}">${rc}</span>` : '-'}</td>${pr ? '' : `<td class="noprint"><button class="btn ghost sm" data-u="${i}">Laporan siswa</button></td>`}</tr>`; }).join('') || `<tr><td colspan="${nP + nK + nA + 5}" class="empty">Belum ada siswa pada paket ini. Siswa muncul setelah pembayaran paket dicatat.</td></tr>`}</tbody>
+      ${R.length ? `<tfoot><tr><td class="sk">Rata-rata kelas</td><td></td>${foot('P', nP)}${foot('K', nK)}${D.asesmen.map((a, k) => { const v = R.map(r => r.nilai[k]).filter(Boolean); return `<td class="c">${v.length ? '<b>' + mean(v.map(x => x.n)) + '</b>' : '-'}</td>`; }).join('')}<td class="c">${st.km == null ? '-' : sg(st.km)}</td><td class="c">${st.as ?? '-'}</td><td></td>${pr ? '' : '<td class="noprint"></td>'}</tr></tfoot>` : ''}</table></div>`;
+  };
+  const NOTE = 'Sel aspek: nilai akhir (besar) dan perubahan dari pertemuan pertama ke terakhir pada periode ini. Kemajuan = rata-rata perubahan seluruh aspek. * = nilai asesmen sementara.';
+  const sheet = () => { const R = rows(), pk = D.pk, st = stats(R);
+    return `<div class="rps"><div class="rhd mini"><div><div class="rl">${esc(C().Nama)} • Laporan periode program</div><h1>${esc(pk.Program)} – ${esc(pk.Nama)}</h1><small>${D.n ? 'Bulan ' + D.n : 'Seluruh paket'} • pertemuan ${D.lo}–${D.hi} • ${esc(pk.Jenjang)} • dicetak ${today()}</small></div><div class="lpst">${st.list.map(s => `<div class="lpsi"><b>${s[0]}</b><small>${s[1]}</small></div>`).join('')}</div></div><div class="rbd">${tbl(R, 1)}<p class="mut" style="font-size:10px">${NOTE}</p>${sigHtml({tgl: today()})}</div></div>`; };
+  const draw = () => {
+    const R = rows(), pk = D.pk, st = stats(R);
+    $('#lr').innerHTML = `<div class="stats">${st.list.map(s => `<div class="stat"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('')}</div>
+      <div class="panel"><h3>${esc(pk.Program)} – ${esc(pk.Nama)} • ${D.n ? 'Bulan ' + D.n : 'Seluruh paket'} <small style="color:var(--mute);font-weight:500">(pertemuan ${D.lo}–${D.hi})</small></h3>${tbl(R, 0)}<p style="color:var(--mute);font-size:13px">${NOTE}</p></div>`;
     document.querySelectorAll('[data-u]').forEach(b => b.onclick = () => { const r = R[b.dataset.u]; S.su = r.Username; S.sl = r.LID; go('report'); });
   };
+  $('#pr').onclick = () => D && printEl(sheet(), 'f4l');
+  $('#pj').onclick = () => D && downloadJpg(`<div class="f4l">${sheet()}</div>`, fname('Laporan-Periode', D.pk.Nama) + '.jpg', 1185);
   const load = async () => { D = await api('lapProgram', {pid: val('lk2'), n: val('ln')}); draw(); };
   const fillN = () => { const pk = pks.find(p => p.ID === val('lk2')); $('#ln').innerHTML = pk ? '<option value="0">Seluruh paket</option>' + Array.from({length: pk.Termin}, (_, i) => `<option value="${i + 1}">Bulan ${i + 1} (pertemuan ${i * pk.PerBulan + 1}–${Math.min((i + 1) * pk.PerBulan, pk.Pertemuan)})</option>`).join('') : ''; load().catch(fail); };
   const fillK = () => { $('#lk2').innerHTML = pks.filter(p => p.Program === val('lg')).map(p => `<option value="${p.ID}">${esc(p.Nama)} (${esc(p.Jenjang)})</option>`).join(''); fillN(); };
@@ -1156,6 +1185,93 @@ const barSVG = (labels, f, l) => {
   const bars = labels.map((t, i) => { const cx = L + gw * i + gw / 2; return bar(cx - bw / 2 - 1, f[i], 'color-mix(in srgb,var(--royal) 35%,#fff)', t) + bar(cx + bw / 2 + 1, l[i], 'var(--royal)', t) + `<text transform="translate(${cx.toFixed(1)} ${H - B + 12}) rotate(-35)" text-anchor="end" font-size="10" style="fill:var(--ink)">${esc(t.length > 14 ? t.slice(0, 13) + '…' : t)}</text>`; }).join('');
   return `<svg viewBox="0 0 ${W} ${H}" role="img">${grid}${bars}<g font-size="10"><rect x="${L}" y="${H - 14}" width="10" height="10" rx="2" style="fill:color-mix(in srgb,var(--royal) 35%,#fff)"/><text x="${L + 14}" y="${H - 5}" style="fill:var(--mute)">Nilai awal</text><rect x="${L + 84}" y="${H - 14}" width="10" height="10" rx="2" style="fill:var(--royal)"/><text x="${L + 98}" y="${H - 5}" style="fill:var(--mute)">Nilai akhir</text></g></svg>`;
 };
+
+/* ---------- Cetak F4 (PDF) dan JPG ---------- */
+function printEl(html, cls) {
+  let r = $('#prt'); if (!r) { r = document.createElement('div'); r.id = 'prt'; document.body.appendChild(r); }
+  r.className = cls; r.innerHTML = html; document.body.classList.add('prt');
+  const done = () => { document.body.classList.remove('prt'); removeEventListener('afterprint', done); };
+  addEventListener('afterprint', done); setTimeout(() => window.print(), 120);
+}
+const JPG_PROPS = ['display', 'position', 'top', 'left', 'right', 'bottom', 'width', 'height', 'min-width', 'max-width', 'min-height', 'max-height', 'box-sizing', 'margin-top', 'margin-right', 'margin-bottom', 'margin-left', 'padding-top', 'padding-right', 'padding-bottom', 'padding-left',
+  'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width', 'border-top-style', 'border-right-style', 'border-bottom-style', 'border-left-style', 'border-top-color', 'border-right-color', 'border-bottom-color', 'border-left-color',
+  'border-top-left-radius', 'border-top-right-radius', 'border-bottom-left-radius', 'border-bottom-right-radius', 'background-color', 'background-image', 'background-size', 'background-position', 'background-repeat', 'color', 'font-family', 'font-size', 'font-weight', 'font-style', 'line-height', 'letter-spacing',
+  'text-align', 'text-transform', 'text-decoration-line', 'white-space', 'word-break', 'overflow-wrap', 'overflow-x', 'overflow-y', 'opacity', 'box-shadow', 'flex-direction', 'flex-wrap', 'flex-grow', 'flex-shrink', 'flex-basis', 'justify-content', 'justify-items', 'align-items', 'align-self', 'align-content', 'place-items',
+  'row-gap', 'column-gap', 'grid-template-columns', 'grid-template-rows', 'grid-column-start', 'grid-column-end', 'grid-row-start', 'grid-row-end', 'order', 'vertical-align', 'border-collapse', 'border-spacing', 'table-layout', 'list-style-type', 'object-fit', 'fill', 'stroke', 'stroke-width', 'stroke-linecap', 'stroke-linejoin',
+  'fill-opacity', 'stroke-opacity', 'stroke-dasharray', 'transform', 'transform-origin', 'filter', 'text-anchor', 'dominant-baseline', 'visibility', 'aspect-ratio'];
+async function nodeToJpg(el, scale) {
+  const clone = el.cloneNode(true), src = [el, ...el.querySelectorAll('*')], dst = [clone, ...clone.querySelectorAll('*')];
+  src.forEach((s, i) => { const cs = getComputedStyle(s); let t = ''; JPG_PROPS.forEach(p => { t += p + ':' + cs.getPropertyValue(p) + ';'; }); dst[i].setAttribute('style', t); });
+  clone.style.position = 'static'; clone.style.left = '0'; clone.style.top = '0';
+  const w = Math.ceil(el.scrollWidth), h = Math.ceil(el.scrollHeight); clone.setAttribute('xmlns', 'http://www.w3.org/1999/xhtml');
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}"><foreignObject x="0" y="0" width="100%" height="100%">${new XMLSerializer().serializeToString(clone)}</foreignObject></svg>`;
+  const img = new Image(); img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+  await new Promise((ok, no) => { img.onload = ok; img.onerror = () => no(new Error('Gagal membuat gambar. Coba lagi.')); });
+  const k = scale || 2, cv = document.createElement('canvas'); cv.width = w * k; cv.height = h * k;
+  const cx = cv.getContext('2d'); cx.fillStyle = '#fff'; cx.fillRect(0, 0, cv.width, cv.height); cx.scale(k, k); cx.drawImage(img, 0, 0);
+  return new Promise((ok, no) => { try { cv.toBlob(b => b ? ok(b) : no(new Error('Gagal menyimpan JPG.')), 'image/jpeg', .92); } catch (e) { no(new Error('Browser tidak mengizinkan penyimpanan gambar: ' + e.message)); } });
+}
+async function downloadJpg(html, name, width, cls) {
+  const box = document.createElement('div'); box.className = 'jpgbox ' + (cls || '');
+  box.style.cssText = `position:fixed;left:-99999px;top:0;width:${width || 980}px;background:#fff;color:#12315c;font:14px/1.5 Figtree,system-ui,sans-serif`; box.innerHTML = html; document.body.appendChild(box);
+  toast('Membuat JPG...');
+  try {
+    await new Promise(r => setTimeout(r, 150)); const blob = await nodeToJpg(box, 2);
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 5000); toast('JPG diunduh');
+  } catch (e) { fail(e); } finally { box.remove(); }
+}
+const fname = (pre, nama) => pre + '-' + String(nama || 'siswa').replace(/[^\w]+/g, '_') + '-' + today();
+
+/* ---------- Laporan: potongan-potongan agar tampilan web dan cetak sama ---------- */
+const repX = d => {
+  const l = d.l, u = d.user, rows = d.prog, all = d.pk.P.map(n => ['P', n]).concat(d.pk.K.map(n => ['K', n])), names = all.map(a => a[1]);
+  const lv = all.map(a => lastVal(rows, a[0], a[1])), fv = all.map(a => firstVal(rows, a[0], a[1])), ap = mean(lv.filter(v => v != null)), pgr = progres(rows);
+  const as = d.res.length ? Math.round(d.res.reduce((s, r) => s + Number(r.Skor), 0) / d.res.length) : null;
+  const comb = ap != null && as != null ? (ap / 10 * 100 + as) / 2 : ap != null ? ap / 10 * 100 : as;
+  return {l, u, rows, all, names, lv, fv, ap, pgr, as, comb, rc: rec(comb == null ? null : Math.round(comb)), hadir: rows.filter(r => r.Kehadiran === 'Hadir').length,
+    last: d.res.slice().sort((a, b) => String(b.Tanggal).localeCompare(String(a.Tanggal)))[0], notes: rows.filter(r => r.Catatan)};
+};
+const repHead = (d, x, mini) => {
+  const info = [['Jenjang', x.u.Jenjang], ['Kelas / kelompok', x.u.Kelompok], ['Program', x.l.Program], ['Paket belajar', x.l.PaketNama], ['Mulai', x.l.Mulai], ['Termin dibayar', `${x.l.Dibayar} dari ${x.l.Termin}`], ['Pertemuan', `${x.l.Tercatat} dari ${x.l.Total}`], ['Kehadiran', `${x.hadir} hadir dari ${x.rows.length}`],
+    ['Hasil asesmen terakhir', x.last ? `${x.last.Skor}${Number(x.last.Pending) > 0 ? '*' : ''} • ${x.last.Judul || x.last.Program}` : '-']];
+  return mini ? `<div class="rhd mini"><div><div class="rl">${esc(d.lembaga)} • Catatan tutor</div><h1>${esc(x.u.Nama)}</h1><small>${esc(x.l.PaketNama)} • ${esc(x.l.Program)} • ${esc(x.u.Jenjang || '')}${x.u.Kelompok ? ' • ' + esc(x.u.Kelompok) : ''} • ${x.notes.length} catatan</small></div>${pfImg(d.foto, x.u.Nama)}</div>`
+    : `<div class="rhd"><div><div class="rl">${esc(d.lembaga)} • Laporan perkembangan belajar</div><h1>${esc(x.u.Nama)}</h1><div class="idg">${info.map(r => `<div><small>${r[0]}</small><b>${esc(r[1] || '-')}</b></div>`).join('')}</div></div>${pfImg(d.foto, x.u.Nama)}</div>`;
+};
+const repCharts = x => x.all.length >= 3 ? `<div class="pair"><div class="chc"><h4>Radar nilai terakhir</h4>${radarSVG(x.names, x.lv.map(v => v || 0), 10)}</div><div class="chc"><h4>Nilai awal dan nilai akhir</h4>${barSVG(x.names, x.fv, x.lv)}</div></div>` : '';
+const repTabs = (d, x) => aspek('Pemahaman materi', 'P', d.pk.P, x.rows) + aspek('Keterampilan', 'K', d.pk.K, x.rows);
+const aspekC = (title, g, names, rows) => `<div><h3>${title}</h3>${names.length ? `<table style="width:100%"><tr><th>Aspek</th><th>Nilai akhir</th><th>Perkembangan</th></tr>${names.map(n => { const l = lastVal(rows, g, n), f = firstVal(rows, g, n), d = l != null && f != null ? l - f : null; return `<tr><td>${esc(n)}</td><td><b>${l == null ? '-' : l}</b></td><td>${d == null ? '-' : `${f} → ${l} <b style="color:${d > 0 ? 'var(--ok)' : d < 0 ? 'var(--bad)' : 'var(--mute)'}">(${d > 0 ? '+' : ''}${d})</b>`}</td></tr>`; }).join('')}</table>` : '<p>Belum ada aspek.</p>'}</div>`;
+const repAses = d => `<h3>Hasil asesmen</h3>${d.res.length ? `<div class="tw"><table><tr><th>Asesmen</th><th>Tanggal</th><th>Nilai</th><th>Kategori</th></tr>${d.res.map(r => `<tr><td>${esc(r.Judul || r.Program)}</td><td>${esc(r.Tanggal)}</td><td><b>${r.Skor}</b>${Number(r.Pending) > 0 ? '*' : ''}</td><td>${kat(r.Skor)}</td></tr>`).join('')}</table></div>` : '<p>Belum ada hasil asesmen pada paket ini.</p>'}`;
+const repRec = x => { const emb = x.pgr ? pmedal(x.pgr) : x.ap != null ? smedal(x.ap) : '';
+  return `<h3>Rekomendasi</h3><div class="recw"><div>${x.comb == null ? '<p style="margin:0">Rekomendasi diberikan setelah ada nilai progres atau asesmen.</p>' : `<span class="tag ${x.rc === 'Reinforcement' ? 'y' : 'g'}" style="font-size:15px;padding:5px 16px">${x.rc}</span><p><b>${x.rc}</b>: ${REC[x.rc]} pada tahap berikutnya.</p>`}<p class="mut">Nilai akhir ${x.ap ?? '-'} (skala 10) • Kemajuan ${x.pgr ? (x.pgr.d > 0 ? '+' : '') + x.pgr.d + ' poin' : '-'} • Rata-rata asesmen ${x.as ?? '-'}</p></div>${emb ? `<div class="reca">${emb}</div>` : ''}</div>`; };
+const REPFOOT = '<p class="mut" style="font-size:12px">Nilai akhir adalah rata-rata nilai terakhir tiap aspek (skala 1-10). Kemajuan membandingkan skor pertemuan pertama dan terakhir. Nilai bukan satu-satunya ukuran keberhasilan. * = nilai sementara.</p>';
+const repNoteCard = r => { const a = rowAvg(r); return `<div class="nt"><div class="nn">${r.Pertemuan}</div><div class="nb"><div class="nth"><b>Pertemuan ${r.Pertemuan}</b><small>${esc(r.Tanggal)} • ${esc(r.Kehadiran)}</small></div><p>${esc(r.Catatan)}</p><small>${esc(r.Tutor)}${a != null ? ' • skor ' + a : ''}</small></div></div>`; };
+const repNotes = x => { const half = Math.ceil(x.notes.length / 2), g = []; for (let i = 0; i < half; i++) { g.push(repNoteCard(x.notes[i])); if (x.notes[half + i]) g.push(repNoteCard(x.notes[half + i])); } return x.notes.length ? `<div class="nts">${g.join('')}</div>` : '<p>Belum ada catatan.</p>'; };
+const sigHtml = d => `<div class="sig"><div><div class="sigl"></div>Tutor</div><small>Dicetak ${esc(d.tgl)}</small><div><div class="sigl"></div>Pengelola</div></div>`;
+const repBody = d => { const x = repX(d); return repHead(d, x) + `<div class="rbd">${repCharts(x)}${repTabs(d, x)}<h3>Catatan tutor</h3>${repNotes(x)}${repAses(d)}${repRec(x)}${REPFOOT}</div>`; };
+// Cetak F4 portrait: halaman 1 = header, grafik, aspek, asesmen, rekomendasi, tanda tangan; catatan tutor di lembar terpisah
+const repPrint = d => { const x = repX(d);
+  return `<div class="rps">${repHead(d, x)}<div class="rbd">${repCharts(x)}${x.all.length > 6 ? `<div class="tabs2">${aspekC('Pemahaman materi', 'P', d.pk.P, x.rows)}${aspekC('Keterampilan', 'K', d.pk.K, x.rows)}</div>` : repTabs(d, x)}${repAses(d)}${repRec(x)}${REPFOOT}${sigHtml(d)}</div></div>` +
+    (x.notes.length ? `<div class="rps pgbrk">${repHead(d, x, 1)}<div class="rbd"><h3>Catatan tutor (${x.notes.length} pertemuan)</h3>${repNotes(x)}<div class="pgf">Lembar catatan tutor • ${esc(x.u.Nama)} • dicetak ${esc(d.tgl)}</div></div></div>` : ''); };
+
+/* ---------- Catatan progres: satu blok yang dipakai staf, siswa, cetak, dan JPG ---------- */
+const progBlock = (L, rows, FOTO) => {
+  const allN = L.P.concat(L.K), lv = L.P.map(n => lastVal(rows, 'P', n)).concat(L.K.map(n => lastVal(rows, 'K', n))), fin = mean(lv.filter(v => v != null)), pr = progres(rows);
+  const hist = rows.map((r, i) => { const a = rowAvg(r); let pv = null; for (let k = i - 1; k >= 0; k--) { const x = rowAvg(rows[k]); if (x != null) { pv = x; break; } } return {r, a, d: a != null && pv != null ? Math.round((a - pv) * 10) / 10 : null}; }).reverse();
+  return `<div class="panel"><h3>Nilai terakhir</h3><div class="sym"><div class="rdc">${radarSVG(allN, lv.map(v => v || 0), 10)}</div>${photoFrame(FOTO, L.Nama, fin, L.PaketNama)}</div>${aspek('Pemahaman materi', 'P', L.P, rows)}${aspek('Keterampilan', 'K', L.K, rows)}</div>
+    <div class="panel tw"><h3>Riwayat pertemuan</h3>${progresHtml(pr)}<table><tr><th>Ke</th><th>Tanggal</th><th>Hadir</th><th>Skor</th><th>Perubahan</th><th>Catatan</th></tr>${hist.map(x => `<tr><td>${x.r.Pertemuan}</td><td>${esc(x.r.Tanggal)}</td><td>${esc(x.r.Kehadiran)}</td><td><b>${x.a == null ? '-' : x.a}</b></td><td>${x.d == null ? '-' : x.d > 0 ? `<b style="color:var(--ok)">▲ +${x.d}</b>` : x.d < 0 ? `<b style="color:var(--bad)">▼ ${x.d}</b>` : '='}</td><td>${esc(x.r.Catatan)}</td></tr>`).join('') || '<tr><td colspan="6" class="empty">Belum ada catatan.</td></tr>'}</table></div>`;
+};
+const progPrint = (L, rows, FOTO, jpg) => `<div class="${jpg ? 'paper rpt' : 'rps'}"><div class="rhd mini"><div><div class="rl">${esc(C().Nama)} • Catatan progres belajar</div><h1>${esc(L.Nama)}</h1><small>${esc(L.PaketNama)} • ${esc(L.Program)} • ${esc(L.Jenjang || '')}${L.Kelompok ? ' • ' + esc(L.Kelompok) : ''} • pertemuan ${L.Tercatat} dari ${L.Total} • dicetak ${today()}</small></div></div><div class="rbd">${progBlock(L, rows, FOTO)}</div></div>`;
+const progBar = '<div class="act"><button class="btn" id="pdfb" type="button">Cetak PDF</button><button class="btn ghost" id="jpgb" type="button">JPG</button></div>';
+async function vCatProg() {
+  const d = await api('dashboard'), ps = d.pakets; let cur = null;
+  $('#main').innerHTML = head('Catatan progres', 'Perkembangan belajarmu di setiap pertemuan.', progBar) + (ps.length ? `<div class="panel noprint" style="max-width:420px">${sel('cp', 'Paket belajar', ps.map(p => `<option value="${p.ID}">${esc(p.Program + ' – ' + p.PaketNama)}</option>`).join(''))}</div><div id="cpb"></div>` : '<div class="panel empty">Belum ada paket aktif. Hubungi pengelola.</div>');
+  if (!ps.length) return;
+  const load = async () => { const L = ps.find(p => p.ID === val('cp')), [rows, foto] = await Promise.all([api('progress', {LID: L.ID}), api('foto', {}).catch(() => '')]); cur = {L, rows, foto}; $('#cpb').innerHTML = progBlock(L, rows, foto); };
+  $('#cp').onchange = () => load().catch(fail);
+  $('#pdfb').onclick = () => cur && printEl(progPrint(cur.L, cur.rows, cur.foto), 'f4p');
+  $('#jpgb').onclick = () => cur && downloadJpg(progPrint(cur.L, cur.rows, cur.foto, 1), fname('Catatan-Progres', cur.L.Nama) + '.jpg', 980);
+  load().catch(fail);
+}
 </script>
 </body>
 </html>
