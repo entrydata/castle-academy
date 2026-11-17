@@ -211,7 +211,7 @@ html{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .lpt thead th.sk{background:color-mix(in srgb,var(--royal) 5%,#fff)}.lpt tbody tr:nth-child(even) .sk{background:#f8fbff}
 .lpt tfoot td{background:color-mix(in srgb,var(--royal) 7%,#fff);font-weight:700;border-top:2px solid color-mix(in srgb,var(--royal) 35%,#fff);border-bottom:0}.lpt tfoot .sk{background:color-mix(in srgb,var(--royal) 7%,#fff)}
 .lpt tfoot td:first-child{border-bottom-left-radius:15px}.lpt tfoot td:last-child{border-bottom-right-radius:15px}
-@media(max-width:1180px){.two{grid-template-columns:1fr}}
+@media(max-width:900px){.two{grid-template-columns:1fr}}
 @media(max-width:900px){
  #app{grid-template-columns:1fr}
  aside{position:fixed;left:0;top:0;width:270px;z-index:15;transform:translateX(-100%);transition:transform .25s}aside.open{transform:none;box-shadow:0 0 40px rgba(18,49,92,.3)}
@@ -285,6 +285,47 @@ html{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
  main{padding:20px 16px}.two{grid-template-columns:1fr}.top h2{font-size:23px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+/* ===== Tampilan 75%, sidebar bisa digeser/disembunyikan, logo, badge sejajar, radar di tengah ===== */
+td.act{display:table-cell;white-space:nowrap;vertical-align:middle}
+td.act .btn{vertical-align:middle}td.act .btn+.btn{margin-left:6px}
+.tag{vertical-align:middle;line-height:1.5;white-space:nowrap}
+.btn.sm{line-height:1.4}
+td .tag,td .bdg{vertical-align:middle}
+.rdc .radar{display:block;margin:0 auto}
+.rdc .ins{width:100%}
+aside{overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+aside::-webkit-scrollbar{width:6px}aside::-webkit-scrollbar-thumb{background:var(--line);border-radius:9px}
+.logo{flex:none}nav{flex:none;margin-bottom:18px}.me{flex:none;margin-top:auto}
+.lgrow{display:flex;align-items:center;gap:10px}
+.lgt{flex:1;min-width:0;line-height:1.2}.lgt b{display:block;font-size:18px;overflow-wrap:anywhere}
+.logo .lgt span{margin-top:3px}
+img.lgi{width:46px;height:46px;object-fit:contain;border-radius:12px;background:#fff;flex:none}
+.sbx{flex:none;width:30px;height:30px;padding:0;border-radius:9px;border:1.5px solid var(--line);background:#fff;color:var(--mute);cursor:pointer;font-size:20px;line-height:1;display:grid;place-items:center}
+.sbx:hover{background:var(--mist);color:var(--royal)}
+#sbopen{display:none}
+.mbar img.lgi{width:30px;height:30px;border-radius:8px}
+.idrow{display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap}
+.lgpv{width:96px;height:96px;flex:none;border-radius:18px;border:1.5px dashed var(--line);background:var(--mist);display:grid;place-items:center;overflow:hidden;color:var(--mute);font-size:12px;text-align:center;padding:6px}
+.lgpv img{width:100%;height:100%;object-fit:contain;background:#fff;border-radius:12px}
+.idf{flex:1 1 280px;min-width:0}
+@media(min-width:901px){
+ #login,#app,.ov,.xroot,#toast{zoom:.75}
+ :root{--vh:100vh}
+ #login{min-height:var(--vh)}
+ #app{display:block;min-height:var(--vh)}
+ aside{position:fixed;left:0;top:0;bottom:0;height:auto;width:250px;z-index:15;transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+ .shell{margin-left:250px;transition:margin-left .3s cubic-bezier(.2,.8,.2,1)}
+ #app.sbh aside{transform:translateX(-100%)}
+ #app.sbh .shell{margin-left:0}
+ #app.sbh main{padding-left:88px}
+ main{max-width:1480px}
+ .modal{max-height:calc(var(--vh)*.92)}
+ #sbopen{position:fixed;left:14px;top:14px;z-index:14;width:48px;height:48px;padding:4px;border-radius:14px;border:1.5px solid var(--line);background:#fff;box-shadow:0 6px 18px rgba(18,49,92,.14);cursor:pointer;place-items:center;font-size:22px;color:var(--royal)}
+ #app.sbh #sbopen{display:grid}
+ #sbopen:hover{background:var(--mist)}
+ #sbopen img.lgi{width:100%;height:100%;border-radius:10px}
+}
+@media print{#login,#app,.ov,.xroot,#toast{zoom:1!important}.shell{margin-left:0!important}#app.sbh main{padding-left:0!important}#sbopen{display:none!important}}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
 </head>
@@ -314,13 +355,14 @@ html{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 
 <div id="app" class="hide">
   <div id="scrim" class="hide"></div>
+  <button id="sbopen" type="button" aria-label="Tampilkan menu" title="Tampilkan menu"><img class="lgi hide" alt="Logo"><span class="lgf">☰</span></button>
   <aside id="side">
-    <div class="logo"><b class="bn">Castle Academy</b><span>Group Learning System</span></div>
+    <div class="logo"><div class="lgrow"><img class="lgi hide" id="sbl" alt="Logo"><div class="lgt"><b class="bn">Castle Academy</b><span>Group Learning System</span></div><button class="sbx" id="sbx" type="button" aria-label="Sembunyikan menu" title="Sembunyikan menu">‹</button></div></div>
     <nav id="nav"></nav>
     <div class="me"><b id="mn"></b><span id="mr"></span><button class="btn sm" id="out">Keluar</button></div>
   </aside>
-  <div>
-    <div class="mbar"><button id="burger" aria-label="Menu">☰</button><b class="bn">Castle Academy</b></div>
+  <div class="shell">
+    <div class="mbar"><button id="burger" aria-label="Menu">☰</button><img class="lgi hide" alt=""><b class="bn">Castle Academy</b></div>
     <main id="main"></main>
   </div>
 </div>
@@ -334,10 +376,10 @@ const API_RX = /^https:\/\/script\.google\.com\/macros\/(a\/[^\/]+\/)?s\/[\w-]+\
 const GAS = typeof google !== 'undefined' && !!(google.script && google.script.run);
 // ====== ISI SEKALI: tempel alamat Web App Apps Script (berakhiran /exec) di antara tanda kutip berikut ======
 const API_TETAP = 'https://script.google.com/macros/s/AKfycbwn7xnNKKsX0uFobOFmFIjmRfDPSsRcd0LvkyxBayZyOEy3o-HMM0ZWYFuJ9Qvmf9qF/exec';
-let API = API_TETAP || window.API_URL || ''; try { API = API || localStorage.getItem('ca_api') || ''; } catch (e) {}
+let API = API_TETAP || window.API_URL || ''; try { API = localStorage.getItem('ca_api_o') || API || localStorage.getItem('ca_api') || ''; } catch (e) {}
 // config.json (di repositori GitHub, sebelah index.html) berisi {"api": "alamat /exec"} agar login langsung tanpa menempel alamat server
 const CFG = GAS ? Promise.resolve() : fetch('config.json', {cache: 'no-store'}).then(r => r.ok ? r.json() : null).then(c => { if (c && API_RX.test(c.api || '')) API = c.api; }).catch(() => {});
-const diagSet = (txt, ok) => { const d = $('#diag'); if (!d) return; d.style.color = ok ? 'var(--ok)' : 'var(--bad)'; d.innerHTML = esc(txt) + (GAS ? '' : ' <a href="#" id="rst">Ganti alamat server</a>'); const r = $('#rst'); if (r) r.onclick = ev => { ev.preventDefault(); try { localStorage.removeItem('ca_api'); } catch (x) {} $('#setup').classList.remove('hide'); }; };
+const diagSet = (txt, ok) => { const d = $('#diag'); if (!d) return; if (ok) { d.innerHTML = ''; return; } d.style.color = ok ? 'var(--ok)' : 'var(--bad)'; d.innerHTML = esc(txt) + (GAS ? '' : ' <a href="#" id="rst">Ganti alamat server</a>'); const r = $('#rst'); if (r) r.onclick = ev => { ev.preventDefault(); try { localStorage.removeItem('ca_api'); localStorage.removeItem('ca_api_o'); } catch (x) {} $('#setup').classList.remove('hide'); }; };
 const call = (fn, ...a) => GAS ? new Promise((ok, no) => {
     const t = setTimeout(() => no(new Error('Server Apps Script tidak merespons. Coba lagi beberapa saat.')), 60000);
     google.script.run.withSuccessHandler(r => { clearTimeout(t); if (r && r.ok) ok(r.data); else no(new Error((r && r.error) || 'Respons server kosong.')); })
@@ -414,14 +456,23 @@ function doLogout(msg) {
 }
 $('#out').onclick = () => doLogout();
 CFG.then(() => { if (!GAS && !API) $('#setup').classList.remove('hide'); });
-$('#apis').onclick = () => { const v = $('#apiu').value.trim(); if (!/^https:\/\/script\.google\.com\/macros\/(a\/[^\/]+\/)?s\/[\w-]+\/exec$/.test(v)) return toast('URL Web App tidak valid. Harus berakhiran /exec.', true); try { localStorage.setItem('ca_api', v); } catch (e) {} location.reload(); };
+$('#apis').onclick = () => { const v = $('#apiu').value.trim(); if (!/^https:\/\/script\.google\.com\/macros\/(a\/[^\/]+\/)?s\/[\w-]+\/exec$/.test(v)) return toast('URL Web App tidak valid. Harus berakhiran /exec.', true); try { localStorage.setItem('ca_api', v); localStorage.setItem('ca_api_o', v); } catch (e) {} location.reload(); };
 $('#burger').onclick = () => { const o = $('#side').classList.toggle('open'); $('#scrim').classList.toggle('hide', !o); };
 $('#scrim').onclick = () => { $('#side').classList.remove('open'); $('#scrim').classList.add('hide'); };
+// Zoom 75% (layar lebar). Tinggi layar disesuaikan agar tata letak tetap penuh.
+const DESK = matchMedia('(min-width:901px)'), ZOOM = (window.CSS && CSS.supports && CSS.supports('zoom', '0.75')) ? .75 : 1;
+function fitView() { const z = DESK.matches ? ZOOM : 1, r = document.documentElement.style; if (z < 1) r.setProperty('--vh', (innerHeight / z) + 'px'); else r.removeProperty('--vh'); }
+addEventListener('resize', fitView); fitView();
+// Sidebar: sembunyikan / tampilkan (layar lebar); di layar kecil tombol ‹ menutup laci menu.
+function sbSet(h) { $('#app').classList.toggle('sbh', h); try { localStorage.setItem('ca_sb', h ? '1' : '0'); } catch (e) {} }
+$('#sbx').onclick = () => { if (DESK.matches) sbSet(true); else { $('#side').classList.remove('open'); $('#scrim').classList.add('hide'); } };
+$('#sbopen').onclick = () => sbSet(false);
 
 /* ---------- Shell ---------- */
 function start() {
   $('#login').classList.add('hide'); $('#app').classList.remove('hide');
   $('#mn').textContent = S.user.Nama; $('#mr').textContent = ROLE[S.user.Role];
+  { let h = false; try { h = localStorage.getItem('ca_sb') === '1'; } catch (e) {} $('#app').classList.toggle('sbh', h); }
   const staff = S.user.Role !== 'siswa';
   const adm = S.user.Role === 'admin';
   const items = staff
@@ -433,6 +484,7 @@ function start() {
   if (S.user.Role !== 'siswa') setTimeout(() => ['pakets', 'langganan', 'users'].forEach(a => api(a).catch(() => {})), 900);
 }
 function go(v) {
+  if (v === 'settings' && S.user.Role !== 'admin') v = 'dash';
   if (S.busy) { if (!confirm('Ujian sedang berlangsung. Jika keluar, ujian dihentikan dan jawaban tidak tersimpan. Tetap keluar?')) return; S.busy = false; }
   clearInterval(S.tm); S.view = v; $('#side').classList.remove('open'); $('#scrim').classList.add('hide');
   document.querySelectorAll('#nav button').forEach(b => b.classList.toggle('on', b.dataset.v === v));
@@ -458,7 +510,7 @@ async function vStaffDash() {
   const show = () => {
     if (!$('#rdr')) return clearInterval(S.tm);
     const x = R[i], m = mean(x.items.map(t => Number(t.v)));
-    $('#rdr').innerHTML = `<div class="sym rd"><div class="rdc">${radarSVG(x.items.map(t => t.n), x.items.map(t => Number(t.v)), 10)}</div><div class="pfw" id="rdp">${pfImg('', x.Nama)}<h3 style="margin:10px 0 2px;font-size:20px">${esc(x.Nama)}</h3><small class="mut">${esc([x.Jenjang, x.Kelompok].filter(Boolean).join(' • '))}</small><small class="mut">${esc(x.Paket)} • pertemuan ${x.Pertemuan} • ${esc(x.Tanggal)}</small><div class="score" style="font-size:44px;color:var(--royal);margin-top:6px">${m}</div><small class="mut">rata-rata nilai pertemuan terakhir</small><div style="margin-top:6px">${bdg(m)}</div></div></div>
+    $('#rdr').innerHTML = `<div class="sym rd"><div class="rdc">${radarSVG(x.items.map(t => t.n), x.items.map(t => Number(t.v)), 10)}${insight(x.items.map(t => t.n), x.items.map(t => Number(t.v)), x.items.map(t => t.f != null ? Number(t.f) : null))}</div><div class="pfw" id="rdp">${pfImg('', x.Nama)}<h3 style="margin:10px 0 2px;font-size:20px">${esc(x.Nama)}</h3><small class="mut">${esc([x.Jenjang, x.Kelompok].filter(Boolean).join(' • '))}</small><small class="mut">${esc(x.Paket)} • pertemuan ${x.Pertemuan} • ${esc(x.Tanggal)}</small><div class="score" style="font-size:44px;color:var(--royal);margin-top:6px">${m}</div><small class="mut">rata-rata nilai pertemuan terakhir</small><div style="margin-top:6px">${bdg(m)}</div></div></div>
       <div class="rdnav"><button class="btn ghost sm" id="rprev" type="button">‹ Sebelumnya</button><span>${i + 1} dari ${R.length}</span><button class="btn ghost sm" id="rnext" type="button">Berikutnya ›</button></div>`;
     photo(x.Username).then(f => { const p = $('#rdp .pfr'); if (f && p && R[i] === x) p.outerHTML = pfImg(f, x.Nama); });
     photo(R[(i + 1) % R.length].Username);
@@ -472,12 +524,12 @@ async function vStaffDash() {
 async function vUsers(filter) {
   const [all, pks] = await Promise.all([api('users'), api('pakets').catch(() => [])]), admin = S.user.Role === 'admin';
   filter = filter || 'semua';
-  const list = all.filter(u => filter === 'semua' || u.Role === filter);
+  const list = all.filter(u => (admin || u.Role === 'siswa') && (filter === 'semua' || u.Role === filter));
   $('#main').innerHTML = head(admin ? 'Pengguna' : 'Siswa', admin ? 'Kelola akun admin, pegawai, dan siswa.' : 'Kelola data siswa dan akun login mereka.', '<button class="btn" id="add">+ Tambah</button>') +
     (admin ? `<div class="tabs">${['semua', 'admin', 'pegawai', 'siswa'].map(t => `<button class="${t === filter ? 'on' : ''}" data-t="${t}">${t[0].toUpperCase() + t.slice(1)}</button>`).join('')}</div>` : '') +
-    `<div class="panel tw"><table><tr><th>Nama</th><th>Username</th><th>Peran</th><th>Jenjang</th><th>Program</th><th>Kelompok</th><th>Kontak</th><th>Kode reg.</th><th>Paket Aktif</th><th></th></tr>
-    ${list.map((u, i) => `<tr><td><b>${esc(u.Nama)}</b></td><td>${esc(u.Username)}</td><td><span class="tag">${ROLE[u.Role]}</span></td><td>${esc(u.Jenjang)}</td><td>${esc(u.Program)}</td><td>${esc(u.Kelompok)}</td><td>${esc(u.HP)}${u.HPOrtu ? '<br><small>Ortu ' + esc(u.HPOrtu) + '</small>' : ''}</td><td>${esc(u.KodeReg)}${u.KodeReg ? ` <button class="btn ghost sm" data-q="${esc(u.KodeReg)}|${esc(u.Nama)}" type="button">QR</button>` : ''}</td><td>${u.Role === 'siswa' ? (u.PaketAktif.map(x => `<span class="tag">${esc(x)}</span>`).join(' ') || '<small>-</small>') : ''}</td>
-    <td class="act"><button class="btn ghost sm" data-e="${i}">Ubah</button><button class="btn del sm" data-d="${i}">Hapus</button></td></tr>`).join('') || '<tr><td colspan="10" class="empty">Belum ada data.</td></tr>'}</table></div>`;
+    `<div class="panel tw"><table><tr><th>Nama</th><th>Username</th>${admin ? '<th>Peran</th>' : ''}<th>Jenjang</th><th>Program</th><th>Kelompok</th><th>Kontak</th><th>Kode reg.</th><th>Paket Aktif</th><th></th></tr>
+    ${list.map((u, i) => `<tr><td><b>${esc(u.Nama)}</b></td><td>${esc(u.Username)}</td>${admin ? `<td><span class="tag">${ROLE[u.Role]}</span></td>` : ''}<td>${esc(u.Jenjang)}</td><td>${esc(u.Program)}</td><td>${esc(u.Kelompok)}</td><td>${esc(u.HP)}${u.HPOrtu ? '<br><small>Ortu ' + esc(u.HPOrtu) + '</small>' : ''}</td><td>${esc(u.KodeReg)}${u.KodeReg ? ` <button class="btn ghost sm" data-q="${esc(u.KodeReg)}|${esc(u.Nama)}" type="button">QR</button>` : ''}</td><td>${u.Role === 'siswa' ? (u.PaketAktif.map(x => `<span class="tag">${esc(x)}</span>`).join(' ') || '<small>-</small>') : ''}</td>
+    <td class="act"><button class="btn ghost sm" data-e="${i}">Ubah</button><button class="btn del sm" data-d="${i}">Hapus</button></td></tr>`).join('') || `<tr><td colspan="${admin ? 10 : 9}" class="empty">Belum ada data.</td></tr>`}</table></div>`;
   $('#add').onclick = () => userForm({}, filter, all, pks);
   document.querySelectorAll('[data-q]').forEach(b => b.onclick = () => { const [c, n] = b.dataset.q.split('|'); showQR(c, n); });
   document.querySelectorAll('.tabs button').forEach(b => b.onclick = () => vUsers(b.dataset.t));
@@ -596,6 +648,25 @@ function applyTheme(s) {
   const r = document.documentElement.style; S.cfg = s;
   r.setProperty('--royal', s.WarnaUtama); r.setProperty('--brass', s.WarnaAksen); r.setProperty('--mist', s.WarnaLatar);
   document.title = s.Nama; document.querySelectorAll('.bn').forEach(e => e.textContent = s.Nama);
+  const lg = s.Logo || '';
+  document.querySelectorAll('img.lgi').forEach(i => { if (lg) { i.src = lg; i.classList.remove('hide'); } else { i.removeAttribute('src'); i.classList.add('hide'); } });
+  document.querySelectorAll('.lgf').forEach(e => e.classList.toggle('hide', !!lg));
+  let ic = document.querySelector('link[rel=icon]');
+  if (lg) { if (!ic) { ic = document.createElement('link'); ic.rel = 'icon'; document.head.appendChild(ic); } ic.href = lg; } else if (ic) ic.remove();
+}
+// Logo: dikecilkan di browser (maks. 256px) agar muat di satu sel Spreadsheet.
+async function shrinkLogo(file) {
+  if (!/^image\/(png|jpeg|webp)$/.test(file.type)) throw new Error('Format logo harus PNG, JPG, atau WebP.');
+  const url = URL.createObjectURL(file);
+  try {
+    const img = await new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => no(new Error('Gambar tidak dapat dibaca. Pilih file lain.')); i.src = url; });
+    for (const m of [256, 200, 160, 128, 96]) {
+      const k = Math.min(1, m / Math.max(img.naturalWidth, img.naturalHeight)), w = Math.max(1, Math.round(img.naturalWidth * k)), h = Math.max(1, Math.round(img.naturalHeight * k));
+      const cv = document.createElement('canvas'); cv.width = w; cv.height = h; cv.getContext('2d').drawImage(img, 0, 0, w, h);
+      for (const q of [.92, .8, .65]) { const d = cv.toDataURL('image/webp', q); if (/^data:image\/(webp|png);base64,/.test(d) && d.length <= 44000) return d; }
+    }
+    throw new Error('Logo terlalu besar. Gunakan gambar yang lebih sederhana.');
+  } finally { URL.revokeObjectURL(url); }
 }
 call('publicSettings').then(s => { applyTheme(s); if (!GAS) diagSet('Server terhubung.', true); }).catch(e => diagSet(e.message, false));
 
@@ -761,14 +832,18 @@ async function vReport() {
 }
 
 /* ---------- Pengaturan ---------- */
-const SK = ['AkunGoogle', 'SpreadsheetID', 'FolderID', 'Nama', 'WarnaUtama', 'WarnaAksen', 'WarnaLatar', 'PertemuanUjian', 'KKM', 'GithubURL', 'TurnURL', 'TurnUser', 'TurnPass'];
+const SK = ['AkunGoogle', 'SpreadsheetID', 'FolderID', 'Nama', 'WarnaUtama', 'WarnaAksen', 'WarnaLatar', 'PertemuanUjian', 'KKM', 'GithubURL', 'TurnURL', 'TurnUser', 'TurnPass', 'Logo'];
 async function vSettings() {
   const s = await api('settings'), f = (k, l, t) => fld('s_' + k, l, s[k], t);
   $('#main').innerHTML = head('Pengaturan', 'Kelola sumber data, tampilan, dan aturan program.') +
-    `<div class="panel"><h3>Sumber data</h3><div class="row">${f('AkunGoogle', 'Akun Google pengelola', 'email')}${f('SpreadsheetID', 'Spreadsheet utama (URL atau ID)')}${f('FolderID', 'Folder utama Drive (URL atau ID)')}</div>
+    `<div class="panel"><h3>Identitas bimbel</h3><div class="idrow"><div class="lgpv" id="lgpv"></div><div class="idf">${f('Nama', 'Nama website / nama bimbel')}
+    <label for="s_logo_f">Logo (PNG, JPG, atau WebP)</label><input type="file" id="s_logo_f" accept="image/png,image/jpeg,image/webp"><input type="hidden" id="s_Logo" value="${esc(s.Logo || '')}">
+    <div class="act" style="margin-top:8px"><button class="btn ghost sm" id="lgx" type="button">Hapus logo</button></div>
+    <small class="mut" style="display:block;margin-top:6px">Gambar dikecilkan otomatis. Logo tampil di bagian atas menu samping; saat menu disembunyikan, logo menjadi tombol di pojok kiri atas. Klik Simpan pengaturan untuk menerapkan.</small></div></div></div>
+    <div class="panel"><h3>Sumber data</h3><div class="row">${f('AkunGoogle', 'Akun Google pengelola', 'email')}${f('SpreadsheetID', 'Spreadsheet utama (URL atau ID)')}${f('FolderID', 'Folder utama Drive (URL atau ID)')}</div>
     <p style="color:var(--mute);font-size:13px">Spreadsheet utama menyimpan pengaturan, pegawai, siswa, pembayaran, dan seluruh data lain. Akun script harus punya akses edit ke spreadsheet dan folder. Jika spreadsheet diganti, sheet baru dibuat otomatis dan akun Admin awal (Admin / 123456) dibuat jika kosong.</p>
     <div class="act"><button class="btn ghost" id="tc">Uji koneksi</button><button class="btn ghost" id="bk">Backup ke Drive</button></div><p id="tr" style="font-weight:600"></p></div>
-    <div class="panel"><h3>Tampilan</h3><div class="row">${f('Nama', 'Nama lembaga')}${f('WarnaUtama', 'Warna utama', 'color')}${f('WarnaAksen', 'Warna aksen', 'color')}${f('WarnaLatar', 'Warna latar', 'color')}</div></div>
+    <div class="panel"><h3>Tampilan</h3><div class="row">${f('WarnaUtama', 'Warna utama', 'color')}${f('WarnaAksen', 'Warna aksen', 'color')}${f('WarnaLatar', 'Warna latar', 'color')}</div></div>
     <div class="panel"><h3>Aturan program</h3><div class="row">${f('PertemuanUjian', 'Final tanpa periode paket dibuka setelah pertemuan ke', 'number')}${f('KKM', 'Nilai minimal (KKM)', 'number')}</div></div>
     <div class="panel"><h3>Halaman GitHub (alamat aplikasi siswa)</h3><div class="row">${f('GithubURL', 'Alamat GitHub Pages, mis. https://akun.github.io/castle-academy/')}</div>
     <label>Alamat API Apps Script (terisi otomatis)</label><input id="s_api" value="${esc(s.ApiURL)}" readonly>
@@ -777,12 +852,22 @@ async function vSettings() {
     <p style="color:var(--mute);font-size:13px">Buka tautan ini sekali di perangkat siswa. Alamat API tersimpan otomatis di browser, sehingga kamera, scan QR, dan printer dapat dipakai.</p>
     <label>Isi file <b>config.json</b> di repositori GitHub (agar semua perangkat langsung bisa login tanpa menempel alamat server)</label><textarea id="s_cfg" rows="2" readonly>{"api": "${esc(s.ApiURL)}"}</textarea>
     <div class="act" style="margin-top:10px"><button class="btn ghost sm" id="cc" type="button">Salin isi config.json</button></div></div>
+    ${GAS ? '' : `<div class="panel"><h3>Alamat server di perangkat ini</h3><p class="mut" style="font-size:13px;margin:0 0 8px">Alamat Web App Apps Script (berakhiran /exec) yang dipakai halaman login. Ubah di sini bila alamat server berganti; kolom pengaturan server di halaman login hanya muncul saat alamat belum tersedia atau server tidak bisa dihubungi.</p>
+    <input id="s_apiov" value="${esc(API)}" placeholder="https://script.google.com/macros/s/.../exec"><div class="act" style="margin-top:10px"><button class="btn ghost sm" id="apv" type="button">Pakai alamat ini</button><button class="btn ghost sm" id="apr" type="button">Kembali ke bawaan</button></div></div>`}
     <div class="panel"><h3>Server TURN (video live pemantauan ujian)</h3><div class="row">${f('TurnURL', 'Alamat TURN, mis. turn.contoh.com:3478')}${f('TurnUser', 'Username TURN')}${f('TurnPass', 'Password TURN', 'password')}</div>
     <div class="act"><button class="btn ghost" id="tt" type="button">Uji TURN</button></div><p id="tp" style="font-weight:600"></p></div>
     <button class="btn" id="sv">Simpan pengaturan</button>`;
   const get = () => { const o = {}; SK.forEach(k => o[k] = val('s_' + k)); return o; };
   const mk = () => { const g = val('s_GithubURL'); $('#s_link').value = g ? g + (g.includes('?') ? '&' : '?') + 'api=' + encodeURIComponent(s.ApiURL) : ''; };
   $('#s_GithubURL').oninput = mk; mk();
+  const pv = () => { const v = $('#s_Logo').value; $('#lgpv').innerHTML = v ? `<img src="${esc(v)}" alt="Pratinjau logo">` : 'Belum ada logo'; $('#lgx').disabled = !v; };
+  $('#s_logo_f').onchange = async e => { const fl = e.target.files[0]; if (!fl) return; try { $('#s_Logo').value = await shrinkLogo(fl); pv(); toast('Logo siap. Klik Simpan pengaturan untuk menerapkan.'); } catch (er) { fail(er); } e.target.value = ''; };
+  $('#lgx').onclick = () => { $('#s_Logo').value = ''; pv(); };
+  pv();
+  if ($('#apv')) {
+    $('#apv').onclick = () => { const v = $('#s_apiov').value.trim(); if (!API_RX.test(v)) return toast('URL Web App tidak valid. Harus berakhiran /exec.', true); try { localStorage.setItem('ca_api_o', v); localStorage.setItem('ca_api', v); } catch (e) {} toast('Alamat server disimpan. Memuat ulang, silakan masuk kembali.'); setTimeout(() => location.reload(), 900); };
+    $('#apr').onclick = () => { try { localStorage.removeItem('ca_api_o'); localStorage.removeItem('ca_api'); } catch (e) {} toast('Kembali ke alamat bawaan. Memuat ulang, silakan masuk kembali.'); setTimeout(() => location.reload(), 900); };
+  }
   $('#cl').onclick = async () => { try { await navigator.clipboard.writeText($('#s_link').value); toast('Tautan disalin'); } catch (e) { $('#s_link').select(); document.execCommand('copy'); toast('Tautan disalin'); } };
   $('#ql').onclick = () => $('#s_link').value ? showQR($('#s_link').value, 'Tautan aplikasi') : toast('Isi alamat GitHub terlebih dahulu.', true);
   $('#cc').onclick = async () => { try { await navigator.clipboard.writeText($('#s_cfg').value); toast('Isi config.json disalin'); } catch (e) { $('#s_cfg').select(); document.execCommand('copy'); toast('Isi config.json disalin'); } };
