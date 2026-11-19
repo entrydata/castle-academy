@@ -113,7 +113,7 @@ input[type=radio],input[type=checkbox]{width:auto}
 .sc{display:flex;gap:6px}.sc button{width:36px;height:36px;border-radius:10px;border:1.5px solid var(--line);background:#fff;cursor:pointer;font-weight:700;color:var(--mute)}.sc button.on{background:var(--royal);border-color:var(--royal);color:#fff}
 #rcpt{display:none;page:rcpt}
 @page rcpt{size:58mm auto;margin:0}
-@media print{body.rcp>:not(#rcpt){display:none!important}body.rcp #rcpt{display:block;width:58mm;padding:3mm;font:12px/1.4 monospace;color:#000;background:#fff}}
+@media print{body.rcp>:not(#rcpt){display:none!important}body.rcp #rcpt{display:block;margin:0 auto;padding:2mm 0;line-height:1.35;color:#000;background:#fff;font-family:"Courier New",monospace}}
 .xroot{--xb:var(--mist);--xc:#fff;--xa:var(--royal);--xo:#fff;--xs:var(--royal);--xst:#fff;--xt:var(--ink);--xbd:var(--line);--xbt:#fff;--xr:12px;--xr2:16px;--xf:inherit;--xg:none;--xpg:var(--royal);--xjs:#0891b2;--xes:#7c3aed;--xqt:#fff;--xd:none;--xds:auto;--xw:#f59e0b;--xcr:#d64545}
 [data-xt=mil]{--xb:radial-gradient(circle at 50% 0,#1b2f8f,#050a2e 72%);--xc:#0a1456;--xa:#f5b301;--xo:#101c6e;--xs:#f5b301;--xst:#1a1200;--xt:#fff;--xbd:#c9a227;--xbt:#1a1200;--xr:999px;--xr2:22px;--xf:Georgia,serif;--xg:0 0 16px rgba(245,179,1,.55);--xy:#ff7043;--xpg:#f5b301;--xjs:#4aa8ff;--xes:#ff9d4d;--xw:#ffb300;--xcr:#ff1744;--xd:radial-gradient(circle,rgba(245,179,1,.28) 1px,transparent 1.6px),conic-gradient(from 160deg at 50% -8%,transparent 0 8deg,rgba(255,255,255,.07) 8deg 14deg,transparent 14deg 24deg,rgba(255,255,255,.06) 24deg 30deg,transparent 30deg 360deg);--xds:46px 46px,100% 100%;--xqt:#14142b}
 [data-xt=f100]{--xb:linear-gradient(180deg,#0b3d91,#1565d8 55%,#0b3d91);--xc:#12327a;--xa:#ffd23f;--xo:#1e4fb3;--xs:#ffd23f;--xst:#3a2a00;--xt:#fff;--xbd:#ffd23f;--xbt:#3a2a00;--xr:14px;--xr2:18px;--xf:'Trebuchet MS',Arial,sans-serif;--xg:0 0 14px rgba(255,210,63,.6);--xy:#ff5252;--xpg:#ffd23f;--xjs:#ff9f43;--xes:#5ee0ff;--xw:#ffb300;--xcr:#ff1744;--xd:repeating-conic-gradient(from 0deg at 50% -10%,rgba(255,255,255,.08) 0 5deg,transparent 5deg 10deg);--xds:100% 100%;--xqt:#14142b}
@@ -376,6 +376,13 @@ a.btn{display:inline-block;text-align:center;text-decoration:none}
 .fi .mt{background:#fff;border:1px solid var(--line);border-radius:999px;padding:1px 8px;margin-left:2px;color:var(--mute)}
 .ur{flex-wrap:wrap}.ura{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .ur select{width:auto;max-width:100%;padding:4px 8px;font-size:12px;margin:0;min-height:0}
+.tpw .row{align-items:end}
+.tpst{display:flex;align-items:center;gap:10px;font-weight:600;margin-bottom:12px}
+.tpd{width:12px;height:12px;border-radius:50%;background:#c9d3e0;display:inline-block;flex:none}
+.tpd.on{background:var(--ok);box-shadow:0 0 0 4px rgba(18,160,98,.18)}
+.tpw .act .btn{margin:0;width:auto}
+.tpv{margin-top:16px;text-align:center;background:var(--mist);border-radius:12px;padding:16px;overflow:auto}
+.tpp{margin:10px auto 0;background:#fff;border:1px solid var(--line);box-shadow:0 6px 18px rgba(18,49,92,.14);padding:14px;font:12px/1.4 "Courier New",monospace;color:#000;text-align:left;max-width:none;box-sizing:content-box}
 .sr .gr input{width:auto;flex:1 1 160px}.sr .gr .gn{flex:0 0 150px}.sr .gr .btn{margin:0;width:auto}
 @media print{#login,#app,.ov,.xroot,#toast{zoom:1!important}.shell{margin-left:0!important}#app.sbh main{padding-left:0!important}#sbopen{display:none!important}}
 </style>
@@ -525,6 +532,7 @@ function start() {
   $('#login').classList.add('hide'); $('#app').classList.remove('hide');
   $('#mn').textContent = S.user.Nama; $('#mr').textContent = ROLE[S.user.Role];
   { let h = false; try { h = localStorage.getItem('ca_sb') === '1'; } catch (e) {} $('#app').classList.toggle('sbh', h); }
+  if (/^(ble|serial|usb)$/.test(tpKind())) tpConnect(false).catch(() => {}).then(tpRefresh);
   const staff = S.user.Role !== 'siswa';
   const adm = S.user.Role === 'admin';
   const items = staff
@@ -804,9 +812,11 @@ function uploader(id, arr, extra, maxMB, max, modes) {
     const fs = Array.from(inp.files); inp.value = '';
     for (const f of fs) {
       if (arr.length >= max) { toast('Maksimal ' + max + ' file.', true); break; }
+      const ex = typeof extra === 'function' ? extra() : extra;
+      if (ex.Judul !== undefined && !String(ex.Judul).trim()) { toast('Isi judul terlebih dahulu. File disimpan di Drive pada folder: Dokumen File LMS › nama grup kelas › judul.', true); break; }
       if (f.size > maxMB * 1048576) { toast(f.name + ': melebihi ' + maxMB + ' MB.', true); continue; }
       const row = {name: f.name, busy: true}; arr.push(row); render();
-      try { Object.assign(row, await api('saveFile', Object.assign({Name: f.name, Data: await fileB64(f)}, extra)), {busy: false}); }
+      try { Object.assign(row, await api('saveFile', Object.assign({Name: f.name, Data: await fileB64(f)}, ex)), {busy: false}); }
       catch (er) { arr.splice(arr.indexOf(row), 1); fail(er); }
       render();
     }
@@ -907,7 +917,7 @@ async function postForm(tipe, x) {
     + fld('p_jd', tipe === 'asesmen' ? 'Judul (opsional, otomatis dari nama asesmen)' : 'Judul', x ? x.Judul : '')
     + `<label for="p_is">${tipe === 'tugas' ? 'Instruksi tugas' : tipe === 'materi' ? 'Isi materi (teks)' : 'Catatan untuk siswa (opsional)'}</label><textarea id="p_is" rows="${tipe === 'asesmen' ? 3 : 7}">${esc(x ? x.Isi : '')}</textarea>`
     + (tipe === 'tugas' ? `<div class="row">${fld('p_tg', 'Tenggat (opsional)', x ? x.Tenggat : '', 'date')}${fld('p_mx', 'Nilai maksimal', x ? x.Maks : 100, 'number')}</div>` : '')
-    + (tipe !== 'asesmen' ? `<label>Lampiran file &amp; akses siswa (maks. 15 MB per file, hingga 10 file)</label>${uplHtml('p_up', 'Pilih akses siswa untuk tiap file: <b>Tampil di LMS</b> (dibuka langsung di halaman LMS: PDF, Word .docx, Excel, gambar, suara, video), <b>Hanya tautan unduh</b>, atau <b>Hanya guru</b> (tidak terlihat siswa). Word .doc, PowerPoint, dan ZIP hanya bisa berupa unduhan. Untuk video besar, gunakan tautan di bawah.')}<label for="p_ln">Tautan video / materi (satu per baris)</label><textarea id="p_ln" rows="2" placeholder="https://youtu.be/...   atau   https://drive.google.com/file/d/...">${esc(x ? x.Links.join('\n') : '')}</textarea><small class="mut">Tautan YouTube, Vimeo, Google Drive / Docs / Sheets / Slides, atau alamat langsung file video (.mp4, .webm) dan audio akan diputar di dalam LMS. Tautan lain dibuka di tab baru. File Drive harus dibagikan “siapa pun yang memiliki tautan”.</small>` : '')
+    + (tipe !== 'asesmen' ? `<label>Lampiran file &amp; akses siswa (maks. 15 MB per file, hingga 10 file)</label>${uplHtml('p_up', 'Pilih akses siswa untuk tiap file: <b>Tampil di LMS</b> (dibuka langsung di halaman LMS: PDF, Word .docx, Excel, gambar, suara, video), <b>Hanya tautan unduh</b>, atau <b>Hanya guru</b> (tidak terlihat siswa). Word .doc, PowerPoint, dan ZIP hanya bisa berupa unduhan. Untuk video besar, gunakan tautan di bawah. Penyimpanan di Drive: Dokumen File LMS › nama grup kelas › judul materi.')}<label for="p_ln">Tautan video / materi (satu per baris)</label><textarea id="p_ln" rows="2" placeholder="https://youtu.be/...   atau   https://drive.google.com/file/d/...">${esc(x ? x.Links.join('\n') : '')}</textarea><small class="mut">Tautan YouTube, Vimeo, Google Drive / Docs / Sheets / Slides, atau alamat langsung file video (.mp4, .webm) dan audio akan diputar di dalam LMS. Tautan lain dibuka di tab baru. File Drive harus dibagikan “siapa pun yang memiliki tautan”.</small>` : '')
     + `<label class="chk"><input type="checkbox" id="p_ct" ${x && x.Catat ? 'checked' : ''}><span>Hitung sebagai pertemuan di <b>Catatan Progres</b> (daring / asinkron)</span></label><small class="mut" style="display:block;margin-top:4px">Siswa yang sudah menyelesaikan item ini (menandai materi selesai, mengumpulkan tugas, atau menyelesaikan asesmen) dapat dicatat otomatis sebagai pertemuan daring lewat tombol “Catat ke Catatan Progres”. Kosongkan untuk item latihan tambahan.</small>`;
   modal((x ? 'Ubah ' : 'Tambah ') + T[1].toLowerCase(), body, async () => {
     if (chk) chk();
@@ -915,7 +925,7 @@ async function postForm(tipe, x) {
       Files: arr.map(f => ({id: f.id, mode: f.mode})), Links: tipe !== 'asesmen' ? $('#p_ln').value : '', Catat: $('#p_ct').checked});
     toast('Tersimpan'); await kelasDetail();
   });
-  const chk = tipe !== 'asesmen' ? uploader('p_up', arr, {}, 15, 10, true) : null;
+  const chk = tipe !== 'asesmen' ? uploader('p_up', arr, () => ({KelasID: KL.id, Judul: val('p_jd')}), 15, 10, true) : null;
 }
 
 function tugasForm(x) {
@@ -1041,7 +1051,7 @@ function paketForm(k, pks) {
 async function vKeuangan() {
   const k = await api('keuangan'), tab = S.kt || 'pay', adm = S.user.Role === 'admin', tot = a => a.reduce((s, x) => s + Number(x.Jumlah), 0);
   const ms = [...new Set(k.wd.map(x => String(x.Tanggal).slice(0, 7)))], wd = k.wd.filter(x => !S.km || String(x.Tanggal).slice(0, 7) === S.km);
-  $('#main').innerHTML = head('Keuangan', 'Pencatatan pemasukan paket belajar dan pengambilan dana.', `<button class="btn" id="add">${tab === 'pay' ? '+ Catat pembayaran' : '+ Catat pengambilan'}</button>`) +
+  $('#main').innerHTML = head('Keuangan', 'Pencatatan pemasukan paket belajar dan pengambilan dana.', `<div class="act"><button class="btn ghost" id="tpb">🖨️ Printer struk</button><button class="btn" id="add">${tab === 'pay' ? '+ Catat pembayaran' : '+ Catat pengambilan'}</button></div>`) +
     `<div class="stats">${[[rp(tot(k.pay)), 'Total pemasukan'], [rp(tot(k.wd)), 'Total pengambilan'], [rp(k.saldo.Tunai), 'Saldo tunai'], [rp(k.saldo.Transfer), 'Saldo transfer']].map(s => `<div class="stat"><b style="font-size:22px">${s[0]}</b><span>${s[1]}</span></div>`).join('')}</div>
     <div class="tabs"><button data-t="pay" class="${tab === 'pay' ? 'on' : ''}">Pembayaran</button><button data-t="wd" class="${tab === 'wd' ? 'on' : ''}">Pengambilan dana</button></div>` +
     (tab === 'pay' ? `<div class="panel tw"><table><tr><th>Tanggal</th><th>Siswa</th><th>Paket belajar</th><th>Termin</th><th>Jumlah</th><th>Metode</th><th>Penginput</th><th></th></tr>${k.pay.map((x, i) => `<tr><td>${esc(x.Tanggal)}</td><td><b>${esc(x.Nama)}</b></td><td>${esc(x.PaketNama || '-')}</td><td>${x.Termin ? x.Termin + '/' + x.N : '-'}</td><td>${rp(x.Jumlah)}</td><td>${esc(x.Metode)}</td><td>${esc(x.Penginput)}</td><td class="act"><button class="btn ghost sm" data-f="${i}">PDF</button><button class="btn ghost sm" data-g="${i}">Print</button></td></tr>`).join('') || '<tr><td colspan="8" class="empty">Belum ada pembayaran.</td></tr>'}</table></div>` :
@@ -1049,6 +1059,7 @@ async function vKeuangan() {
     <div class="panel tw"><table><tr><th>Tanggal</th><th>Bulan</th><th>Metode pengambilan</th><th>Jumlah</th><th>Keterangan</th><th>Nama penginput</th>${adm ? '<th></th>' : ''}</tr>${wd.map((x, i) => `<tr><td>${esc(x.Tanggal)}</td><td>${bln(x.Tanggal)}</td><td>${esc(x.Metode)}</td><td><b>${rp(x.Jumlah)}</b></td><td>${esc(x.Keterangan)}</td><td>${esc(x.Penginput)}</td>${adm ? `<td><button class="btn del sm" data-x="${i}">Hapus</button></td>` : ''}</tr>`).join('') || `<tr><td colspan="7" class="empty">Belum ada pengambilan dana.</td></tr>`}</table></div>`);
   document.querySelectorAll('[data-t]').forEach(b => b.onclick = () => { S.kt = b.dataset.t; vKeuangan(); });
   $('#add').onclick = () => tab === 'pay' ? openPay() : wdForm();
+  $('#tpb').onclick = () => { const o = viewModal('Pengaturan printer struk', tpPanel()); tpInit(o.querySelector('.tpw')); };
   document.querySelectorAll('[data-f]').forEach(b => b.onclick = () => pdfInvoice(k.pay[b.dataset.f]));
   document.querySelectorAll('[data-g]').forEach(b => b.onclick = () => printStruk(k.pay[b.dataset.g]));
   document.querySelectorAll('[data-x]').forEach(b => b.onclick = async () => { if (!confirm('Hapus catatan pengambilan ini?')) return; try { await api('delWithdrawal', {ID: wd[b.dataset.x].ID}); toast('Dihapus'); vKeuangan(); } catch (e) { fail(e); } });
@@ -1076,45 +1087,168 @@ function wdForm() {
 
 /* ---------- Struk: PDF dan printer thermal 58mm ---------- */
 const ascii = s => String(s == null ? '' : s).normalize('NFKD').replace(/[^\x20-\x7e]/g, '');
-function rcLines(p) {
-  const W = 32, no = 'INV-' + String(p.ID).slice(0, 8).toUpperCase(), L = [{t: C().Nama, c: 1, b: 1, big: 1}, {t: 'STRUK PEMBAYARAN', c: 1}, {t: '-'.repeat(W)}];
-  [['No', no], ['Tanggal', p.Tanggal], ['Siswa', p.Nama], ['Paket', p.PaketNama || '-'], ['Termin', p.Termin ? p.Termin + ' dari ' + p.N : '-'], ['Metode', p.Metode]]
-    .forEach(r => (ascii(r[0]).padEnd(8) + ': ' + ascii(r[1])).match(/.{1,32}/g).forEach(t => L.push({t})));
-  L.push({t: '-'.repeat(W)}, {t: 'TOTAL', b: 1}, {t: rp(p.Jumlah), b: 1, big: 1}, {t: '-'.repeat(W)}, {t: 'Penginput: ' + ascii(p.Penginput)}, {t: 'Terima kasih', c: 1}, {t: ''});
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const COLS = {58: 32, 80: 48}, TPK = 'ca_printer';
+const TP = {cfg: {mode: 'dialog', cable: 'serial', baud: 9600, width: 58, cut: false, name: ''}, ble: null, chr: null, port: null, usb: null, ep: 0, busy: false};
+try { Object.assign(TP.cfg, JSON.parse(localStorage.getItem(TPK) || '{}')); } catch (e) {}
+const tpSave = () => { try { localStorage.setItem(TPK, JSON.stringify(TP.cfg)); } catch (e) {} };
+const tpKind = () => TP.cfg.mode === 'cable' ? TP.cfg.cable : TP.cfg.mode;
+const tpCols = () => COLS[TP.cfg.width] || 32;
+const BLE_SVC = ['000018f0-0000-1000-8000-00805f9b34fb', 'e7810a71-73ae-499d-8c15-faa9aef0c3f2', '49535343-fe7d-4ae5-8fa9-9fafd205e455', '0000ff00-0000-1000-8000-00805f9b34fb', '0000fff0-0000-1000-8000-00805f9b34fb', '0000ae30-0000-1000-8000-00805f9b34fb'];
+const TP_SAMPLE = {ID: '3f9a1c2e-0000', Tanggal: '2026-11-19', Nama: 'Aisyah Putri', PaketNama: 'English Intensive', Termin: 2, N: 6, Metode: 'Transfer', Jumlah: 600000, Penginput: 'Admin'};
+const TP_HELP = {
+  dialog: 'Struk dicetak lewat jendela cetak browser. Pilih Bluetooth atau Kabel USB agar struk langsung tercetak tanpa jendela.',
+  ble: 'Untuk printer Bluetooth jenis BLE. Nyalakan printer, klik “Hubungkan printer”, lalu pilih printer dari daftar. Butuh Chrome/Edge dan HTTPS. Printer Bluetooth klasik (SPP) tidak muncul di daftar ini: pakai RawBT (Android) atau kabel.',
+  cable: 'Colok kabel USB, klik “Hubungkan printer”, lalu pilih printer. “USB Serial / COM” cocok untuk printer yang terbaca sebagai port COM (termasuk printer Bluetooth klasik yang sudah dipasangkan di Windows). “USB printer langsung” untuk Linux, Mac, Android, atau ChromeOS. Butuh Chrome/Edge.',
+  rawbt: 'Android: pasang aplikasi RawBT dan pasangkan printer Bluetooth di dalamnya. Struk dikirim ke RawBT tanpa jendela cetak browser.'
+};
+const wrapTxt = (t, n) => { const out = []; let x = String(t); if (!x) return ['']; while (x.length > n) { let i = x.lastIndexOf(' ', n); if (i < Math.floor(n / 2)) i = n; out.push(x.slice(0, i).trimEnd()); x = x.slice(i).trimStart(); } out.push(x); return out; };
+function rcLines(p, W) {
+  W = W || tpCols();
+  const no = 'INV-' + String(p.ID).slice(0, 8).toUpperCase(), L = [];
+  wrapTxt(ascii(C().Nama), Math.floor(W / 2)).forEach(t => L.push({t, c: 1, b: 1, big: 1}));
+  L.push({t: 'STRUK PEMBAYARAN', c: 1}, {t: '-'.repeat(W)});
+  [['No', no], ['Tanggal', p.Tanggal], ['Siswa', p.Nama], ['Paket', p.PaketNama || '-'], ['Termin', p.Termin ? p.Termin + ' dari ' + p.N : '-'], ['Metode', p.Metode]].forEach(r => {
+    const pre = ascii(r[0]).padEnd(8) + ': ';
+    wrapTxt(ascii(r[1]), W - pre.length).forEach((t, i) => L.push({t: (i ? ' '.repeat(pre.length) : pre) + t}));
+  });
+  L.push({t: '-'.repeat(W)}, {t: 'TOTAL', b: 1}, {t: ascii(rp(p.Jumlah)), b: 1, big: 1}, {t: '-'.repeat(W)});
+  wrapTxt('Penginput: ' + ascii(p.Penginput), W).forEach(t => L.push({t}));
+  L.push({t: 'Terima kasih', c: 1}, {t: ''});
   return L;
 }
-const rcHtml = L => L.map(l => `<div style="${l.c ? 'text-align:center;' : ''}${l.b ? 'font-weight:700;' : ''}${l.big ? 'font-size:16px;' : ''}white-space:pre-wrap;word-break:break-all">${esc(l.t) || '&nbsp;'}</div>`).join('');
+const rcHtml = (L, fs) => { fs = fs || 12; return L.map(l => `<div style="${l.c ? 'text-align:center;' : ''}${l.b ? 'font-weight:700;' : ''}${l.big ? `font-size:${fs * 2}px;line-height:1.2;` : ''}white-space:pre-wrap;word-break:break-all">${esc(l.t) || '&nbsp;'}</div>`).join(''); };
 function printDialog(L) {
+  const wmm = TP.cfg.width === 80 ? 80 : 58;
+  let st = $('#rcpt-pg'); if (!st) { st = document.createElement('style'); st.id = 'rcpt-pg'; document.head.appendChild(st); }
+  st.textContent = `@page rcpt{size:${wmm}mm auto;margin:0}`;
   let r = $('#rcpt'); if (!r) { r = document.createElement('div'); r.id = 'rcpt'; document.body.appendChild(r); }
-  r.innerHTML = rcHtml(L); document.body.classList.add('rcp');
+  r.style.width = tpCols() + 'ch'; r.style.fontSize = '9.4px'; r.innerHTML = rcHtml(L, 9.4); document.body.classList.add('rcp');
   const done = () => { document.body.classList.remove('rcp'); window.removeEventListener('afterprint', done); };
   window.addEventListener('afterprint', done); window.print();
 }
 function escpos(L) {
   const b = [0x1b, 0x40];
   L.forEach(l => { b.push(0x1b, 0x61, l.c ? 1 : 0, 0x1b, 0x45, l.b ? 1 : 0, 0x1d, 0x21, l.big ? 0x11 : 0); for (const ch of ascii(l.t)) b.push(ch.charCodeAt(0)); b.push(10); });
-  b.push(0x1b, 0x45, 0, 0x1d, 0x21, 0, 0x1b, 0x61, 0, 0x1b, 0x64, 4);
+  b.push(0x1b, 0x45, 0, 0x1d, 0x21, 0, 0x1b, 0x61, 0, 0x1b, 0x64, TP.cfg.cut ? 3 : 4);
+  if (TP.cfg.cut) b.push(0x1d, 0x56, 0x42, 0x00);
   return new Uint8Array(b);
 }
-async function sendRaw(bytes, mode) {
-  if (mode === 'serial') {
-    if (!navigator.serial) throw new Error('Browser tidak mendukung Web Serial. Gunakan Chrome/Edge di komputer, atau Cetak dialog sistem.');
-    const port = await navigator.serial.requestPort(); await port.open({baudRate: 9600}); const w = port.writable.getWriter(); await w.write(bytes); w.releaseLock(); await port.close(); return;
-  }
-  if (!navigator.bluetooth) throw new Error('Browser tidak mendukung Web Bluetooth. Gunakan Cetak dialog sistem.');
-  const d = await navigator.bluetooth.requestDevice({acceptAllDevices: true, optionalServices: ['000018f0-0000-1000-8000-00805f9b34fb', 'e7810a71-73ae-499d-8c15-faa9aef0c3f2', '49535343-fe7d-4ae5-8fa9-9fafd205e455']});
-  const gs = await d.gatt.connect(); let c = null;
-  for (const sv of await gs.getPrimaryServices()) for (const ch of await sv.getCharacteristics()) if (!c && (ch.properties.write || ch.properties.writeWithoutResponse)) c = ch;
-  if (!c) throw new Error('Printer tidak menyediakan karakteristik tulis.');
-  for (let i = 0; i < bytes.length; i += 100) { const part = bytes.slice(i, i + 100); if (c.properties.writeWithoutResponse) await c.writeValueWithoutResponse(part); else await c.writeValue(part); }
-  d.gatt.disconnect();
+
+// ----- koneksi printer: dipakai ulang tanpa dialog selama perangkat masih terhubung -----
+function tpState() {
+  const k = tpKind(), c = TP.cfg;
+  if (k === 'dialog') return {ok: true, txt: 'Memakai jendela cetak browser (tidak perlu koneksi).'};
+  if (k === 'rawbt') return {ok: true, txt: 'Dikirim lewat aplikasi RawBT (Android).'};
+  const api = {ble: 'bluetooth', serial: 'serial', usb: 'usb'}[k];
+  if (!window.isSecureContext) return {ok: false, txt: 'Koneksi printer langsung membutuhkan alamat HTTPS.'};
+  if (!navigator[api]) return {ok: false, txt: 'Browser ini tidak mendukung ' + ({ble: 'Web Bluetooth', serial: 'Web Serial', usb: 'WebUSB'})[k] + '. Gunakan Chrome atau Edge.'};
+  const on = k === 'ble' ? !!(TP.ble && TP.ble.gatt && TP.ble.gatt.connected && TP.chr) : k === 'serial' ? !!(TP.port && TP.port.writable) : !!(TP.usb && TP.usb.opened);
+  return {ok: on, txt: on ? 'Terhubung: ' + (c.name || 'printer') : 'Belum terhubung. Klik “Hubungkan printer”.'};
 }
-function printStruk(p) {
-  const L = rcLines(p), o = modal('Print struk 58mm', `<div style="background:#fff;border:1.5px dashed var(--line);border-radius:10px;padding:12px;font:12px/1.4 monospace;max-width:260px;margin:0 auto">${rcHtml(L)}</div>
-    <div class="act" style="justify-content:center;margin-top:14px;flex-wrap:wrap"><button class="btn ghost sm" id="rs1" type="button">Kabel data / USB</button><button class="btn ghost sm" id="rs2" type="button">Bluetooth</button></div>
-    <small style="display:block;text-align:center;color:var(--mute);margin-top:10px">Jika browser memblokir akses langsung, pakai Cetak dialog sistem lalu pilih printer thermal 58mm.</small>`, async () => printDialog(L), 'Cetak dialog sistem');
-  const via = m => async () => { try { await sendRaw(escpos(L), m); toast('Struk terkirim ke printer'); o.remove(); } catch (e) { fail(e); } };
-  $('#rs1').onclick = via('serial'); $('#rs2').onclick = via('ble');
+const tpRefresh = () => document.querySelectorAll('.tpw').forEach(e => e._refresh && e._refresh());
+const tpErr = e => e && e.name === 'NotFoundError' ? 'Tidak ada perangkat yang dipilih.' : e && e.name === 'NetworkError' ? 'Printer Bluetooth tidak terjangkau. Pastikan printer menyala dan berada di dekat perangkat.' : (e && e.message) || String(e);
+async function tpBleChar(d) {
+  const gs = await d.gatt.connect(); let best = null, any = null;
+  for (const sv of await gs.getPrimaryServices()) for (const ch of await sv.getCharacteristics()) {
+    if (!(ch.properties.write || ch.properties.writeWithoutResponse)) continue;
+    any = any || ch; if (/18f0|2af1|ff02|fff2|ae01|bef8d6c9|49535343-8841/i.test(sv.uuid + ch.uuid)) best = best || ch;
+  }
+  const c = best || any;
+  if (!c) throw new Error('Printer ini tidak menyediakan jalur tulis Bluetooth LE (mungkin Bluetooth klasik). Gunakan RawBT atau kabel.');
+  TP.ble = d; TP.chr = c; TP.cfg.name = d.name || 'Printer Bluetooth'; TP.cfg.devId = d.id; tpSave();
+  if (!d._tp) { d._tp = 1; d.addEventListener('gattserverdisconnected', () => { TP.chr = null; tpRefresh(); }); }
+}
+async function tpBle(inter) {
+  if (TP.ble) { try { await tpBleChar(TP.ble); return; } catch (e) { if (!inter) throw e; } }
+  if (!inter && navigator.bluetooth.getDevices) { const d = (await navigator.bluetooth.getDevices()).find(x => x.id === TP.cfg.devId); if (d) { await tpBleChar(d); return; } }
+  if (!inter) throw new Error('Printer Bluetooth belum terhubung. Buka Pengaturan printer lalu klik “Hubungkan printer”.');
+  await tpBleChar(await navigator.bluetooth.requestDevice({acceptAllDevices: true, optionalServices: BLE_SVC}));
+}
+async function tpSerial(inter) {
+  if (TP.port && TP.port.writable) return;
+  const ps = await navigator.serial.getPorts(), sv = TP.cfg.serialId;
+  let port = ps.find(x => { const i = x.getInfo(); return sv && i.usbVendorId === sv.v && i.usbProductId === sv.p; }) || (!inter && ps.length === 1 ? ps[0] : null);
+  if (!port) { if (!inter) throw new Error('Printer kabel belum terhubung. Buka Pengaturan printer lalu klik “Hubungkan printer”.'); port = await navigator.serial.requestPort(); }
+  if (!port.writable) await port.open({baudRate: +TP.cfg.baud || 9600});
+  const i = port.getInfo(); TP.port = port; TP.cfg.serialId = {v: i.usbVendorId, p: i.usbProductId};
+  TP.cfg.name = 'Printer kabel' + (i.usbVendorId ? ' (USB ' + i.usbVendorId.toString(16) + ':' + (i.usbProductId || 0).toString(16) + ')' : ' (port COM)'); tpSave();
+}
+async function tpUsb(inter) {
+  if (TP.usb && TP.usb.opened) return;
+  const ds = await navigator.usb.getDevices(), sv = TP.cfg.usbId;
+  let d = ds.find(x => sv && x.vendorId === sv.v && x.productId === sv.p) || (!inter && ds.length === 1 ? ds[0] : null);
+  if (!d) { if (!inter) throw new Error('Printer USB belum terhubung. Buka Pengaturan printer lalu klik “Hubungkan printer”.'); d = await navigator.usb.requestDevice({filters: []}); }
+  await d.open(); if (!d.configuration) await d.selectConfiguration(1);
+  let ifc = null, ep = null;
+  for (const c of d.configuration.interfaces) for (const a of c.alternates) { const e = a.endpoints.find(z => z.direction === 'out' && z.type === 'bulk'); if (e && (!ifc || a.interfaceClass === 7)) { ifc = c; ep = e; } }
+  if (!ifc) throw new Error('Perangkat USB ini tidak memiliki jalur cetak.');
+  try { await d.claimInterface(ifc.interfaceNumber); } catch (e) { throw new Error('USB ditolak sistem (' + e.message + '). Di Windows, printer dengan driver bawaan tidak dapat dibuka langsung oleh browser: pilih jenis kabel “USB Serial / COM”, atau pakai jendela cetak.'); }
+  TP.usb = d; TP.ep = ep.endpointNumber; TP.cfg.name = d.productName || 'Printer USB'; TP.cfg.usbId = {v: d.vendorId, p: d.productId}; tpSave();
+}
+async function tpConnect(inter) {
+  const k = tpKind();
+  if (k === 'ble') { if (!navigator.bluetooth) throw new Error('Browser ini tidak mendukung Web Bluetooth. Gunakan Chrome atau Edge (HTTPS).'); return tpBle(inter); }
+  if (k === 'serial') { if (!navigator.serial) throw new Error('Browser ini tidak mendukung Web Serial. Gunakan Chrome atau Edge di komputer.'); return tpSerial(inter); }
+  if (k === 'usb') { if (!navigator.usb) throw new Error('Browser ini tidak mendukung WebUSB. Gunakan Chrome atau Edge.'); return tpUsb(inter); }
+}
+async function tpDisconnect() {
+  try { if (TP.ble && TP.ble.gatt.connected) TP.ble.gatt.disconnect(); if (TP.port) await TP.port.close(); if (TP.usb && TP.usb.opened) await TP.usb.close(); } catch (e) {}
+  TP.chr = null; TP.port = null; TP.usb = null;
+}
+async function tpWrite(bytes) {
+  const k = tpKind();
+  if (k === 'rawbt') { let bin = ''; bytes.forEach(x => bin += String.fromCharCode(x)); location.href = 'intent:base64,' + btoa(bin) + '#Intent;scheme=rawbt;package=ru.a402d.rawbtprinter;end;'; return; }
+  if (!tpState().ok) await tpConnect(false);
+  if (k === 'ble') { const c = TP.chr, wr = !!c.properties.writeWithoutResponse; for (let i = 0; i < bytes.length; i += 100) { const part = bytes.slice(i, i + 100); if (wr) await c.writeValueWithoutResponse(part); else await c.writeValue(part); if (wr) await sleep(20); } }
+  else if (k === 'serial') { const w = TP.port.writable.getWriter(); try { await w.write(bytes); } finally { w.releaseLock(); } }
+  else for (let i = 0; i < bytes.length; i += 4096) { const r = await TP.usb.transferOut(TP.ep, bytes.slice(i, i + 4096)); if (r.status !== 'ok') throw new Error('Data tidak terkirim ke printer USB (' + r.status + ').'); }
+}
+async function tpPrint(L) {
+  if (tpKind() === 'dialog') return printDialog(L);
+  if (TP.busy) return; TP.busy = true;
+  try { await tpWrite(escpos(L)); toast('Struk dikirim ke printer'); }
+  catch (e) { const m = tpErr(e); toast(m, true); if (confirm('Struk belum tercetak: ' + m + '\n\nCetak lewat jendela cetak browser sekarang?')) printDialog(L); }
+  finally { TP.busy = false; tpRefresh(); }
+}
+const printStruk = p => tpPrint(rcLines(p));
+const tpTestLines = () => { const W = tpCols(); return [{t: 'TES PRINTER', c: 1, b: 1, big: 1}, {t: `Kertas ${TP.cfg.width} mm / ${W} kolom`, c: 1}, {t: '1234567890'.repeat(5).slice(0, W)}, {t: '-'.repeat(W)}].concat(rcLines(TP_SAMPLE, W)); };
+['serial', 'usb'].forEach(a => { if (navigator[a] && navigator[a].addEventListener) navigator[a].addEventListener('disconnect', () => { if (a === 'serial') TP.port = null; else TP.usb = null; tpRefresh(); }); });
+
+function tpPanel() {
+  const op = (v, t) => `<option value="${v}">${t}</option>`;
+  return `<div class="tpw"><div class="tpst" data-k="st"></div>
+    <div class="row"><div><label>Cara koneksi printer</label><select data-k="mode">${op('dialog', 'Jendela cetak browser')}${op('ble', 'Bluetooth (BLE) — langsung cetak')}${op('cable', 'Kabel USB — langsung cetak')}${op('rawbt', 'Android — aplikasi RawBT')}</select></div>
+    <div data-k="cw"><label>Jenis kabel</label><select data-k="cable">${op('serial', 'USB Serial / COM (disarankan)')}${op('usb', 'USB printer langsung (WebUSB)')}</select></div>
+    <div data-k="bw"><label>Baud rate</label><select data-k="baud">${[9600, 19200, 38400, 57600, 115200].map(x => op(x, x)).join('')}</select></div>
+    <div><label>Ukuran kertas</label><select data-k="w">${op(58, '58 mm (32 karakter / baris)')}${op(80, '80 mm (48 karakter / baris)')}</select></div></div>
+    <label class="chk"><input type="checkbox" data-k="cut"><span>Potong kertas otomatis setelah struk (jika printer punya pemotong)</span></label>
+    <div class="act" style="margin-top:12px"><button type="button" class="btn" data-k="con">Hubungkan printer</button><button type="button" class="btn ghost" data-k="dis">Putuskan</button><button type="button" class="btn ghost" data-k="test">Cetak contoh</button></div>
+    <small class="mut" style="display:block;margin-top:10px" data-k="help"></small>
+    <div class="tpv"><b>Contoh tampilan cetak</b><div><small class="mut" data-k="pvl"></small></div><div class="tpp" data-k="pv"></div></div>
+    <small class="mut" style="display:block;margin-top:8px">Pengaturan ini tersimpan di perangkat/browser ini saja, karena printer terhubung ke komputer atau HP yang dipakai mencetak.</small></div>`;
+}
+function tpInit(root) {
+  const q = k => root.querySelector(`[data-k="${k}"]`);
+  const draw = () => {
+    const c = TP.cfg, st = tpState(), cab = c.mode === 'cable', W = tpCols();
+    q('mode').value = c.mode; q('cable').value = c.cable; q('baud').value = String(c.baud); q('w').value = String(c.width); q('cut').checked = !!c.cut;
+    q('cw').classList.toggle('hide', !cab); q('bw').classList.toggle('hide', !(cab && c.cable === 'serial'));
+    const needs = c.mode === 'ble' || cab; q('con').classList.toggle('hide', !needs); q('dis').classList.toggle('hide', !(needs && st.ok));
+    q('st').innerHTML = `<span class="tpd${st.ok ? ' on' : ''}"></span><span>${esc(st.txt)}</span>`;
+    q('help').textContent = TP_HELP[c.mode]; q('pvl').textContent = `Kertas ${c.width} mm • ${W} karakter per baris`;
+    q('pv').style.width = W + 'ch'; q('pv').innerHTML = rcHtml(rcLines(TP_SAMPLE, W), 12);
+  };
+  root._refresh = draw;
+  root.addEventListener('change', e => {
+    const t = e.target.closest('[data-k]'); if (!t) return; const c = TP.cfg, k = t.dataset.k;
+    if (k === 'mode') c.mode = t.value; else if (k === 'cable') c.cable = t.value; else if (k === 'baud') c.baud = +t.value; else if (k === 'w') c.width = +t.value; else if (k === 'cut') c.cut = t.checked; else return;
+    tpSave(); tpRefresh();
+  });
+  q('con').onclick = async e => { const b = e.currentTarget; b.disabled = true; try { await tpConnect(true); toast('Printer terhubung'); } catch (er) { toast(tpErr(er), true); } b.disabled = false; tpRefresh(); };
+  q('dis').onclick = async () => { await tpDisconnect(); toast('Koneksi printer diputuskan'); tpRefresh(); };
+  q('test').onclick = () => tpPrint(tpTestLines());
+  draw();
 }
 function pdfInvoice(p) {
   if (!window.jspdf) return toast('Pustaka PDF belum termuat. Periksa koneksi internet lalu muat ulang.', true);
@@ -1189,6 +1323,7 @@ async function vSettings() {
     <div class="act" style="margin-top:10px"><button class="btn ghost sm" id="cc" type="button">Salin isi config.json</button></div></div>
     ${GAS ? '' : `<div class="panel"><h3>Alamat server di perangkat ini</h3><p class="mut" style="font-size:13px;margin:0 0 8px">Alamat Web App Apps Script (berakhiran /exec) yang dipakai halaman login. Ubah di sini bila alamat server berganti; kolom pengaturan server di halaman login hanya muncul saat alamat belum tersedia atau server tidak bisa dihubungi.</p>
     <input id="s_apiov" value="${esc(API)}" placeholder="https://script.google.com/macros/s/.../exec"><div class="act" style="margin-top:10px"><button class="btn ghost sm" id="apv" type="button">Pakai alamat ini</button><button class="btn ghost sm" id="apr" type="button">Kembali ke bawaan</button></div></div>`}
+    <div class="panel"><h3>Printer thermal (struk)</h3>${tpPanel()}</div>
     <div class="panel"><h3>Server TURN (video live pemantauan ujian)</h3><div class="row">${f('TurnURL', 'Alamat TURN, mis. turn.contoh.com:3478')}${f('TurnUser', 'Username TURN')}${f('TurnPass', 'Password TURN', 'password')}</div>
     <div class="act"><button class="btn ghost" id="tt" type="button">Uji TURN</button></div><p id="tp" style="font-weight:600"></p></div>
     <button class="btn" id="sv">Simpan pengaturan</button>`;
@@ -1198,7 +1333,7 @@ async function vSettings() {
   const pv = () => { const v = $('#s_Logo').value; $('#lgpv').innerHTML = v ? `<img src="${esc(v)}" alt="Pratinjau logo">` : 'Belum ada logo'; $('#lgx').disabled = !v; };
   $('#s_logo_f').onchange = async e => { const fl = e.target.files[0]; if (!fl) return; try { $('#s_Logo').value = await shrinkLogo(fl); pv(); toast('Logo siap. Klik Simpan pengaturan untuk menerapkan.'); } catch (er) { fail(er); } e.target.value = ''; };
   $('#lgx').onclick = () => { $('#s_Logo').value = ''; pv(); };
-  pv();
+  pv(); tpInit(document.querySelector('.tpw'));
   $('#tlms').onclick = async () => { const b = $('#tlms'); b.disabled = true; try { const r = await api('tesLms'); viewModal('Uji penyimpanan LMS (Google Drive)', r.langkah.map(l => `<div class="sr"><b>${l.ok ? '✅' : '❌'} ${esc(l.nama)}</b><div class="mut" style="font-size:13px;margin-top:4px;overflow-wrap:anywhere">${esc(l.info)}</div></div>`).join('') + (r.petunjuk ? `<div class="panel" style="margin:12px 0 0">${esc(r.petunjuk)}</div>` : '<div class="pbar"><span class="tag g">Semua langkah berhasil. Unggah file LMS siap dipakai.</span></div>')); } catch (e) { fail(e); } b.disabled = false; };
   if ($('#apv')) {
     $('#apv').onclick = () => { const v = $('#s_apiov').value.trim(); if (!API_RX.test(v)) return toast('URL Web App tidak valid. Harus berakhiran /exec.', true); try { localStorage.setItem('ca_api_o', v); localStorage.setItem('ca_api', v); } catch (e) {} toast('Alamat server disimpan. Memuat ulang, silakan masuk kembali.'); setTimeout(() => location.reload(), 900); };
