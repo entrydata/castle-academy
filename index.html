@@ -341,7 +341,7 @@ img.lgi{width:46px;height:46px;object-fit:contain;border-radius:12px;background:
 .ncontent:empty::before{content:'Tulis catatan di sini…';color:var(--mute);pointer-events:none}.ncontent table{border-collapse:collapse;width:100%;margin:12px 0}.ncontent td,.ncontent th{border:1px solid #aebdd0;padding:7px;min-width:42px}.ncontent a{color:var(--royal)}
 .nfoot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 16px;border-top:1px solid var(--line);flex-wrap:wrap}
 .cm{margin-top:16px;border-top:1px dashed var(--line);padding-top:12px}.cmrow{display:flex;gap:9px;margin:9px 0}.cmav{width:32px;height:32px;border-radius:50%;background:var(--mist);color:var(--royal);display:grid;place-items:center;font-weight:800;flex:none}.cmbody{background:var(--mist);border-radius:4px 14px 14px 14px;padding:8px 12px;min-width:0;flex:1}.cmbody p{margin:3px 0;overflow-wrap:anywhere;white-space:pre-wrap}.cmbody small{color:var(--mute)}.cmform{display:flex;gap:8px;margin-top:12px}.cmform input{flex:1}.cmnew{color:var(--bad);font-size:12px;font-weight:700}
-.fgroup{display:block}.fgroup>.fi{max-width:100%}.inlinefile{width:100%;margin:12px 0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}.ifhead{display:flex;align-items:center;gap:8px;padding:9px 12px;background:var(--mist);flex-wrap:wrap}.ifhead b{flex:1;min-width:120px;overflow-wrap:anywhere}.ifbody{min-height:60px;padding:10px}.ifbody iframe{width:100%;height:min(65vh,600px);border:0}.ifbody img{max-width:100%;max-height:65vh;display:block;margin:auto}.ifbody video{width:100%;max-height:65vh}.ifbody audio{width:100%}.ifbody pre{white-space:pre-wrap;overflow-wrap:anywhere}.ifbody .docf{height:60vh}.ifbody .pdfv{max-height:65vh;overflow:auto}
+.fgroup{display:block}.fgroup>.fi{max-width:100%}.inlinefile{width:100%;margin:12px 0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}.ifhead{display:flex;align-items:center;gap:8px;padding:9px 12px;background:var(--mist);flex-wrap:wrap}.ifhead b{flex:1;min-width:120px;overflow-wrap:anywhere}.ifbody{min-height:60px;padding:10px}.ifbody iframe{width:100%;min-height:80vh;height:900px;border:0}.ifbody img{max-width:100%;height:auto;display:block;margin:auto}.ifbody video{display:block;max-width:100%;width:auto;height:auto;margin:auto}.ifbody audio{width:100%}.ifbody pre{white-space:pre-wrap;overflow-wrap:anywhere}.ifbody .docf{min-height:80vh;height:900px}.ifbody .pdfv{overflow:visible}.ifbody .inline-video{width:100%;aspect-ratio:16/9;height:auto;min-height:0}
 .bookmark{background:linear-gradient(135deg,color-mix(in srgb,var(--royal) 10%,#fff),#fff);border:1px solid var(--line);border-radius:14px;padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}.bookmark .row{flex:1;min-width:220px}.bookmark select{margin:0}
 @media(max-width:700px){.nwrap{grid-template-columns:1fr}.nside{display:flex;gap:5px;overflow:auto}.nfold{white-space:nowrap}.ncontent{padding:16px;min-height:280px}.cmform{flex-wrap:wrap}}
 /* ===== Grup Kelas - LMS ===== */
@@ -404,6 +404,7 @@ a.btn{display:inline-block;text-align:center;text-decoration:none}
 .tpp{margin:10px auto 0;background:#fff;border:1px solid var(--line);box-shadow:0 6px 18px rgba(18,49,92,.14);padding:14px;font:12px/1.4 "Courier New",monospace;color:#000;text-align:left;max-width:none;box-sizing:content-box}
 .sr .gr input{width:auto;flex:1 1 160px}.sr .gr .gn{flex:0 0 150px}.sr .gr .btn{margin:0;width:auto}
 @media print{#login,#app,.ov,.xroot,#toast{zoom:1!important}.shell{margin-left:0!important}#app.sbh main{padding-left:0!important}#sbopen{display:none!important}}
+.timeline-meeting{border-left:3px solid var(--primary,#5375cb);margin:14px 0;padding:4px 0 4px 16px}.timeline-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.timeline-head h3{margin:4px 0}.timeline-actions,.timeline-post-actions{display:flex;gap:6px;flex-wrap:wrap;align-items:center}.timeline-post-actions{margin:8px 0}.timeline-post-actions select{max-width:240px}.timeline-locked{padding:14px;background:#f5f6fa;border-radius:8px}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
 </head>
@@ -558,7 +559,8 @@ function start() {
   const items = staff
     ? [['dash', '🏫', 'Dashboard'], ['users', '👥', adm ? 'Pengguna' : 'Siswa'], ['paket', '🎓', 'Daftar Program Paket'], ['progress', '📈', 'Catatan Progres'], ['kelas', '🎒', 'Grup Kelas - LMS'], ['keuangan', '💳', 'Keuangan'], ['aktif', '✅', 'Paket Aktif'], ['asesmen', '📚', 'Daftar asesmen'], ['lap', '📊', 'Laporan hasil asesmen'], ['pantau', '📡', 'Pantau ujian'], ['lpp', '🗓️', 'Laporan Periode Program']].concat(adm ? [['settings', '⚙️', 'Pengaturan']] : [])
     : [['dash', '🏫', 'Beranda'], ['kelas', '🎒', 'Grup Kelas - LMS'], ['exam', '✏️', 'Ujian'], ['catprog', '📈', 'Catatan Progres'], ['results', '🏅', 'Hasil ujian & laporan'], ['report', '🖨️', 'Laporan saya']];
-  items.push(['notes', '📝', staff ? 'Catatan Guru' : 'Catatan Siswa']);
+  if (staff) items.splice(items.findIndex(i => i[0] === 'kelas') + 1, 0, ['notes', '📝', 'Catatan Guru']);
+  else items.push(['notes', '📝', 'Catatan Siswa']);
   $('#nav').innerHTML = items.map(i => `<button data-v="${i[0]}">${i[1]} ${i[2]}</button>`).join('');
   $('#nav').onclick = e => { const v = e.target.closest('button')?.dataset.v; if (v) go(v); };
   go('dash');
@@ -833,22 +835,43 @@ async function renderPdf(body, u8) {
   await loadScript(CDN.pdf);
   const L = window.pdfjsLib; if (!L) throw new Error('Pustaka PDF tidak tersedia.');
   L.GlobalWorkerOptions.workerSrc = CDN.pdfw;
-  const doc = await L.getDocument({data: u8}).promise, n = Math.min(doc.numPages, 300);
-  body.innerHTML = '<div class="pdfv"></div>'; const box = body.firstChild;
-  const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { io.unobserve(en.target); if (en.target._r) en.target._r().catch(() => {}); } }), {root: body.closest('.inlinefile') ? box : body, rootMargin: '700px 0px'});
-  for (let i = 1; i <= n; i++) {
-    const pg = await doc.getPage(i), v1 = pg.getViewport({scale: 1}), w = document.createElement('div');
-    w.className = 'pdfp'; w.style.aspectRatio = v1.width + ' / ' + v1.height;
-    w._r = async () => { const dpr = Math.min(2, window.devicePixelRatio || 1), W = Math.min(1800, Math.max(300, (w.clientWidth || 800) * dpr)), v = pg.getViewport({scale: W / v1.width}), c = document.createElement('canvas'); c.width = Math.floor(v.width); c.height = Math.floor(v.height); w.appendChild(c); await pg.render({canvasContext: c.getContext('2d'), viewport: v}).promise; };
-    box.appendChild(w); io.observe(w);
-  }
-  if (doc.numPages > n) box.insertAdjacentHTML('beforeend', `<div class="empty">Menampilkan ${n} halaman pertama.</div>`);
+  const task = L.getDocument({data: u8});
+  let doc, io, observer, closed = false;
+  const cleanup = () => { if (closed) return; closed = true; if (io) io.disconnect(); if (observer) observer.disconnect(); task.destroy(); };
+  observer = new MutationObserver(() => { if (!body.isConnected) cleanup(); });
+  observer.observe(document.body, {childList: true, subtree: true});
+  try {
+    doc = await task.promise;
+    if (!body.isConnected || closed) { cleanup(); return; }
+    const n = Math.min(doc.numPages, 300);
+    body.innerHTML = '<div class="pdfv"></div>'; const box = body.firstChild;
+    io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { io.unobserve(en.target); const render = en.target._r; delete en.target._r; if (render) render().catch(() => {}); } }), {root: body.closest('.inlinefile') ? null : body, rootMargin: '700px 0px'});
+    for (let i = 1; i <= n; i++) {
+      const pg = await doc.getPage(i);
+      if (closed || !body.isConnected) { cleanup(); return; }
+      const v1 = pg.getViewport({scale: 1}), w = document.createElement('div');
+      w.className = 'pdfp'; w.style.aspectRatio = v1.width + ' / ' + v1.height;
+      w._r = async () => { const dpr = Math.min(2, window.devicePixelRatio || 1), W = Math.min(1800, Math.max(300, (w.clientWidth || 800) * dpr)), v = pg.getViewport({scale: W / v1.width}), c = document.createElement('canvas'); c.width = Math.floor(v.width); c.height = Math.floor(v.height); w.appendChild(c); await pg.render({canvasContext: c.getContext('2d'), viewport: v}).promise; };
+      box.appendChild(w); io.observe(w);
+    }
+    if (doc.numPages > n) box.insertAdjacentHTML('beforeend', `<div class="empty">Menampilkan ${n} halaman pertama.</div>`);
+  } catch (error) { cleanup(); if (!body.isConnected) return; throw error; }
 }
 async function renderDocx(body, u8) {
   await loadScript(CDN.docx);
   if (!window.mammoth) throw new Error('Pustaka Word tidak tersedia.');
   const r = await window.mammoth.convertToHtml({arrayBuffer: u8.buffer});
-  sandboxFrame(body, DOCCSS + (r.value || '<p>(Dokumen kosong)</p>'));
+  if (body.closest('.inlinefile')) {
+    if (!body.isConnected) return;
+    const frame = document.createElement('iframe'); frame.className = 'docf'; frame.setAttribute('sandbox', 'allow-scripts');
+    const token = Array.from(crypto.getRandomValues(new Uint32Array(4)), n => n.toString(16).padStart(8, '0')).join('');
+    const onMessage = e => { if (e.source !== frame.contentWindow || !e.data || e.data.type !== 'doc-height' || e.data.token !== token) return; frame.style.height = Math.max(Math.round(innerHeight * 0.8), Math.min  (100000, Number(e.data.height) || 0)) + 'px'; };
+    window.addEventListener('message', onMessage);
+    const content = (r.value || '<p>(Dokumen kosong)</p>').replace(/<script\b[^>]*>[\s\S]*?<\/script\s*>/gi, '');
+    frame.srcdoc = '<meta http-equiv="Content-Security-Policy" content="default-src \'none\'; img-src data:; style-src \'unsafe-inline\'; script-src \'nonce-' + token + '\'">' + DOCCSS + content + '<script nonce="' + token + '">new ResizeObserver(function(){parent.postMessage({type:"doc-height",token:"' + token + '",height:document.body.scrollHeight+36},"*")}).observe(document.body)<\/script>';
+    body.replaceChildren(frame);
+    new MutationObserver((_, observer) => { if (!frame.isConnected) { window.removeEventListener('message', onMessage); observer.disconnect(); } }).observe(document.body, {childList: true, subtree: true});
+  } else sandboxFrame(body, DOCCSS + (r.value || '<p>(Dokumen kosong)</p>'));
 }
 async function renderXls(body, u8) {
   await loadScript(CDN.xls);
@@ -890,7 +913,9 @@ async function openFile(f) {
 async function openInlineFile(button, f) {
   const old = button.nextElementSibling; if (old && old.classList.contains('inlinefile')) { old.querySelector('[data-close-preview]').click(); return; }
   const wrap = document.createElement('div'); wrap.className = 'inlinefile'; wrap.innerHTML = `<div class="ifhead"><b>${esc(f.name)}</b><button class="btn ghost sm" data-close-preview>Tutup</button></div><div class="ifbody"><div class="empty">Memuat dokumen…</div></div>`; button.after(wrap);
-  let objectUrl = ''; wrap.querySelector('[data-close-preview]').onclick = e => { e.stopPropagation(); if (objectUrl) URL.revokeObjectURL(objectUrl); wrap.remove(); };
+  let objectUrl = ''; const observer = new MutationObserver(() => { if (!wrap.isConnected) { if (objectUrl) URL.revokeObjectURL(objectUrl); objectUrl = ''; observer.disconnect(); } });
+  observer.observe(document.body, {childList: true, subtree: true});
+  wrap.querySelector('[data-close-preview]').onclick = e => { e.stopPropagation(); wrap.remove(); };
   const body = wrap.querySelector('.ifbody'), canDl = S.user.Role !== 'siswa' || f.mode !== 'lihat';
   if (!canDl) { body.oncontextmenu = e => e.preventDefault(); body.style.userSelect = 'none'; }
   try {
@@ -914,9 +939,12 @@ async function dlFile(f) {
 }
 function openInlineLink(button, u) {
   const old = button.nextElementSibling; if (old && old.classList.contains('inlinefile')) { old.remove(); return; }
-  const e = embedOf(u);
-  if (!e) return window.open(u, '_blank', 'noopener,noreferrer');
-  const tag = e.t === 'vid' ? `<video controls playsinline controlsList="nodownload" src="${esc(e.s)}"></video>` : e.t === 'aud' ? `<audio controls src="${esc(e.s)}"></audio>` : e.t === 'img' ? `<img src="${esc(e.s)}" alt="">` : `<iframe src="${esc(e.s)}" allow="accelerometer; autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
+  let url; try { url = new URL(u); } catch (error) { return; }
+  if (!['http:', 'https:'].includes(url.protocol)) return;
+  const e = embedOf(url.href);
+  if (!e) return window.open(url.href, '_blank', 'noopener,noreferrer');
+  const videoFrame = /youtube-nocookie\.com|player\.vimeo\.com/.test(e.s);
+  const tag = e.t === 'vid' ? `<video controls playsinline controlsList="nodownload" src="${esc(e.s)}"></video>` : e.t === 'aud' ? `<audio controls src="${esc(e.s)}"></audio>` : e.t === 'img' ? `<img src="${esc(e.s)}" alt="">` : `<iframe${videoFrame ? ' class="inline-video"' : ''} src="${esc(e.s)}" sandbox="allow-scripts allow-same-origin allow-presentation allow-forms allow-popups" allow="accelerometer; autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
   const wrap = document.createElement('div'); wrap.className = 'inlinefile'; wrap.innerHTML = `<div class="ifhead"><b>${esc(linkLabel(u))}</b><a class="btn ghost sm" href="${esc(u)}" target="_blank" rel="noopener">Buka di tab baru</a><button class="btn ghost sm" data-close-preview>Tutup</button></div><div class="ifbody">${tag}</div>`;
   button.after(wrap); wrap.querySelector('[data-close-preview]').onclick = ev => { ev.stopPropagation(); wrap.remove(); };
 }
@@ -1009,6 +1037,26 @@ function postCard(x) {
     ${staff ? '<div class="act"><button class="btn ghost sm" data-a="ed">Ubah</button><button class="btn del sm" data-a="del">Hapus</button></div>' : ''}</div>
     ${x.GuruOnly ? '<span class="tag y">🔒 Hanya guru</span>' : ''}${KL.D && KL.D.bookmarkPostID === x.ID ? ' <span class="tag">🔖 Materi terakhir diberikan</span>' : ''}${x.Isi ? `<div class="tx">${autolink(x.Isi)}</div>` : ''}${filesHtml(x.Files)}${linksHtml(x.Links)}${extra}<div class="cm"><button class="btn ghost sm" data-a="comments">💬 Komentar (${Number(x.nKomentar) || 0})</button>${x.unread ? `<span class="cmnew"> ${Number(x.unread)} aktivitas baru</span>` : ''}<div class="cmitems"></div></div></div>`;
 }
+const timelineFlag = (v, fallback) => v == null || v === '' ? fallback : v === true || v === 1 || String(v).toLowerCase() === 'true' || String(v) === '1';
+function timelineForm(m) {
+  const visible = timelineFlag(m && m.Visible, true), locked = timelineFlag(m && m.Locked, false), executed = timelineFlag(m && m.Executed, false);
+  modal('Ubah pertemuan ' + m.Pertemuan, `<label class="chk"><input type="checkbox" id="tm_visible" ${visible ? 'checked' : ''}><span>Terlihat oleh siswa</span></label><label class="chk"><input type="checkbox" id="tm_locked" ${locked ? 'checked' : ''}><span>Terkunci</span></label><label class="chk"><input type="checkbox" id="tm_executed" ${executed ? 'checked' : ''}><span>Sudah dilaksanakan</span></label>`, async () => {
+    await api('savePertemuan', {KelasID: KL.id, Pertemuan: m.Pertemuan, Visible: $('#tm_visible').checked, Locked: $('#tm_locked').checked, Executed: $('#tm_executed').checked});
+    toast('Pertemuan tersimpan'); await kelasDetail();
+  });
+}
+function timelineHtml(D, list, staff) {
+  const meetings = Array.isArray(D.meetings) ? D.meetings.slice().sort((a, b) => Number(a.Pertemuan) - Number(b.Pertemuan)) : [], known = new Set(meetings.map(m => String(m.Pertemuan)));
+  const groups = meetings.filter(m => staff || timelineFlag(m.Visible, true)).map(m => ({m, posts: list.filter(p => String(p.Pertemuan || '') === String(m.Pertemuan))}));
+  const unassigned = list.filter(p => !p.Pertemuan || !known.has(String(p.Pertemuan)));
+  if (unassigned.length) groups.push({m: null, posts: unassigned});
+  const card = (p, posts, i) => `${staff ? `<div class="timeline-post-actions"><select data-tmove="${esc(p.ID)}" aria-label="Pindahkan ${esc(p.Judul)}">${!p.Pertemuan || !known.has(String(p.Pertemuan)) ? '<option value="" selected disabled>Pilih pertemuan</option>' : ''}${meetings.map(m => `<option value="${esc(m.Pertemuan)}" ${String(p.Pertemuan || '') === String(m.Pertemuan) ? 'selected' : ''}>Pertemuan ${esc(m.Pertemuan)}</option>`).join('')}</select><button class="btn ghost sm" data-torder="up" data-post="${esc(p.ID)}" ${KL.tab !== 'semua' || i === 0 ? 'disabled' : ''} title="Urutkan melalui tab Semua" aria-label="Naikkan ${esc(p.Judul)}">↑</button><button class="btn ghost sm" data-torder="down" data-post="${esc(p.ID)}" ${KL.tab !== 'semua' || i === posts.length - 1 ? 'disabled' : ''} title="Urutkan melalui tab Semua" aria-label="Turunkan ${esc(p.Judul)}">↓</button></div>` : ''}${postCard(p)}`;
+  return groups.map(({m, posts}) => {
+    posts = posts.slice().sort((a, b) => (Number(a.Urutan) || 0) - (Number(b.Urutan) || 0));
+    const locked = m && timelineFlag(m.Locked, false), visible = !m || timelineFlag(m.Visible, true), executed = m && timelineFlag(m.Executed, false);
+    return `<section class="timeline-meeting"><div class="timeline-head"><div><h3>${esc(m ? 'Pertemuan ' + m.Pertemuan : 'Belum dikelompokkan')}</h3>${m ? `<span class="tag ${executed ? 'g' : 'y'}">${executed ? 'Sudah dilaksanakan' : 'Belum dilaksanakan'}</span> ${locked ? '<span class="tag y">🔒 Terkunci</span>' : '<span class="tag g">Terbuka</span>'} ${staff && !visible ? '<span class="tag y">Disembunyikan</span>' : ''}` : ''}</div>${staff && m ? `<div class="timeline-actions"><button class="btn ghost sm" data-tedit="${esc(m.Pertemuan)}">Ubah status</button>${['materi','tugas','asesmen'].map(type => `<button class="btn sm" data-taddpost="${type}" data-meeting="${esc(m.Pertemuan)}">+ ${TIPE[type][1]}</button>`).join('')}</div>` : ''}</div>${locked && !staff ? '<div class="timeline-locked">Pertemuan ini terkunci.</div>' : posts.map(card).join('') || '<div class="empty">Belum ada item di bagian ini.</div>'}</section>`;
+  }).join('') || '<div class="panel empty">Belum ada item di bagian ini.</div>';
+}
 function drawKelas() {
   const D = KL.D, k = D.k, staff = S.user.Role !== 'siswa';
   const tabs = [['semua', 'Semua'], ['materi', 'Materi'], ['tugas', 'Tugas'], ['asesmen', 'Asesmen']].concat(staff ? [['anggota', 'Anggota (' + D.members.length + ')']] : []);
@@ -1019,10 +1067,22 @@ function drawKelas() {
     (staff ? '<div class="panel" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><b>Tambah ke kelas:</b><button class="btn sm" data-add="materi">+ Materi</button><button class="btn sm" data-add="tugas">+ Tugas</button><button class="btn sm" data-add="asesmen">+ Asesmen</button></div>' : '') +
     `<div class="tabs">${tabs.map(t => `<button data-tab="${t[0]}" class="${KL.tab === t[0] ? 'on' : ''}">${t[1]}</button>`).join('')}</div>` +
     (KL.tab === 'anggota' ? `<div class="panel tw"><table><tr><th>Nama</th><th>Username</th><th>Kelompok</th></tr>${D.members.map(m => `<tr><td><b>${esc(m.Nama)}</b></td><td>${esc(m.Username)}</td><td>${esc(m.Kelompok || '-')}</td></tr>`).join('') || '<tr><td colspan="3" class="empty">Belum ada siswa dengan paket ini.</td></tr>'}</table></div>`
-      : list.map(postCard).join('') || '<div class="panel empty">Belum ada item di bagian ini.</div>') + '</div>';
+      : timelineHtml(D, list, staff)) + '</div>';
   const bookmark = $('#kbookmark'); if (bookmark) bookmark.onchange = async () => { const previous = D.bookmarkPostID, value = bookmark.value; bookmark.disabled = true; try { await api('saveBookmark', {ID: k.ID, PostID: value}); D.bookmarkPostID = value; drawKelas(); toast('Penanda tersimpan'); } catch (e) { bookmark.value = previous || ''; fail(e); } finally { bookmark.disabled = false; } };
+  $('#kroot').onchange = e => {
+    const select = e.target.closest('[data-tmove]'); if (!staff || !select) return;
+    api('movePost', {ID: select.dataset.tmove, Pertemuan: Number(select.value) || 0, Urutan: 999999}).then(() => kelasDetail()).catch(e => { fail(e); drawKelas(); });
+  };
   $('#kroot').onclick = e => {
     const t = e.target.closest('button'); if (!t) return;
+    if (staff && t.dataset.tedit) { const m = (D.meetings || []).find(m => String(m.Pertemuan) === t.dataset.tedit); if (m) timelineForm(m); return; }
+    if (staff && t.dataset.taddpost) return postForm(t.dataset.taddpost, undefined, Number(t.dataset.meeting)).catch(fail);
+    if (staff && t.dataset.torder) {
+      const p = D.posts.find(x => String(x.ID) === t.dataset.post); if (!p) return;
+      const group = D.posts.filter(x => String(x.Pertemuan || '') === String(p.Pertemuan || '')).slice().sort((a, b) => (Number(a.Urutan) || 0) - (Number(b.Urutan) || 0));
+      const index = group.indexOf(p), target = index + (t.dataset.torder === 'up' ? -1 : 1); if (target < 0 || target >= group.length) return;
+      t.disabled = true; api('movePost', {ID: p.ID, Pertemuan: Number(p.Pertemuan) || 1, Urutan: target + 1}).then(() => kelasDetail()).catch(e => { fail(e); kelasDetail().catch(fail); }); return;
+    }
     if (t.id === 'knote') return notesShortcut();
     if (t.id === 'kback') { KL.id = null; return kelasHome().catch(fail); }
     if (t.dataset.tab) { KL.tab = t.dataset.tab; return drawKelas(); }
@@ -1055,23 +1115,44 @@ async function showComments(card, post) {
   await draw();
 }
 
-async function postForm(tipe, x) {
-  const T = TIPE[tipe], asm = tipe === 'asesmen' ? await api('asesmen') : [], arr = x ? x.Files.map(f => Object.assign({}, f)) : [];
+async function postForm(tipe, x, meetingNumber) {
+  const T = TIPE[tipe], asm = tipe === 'asesmen' ? await api('asesmen') : [], arr = x && Array.isArray(x.Files) ? x.Files.map(f => Object.assign({}, f)) : [];
+  const links = x && Array.isArray(x.Links) ? x.Links : x && typeof x.Links === 'string' ? x.Links.split(/\r?\n/) : [];
+  const meetings = (KL.D && KL.D.meetings) || [], selectedMeeting = Number(x ? x.Pertemuan : meetingNumber) || 1;
   if (tipe === 'asesmen' && !asm.length) return toast('Belum ada asesmen. Buat dulu di menu Daftar asesmen.', true);
   const body = (tipe === 'asesmen' ? sel('p_kd', 'Asesmen', asm.map(a => `<option value="${esc(a.Kode)}" ${x && x.Kode === a.Kode ? 'selected' : ''}>${esc(a.Nama)} • ${esc(a.Tipe)}${a.Status !== 'Aktif' ? ' • ' + esc(a.Status) : ''}</option>`).join('')) : '')
+    + sel('p_meeting', 'Pertemuan', meetings.map(m => `<option value="${esc(m.Pertemuan)}" ${Number(m.Pertemuan) === selectedMeeting ? 'selected' : ''}>Pertemuan ${esc(m.Pertemuan)}</option>`).join(''))
     + fld('p_jd', tipe === 'asesmen' ? 'Judul (opsional, otomatis dari nama asesmen)' : 'Judul', x ? x.Judul : '')
     + `<label for="p_is">${tipe === 'tugas' ? 'Instruksi tugas' : tipe === 'materi' ? 'Isi materi (teks)' : 'Catatan untuk siswa (opsional)'}</label><textarea id="p_is" rows="${tipe === 'asesmen' ? 3 : 7}">${esc(x ? x.Isi : '')}</textarea>`
     + (tipe === 'tugas' ? `<div class="row">${fld('p_tg', 'Tenggat (opsional)', x ? x.Tenggat : '', 'date')}${fld('p_mx', 'Nilai maksimal', x ? x.Maks : 100, 'number')}</div>` : '')
-    + (tipe !== 'asesmen' ? `<label>Lampiran file &amp; akses siswa (maks. 15 MB per file, hingga 10 file)</label>${uplHtml('p_up', 'Pilih akses siswa untuk tiap file: <b>Tampil di LMS</b> (dibuka langsung di halaman LMS: PDF, Word .docx, Excel, gambar, suara, video), <b>Hanya tautan unduh</b>, atau <b>Hanya guru</b> (tidak terlihat siswa). Word .doc, PowerPoint, dan ZIP hanya bisa berupa unduhan. Untuk video besar, gunakan tautan di bawah. Penyimpanan di Drive: Dokumen File LMS › nama grup kelas › judul materi.')}<label for="p_ln">Tautan video / materi (satu per baris)</label><textarea id="p_ln" rows="2" placeholder="https://youtu.be/...   atau   https://drive.google.com/file/d/...">${esc(x ? x.Links.join('\n') : '')}</textarea><small class="mut">Tautan YouTube, Vimeo, Google Drive / Docs / Sheets / Slides, atau alamat langsung file video (.mp4, .webm) dan audio akan diputar di dalam LMS. Tautan lain dibuka di tab baru. File Drive harus dibagikan “siapa pun yang memiliki tautan”.</small>` : '')
+    + (tipe !== 'asesmen' ? `<label>Lampiran file &amp; akses siswa (maks. 15 MB per file, hingga 10 file)</label>${uplHtml('p_up', 'Pilih akses siswa untuk tiap file: <b>Tampil di LMS</b> (dibuka langsung di halaman LMS: PDF, Word .docx, Excel, gambar, suara, video), <b>Hanya tautan unduh</b>, atau <b>Hanya guru</b> (tidak terlihat siswa). Word .doc, PowerPoint, dan ZIP hanya bisa berupa unduhan. Untuk video besar, gunakan tautan di bawah. Penyimpanan di Drive: Dokumen File LMS › nama grup kelas › judul materi.')}<label>Tautan video / materi (maksimal 10)</label><div id="p_links"></div><button type="button" class="btn ghost sm" id="p_addlink">+ Tambah Link</button><small class="mut">Tautan YouTube, Vimeo, Google Drive / Docs / Sheets / Slides, atau alamat langsung file video (.mp4, .webm) dan audio akan diputar di dalam LMS. Tautan lain dibuka di tab baru. File Drive harus dibagikan “siapa pun yang memiliki tautan”.</small>` : '')
     + (tipe === 'materi' ? `<label class="chk"><input type="checkbox" id="p_private" ${x && x.GuruOnly ? 'checked' : ''}><span>Hanya guru / pegawai yang dapat melihat materi ini</span></label>` : '')
     + `<label class="chk"><input type="checkbox" id="p_ct" ${x && x.Catat ? 'checked' : ''}><span>Hitung sebagai pertemuan di <b>Catatan Progres</b> (daring / asinkron)</span></label><small class="mut" style="display:block;margin-top:4px">Siswa yang sudah menyelesaikan item ini (menandai materi selesai, mengumpulkan tugas, atau menyelesaikan asesmen) dapat dicatat otomatis sebagai pertemuan daring lewat tombol “Catat ke Catatan Progres”. Kosongkan untuk item latihan tambahan.</small>`;
   modal((x ? 'Ubah ' : 'Tambah ') + T[1].toLowerCase(), body, async () => {
     if (chk) chk();
+    const meeting = Number(val('p_meeting'));
+    if (!meetings.some(m => Number(m.Pertemuan) === meeting)) throw new Error('Pilih pertemuan yang valid.');
+    const linkValues = tipe !== 'asesmen' ? Array.from($('#p_links').querySelectorAll('input')).map(input => input.value.trim()).filter(Boolean) : [];
+    if (linkValues.length > 10) throw new Error('Maksimal 10 tautan.');
     await api('savePost', {ID: x && x.ID, KelasID: KL.id, Tipe: tipe, Kode: tipe === 'asesmen' ? val('p_kd') : '', Judul: val('p_jd'), Isi: $('#p_is').value, Tenggat: tipe === 'tugas' ? val('p_tg') : '', Maks: tipe === 'tugas' ? val('p_mx') : '',
-      Files: arr.map(f => ({id: f.id, mode: f.mode})), Links: tipe !== 'asesmen' ? $('#p_ln').value : '', Catat: $('#p_ct').checked, GuruOnly: tipe === 'materi' && $('#p_private').checked});
+      Files: arr.map(f => ({id: f.id, mode: f.mode})), Links: linkValues.join('\n'), Catat: $('#p_ct').checked, GuruOnly: tipe === 'materi' && $('#p_private').checked, Pertemuan: meeting});
     toast('Tersimpan'); await kelasDetail();
   });
   const chk = tipe !== 'asesmen' ? uploader('p_up', arr, () => ({KelasID: KL.id, Judul: val('p_jd')}), 15, 10, true) : null;
+  if (tipe !== 'asesmen') {
+    const input = $('#p_up').querySelector('input[type="file"]');
+    input.setAttribute('aria-label', 'Pilih file dokumen');
+    const addFile = document.createElement('button'); addFile.type = 'button'; addFile.className = 'btn ghost sm'; addFile.textContent = '+ Tambah File';
+    input.before(addFile); input.hidden = true; addFile.onclick = () => input.click();
+    const list = $('#p_links'), addLink = value => {
+      const row = document.createElement('div'); row.className = 'row';
+      const field = document.createElement('input'); field.type = 'url'; field.placeholder = 'https://...'; field.setAttribute('aria-label', 'Tautan video atau materi'); field.value = value || '';
+      const remove = document.createElement('button'); remove.type = 'button'; remove.className = 'btn del sm'; remove.textContent = 'Hapus'; remove.setAttribute('aria-label', 'Hapus tautan'); remove.onclick = () => { row.remove(); $('#p_addlink').disabled = list.children.length >= 10; $('#p_addlink').focus(); };
+      row.append(field, remove); list.appendChild(row); $('#p_addlink').disabled = list.children.length >= 10; return field;
+    };
+    links.filter(Boolean).forEach(link => addLink(link));
+    $('#p_addlink').onclick = () => { if (list.children.length < 10) addLink('').focus(); };
+  }
 }
 
 function tugasForm(x) {
