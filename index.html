@@ -52,6 +52,11 @@ input:focus,select:focus,textarea:focus{border-color:var(--royal);outline:none}
 .btn.del{background:#fdeeee;color:var(--bad)}.btn.del:hover{background:#fadada}
 .btn:disabled{opacity:.6;cursor:wait}
 .err{color:var(--bad);font-size:13px;margin-top:12px;min-height:18px}
+/* Penilaian progres LMS */
+.lprog.modal{max-width:900px;width:min(900px,96vw)}
+.lprog-head{padding:16px;border-radius:12px;background:linear-gradient(120deg,var(--mist),#fff8e8);margin-bottom:14px}.lprog-head p{margin:4px 0 0;color:var(--mute)}
+.lprog-layout{display:grid;grid-template-columns:minmax(180px,240px) minmax(0,1fr);gap:14px;max-height:60vh;overflow:auto}.lprog-list{display:flex;flex-direction:column;gap:6px}.lprog-student{width:100%;text-align:left;border:1px solid var(--line);border-radius:10px;background:#fff;padding:10px;cursor:pointer}.lprog-student.on{border-color:var(--royal);background:var(--mist)}.lprog-student:disabled{opacity:.55;cursor:not-allowed}.lprog-student small{display:block;color:var(--mute)}.lprog-form{min-width:0;border:1px solid var(--line);border-radius:12px;padding:16px}.lprog-form h3{margin:0}.lprog-form h4{margin:18px 0 6px}.lprog-form .item{padding:8px 0}.lprog-form .sc{flex-wrap:wrap}.lprog-status{color:var(--mute);font-size:13px;margin:6px 0}.lprog-error{color:var(--bad);font-size:13px;white-space:pre-wrap}.lprog-form textarea{resize:vertical}.lprog-form .btn{margin-top:12px}
+@media(max-width:650px){.lprog-layout{grid-template-columns:1fr;max-height:65vh}.lprog-list{max-height:180px;overflow:auto}.lprog-form{padding:12px}}
 /* shell */
 #app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
 aside{background:#fff;border-right:1px solid var(--line);color:var(--ink);padding:22px 14px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
@@ -404,7 +409,12 @@ a.btn{display:inline-block;text-align:center;text-decoration:none}
 .tpp{margin:10px auto 0;background:#fff;border:1px solid var(--line);box-shadow:0 6px 18px rgba(18,49,92,.14);padding:14px;font:12px/1.4 "Courier New",monospace;color:#000;text-align:left;max-width:none;box-sizing:content-box}
 .sr .gr input{width:auto;flex:1 1 160px}.sr .gr .gn{flex:0 0 150px}.sr .gr .btn{margin:0;width:auto}
 @media print{#login,#app,.ov,.xroot,#toast{zoom:1!important}.shell{margin-left:0!important}#app.sbh main{padding-left:0!important}#sbopen{display:none!important}}
-.timeline-meeting{border-left:3px solid var(--primary,#5375cb);margin:14px 0;padding:4px 0 4px 16px}.timeline-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.timeline-head h3{margin:4px 0}.timeline-actions,.timeline-post-actions{display:flex;gap:6px;flex-wrap:wrap;align-items:center}.timeline-post-actions{margin:8px 0}.timeline-post-actions select{max-width:240px}.timeline-locked{padding:14px;background:#f5f6fa;border-radius:8px}
+.class-progress>div:first-child{display:flex;justify-content:space-between;gap:12px;font-size:13px;color:var(--mute)}.class-progress b{color:var(--royal)}.class-progress .bar{margin:7px 0 0}.meeting-room{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff;margin:12px 0}.meeting-room span{font-weight:700}.meeting-room .btn{margin:0;width:auto}
+.timeline-meeting{margin:18px 0;padding:20px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,#fff,var(--mist));box-shadow:0 6px 22px rgba(18,49,92,.06);min-width:0}
+.timeline-head{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:0 0 15px;margin-bottom:16px;border-bottom:1px solid var(--line)}.timeline-head h3{margin:0 0 8px;font-size:19px}.timeline-head .tag{margin:2px 3px 2px 0}
+.timeline-actions,.timeline-post-actions{display:flex;gap:6px;flex-wrap:wrap;align-items:center}.timeline-post-actions{margin:12px 0 6px}.timeline-post-actions select{width:auto;max-width:min(240px,100%);padding:6px 10px;font-size:13px}.timeline-meeting .pst{margin-bottom:12px;box-shadow:0 3px 12px rgba(18,49,92,.05)}.timeline-meeting .pst:last-child{margin-bottom:0}.timeline-locked{padding:16px;background:#fff;border:1px dashed var(--line);border-radius:10px;color:var(--mute)}
+.pdfv{height:297mm;max-height:none;overflow:auto;overscroll-behavior:contain;align-items:center}.pdfp{max-width:210mm;flex:none}.ifbody .pdfv{overflow:auto}.ifbody .docf,.fvb .docf{display:block;height:297mm;min-height:0;max-height:none}.fvb:has(>.pdfv),.fvb:has(>.docf){max-height:none;overflow:visible}.ifbody iframe:not(.inline-video):not(.docf){height:297mm;min-height:0}
+@media(max-width:700px){.timeline-meeting{padding:14px;margin:12px 0;border-radius:14px}.timeline-head{align-items:flex-start}.timeline-actions{width:100%}.timeline-meeting .pst{padding:14px}.pdfv,.ifbody .docf,.fvb .docf,.ifbody iframe:not(.inline-video):not(.docf){height:min(297mm,75vh)}}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
 </head>
@@ -471,14 +481,29 @@ const call = (fn, ...a) => GAS ? new Promise((ok, no) => {
       .then(t => { let r; try { r = JSON.parse(t); } catch (e) { throw new Error('Server mengembalikan halaman, bukan data. Deploy ulang Code.gs terbaru (Manage deployments > Edit > New version) dengan akses "Anyone".'); }
         if (r && r.ok) return r.data; throw new Error((r && r.error) || 'Kesalahan server'); });
   });
-const RC = new Map(), RTTL = {users: 30000, pakets: 30000, langganan: 15000, asesmen: 20000, keuangan: 10000}, MUT = /^(save|del|set|reset|stop|nilai|exam)/;
+const RC = new Map(), RTTL = {pakets: 10000}, READS = new Set(['dashboard', 'users', 'progress', 'results', 'asesmen', 'asesmenDetail', 'pakets', 'langganan', 'myAsesmen', 'monitor', 'hasil', 'lapProgram', 'foto', 'ice', 'keuangan', 'report', 'settings', 'noteFolders', 'notes', 'kelasList', 'kelasView', 'kelasSubs', 'comments', 'fileGet']);
+let navVersion = 0;
+const staleNavigation = () => Object.assign(new Error('Navigasi telah berubah.'), {staleNavigation: true});
 const api = (a, p) => {
-  const ttl = RTTL[a], key = ttl ? a + JSON.stringify(p || {}) : '';
-  if (ttl) { const c = RC.get(key); if (c && Date.now() - c.t < ttl) return c.p; }
-  const mut = MUT.test(a); if (mut) RC.clear();
-  const pr = call('api', a, S.token, p || {}).then(x => { if (mut) RC.clear(); return x; }).catch(e => { if (ttl) RC.delete(key); if (/Sesi berakhir/.test(e.message) && S.token) doLogout('Sesi berakhir. Silakan login kembali.'); throw e; });
-  if (ttl) RC.set(key, {t: Date.now(), p: pr});
-  return pr;
+  const token = S.token, nav = navVersion, ttl = RTTL[a], key = ttl ? a + JSON.stringify(p || {}) : '';
+  let c = ttl && RC.get(key), pr;
+  if (c && c.token === token && (!c.t || Date.now() - c.t < ttl)) pr = c.p;
+  else {
+    const mut = !READS.has(a);
+    if (mut) RC.clear();
+    c = ttl ? {token, t: 0} : null;
+    pr = call('api', a, token, p || {}).then(x => {
+      if (mut) RC.clear();
+      if (c && RC.get(key) === c) c.t = Date.now();
+      return x;
+    }).catch(e => {
+      if (c && RC.get(key) === c) RC.delete(key);
+      if (/Sesi berakhir/.test(e.message) && token && S.token === token) doLogout('Sesi berakhir. Silakan login kembali.');
+      throw e;
+    });
+    if (c) { c.p = pr; RC.set(key, c); }
+  }
+  return pr.then(x => { if (token !== S.token || (READS.has(a) && nav !== navVersion)) throw staleNavigation(); return x; }, e => { if (token !== S.token || (READS.has(a) && nav !== navVersion)) throw staleNavigation(); throw e; });
 };
 addEventListener('error', e => { const d = $('#lerr'); if (d && !$('#login').classList.contains('hide')) d.textContent = 'Kesalahan aplikasi: ' + e.message; });
 const JENJANG = ['TK–SD kelas 2', 'SD kelas 3–4', 'SD kelas 5–6', 'SMP', 'SMA'];
@@ -491,7 +516,7 @@ function toast(m, bad) {
   const t = document.createElement('div'); t.id = 'toast'; t.textContent = m; if (bad) t.className = 'bad';
   document.body.appendChild(t); setTimeout(() => t.remove(), 3200);
 }
-const fail = e => toast(e.message, true);
+const fail = e => { if (!e.staleNavigation) toast(e.message, true); };
 const kat = s => s >= 90 ? 'Excellent' : s >= 80 ? 'Very Good' : s >= 70 ? 'Good' : s >= 60 ? 'Developing' : 'Needs Improvement';
 const katTag = s => `<span class="tag ${s >= 80 ? 'g' : s >= 60 ? 'y' : 'r'}">${kat(s)}</span>`;
 const stTag = s => `<span class="tag ${s === 'Selesai' ? 'g' : s === 'Menunggu termin' ? 'y' : s === 'Nonaktif' ? 'r' : ''}">${s}</span>`;
@@ -513,6 +538,24 @@ function modal(title, body, onSave, label) {
   return o;
 }
 
+function askDialog(message, initial) {
+  return new Promise(resolve => {
+    const inputMode = initial !== undefined, previous = document.activeElement;
+    const d = document.createElement('dialog');
+    d.style.cssText = 'border:0;border-radius:20px;padding:0;max-width:min(440px,calc(100vw - 32px));width:100%;box-shadow:0 24px 80px #17255455;color:#172554';
+    d.innerHTML = `<form method="dialog" style="padding:26px"><div style="font-size:28px;margin-bottom:10px">${inputMode ? '✏️' : '✨'}</div><h3 style="margin:0 0 10px">${inputMode ? 'Masukkan informasi' : 'Konfirmasi'}</h3><p style="white-space:pre-wrap;line-height:1.55;color:#475569;margin:0 0 18px"></p>${inputMode ? '<input aria-label="Jawaban" style="width:100%;box-sizing:border-box;margin-bottom:18px">' : ''}<div style="display:flex;justify-content:flex-end;gap:10px"><button type="button" class="btn ghost" data-cancel>Batal</button><button type="submit" class="btn">${inputMode ? 'OK' : 'Lanjutkan'}</button></div></form>`;
+    d.querySelector('p').textContent = message;
+    const input = d.querySelector('input'); if (input) input.value = initial;
+    let result = inputMode ? null : false;
+    d.querySelector('[data-cancel]').onclick = () => d.close();
+    d.querySelector('form').onsubmit = e => { e.preventDefault(); result = inputMode ? input.value : true; d.close(); };
+    d.addEventListener('close', () => { d.remove(); if (previous && previous.isConnected) previous.focus(); resolve(result); }, {once: true});
+    document.body.appendChild(d); d.showModal(); (input || d.querySelector('[data-cancel]')).focus(); if (input) input.select();
+  });
+}
+const askConfirm = message => askDialog(message);
+const askInput = (message, initial = '') => askDialog(message, initial);
+
 /* ---------- Login ---------- */
 async function doLogin() {
   const b = $('#lbtn'); b.disabled = true; b.textContent = 'Memeriksa...'; $('#lerr').textContent = '';
@@ -525,6 +568,7 @@ async function doLogin() {
 $('#lbtn').onclick = doLogin;
 $('#lp').onkeydown = e => { if (e.key === 'Enter') doLogin(); };
 function doLogout(msg) {
+  zoomLeave();
   const t = S.token; S.token = null; S.user = null; S.view = 'dash'; S.busy = false; clearInterval(S.tm); RC.clear();
   Object.assign(NOTES, {folder: '', id: '', folders: [], list: [], dirty: false}); KL.id = null; KL.D = null; Object.keys(FREG).forEach(k => delete FREG[k]);
   if (t) call('logout', t).catch(() => {});
@@ -534,7 +578,7 @@ function doLogout(msg) {
   $('#app').classList.add('hide'); $('#login').classList.remove('hide');
   $('#lu').value = ''; $('#lp').value = ''; $('#lerr').textContent = msg || ''; window.scrollTo(0, 0); $('#lu').focus();
 }
-$('#out').onclick = () => { if (NOTES.dirty && !confirm('Perubahan catatan belum disimpan. Keluar tanpa menyimpan?')) return; doLogout(); };
+$('#out').onclick = async () => { if (NOTES.dirty && !await askConfirm('Perubahan catatan belum disimpan. Keluar tanpa menyimpan?')) return; doLogout(); };
 CFG.then(() => { if (!GAS && !API) $('#setup').classList.remove('hide'); });
 $('#apis').onclick = () => { const v = $('#apiu').value.trim(); if (!/^https:\/\/script\.google\.com\/macros\/(a\/[^\/]+\/)?s\/[\w-]+\/exec$/.test(v)) return toast('URL Web App tidak valid. Harus berakhiran /exec.', true); try { localStorage.setItem('ca_api', v); localStorage.setItem('ca_api_o', v); } catch (e) {} location.reload(); };
 $('#burger').onclick = () => { const o = $('#side').classList.toggle('open'); $('#scrim').classList.toggle('hide', !o); };
@@ -564,19 +608,21 @@ function start() {
   $('#nav').innerHTML = items.map(i => `<button data-v="${i[0]}">${i[1]} ${i[2]}</button>`).join('');
   $('#nav').onclick = e => { const v = e.target.closest('button')?.dataset.v; if (v) go(v); };
   go('dash');
-  if (S.user.Role !== 'siswa') setTimeout(() => ['pakets', 'langganan', 'users'].forEach(a => api(a).catch(() => {})), 900);
+  if (S.user.Role !== 'siswa') { const token = S.token; setTimeout(() => { if (S.token === token) api('pakets').catch(() => {}); }, 900); }
 }
-function go(v) {
-  if (NOTES.dirty && !confirm('Perubahan catatan belum disimpan. Lanjutkan tanpa menyimpan?')) return;
+async function go(v) {
+  if (NOTES.dirty && !await askConfirm('Perubahan catatan belum disimpan. Lanjutkan tanpa menyimpan?')) return;
   if (v === 'settings' && S.user.Role !== 'admin') v = 'dash';
+  if (S.busy) { if (!await askConfirm('Ujian sedang berlangsung. Jika keluar, ujian dihentikan dan jawaban tidak tersimpan. Tetap keluar?')) return; S.busy = false; }
+  await zoomLeave();
   if (v === 'kelas') KL.id = null;
-  if (S.busy) { if (!confirm('Ujian sedang berlangsung. Jika keluar, ujian dihentikan dan jawaban tidak tersimpan. Tetap keluar?')) return; S.busy = false; }
   NOTES.dirty = false;
+  navVersion++;
   clearInterval(S.tm); S.view = v; $('#side').classList.remove('open'); $('#scrim').classList.add('hide');
   document.querySelectorAll('#nav button').forEach(b => b.classList.toggle('on', b.dataset.v === v));
   $('#main').innerHTML = '<div class="empty"><span class="spn"></span> Memuat...</div>';
   const f = {dash: S.user.Role === 'siswa' ? vStudentDash : vStaffDash, users: vUsers, progress: vProgress, results: vResults, exam: vExam, paket: vPaket, keuangan: vKeuangan, aktif: vAktif, report: vReport, settings: vSettings, asesmen: vAsesmen, catprog: vCatProg, kelas: vKelas, lap: vLap, pantau: vPantau, lpp: vLpp, notes: vNotes}[v];
-  f().catch(e => { $('#main').innerHTML = `<div class="empty">${esc(e.message)}</div>`; });
+  f().catch(e => { if (e.staleNavigation || S.view !== v) return; $('#main').innerHTML = `<div class="empty">${esc(e.message)}</div>`; });
 }
 const head = (t, sub, btn) => `<div class="top"><div><h2>${t}</h2><p>${sub || ''}</p></div>${btn || ''}</div>`;
 const resRows = r => r.length ? r.map(x => `<tr><td>${esc(x.Tanggal)}</td>${S.user.Role !== 'siswa' ? `<td>${esc(x.Nama)}</td>` : ''}<td>${esc(x.Judul || x.Program)}</td><td><b>${x.Skor}</b>${Number(x.Pending) > 0 ? ' <span class="tag y">sementara</span>' : ''}</td><td>${katTag(x.Skor)}</td><td>${x.Benar}/${x.Total}</td></tr>`).join('') : '<tr><td colspan="6" class="empty">Belum ada hasil ujian.</td></tr>';
@@ -622,7 +668,7 @@ async function vUsers(filter) {
   document.querySelectorAll('[data-e]').forEach(b => b.onclick = () => userForm(list[b.dataset.e], filter, all, pks));
   document.querySelectorAll('[data-d]').forEach(b => b.onclick = async () => {
     const u = list[b.dataset.d];
-    if (!confirm(`Hapus ${u.Nama}? Data login akan dihapus.`)) return;
+    if (!await askConfirm(`Hapus ${u.Nama}? Data login akan dihapus.`)) return;
     try { await api('delUser', {Username: u.Username}); toast('Pengguna dihapus'); vUsers(filter); } catch (e) { fail(e); }
   });
 }
@@ -748,20 +794,20 @@ function notesDraw(root) {
   root.onmousedown = e => { if (e.target.closest('[data-cmd],[data-nact="highlight"],[data-nact="link"],[data-nact="table"]')) e.preventDefault(); };
   root.onclick = async e => {
     const folder = e.target.closest('[data-folder]'), note = e.target.closest('[data-note]'), cmd = e.target.closest('[data-cmd]'), act = e.target.closest('[data-nact]');
-    if ((folder || note || (act && ['new','folder','delfolder','delete'].includes(act.dataset.nact))) && NOTES.dirty && !confirm('Perubahan catatan belum disimpan. Lanjutkan tanpa menyimpan?')) return;
+    if ((folder || note || (act && ['new','folder','delfolder','delete'].includes(act.dataset.nact))) && NOTES.dirty && !await askConfirm('Perubahan catatan belum disimpan. Lanjutkan tanpa menyimpan?')) return;
     try {
       if (folder) { NOTES.dirty = false; NOTES.folder = folder.dataset.folder; NOTES.id = ''; return notesDraw(root); }
       if (note) { NOTES.dirty = false; NOTES.id = note.dataset.note; return notesDraw(root); }
       if (cmd && editor) { restore(); document.execCommand(cmd.dataset.cmd, false, null); NOTES.dirty = true; return; }
       if (!act) return; const a = act.dataset.nact;
-      if (a === 'folder') { const name = prompt('Nama folder:'); if (name && name.trim()) { await api('saveNoteFolder', {Nama: name.trim()}); NOTES.dirty = false; await notesLoad(root); } }
-      else if (a === 'delfolder') { if (confirm('Hapus folder ini? Catatan di dalamnya akan dipindahkan ke tanpa folder.')) { await api('delNoteFolder', {ID: NOTES.folder}); NOTES.folder = ''; NOTES.dirty = false; await notesLoad(root); } }
+      if (a === 'folder') { const name = await askInput('Nama folder:'); if (name && name.trim()) { await api('saveNoteFolder', {Nama: name.trim()}); NOTES.dirty = false; await notesLoad(root); } }
+      else if (a === 'delfolder') { if (await askConfirm('Hapus folder ini? Catatan di dalamnya akan dipindahkan ke tanpa folder.')) { await api('delNoteFolder', {ID: NOTES.folder}); NOTES.folder = ''; NOTES.dirty = false; await notesLoad(root); } }
       else if (a === 'new') { const n = await api('saveNote', {FolderID: NOTES.folder, Title: 'Catatan baru', Content: ''}); NOTES.id = typeof n === 'string' ? n : n.ID; NOTES.dirty = false; await notesLoad(root); }
-      else if (a === 'delete') { if (confirm('Hapus catatan ini?')) { await api('delNote', {ID: NOTES.id}); NOTES.id = ''; NOTES.dirty = false; await notesLoad(root); } }
+      else if (a === 'delete') { if (await askConfirm('Hapus catatan ini?')) { await api('delNote', {ID: NOTES.id}); NOTES.id = ''; NOTES.dirty = false; await notesLoad(root); } }
       else if (a === 'save') { await api('saveNote', {ID: NOTES.id, FolderID: root.querySelector('[data-n-folder]').value, Title: root.querySelector('[data-n-title]').value.trim() || 'Tanpa judul', Content: notesSafeHTML(editor.innerHTML)}); NOTES.dirty = false; await notesLoad(root); toast('Catatan tersimpan'); }
       else if (a === 'highlight') { restore(); document.execCommand('hiliteColor', false, '#fff19c'); NOTES.dirty = true; }
-      else if (a === 'link') { const u = prompt('Masukkan URL lengkap (https:// atau http://):'); if (u && /^https?:\/\//i.test(u)) { restore(); document.execCommand('createLink', false, u); NOTES.dirty = true; } else if (u) toast('Gunakan URL yang dimulai dengan https:// atau http://', true); }
-      else if (a === 'table') { const rows = Math.min(10, Math.max(1, Number(prompt('Jumlah baris (1–10):', '3')) || 0)), cols = Math.min(8, Math.max(1, Number(prompt('Jumlah kolom (1–8):', '3')) || 0)); restore(); document.execCommand('insertHTML', false, '<table><tbody>' + '<tr>' .concat('<td>&nbsp;</td>'.repeat(cols), '</tr>').repeat(rows) + '</tbody></table><p><br></p>'); NOTES.dirty = true; }
+      else if (a === 'link') { const u = await askInput('Masukkan URL lengkap (https:// atau http://):'); if (u && /^https?:\/\//i.test(u)) { restore(); document.execCommand('createLink', false, u); NOTES.dirty = true; } else if (u) toast('Gunakan URL yang dimulai dengan https:// atau http://', true); }
+      else if (a === 'table') { const r = await askInput('Jumlah baris (1–10):', '3'); if (r === null) return; const c = await askInput('Jumlah kolom (1–8):', '3'); if (c === null) return; const rows = Math.min(10, Math.max(1, Number(r) || 0)), cols = Math.min(8, Math.max(1, Number(c) || 0)); restore(); document.execCommand('insertHTML', false, '<table><tbody>' + '<tr>' .concat('<td>&nbsp;</td>'.repeat(cols), '</tr>').repeat(rows) + '</tbody></table><p><br></p>'); NOTES.dirty = true; }
     } catch (err) { fail(err); }
   };
   if (editor) editor.addEventListener('paste', e => { e.preventDefault(); const text = e.clipboardData ? e.clipboardData.getData('text/plain') : ''; if (!text) return; if (/^https?:\/\/\S+$/i.test(text.trim())) document.execCommand('insertHTML', false, `<a href="${esc(text.trim())}" target="_blank" rel="noopener noreferrer">${esc(text.trim())}</a>`); else document.execCommand('insertText', false, text); NOTES.dirty = true; remember(); });
@@ -777,7 +823,7 @@ function notesDraw(root) {
 function notesShortcut() {
   const o = viewModal(S.user.Role === 'siswa' ? 'Catatan Siswa' : 'Catatan Guru', '<div id="notes-pop"></div>');
   o.querySelector('.modal').style.maxWidth = '1100px';
-  const close = o.querySelector('#vmc'); close.onclick = () => { if (NOTES.dirty && !confirm('Perubahan catatan belum disimpan. Tutup tanpa menyimpan?')) return; NOTES.dirty = false; o.remove(); };
+  const close = o.querySelector('#vmc'); close.onclick = async () => { if (NOTES.dirty && !await askConfirm('Perubahan catatan belum disimpan. Tutup tanpa menyimpan?')) return; NOTES.dirty = false; o.remove(); };
   o.addEventListener('mousedown', e => { if (e.target === o) { e.stopImmediatePropagation(); close.click(); } }, true);
   notesLoad(o.querySelector('#notes-pop')).catch(fail);
 }
@@ -845,7 +891,7 @@ async function renderPdf(body, u8) {
     if (!body.isConnected || closed) { cleanup(); return; }
     const n = Math.min(doc.numPages, 300);
     body.innerHTML = '<div class="pdfv"></div>'; const box = body.firstChild;
-    io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { io.unobserve(en.target); const render = en.target._r; delete en.target._r; if (render) render().catch(() => {}); } }), {root: body.closest('.inlinefile') ? null : body, rootMargin: '700px 0px'});
+    io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { io.unobserve(en.target); const render = en.target._r; delete en.target._r; if (render) render().catch(() => {}); } }), {root: box, rootMargin: '700px 0px'});
     for (let i = 1; i <= n; i++) {
       const pg = await doc.getPage(i);
       if (closed || !body.isConnected) { cleanup(); return; }
@@ -861,17 +907,8 @@ async function renderDocx(body, u8) {
   await loadScript(CDN.docx);
   if (!window.mammoth) throw new Error('Pustaka Word tidak tersedia.');
   const r = await window.mammoth.convertToHtml({arrayBuffer: u8.buffer});
-  if (body.closest('.inlinefile')) {
-    if (!body.isConnected) return;
-    const frame = document.createElement('iframe'); frame.className = 'docf'; frame.setAttribute('sandbox', 'allow-scripts');
-    const token = Array.from(crypto.getRandomValues(new Uint32Array(4)), n => n.toString(16).padStart(8, '0')).join('');
-    const onMessage = e => { if (e.source !== frame.contentWindow || !e.data || e.data.type !== 'doc-height' || e.data.token !== token) return; frame.style.height = Math.max(Math.round(innerHeight * 0.8), Math.min  (100000, Number(e.data.height) || 0)) + 'px'; };
-    window.addEventListener('message', onMessage);
-    const content = (r.value || '<p>(Dokumen kosong)</p>').replace(/<script\b[^>]*>[\s\S]*?<\/script\s*>/gi, '');
-    frame.srcdoc = '<meta http-equiv="Content-Security-Policy" content="default-src \'none\'; img-src data:; style-src \'unsafe-inline\'; script-src \'nonce-' + token + '\'">' + DOCCSS + content + '<script nonce="' + token + '">new ResizeObserver(function(){parent.postMessage({type:"doc-height",token:"' + token + '",height:document.body.scrollHeight+36},"*")}).observe(document.body)<\/script>';
-    body.replaceChildren(frame);
-    new MutationObserver((_, observer) => { if (!frame.isConnected) { window.removeEventListener('message', onMessage); observer.disconnect(); } }).observe(document.body, {childList: true, subtree: true});
-  } else sandboxFrame(body, DOCCSS + (r.value || '<p>(Dokumen kosong)</p>'));
+  if (!body.isConnected) return;
+  sandboxFrame(body, DOCCSS + (r.value || '<p>(Dokumen kosong)</p>'));
 }
 async function renderXls(body, u8) {
   await loadScript(CDN.xls);
@@ -984,21 +1021,21 @@ function uploader(id, arr, extra, maxMB, max, modes) {
 
 async function vKelas() { await (KL.id ? kelasDetail() : kelasHome()); }
 const kelasRefresh = () => (KL.id ? kelasDetail() : kelasHome()).catch(fail);
-function openKelas(id) { KL.id = id; KL.tab = 'semua'; $('#main').innerHTML = '<div class="empty"><span class="spn"></span> Memuat...</div>'; kelasDetail().catch(e => { KL.id = null; $('#main').innerHTML = `<div class="empty">${esc(e.message)}</div>`; }); }
+function openKelas(id) { KL.id = id; KL.tab = 'semua'; $('#main').innerHTML = '<div class="empty"><span class="spn"></span> Memuat...</div>'; kelasDetail().catch(e => { if (e.staleNavigation || S.view !== 'kelas' || KL.id !== id) return; KL.id = null; $('#main').innerHTML = `<div class="empty">${esc(e.message)}</div>`; }); }
 
 async function kelasHome() {
   const staff = S.user.Role !== 'siswa', adm = S.user.Role === 'admin', list = await api('kelasList');
   const card = k => `<div class="kc" data-k="${esc(k.ID)}"><div class="kmeta"><span class="tag">${esc(k.Program)}</span>${k.Jenjang ? `<span class="tag">${esc(k.Jenjang)}</span>` : ''}${k.Kelompok ? `<span class="tag">${esc(k.Kelompok)}</span>` : ''}${k.Status === 'Arsip' ? '<span class="tag y">Diarsipkan</span>' : ''}</div>
     <h3>${esc(k.Nama)}</h3>${k.unread ? `<span class="tag r">${esc(k.unread)} belum dibaca</span>` : ''}${k.bookmarked ? '<span class="tag">🔖 Ada materi ditandai</span>' : ''}<small>Paket ${esc(k.PaketNama)} • Pengajar: ${esc(k.Pengajar)}</small>
-    <div class="kmeta"><span class="tag g">📖 ${k.nMateri} materi</span><span class="tag y">📝 ${k.nTugas} tugas</span><span class="tag">✏️ ${k.nAsesmen} asesmen</span></div>
+    <div class="class-progress"><div><span>Progres pertemuan</span><b>${Number(k.persen) || 0}%</b></div><div class="bar"><i style="width:${Math.max(0, Math.min(100, Number(k.persen) || 0))}%"></i></div></div><div class="kmeta"><span class="tag g">📖 ${k.nMateri} materi</span><span class="tag y">📝 ${k.nTugas} tugas</span><span class="tag">✏️ ${k.nAsesmen} asesmen</span></div>
     ${staff ? `<small>👥 ${k.nSiswa} siswa</small><div class="kact"><button class="btn sm" data-a="open">Buka</button><button class="btn ghost sm" data-a="ed">Ubah</button>${adm ? '<button class="btn del sm" data-a="del">Hapus</button>' : ''}</div>` : k.belum ? `<span class="tag r">${k.belum} tugas belum dikumpulkan</span>` : '<small>Semua tugas sudah dikumpulkan 👍</small>'}</div>`;
   $('#main').innerHTML = head('Grup Kelas - LMS', staff ? 'Kelas daring per program paket: bagikan materi, beri tugas, dan hubungkan dengan asesmen.' : 'Materi, tugas, dan asesmen dari tutor Anda.', staff ? '<button class="btn" id="kadd">+ Buat grup kelas</button>' : '') +
     (list.length ? `<div class="kg">${list.map(card).join('')}</div>` : `<div class="panel empty">${staff ? 'Belum ada grup kelas. Klik “Buat grup kelas” lalu pilih program paket. Siswa yang memiliki paket tersebut otomatis menjadi anggota.' : 'Anda belum tergabung di grup kelas. Grup kelas muncul setelah tutor membuatnya untuk paket yang Anda ikuti.'}</div>`);
   if (staff) $('#kadd').onclick = () => kelasForm().catch(fail);
-  document.querySelectorAll('.kc').forEach(c => c.onclick = e => {
+  document.querySelectorAll('.kc').forEach(c => c.onclick = async e => {
     const b = e.target.closest('button'), k = list.find(x => x.ID === c.dataset.k), a = b && b.dataset.a;
     if (a === 'ed') return kelasForm(k).catch(fail);
-    if (a === 'del') { if (!confirm(`Hapus grup kelas "${k.Nama}" beserta seluruh materi, tugas, dan pengumpulan siswa? Tindakan ini tidak dapat dibatalkan. (Pertemuan daring yang sudah tercatat di Catatan Progres tetap ada.)`)) return; return api('delKelas', {ID: k.ID}).then(() => { toast('Grup kelas dihapus'); return kelasHome(); }).catch(fail); }
+    if (a === 'del') { if (!await askConfirm(`Hapus grup kelas "${k.Nama}" beserta seluruh materi, tugas, dan pengumpulan siswa? Tindakan ini tidak dapat dibatalkan. (Pertemuan daring yang sudah tercatat di Catatan Progres tetap ada.)`)) return; return api('delKelas', {ID: k.ID}).then(() => { toast('Grup kelas dihapus'); return kelasHome(); }).catch(fail); }
     openKelas(k.ID);
   });
 }
@@ -1014,7 +1051,7 @@ async function kelasForm(k) {
     async () => { await api('saveKelas', {ID: k && k.ID, PaketID: val('k_pk'), Nama: val('k_nm'), Kelompok: val('k_kg'), Pengajar: val('k_pg'), Status: val('k_st'), Deskripsi: $('#k_ds').value}); toast('Grup kelas tersimpan'); await kelasRefresh(); });
 }
 
-async function kelasDetail() { KL.D = await api('kelasView', {ID: KL.id}); drawKelas(); api('markClassRead', {ID: KL.id}).catch(fail); }
+async function kelasDetail() { await zoomLeave(); KL.D = await api('kelasView', {ID: KL.id}); drawKelas(); api('markClassRead', {ID: KL.id}).catch(fail); }
 function postCard(x) {
   const staff = S.user.Role !== 'siswa', T = TIPE[x.Tipe], s = x.sub, late = x.Tenggat && ymd() > x.Tenggat;
   let extra = '';
@@ -1037,11 +1074,75 @@ function postCard(x) {
     ${staff ? '<div class="act"><button class="btn ghost sm" data-a="ed">Ubah</button><button class="btn del sm" data-a="del">Hapus</button></div>' : ''}</div>
     ${x.GuruOnly ? '<span class="tag y">🔒 Hanya guru</span>' : ''}${KL.D && KL.D.bookmarkPostID === x.ID ? ' <span class="tag">🔖 Materi terakhir diberikan</span>' : ''}${x.Isi ? `<div class="tx">${autolink(x.Isi)}</div>` : ''}${filesHtml(x.Files)}${linksHtml(x.Links)}${extra}<div class="cm"><button class="btn ghost sm" data-a="comments">💬 Komentar (${Number(x.nKomentar) || 0})</button>${x.unread ? `<span class="cmnew"> ${Number(x.unread)} aktivitas baru</span>` : ''}<div class="cmitems"></div></div></div>`;
 }
+let zoomClient = null, zoomGeneration = 0, zoomLoadPromise = null;
+async function zoomLeave() {
+  ++zoomGeneration;
+  const client = zoomClient; zoomClient = null;
+  if (client) { try { await client.leaveMeeting(); } catch (e) {} try { window.ZoomMtgEmbedded.destroyClient(); } catch (e) {} }
+}
+function zoomLoad() {
+  if (window.ZoomMtgEmbedded) return Promise.resolve(window.ZoomMtgEmbedded);
+  if (!zoomLoadPromise) zoomLoadPromise = (async () => {
+    const version = '6.10.0';
+    const load = src => new Promise((resolve, reject) => { const s = document.createElement('script'); s.src = src; s.onload = resolve; s.onerror = () => reject(new Error('Zoom SDK gagal dimuat. Periksa koneksi atau kebijakan hosting.')); document.head.appendChild(s); });
+    for (const name of ['react','react-dom','redux','redux-thunk','react-redux','lodash']) await load('https://source.zoom.us/' + version + '/lib/vendor/' + name + '.min.js');
+    await load('https://source.zoom.us/zoom-meeting-embedded-' + version + '.min.js');
+    if (!window.ZoomMtgEmbedded) throw new Error('Zoom SDK tidak tersedia di browser ini.');
+    return window.ZoomMtgEmbedded;
+  })().catch(e => { zoomLoadPromise = null; throw e; });
+  return zoomLoadPromise;
+}
+async function zoomJoin(button, meeting) {
+  await zoomLeave();
+  const generation = zoomGeneration, kelas = KL.id, nav = navVersion;
+  button.disabled = true;
+  try {
+    const d = await api('joinZoomMeeting', {KelasID: kelas, Pertemuan: Number(meeting)});
+    const sdk = await zoomLoad();
+    if (generation !== zoomGeneration || nav !== navVersion || KL.id !== kelas || !button.isConnected) return;
+    if (!d || !d.signature || !d.meetingNumber || !d.userName) throw new Error('Data bergabung Zoom dari server belum lengkap.');
+    const root = button.closest('.timeline-meeting').querySelector('.zoom-root');
+    root.hidden = false;
+    const client = sdk.createClient(); zoomClient = client;
+    await client.init({zoomAppRoot: root, language: 'id-ID', patchJsMedia: true});
+    if (generation !== zoomGeneration) return;
+    await client.join({signature: d.signature, meetingNumber: String(d.meetingNumber), password: d.password || '', userName: d.userName, ...(d.zak ? {zak: d.zak} : {})});
+    if (generation !== zoomGeneration) { try { await client.leaveMeeting(); } catch (e) {} return; }
+    root.scrollIntoView({behavior: 'smooth', block: 'start'});
+  } catch (e) { if (generation === zoomGeneration) { await zoomLeave(); fail(e); } }
+  finally { if (button.isConnected) button.disabled = false; }
+}
+async function zoomSettings() {
+  let c = await api('zoomConfig'), step = 0;
+  const fields = {accountId: 'Account ID', clientId: 'OAuth Client ID', clientSecret: 'OAuth Client Secret', sdkClientId: 'Meeting SDK Client ID', sdkClientSecret: 'Meeting SDK Client Secret', hostUserId: 'User ID / email host'};
+  const field = key => `<div><label for="z_${key}">${fields[key]} <small class="mut" data-z-set="${key}"></small></label><input id="z_${key}" type="${key.endsWith('Secret') ? 'password' : 'text'}" autocomplete="off" maxlength="500"></div>`;
+  const o = document.createElement('div'); o.className = 'ov';
+  o.innerHTML = `<div class="modal" role="dialog" aria-modal="true" aria-label="Panduan pengaturan Zoom"><h3>Pengaturan Zoom untuk admin</h3><p id="z_progress" class="mut" aria-live="polite"></p>
+    <section data-z-step><h4>1. Siapkan Server-to-Server OAuth</h4><ol><li>Buka <a href="https://marketplace.zoom.us/" target="_blank" rel="noopener noreferrer">Zoom App Marketplace</a>, masuk sebagai admin, lalu pilih Develop → Build App dan buat aplikasi Server-to-Server OAuth.</li><li>Di App Credentials, salin Account ID, Client ID, dan Client Secret. Pada Scopes, tambahkan izin membaca pengguna dan membuat meeting untuk pengguna yang diperlukan. Untuk mengambil ZAK host melalui endpoint Get a user's token, tambahkan granular scope <code>user:read:token:admin</code> (atau scope klasik <code>user:read:admin</code> bila tersedia). Aktifkan aplikasi dan terapkan perubahan scope sesuai petunjuk Zoom.</li></ol><p><a href="https://developers.zoom.us/docs/internal-apps/s2s-oauth/" target="_blank" rel="noopener noreferrer">Dokumentasi Server-to-Server OAuth ↗</a></p><div class="row">${field('accountId')}${field('clientId')}</div>${field('clientSecret')}</section>
+    <section data-z-step hidden><h4>2. Siapkan Meeting SDK</h4><ol><li>Di Marketplace, buat aplikasi yang mendukung Meeting SDK dan lengkapi konfigurasi serta aktivasi yang diminta Zoom.</li><li>Salin Client ID dan Client Secret Meeting SDK, bukan kredensial Server-to-Server OAuth. Akses meeting di luar akun dapat memerlukan review atau publikasi sesuai kebijakan Zoom.</li></ol><p><a href="https://developers.zoom.us/docs/meeting-sdk/" target="_blank" rel="noopener noreferrer">Dokumentasi Meeting SDK ↗</a></p><div class="row">${field('sdkClientId')}${field('sdkClientSecret')}</div></section>
+    <section data-z-step hidden><h4>3. Host, simpan dan uji</h4><p>Masukkan User ID atau email pengguna Zoom yang akan memiliki meeting. Pastikan akun dan scope aplikasi mengizinkan akses pengguna serta pembuatan meeting.</p>${field('hostUserId')}<p class="mut">Admin LMS dapat memulai sebagai host untuk pengguna Zoom yang dikonfigurasi menggunakan ZAK; pegawai bergabung sebagai peserta, bukan host. ZAK bersifat rahasia dan memiliki masa berlaku terbatas. Kemampuan memulai tetap bergantung pada izin, akun host, konfigurasi aplikasi, dan kebijakan Zoom.</p><p>Uji menggunakan konfigurasi yang sudah tersimpan: tes memeriksa token OAuth dan akses ke pengguna host, <b>bukan validasi kredensial Meeting SDK</b>, izin pengambilan ZAK, pembuatan meeting, atau keberhasilan memulai meeting.</p><button type="button" class="btn ghost sm" id="z_test">Uji konfigurasi tersimpan</button> <span id="z_status" role="status" class="mut"></span></section>
+    <p class="mut">Nilai tersimpan tidak ditampilkan kembali. Kosongkan kolom untuk mempertahankan nilai sebelumnya; secret hanya dikirim ke server saat disimpan dan tidak disimpan permanen di halaman.</p><div class="foot"><button type="button" class="btn ghost" id="z_cancel">Tutup</button><button type="button" class="btn ghost" id="z_back">Kembali</button><button type="button" class="btn" id="z_next">Lanjut</button><button type="button" class="btn" id="z_save" hidden>Simpan</button></div></div>`;
+  document.body.appendChild(o);
+  const q = s => o.querySelector(s), steps = o.querySelectorAll('[data-z-step]');
+  const update = () => { steps.forEach((el, i) => { el.hidden = i !== step; }); q('#z_progress').textContent = 'Langkah ' + (step + 1) + ' dari ' + steps.length; q('#z_back').hidden = step === 0; q('#z_next').hidden = step === steps.length - 1; q('#z_save').hidden = step !== steps.length - 1; Object.keys(fields).forEach(key => { q('[data-z-set="' + key + '"]').textContent = c[key + 'Set'] ? '(sudah tersimpan)' : '(belum tersimpan)'; }); };
+  q('#z_cancel').onclick = () => o.remove();
+  q('#z_back').onclick = () => { step--; update(); };
+  q('#z_next').onclick = () => { step++; update(); };
+  q('#z_save').onclick = async e => {
+    const payload = {}; Object.keys(fields).forEach(key => { const value = q('#z_' + key).value.trim(); if (value) payload[key] = value; });
+    e.target.disabled = true; q('#z_test').disabled = true; q('#z_status').textContent = 'Menyimpan…';
+    try { c = await api('saveZoomConfig', payload); Object.keys(fields).forEach(key => { q('#z_' + key).value = ''; }); update(); q('#z_status').textContent = 'Tersimpan. Uji konfigurasi tersimpan untuk memeriksa koneksi OAuth.'; }
+    catch (err) { q('#z_status').textContent = 'Gagal menyimpan: ' + err.message; }
+    finally { e.target.disabled = false; q('#z_test').disabled = false; }
+  };
+  q('#z_test').onclick = async e => { e.target.disabled = true; q('#z_save').disabled = true; const status = q('#z_status'); status.textContent = 'Menguji konfigurasi tersimpan…'; try { await api('testZoomConfig'); status.textContent = 'Token OAuth dan akses pengguna host berhasil. Tes ini tidak memvalidasi Meeting SDK, izin ZAK, pembuatan atau memulai meeting.'; } catch (err) { status.textContent = 'Uji gagal: ' + err.message; } finally { e.target.disabled = false; q('#z_save').disabled = false; } };
+  update();
+}
 const timelineFlag = (v, fallback) => v == null || v === '' ? fallback : v === true || v === 1 || String(v).toLowerCase() === 'true' || String(v) === '1';
 function timelineForm(m) {
   const visible = timelineFlag(m && m.Visible, true), locked = timelineFlag(m && m.Locked, false), executed = timelineFlag(m && m.Executed, false);
-  modal('Ubah pertemuan ' + m.Pertemuan, `<label class="chk"><input type="checkbox" id="tm_visible" ${visible ? 'checked' : ''}><span>Terlihat oleh siswa</span></label><label class="chk"><input type="checkbox" id="tm_locked" ${locked ? 'checked' : ''}><span>Terkunci</span></label><label class="chk"><input type="checkbox" id="tm_executed" ${executed ? 'checked' : ''}><span>Sudah dilaksanakan</span></label>`, async () => {
-    await api('savePertemuan', {KelasID: KL.id, Pertemuan: m.Pertemuan, Visible: $('#tm_visible').checked, Locked: $('#tm_locked').checked, Executed: $('#tm_executed').checked});
+  modal('Ubah pertemuan ' + m.Pertemuan, `<label class="chk"><input type="checkbox" id="tm_visible" ${visible ? 'checked' : ''}><span>Terlihat oleh siswa</span></label><label class="chk"><input type="checkbox" id="tm_locked" ${locked ? 'checked' : ''}><span>Terkunci</span></label><label class="chk"><input type="checkbox" id="tm_executed" ${executed ? 'checked' : ''}><span>Sudah dilaksanakan</span></label><label for="tm_room">Tautan Zoom / Google Meet (opsional)</label><input id="tm_room" type="url" value="${esc(m.Room || '')}" placeholder="https://meet.google.com/... atau https://zoom.us/..."><small class="mut">Rapat dibuka melalui penyedia; beberapa layanan tidak mengizinkan ditampilkan di dalam LMS.</small>`, async () => {
+    await api('savePertemuan', {KelasID: KL.id, Pertemuan: m.Pertemuan, Visible: $('#tm_visible').checked, Locked: $('#tm_locked').checked, Executed: $('#tm_executed').checked, Room: val('tm_room')});
     toast('Pertemuan tersimpan'); await kelasDetail();
   });
 }
@@ -1054,7 +1155,7 @@ function timelineHtml(D, list, staff) {
   return groups.map(({m, posts}) => {
     posts = posts.slice().sort((a, b) => (Number(a.Urutan) || 0) - (Number(b.Urutan) || 0));
     const locked = m && timelineFlag(m.Locked, false), visible = !m || timelineFlag(m.Visible, true), executed = m && timelineFlag(m.Executed, false);
-    return `<section class="timeline-meeting"><div class="timeline-head"><div><h3>${esc(m ? 'Pertemuan ' + m.Pertemuan : 'Belum dikelompokkan')}</h3>${m ? `<span class="tag ${executed ? 'g' : 'y'}">${executed ? 'Sudah dilaksanakan' : 'Belum dilaksanakan'}</span> ${locked ? '<span class="tag y">🔒 Terkunci</span>' : '<span class="tag g">Terbuka</span>'} ${staff && !visible ? '<span class="tag y">Disembunyikan</span>' : ''}` : ''}</div>${staff && m ? `<div class="timeline-actions"><button class="btn ghost sm" data-tedit="${esc(m.Pertemuan)}">Ubah status</button>${['materi','tugas','asesmen'].map(type => `<button class="btn sm" data-taddpost="${type}" data-meeting="${esc(m.Pertemuan)}">+ ${TIPE[type][1]}</button>`).join('')}</div>` : ''}</div>${locked && !staff ? '<div class="timeline-locked">Pertemuan ini terkunci.</div>' : posts.map(card).join('') || '<div class="empty">Belum ada item di bagian ini.</div>'}</section>`;
+    return `<section class="timeline-meeting"><div class="timeline-head"><div><h3>${esc(m ? 'Pertemuan ' + m.Pertemuan : 'Belum dikelompokkan')}</h3>${m ? `<span class="tag ${executed ? 'g' : 'y'}">${executed ? 'Sudah dilaksanakan' : 'Belum dilaksanakan'}</span> ${locked ? '<span class="tag y">🔒 Terkunci</span>' : '<span class="tag g">Terbuka</span>'} ${staff && !visible ? '<span class="tag y">Disembunyikan</span>' : ''}` : ''}</div>${staff && m ? `<div class="timeline-actions"><button class="btn ghost sm" data-tbookmark="${esc(m.Pertemuan)}" aria-pressed="${(D.bookmarkedMeetings || []).includes(Number(m.Pertemuan))}">${(D.bookmarkedMeetings || []).includes(Number(m.Pertemuan)) ? '🔖 Hapus penanda' : '🔖 Tandai'}</button><button class="btn ghost sm" data-tedit="${esc(m.Pertemuan)}">Ubah status &amp; room</button>${['materi','tugas','asesmen'].map(type => `<button class="btn sm" data-taddpost="${type}" data-meeting="${esc(m.Pertemuan)}">+ ${TIPE[type][1]}</button>`).join('')}</div>` : ''}</div>${m ? `<div class="meeting-room">${staff ? `<button class="btn sm" data-zcreate="${esc(m.Pertemuan)}">Buat room Zoom</button>` : ''}${staff || !locked ? `<button class="btn sm" data-zjoin="${esc(m.Pertemuan)}">Gabung Zoom di sini</button><button class="btn ghost sm" data-zleave="1">Keluar Zoom</button><small class="mut">Tampilan Zoom dirancang untuk browser desktop; perangkat seluler tidak dijamin.</small><div class="zoom-root" hidden style="width:100%;min-height:500px"></div>` : ''}</div>` : ''}${m && m.Room && (staff || !locked) ? `<div class="meeting-room"><span>🎥 Pertemuan daring</span><a class="btn sm" href="${esc(m.Room)}" target="_blank" rel="noopener noreferrer">Buka Zoom / Google Meet ↗</a><small class="mut">Rapat terbuka di layanan penyedia.</small></div>` : ''}${locked && !staff ? '<div class="timeline-locked">Pertemuan ini terkunci.</div>' : posts.map(card).join('') || '<div class="empty">Belum ada item di bagian ini.</div>'}</section>`;
   }).join('') || '<div class="panel empty">Belum ada item di bagian ini.</div>';
 }
 function drawKelas() {
@@ -1062,6 +1163,7 @@ function drawKelas() {
   const tabs = [['semua', 'Semua'], ['materi', 'Materi'], ['tugas', 'Tugas'], ['asesmen', 'Asesmen']].concat(staff ? [['anggota', 'Anggota (' + D.members.length + ')']] : []);
   const list = KL.tab === 'semua' ? D.posts : D.posts.filter(x => x.Tipe === KL.tab);
   $('#main').innerHTML = '<div id="kroot">' + head(esc(k.Nama), `${esc(k.Program)} • ${esc(k.PaketNama)}${k.Kelompok ? ' • ' + esc(k.Kelompok) : ''} • Pengajar: ${esc(k.Pengajar)}`, '<button class="btn ghost" id="kback">‹ Semua grup kelas</button>') +
+    `<div class="panel class-progress"><div><span>Progres pertemuan</span><b>${Number(k.persen) || 0}%</b></div><div class="bar"><i style="width:${Math.max(0, Math.min(100, Number(k.persen) || 0))}%"></i></div></div>` +
     (k.Deskripsi ? `<div class="panel tx" style="margin-top:0">${autolink(k.Deskripsi)}</div>` : '') +
     `<div class="bookmark"><button class="btn ghost sm" id="knote">📝 Buka catatan pribadi</button>${staff ? `<span>🔖 Materi terakhir diberikan:</span><select id="kbookmark"><option value="">Belum ditandai</option>${D.posts.filter(p => p.Tipe === 'materi').map(p => `<option value="${esc(p.ID)}" ${D.bookmarkPostID === p.ID ? 'selected' : ''}>${esc(p.Judul)}</option>`).join('')}</select>` : ''}</div>` +
     (staff ? '<div class="panel" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><b>Tambah ke kelas:</b><button class="btn sm" data-add="materi">+ Materi</button><button class="btn sm" data-add="tugas">+ Tugas</button><button class="btn sm" data-add="asesmen">+ Asesmen</button></div>' : '') +
@@ -1073,8 +1175,12 @@ function drawKelas() {
     const select = e.target.closest('[data-tmove]'); if (!staff || !select) return;
     api('movePost', {ID: select.dataset.tmove, Pertemuan: Number(select.value) || 0, Urutan: 999999}).then(() => kelasDetail()).catch(e => { fail(e); drawKelas(); });
   };
-  $('#kroot').onclick = e => {
+  $('#kroot').onclick = async e => {
     const t = e.target.closest('button'); if (!t) return;
+    if (staff && t.dataset.zcreate) { t.disabled = true; try { await api('createZoomMeeting', {KelasID: k.ID, Pertemuan: Number(t.dataset.zcreate)}); toast('Room Zoom siap.'); await kelasDetail(); } catch (err) { fail(err); } finally { t.disabled = false; } return; }
+    if (t.dataset.zjoin) return zoomJoin(t, t.dataset.zjoin);
+    if (t.dataset.zleave) { await zoomLeave(); const root = t.closest('.timeline-meeting').querySelector('.zoom-root'); if (root) { root.innerHTML = ''; root.hidden = true; } return; }
+    if (staff && t.dataset.tbookmark) { t.disabled = true; return api('toggleMeetingBookmark', {KelasID: k.ID, Pertemuan: Number(t.dataset.tbookmark)}).then(() => kelasDetail()).catch(e => { t.disabled = false; fail(e); }); }
     if (staff && t.dataset.tedit) { const m = (D.meetings || []).find(m => String(m.Pertemuan) === t.dataset.tedit); if (m) timelineForm(m); return; }
     if (staff && t.dataset.taddpost) return postForm(t.dataset.taddpost, undefined, Number(t.dataset.meeting)).catch(fail);
     if (staff && t.dataset.torder) {
@@ -1084,8 +1190,8 @@ function drawKelas() {
       t.disabled = true; api('movePost', {ID: p.ID, Pertemuan: Number(p.Pertemuan) || 1, Urutan: target + 1}).then(() => kelasDetail()).catch(e => { fail(e); kelasDetail().catch(fail); }); return;
     }
     if (t.id === 'knote') return notesShortcut();
-    if (t.id === 'kback') { KL.id = null; return kelasHome().catch(fail); }
-    if (t.dataset.tab) { KL.tab = t.dataset.tab; return drawKelas(); }
+    if (t.id === 'kback') { await zoomLeave(); KL.id = null; return kelasHome().catch(fail); }
+    if (t.dataset.tab) { await zoomLeave(); KL.tab = t.dataset.tab; return drawKelas(); }
     if (t.dataset.add) return postForm(t.dataset.add).catch(fail);
     if (t.dataset.fid) return openInlineFile(t, FREG[t.dataset.fid]);
     if (t.dataset.dl) return dlFile(FREG[t.dataset.dl]);
@@ -1094,7 +1200,7 @@ function drawKelas() {
     if (!x || !a) return;
     if (a === 'comments') showComments(t.closest('.pst'), x).catch(fail);
     else if (a === 'ed') postForm(x.Tipe, x).catch(fail);
-    else if (a === 'del') { if (confirm(`Hapus "${x.Judul}"?${x.selesai ? ' Pengumpulan dan progres siswa untuk item ini ikut terhapus (pertemuan yang sudah tercatat di Catatan Progres tetap ada).' : ''}`)) api('delPost', {ID: x.ID}).then(() => { toast('Item dihapus'); return kelasDetail(); }).catch(fail); }
+    else if (a === 'del') { if (await askConfirm(`Hapus "${x.Judul}"?${x.selesai ? ' Pengumpulan dan progres siswa untuk item ini ikut terhapus (pertemuan yang sudah tercatat di Catatan Progres tetap ada).' : ''}`)) api('delPost', {ID: x.ID}).then(() => { toast('Item dihapus'); return kelasDetail(); }).catch(fail); }
     else if (a === 'subs') subsModal(x).catch(fail);
     else if (a === 'catat') catatLms(x);
     else if (a === 'ujian') examIntro(x.asm);
@@ -1111,7 +1217,7 @@ async function showComments(card, post) {
     box.innerHTML = list.map(c => `<div class="cmrow"><div class="cmav">${esc((c.Nama || '?').slice(0, 1))}</div><div class="cmbody"><b>${esc(c.Nama)}</b> <small>${esc(c.Waktu)}</small><p>${autolink(c.Isi)}</p>${S.user.Role !== 'siswa' || c.Username === S.user.Username ? `<button class="btn del sm" data-cdel="${esc(c.ID)}">Hapus</button>` : ''}</div></div>`).join('') + '<div class="cmform"><input maxlength="2000" placeholder="Tulis komentar…"><button class="btn sm" data-csend>Kirim</button></div>';
     const input = box.querySelector('input'); if (input) input.onkeydown = e => { if (e.key === 'Enter') box.querySelector('[data-csend]').click(); };
   };
-  box.onclick = async e => { const del = e.target.closest('[data-cdel]'), send = e.target.closest('[data-csend]'); if (!del && !send) return; e.stopPropagation(); try { if (del) { if (!confirm('Hapus komentar ini?')) return; await api('delComment', {ID: del.dataset.cdel}); } else { const input = box.querySelector('input'); if (!input.value.trim()) return; await api('saveComment', {PostID: post.ID, Isi: input.value.trim()}); } await draw(); } catch (err) { fail(err); } };
+  box.onclick = async e => { const del = e.target.closest('[data-cdel]'), send = e.target.closest('[data-csend]'); if (!del && !send) return; e.stopPropagation(); try { if (del) { if (!await askConfirm('Hapus komentar ini?')) return; await api('delComment', {ID: del.dataset.cdel}); } else { const input = box.querySelector('input'); if (!input.value.trim()) return; await api('saveComment', {PostID: post.ID, Isi: input.value.trim()}); } await draw(); } catch (err) { fail(err); } };
   await draw();
 }
 
@@ -1163,12 +1269,67 @@ function tugasForm(x) {
 }
 
 async function catatLms(x) {
-  if (!confirm('Catat siswa yang sudah menyelesaikan item ini ke Catatan Progres sebagai pertemuan daring (asinkron)? Siswa yang belum menyelesaikan dilewati dan bisa dicatat nanti.')) return;
-  try {
-    const r = await api('saveCatatLms', {ID: x.ID});
-    toast(`${r.dicatat} siswa dicatat sebagai pertemuan daring.${r.belum ? ' ' + r.belum + ' belum menyelesaikan.' : ''}${r.penuh ? ' ' + r.penuh + ' paket sudah penuh.' : ''}`);
-    await kelasDetail();
-  } catch (e) { fail(e); }
+  const o = document.createElement('div'); o.className = 'ov';
+  o.innerHTML = '<div class="modal fv lprog" role="dialog" aria-label="Penilaian Catatan Progres"><h3>Penilaian Catatan Progres</h3><div class="lprog-head">Memuat data siswa…</div><div class="foot"><button type="button" class="btn ghost" data-close>Tutup</button></div></div>';
+  document.body.appendChild(o);
+  const head = o.querySelector('.lprog-head'), drafts = new Map();
+  let saving = false, changed = false, closing = false;
+  const close = async () => {
+    if (saving || closing) return;
+    closing = true;
+    try {
+      if ([...drafts.values()].some(d => d.dirty) && !await askConfirm('Ada perubahan siswa yang belum disimpan. Tutup tanpa menyimpan perubahan tersebut?')) return;
+      o.remove();
+      if (changed && KL.D && KL.D.posts) {
+        const post = KL.D.posts.find(p => String(p.ID) === String(x.ID));
+        const bar = [...document.querySelectorAll('[data-p]')].find(el => el.dataset.p === String(x.ID));
+        const count = bar && bar.querySelector('.pbar small');
+        if (post && count) count.textContent = `${post.dicatat}/${post.total} tercatat`;
+      }
+    } finally { closing = false; }
+  };
+  o.querySelector('[data-close]').onclick = close;
+  o.addEventListener('mousedown', e => { if (e.target === o) close(); });
+  let D;
+  try { D = await api('lmsProgressData', {ID: x.ID}); }
+  catch (e) { head.innerHTML = `<div class="lprog-error" role="alert">${esc(e.message || String(e))}</div>`; return; }
+  if (!o.isConnected) return;
+  const rows = D.rows || [], P = Array.isArray(D.P) ? D.P : [], K = Array.isArray(D.K) ? D.K : [];
+  rows.forEach(r => { const n = r.Nilai || {}; drafts.set(String(r.Username), {Nilai: {P: Object.assign({}, n.P || {}), K: Object.assign({}, n.K || {})}, Catatan: r.Catatan || '', noteKnown: !!r.dicatat, noteEdited: false, dirty: false}); });
+  const blocked = r => !r.selesai || !!r.konflik || (!r.dicatat && !r.pertemuanBerikut);
+  const status = r => !r.selesai ? 'Belum selesai' : r.konflik ? 'Konflik pertemuan' : !r.dicatat && !r.pertemuanBerikut ? 'Paket penuh' : r.dicatat ? 'Sudah dicatat' : 'Siap dicatat';
+  let current = rows.find(r => !blocked(r)) || null;
+  head.innerHTML = `<b>${esc((D.post || x).Judul || 'Item LMS')}</b><p>Nilai setiap siswa yang sudah selesai. Perubahan disimpan per siswa.</p>`;
+  head.insertAdjacentHTML('afterend', '<div class="lprog-layout"><div class="lprog-list" aria-label="Daftar siswa"></div><div class="lprog-form"></div></div>');
+  const list = o.querySelector('.lprog-list'), form = o.querySelector('.lprog-form');
+  const drawList = () => { list.innerHTML = rows.map((r, i) => `<button type="button" class="lprog-student ${r === current ? 'on' : ''}" data-student="${i}" ${blocked(r) || saving ? 'disabled' : ''}><b>${esc(r.Nama || r.Username)}</b><small>${status(r)}${r.pertemuan || r.pertemuanBerikut ? ' • Pertemuan ' + esc(r.pertemuan || r.pertemuanBerikut) : ''}${drafts.get(String(r.Username)).dirty ? ' • Belum disimpan' : ''}</small></button>`).join('') || '<div class="empty">Belum ada siswa di kelas ini.</div>'; };
+  const drawForm = () => {
+    if (!current) { form.innerHTML = '<div class="empty">Belum ada siswa yang dapat dicatat.</div>'; return; }
+    const d = drafts.get(String(current.Username));
+    const scores = (g, names) => names.map((name, i) => `<div class="item"><span>${esc(name)}</span><div class="sc" data-group="${g}" data-index="${i}">${Array.from({length: 10}, (_, j) => { const v = j + 1; return `<button type="button" data-score="${v}" class="${Number(d.Nilai[g][name]) === v ? 'on' : ''}" aria-pressed="${Number(d.Nilai[g][name]) === v}">${v}</button>`; }).join('')}</div></div>`).join('') || '<small class="mut">Belum ada aspek penilaian.</small>';
+    form.innerHTML = `<h3>${esc(current.Nama || current.Username)}</h3><div class="lprog-status">${current.dicatat ? 'Sudah dicatat • dapat diubah' : 'Selesai • siap dicatat'}${current.pertemuan || current.pertemuanBerikut ? ' • Pertemuan ' + esc(current.pertemuan || current.pertemuanBerikut) : ''}${d.dirty ? ' • Perubahan belum disimpan' : ''}</div><h4>Pemahaman materi</h4>${scores('P', P)}<h4>Keterampilan</h4>${scores('K', K)}<label for="lprog-note">Catatan tutor</label><textarea id="lprog-note" rows="3">${esc(d.Catatan)}</textarea><div class="lprog-error" role="alert"></div><button type="button" class="btn" data-lprog-save>${current.dicatat ? 'Simpan perubahan' : 'Catat progres siswa'}</button>`;
+  };
+  list.onclick = e => { const b = e.target.closest('[data-student]'); if (!b || saving) return; current = rows[Number(b.dataset.student)]; drawList(); drawForm(); };
+  form.oninput = e => { if (e.target.id !== 'lprog-note' || !current) return; const d = drafts.get(String(current.Username)); d.Catatan = e.target.value; d.noteEdited = true; d.dirty = true; drawList(); };
+  form.onclick = async e => {
+    const score = e.target.closest('[data-score]');
+    if (score && current && !saving) { const group = score.parentNode.dataset.group, names = group === 'P' ? P : K, name = names[Number(score.parentNode.dataset.index)], d = drafts.get(String(current.Username)), value = Number(score.dataset.score); if (Number(d.Nilai[group][name]) === value) delete d.Nilai[group][name]; else d.Nilai[group][name] = value; d.dirty = true; drawList(); drawForm(); return; }
+    const b = e.target.closest('[data-lprog-save]'); if (!b || !current || saving) return;
+    const r = current, d = drafts.get(String(r.Username)); saving = true; b.disabled = true; drawList(); form.querySelector('.lprog-error').textContent = '';
+    try {
+      const payload = {ID: x.ID, Username: r.Username, Nilai: d.Nilai};
+      if ((r.dicatat && (d.noteKnown || d.noteEdited)) || (!r.dicatat && d.Catatan.trim())) payload.Catatan = d.Catatan;
+      const result = await api('saveLmsProgress', payload);
+      if (!r.dicatat) { const post = KL.D && KL.D.posts && KL.D.posts.find(p => String(p.ID) === String(x.ID)); if (post) post.dicatat = (Number(post.dicatat) || 0) + 1; }
+      r.dicatat = true; r.pertemuan = result && result.pertemuan != null ? result.pertemuan : r.pertemuan || r.pertemuanBerikut;
+      if (result && result.Catatan != null) { d.Catatan = result.Catatan; d.noteKnown = true; }
+      else if (Object.prototype.hasOwnProperty.call(payload, 'Catatan')) d.noteKnown = true;
+      d.noteEdited = false; d.dirty = false; changed = true; toast('Catatan progres tersimpan');
+    }
+    catch (err) { form.querySelector('.lprog-error').textContent = err.message || String(err); }
+    finally { saving = false; b.disabled = false; drawList(); if (!form.querySelector('.lprog-error').textContent) drawForm(); }
+  };
+  drawList(); drawForm();
 }
 
 async function subsModal(x) {
@@ -1177,7 +1338,7 @@ async function subsModal(x) {
   const row = r => { const s = r.sub; return `<div class="sr" data-u="${esc(r.Username)}"><div class="sh"><b>${esc(r.Nama)}</b>${stat(r)}${s ? `<small class="mut">${esc(s.Waktu)}${tg && p.Tenggat && String(s.Waktu).slice(0, 10) > p.Tenggat ? ' • terlambat' : ''}</small>` : ''}${s && s.Dicatat ? `<span class="tag">📈 pertemuan ${s.Pertemuan}</span>` : ''}</div>
     ${tg && s ? `${s.Teks ? `<div class="tx">${autolink(s.Teks)}</div>` : ''}${filesHtml(s.Files)}<div class="gr"><input type="number" class="gn" min="0" max="${p.Maks}" step="0.5" placeholder="Nilai (0–${p.Maks})" value="${s.Nilai == null ? '' : s.Nilai}"><input class="gc" maxlength="1000" placeholder="Komentar untuk siswa (opsional)" value="${esc(s.Komentar)}"><button class="btn sm" data-save>Simpan nilai</button></div>` : ''}</div>`; };
   const o = viewModal((tg ? 'Pengumpulan: ' : 'Progres: ') + p.Judul, `<div style="max-height:62vh;overflow:auto">${D.rows.map(row).join('') || '<div class="empty">Belum ada siswa di kelas ini.</div>'}</div>`);
-  if (p.Catat) { const b = document.createElement('button'); b.className = 'btn'; b.textContent = 'Catat ke Catatan Progres'; b.onclick = async () => { await catatLms(x); o.remove(); }; o.querySelector('.foot').prepend(b); }
+  if (p.Catat) { const b = document.createElement('button'); b.className = 'btn'; b.textContent = 'Catat ke Catatan Progres'; b.onclick = () => catatLms(x); o.querySelector('.foot').prepend(b); }
   o.addEventListener('click', async e => {
     const f = e.target.closest('[data-fid]'); if (f) return openFile(FREG[f.dataset.fid]);
     const b = e.target.closest('[data-save]'); if (!b) return;
@@ -1253,7 +1414,7 @@ async function vPaket() {
     `<div class="panel tw"><table><tr><th>Program</th><th>Jenjang</th><th>Paket belajar</th><th>Pertemuan</th><th>Harga / termin</th><th>Aspek nilai</th><th>Status</th><th></th></tr>${pks.map((p, i) => `<tr><td><b>${esc(p.Program)}</b></td><td>${esc(p.Jenjang)}</td><td>${esc(p.Nama)}<br><small style="color:var(--mute)">${esc(p.Materi)}</small></td><td>${p.Pertemuan}<br><small>${p.PerBulan} per bulan</small></td><td>${rp(p.Harga)}<br><small>${p.Termin} termin × ${rp(termAmt(p))}</small></td><td><small>${p.P.length} pemahaman, ${p.K.length} keterampilan</small></td><td><span class="tag ${p.Status === 'Aktif' ? 'g' : 'y'}">${esc(p.Status)}</span></td><td class="act"><button class="btn ghost sm" data-e="${i}">Ubah</button><button class="btn del sm" data-d="${i}">Hapus</button></td></tr>`).join('') || '<tr><td colspan="8" class="empty">Belum ada paket. Tambahkan paket pertama.</td></tr>'}</table></div>`;
   $('#add').onclick = () => paketForm({}, pks);
   document.querySelectorAll('[data-e]').forEach(b => b.onclick = () => paketForm(pks[b.dataset.e], pks));
-  document.querySelectorAll('[data-d]').forEach(b => b.onclick = async () => { if (!confirm('Hapus paket ini?')) return; try { await api('delPaket', {ID: pks[b.dataset.d].ID}); toast('Paket dihapus'); vPaket(); } catch (e) { fail(e); } });
+  document.querySelectorAll('[data-d]').forEach(b => b.onclick = async () => { if (!await askConfirm('Hapus paket ini?')) return; try { await api('delPaket', {ID: pks[b.dataset.d].ID}); toast('Paket dihapus'); vPaket(); } catch (e) { fail(e); } });
 }
 function paketForm(k, pks) {
   const PL = (k.P || []).slice(), KL = (k.K || []).slice();
@@ -1289,7 +1450,7 @@ async function vKeuangan() {
   $('#tpb').onclick = () => { const o = viewModal('Pengaturan printer struk', tpPanel()); tpInit(o.querySelector('.tpw')); };
   document.querySelectorAll('[data-f]').forEach(b => b.onclick = () => pdfInvoice(k.pay[b.dataset.f]));
   document.querySelectorAll('[data-g]').forEach(b => b.onclick = () => printStruk(k.pay[b.dataset.g]));
-  document.querySelectorAll('[data-x]').forEach(b => b.onclick = async () => { if (!confirm('Hapus catatan pengambilan ini?')) return; try { await api('delWithdrawal', {ID: wd[b.dataset.x].ID}); toast('Dihapus'); vKeuangan(); } catch (e) { fail(e); } });
+  document.querySelectorAll('[data-x]').forEach(b => b.onclick = async () => { if (!await askConfirm('Hapus catatan pengambilan ini?')) return; try { await api('delWithdrawal', {ID: wd[b.dataset.x].ID}); toast('Dihapus'); vKeuangan(); } catch (e) { fail(e); } });
   if (tab === 'wd') $('#wm').onchange = () => { S.km = val('wm'); vKeuangan(); };
 }
 async function openPay(pre) {
@@ -1435,7 +1596,7 @@ async function tpPrint(L) {
   if (tpKind() === 'dialog') return printDialog(L);
   if (TP.busy) return; TP.busy = true;
   try { await tpWrite(escpos(L)); toast('Struk dikirim ke printer'); }
-  catch (e) { const m = tpErr(e); toast(m, true); if (confirm('Struk belum tercetak: ' + m + '\n\nCetak lewat jendela cetak browser sekarang?')) printDialog(L); }
+  catch (e) { const m = tpErr(e); toast(m, true); if (await askConfirm('Struk belum tercetak: ' + m + '\n\nCetak lewat jendela cetak browser sekarang?')) printDialog(L); }
   finally { TP.busy = false; tpRefresh(); }
 }
 const printStruk = p => tpPrint(rcLines(p));
@@ -1550,10 +1711,12 @@ async function vSettings() {
     <div class="act" style="margin-top:10px"><button class="btn ghost sm" id="cc" type="button">Salin isi config.json</button></div></div>
     ${GAS ? '' : `<div class="panel"><h3>Alamat server di perangkat ini</h3><p class="mut" style="font-size:13px;margin:0 0 8px">Alamat Web App Apps Script (berakhiran /exec) yang dipakai halaman login. Ubah di sini bila alamat server berganti; kolom pengaturan server di halaman login hanya muncul saat alamat belum tersedia atau server tidak bisa dihubungi.</p>
     <input id="s_apiov" value="${esc(API)}" placeholder="https://script.google.com/macros/s/.../exec"><div class="act" style="margin-top:10px"><button class="btn ghost sm" id="apv" type="button">Pakai alamat ini</button><button class="btn ghost sm" id="apr" type="button">Kembali ke bawaan</button></div></div>`}
+    <div class="panel"><h3>Zoom Meeting SDK</h3><p class="mut">Siapkan kredensial server dan Meeting SDK untuk pertemuan inline di browser desktop.</p><button class="btn ghost" id="zoom_settings" type="button">Pengaturan &amp; tutorial Zoom</button></div>
     <div class="panel"><h3>Printer thermal (struk)</h3>${tpPanel()}</div>
     <div class="panel"><h3>Server TURN (video live pemantauan ujian)</h3><div class="row">${f('TurnURL', 'Alamat TURN, mis. turn.contoh.com:3478')}${f('TurnUser', 'Username TURN')}${f('TurnPass', 'Password TURN', 'password')}</div>
     <div class="act"><button class="btn ghost" id="tt" type="button">Uji TURN</button></div><p id="tp" style="font-weight:600"></p></div>
     <button class="btn" id="sv">Simpan pengaturan</button>`;
+  $('#zoom_settings').onclick = () => zoomSettings().catch(fail);
   const get = () => { const o = {}; SK.forEach(k => o[k] = val('s_' + k)); return o; };
   const mk = () => { const g = val('s_GithubURL'); $('#s_link').value = g ? g + (g.includes('?') ? '&' : '?') + 'api=' + encodeURIComponent(s.ApiURL) : ''; };
   $('#s_GithubURL').oninput = mk; mk();
@@ -1590,7 +1753,7 @@ async function vAsesmen() {
   bind('[data-c]', async a => { const d = await det(a); if (d) asmForm(Object.assign({}, d, {Kode: '', Nama: 'Salinan ' + d.Nama}), per); });
   bind('[data-p]', a => { S.sel = a.Kode; go('pantau'); });
   bind('[data-h]', a => { S.sel = a.Kode; go('lap'); });
-  bind('[data-d]', async a => { if (!confirm(`Hapus asesmen ${a.Nama}? Hasil siswa yang sudah ada tetap tersimpan.`)) return; try { await api('delAsesmen', {Kode: a.Kode}); toast('Asesmen dihapus'); vAsesmen(); } catch (e) { fail(e); } });
+  bind('[data-d]', async a => { if (!await askConfirm(`Hapus asesmen ${a.Nama}? Hasil siswa yang sudah ada tetap tersimpan.`)) return; try { await api('delAsesmen', {Kode: a.Kode}); toast('Asesmen dihapus'); vAsesmen(); } catch (e) { fail(e); } });
 }
 function asmForm(a, per) {
   const Q = JSON.parse(JSON.stringify(a.soal || []));
@@ -1626,7 +1789,7 @@ async function vLap() {
       <div class="panel tw"><h3>${esc(d.a.Nama)}</h3><table><tr><th>Siswa</th><th>Kelompok</th><th>Tanggal</th><th>PG benar</th><th>Nilai</th><th>Kategori</th><th>Koreksi</th><th>Keterangan</th><th class="noprint"></th></tr>${L.map((r, i) => `<tr><td><b>${esc(r.Nama)}</b></td><td>${esc(r.Kelompok)}</td><td>${esc(r.Tanggal)}</td><td>${r.Benar}/${pgN}</td><td><b>${r.Skor}</b></td><td>${katTag(r.Skor)}</td><td>${Number(r.Pending) > 0 ? `<span class="tag y">${r.Pending} menunggu</span>` : '<span class="tag g">Selesai</span>'}</td><td>${r.Alasan ? `<span class="tag r">${esc(r.Alasan)}</span>` : '-'}</td>
       <td class="act noprint">${pgN < d.a.soal.length ? `<button class="btn ghost sm" data-k="${i}">Koreksi</button>` : ''}<button class="btn del sm" data-r="${i}">Izinkan ulang</button></td></tr>`).join('') || '<tr><td colspan="9" class="empty">Belum ada siswa yang menyelesaikan asesmen ini.</td></tr>'}</table></div>`;
     document.querySelectorAll('[data-k]').forEach(b => b.onclick = () => korForm(d.a, L[b.dataset.k], show));
-    document.querySelectorAll('[data-r]').forEach(b => b.onclick = async () => { const r = L[b.dataset.r]; if (!confirm(`Hapus hasil ${r.Nama} dan izinkan mengerjakan ulang?`)) return; try { await api('resetSiswa', {kode: d.a.Kode, Username: r.Username}); toast('Siswa dapat mengulang'); show(); } catch (e) { fail(e); } });
+    document.querySelectorAll('[data-r]').forEach(b => b.onclick = async () => { const r = L[b.dataset.r]; if (!await askConfirm(`Hapus hasil ${r.Nama} dan izinkan mengerjakan ulang?`)) return; try { await api('resetSiswa', {kode: d.a.Kode, Username: r.Username}); toast('Siswa dapat mengulang'); show(); } catch (e) { fail(e); } });
   };
   $('#ls').onchange = () => show().catch(fail); show().catch(fail);
 }
@@ -1653,7 +1816,7 @@ async function vPantau() {
   $('#pb').onclick = async e => {
     const b = e.target.closest('[data-a]'); if (!b) return;
     if (b.dataset.a === 'cam') return liveCam(val('pn'), b.dataset.u, b.dataset.n);
-    if (!confirm(b.dataset.a === 'stop' ? 'Hentikan ujian siswa ini? Jawaban terakhir akan dikirim otomatis.' : 'Hapus sesi dan hasil siswa ini agar bisa mengulang?')) return;
+    if (!await askConfirm(b.dataset.a === 'stop' ? 'Hentikan ujian siswa ini? Jawaban terakhir akan dikirim otomatis.' : 'Hapus sesi dan hasil siswa ini agar bisa mengulang?')) return;
     try { await api(b.dataset.a === 'stop' ? 'stopSiswa' : 'resetSiswa', {kode: val('pn'), Username: b.dataset.u}); toast('Perintah dikirim'); load(); } catch (er) { fail(er); }
   };
   const run = () => { clearInterval(S.tm); load(); S.tm = setInterval(load, 5000); };
