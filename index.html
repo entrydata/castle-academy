@@ -17,7 +17,8 @@ button,input,select,textarea{font:inherit;color:inherit}
 .hide{display:none!important}
 /* login */
 #login{min-height:100vh;display:grid;grid-template-columns:1.05fr 1fr;background:#fff}
-#login{background:#f7fbff url('assets/castle-academy-login-full.png') center/contain no-repeat;position:relative;overflow:hidden}
+#login{background:#f7fbff url('assets/castle-academy-login-desktop.png') center/contain no-repeat;position:relative;overflow:hidden}
+@media(min-width:901px) and (max-width:1440px){#login{background-image:url('assets/castle-academy-login-laptop.png')}}
 #login .lside{background:transparent;color:var(--ink);padding:40px 30px;align-items:center;text-align:center;justify-content:center;position:relative;z-index:1}
 #login .lside::before{display:none}
 #login .lside .crest,#login .lside h1,#login .lside .sub,#login .lside .rule{display:none}
