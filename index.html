@@ -17,12 +17,13 @@ button,input,select,textarea{font:inherit;color:inherit}
 .hide{display:none!important}
 /* login */
 #login{min-height:100vh;display:grid;grid-template-columns:1.05fr 1fr;background:#fff}
-#login{background:#f7fbff url('assets/castle-academy-login-laptop.png') center/100% 100% no-repeat;position:relative;overflow:hidden}
+#login{background:#f7fbff url('assets/castle-academy-login-web.png') center/100% 100% no-repeat;position:relative;overflow:hidden}
 @media(max-width:900px){#login{background:#f7fbff;position:relative;overflow:hidden}#login .lside .logo4{display:block;width:min(280px,70%);height:220px;margin:0 auto 10px;background:url('assets/castle-academy-login-logo.png') center/contain no-repeat}#login .lside .quote{display:block;background:url('assets/castle-academy-slogan.png') center/contain no-repeat;width:min(330px,90%);height:auto;aspect-ratio:406/156;margin:8px auto 0;color:transparent;user-select:none}#login .lside::after{content:'';position:absolute;left:-5%;right:-5%;bottom:0;height:16px;background:linear-gradient(90deg,#0e4e93 0 65%,#1475d1 65% 82%,#f4b740 82%);transform:skewY(-2deg);transform-origin:left bottom}}
 #login .lside{background:transparent;color:var(--ink);padding:40px 30px;align-items:center;text-align:center;justify-content:center;position:relative;z-index:1}
 #login .lside::before{display:none}
 #login .lside .crest,#login .lside h1,#login .lside .sub,#login .lside .rule{display:none}
-#login .lside .logo4,#login .lside .quote{display:none}
+#login .lside .logo4{display:block;width:min(300px,70%);height:250px;margin:0 auto 12px;background:url('assets/castle-academy-login-logo.png') center/contain no-repeat}
+#login .lside .quote{display:block;background:url('assets/castle-academy-slogan.png') center/contain no-repeat;width:min(360px,90%);height:auto;aspect-ratio:406/156;margin:8px auto 0;color:transparent;user-select:none}
 #login .rside{background:transparent;justify-items:center;position:relative;z-index:1}
 #login .rside .lcard{background:rgba(255,255,255,.94);border:1px solid rgba(42,125,225,.12);border-radius:24px;padding:38px 42px;max-width:470px;box-shadow:0 18px 55px rgba(18,49,92,.12)}
 #login .lcard h2{font-family:'Bricolage Grotesque',Figtree,sans-serif;font-size:34px;color:var(--ink);text-align:center}
