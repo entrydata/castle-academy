@@ -17,6 +17,20 @@ button,input,select,textarea{font:inherit;color:inherit}
 .hide{display:none!important}
 /* login */
 #login{min-height:100vh;display:grid;grid-template-columns:1.05fr 1fr;background:#fff}
+#login{background:#f7fbff}
+#login .lside{background:#f7fbff;color:var(--ink);padding:40px 30px;align-items:center;text-align:center;justify-content:center}
+#login .lside::before{display:none}
+#login .lside .crest,#login .lside h1,#login .lside .sub,#login .lside .rule{display:none}
+#login .lside .logo4{display:block;width:min(300px,70%);height:250px;margin:0 auto 12px;background:url('assets/castle-academy-login-logo.png') center/contain no-repeat}
+#login .lside .quote{font-family:'Bricolage Grotesque',Figtree,sans-serif;font-style:normal;font-size:18px;line-height:1.25;color:var(--ink);text-indent:0;overflow:visible;background:url('assets/castle-academy-slogan.png') center/contain no-repeat;width:min(360px,90%);height:100px;margin:8px auto 0;font-weight:700;letter-spacing:.01em;color:transparent;user-select:none}
+#login .rside{background:#f7fbff;justify-items:center}
+#login .rside .lcard{background:rgba(255,255,255,.94);border:1px solid rgba(42,125,225,.12);border-radius:24px;padding:38px 42px;max-width:470px;box-shadow:0 18px 55px rgba(18,49,92,.12)}
+#login .lcard h2{font-family:'Bricolage Grotesque',Figtree,sans-serif;font-size:34px;color:var(--ink);text-align:center}
+#login .lcard>p:first-of-type{text-align:center;font-size:15px}
+#login .btn.full{border-radius:999px;background:linear-gradient(135deg,#1475d1,#1262b4);box-shadow:0 8px 18px rgba(42,125,225,.24)}
+#login .lcard:before{content:'';display:block;width:120px;height:78px;margin:-10px auto 12px;background:url('assets/castle-academy-login-logo.png') center/contain no-repeat}
+#login .lcard:before{display:none}
+@media(max-width:860px){#login{background-position:center top;grid-template-columns:1fr}#login .lside{min-height:0;padding:28px 18px 20px}#login .lside .logo4{width:180px;height:145px;margin-bottom:6px}#login .lside .quote{width:240px;height:76px}.rside{padding:20px 16px 42px;align-items:start}#login .rside .lcard{padding:30px 24px}}
 .lside{background:linear-gradient(160deg,var(--ink),color-mix(in srgb,var(--ink) 55%,var(--royal)));color:#fff;padding:64px 56px;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
 .lside::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 1px,transparent 1px 64px)}
 .lside>*{position:relative}
@@ -57,6 +71,10 @@ input:focus,select:focus,textarea:focus{border-color:var(--royal);outline:none}
 .lprog-head{padding:16px;border-radius:12px;background:linear-gradient(120deg,var(--mist),#fff8e8);margin-bottom:14px}.lprog-head p{margin:4px 0 0;color:var(--mute)}
 .lprog-layout{display:grid;grid-template-columns:minmax(180px,240px) minmax(0,1fr);gap:14px;max-height:60vh;overflow:auto}.lprog-list{display:flex;flex-direction:column;gap:6px}.lprog-student{width:100%;text-align:left;border:1px solid var(--line);border-radius:10px;background:#fff;padding:10px;cursor:pointer}.lprog-student.on{border-color:var(--royal);background:var(--mist)}.lprog-student:disabled{opacity:.55;cursor:not-allowed}.lprog-student small{display:block;color:var(--mute)}.lprog-form{min-width:0;border:1px solid var(--line);border-radius:12px;padding:16px}.lprog-form h3{margin:0}.lprog-form h4{margin:18px 0 6px}.lprog-form .item{padding:8px 0}.lprog-form .sc{flex-wrap:wrap}.lprog-status{color:var(--mute);font-size:13px;margin:6px 0}.lprog-error{color:var(--bad);font-size:13px;white-space:pre-wrap}.lprog-form textarea{resize:vertical}.lprog-form .btn{margin-top:12px}
 @media(max-width:650px){.lprog-layout{grid-template-columns:1fr;max-height:65vh}.lprog-list{max-height:180px;overflow:auto}.lprog-form{padding:12px}}
+.top.dash-head{align-items:center;padding:14px 18px;border:1px solid var(--line);border-radius:18px;background:#fff;gap:16px}
+.dash-title{display:flex;align-items:center;gap:14px;min-width:0}
+.dash-logo{width:76px;height:68px;object-fit:contain;flex:none;border-radius:12px;background:#fff}
+@media(max-width:640px){.top.dash-head{padding:12px;gap:10px}.dash-title{gap:9px;flex:1 1 100%}.dash-logo{width:58px;height:52px}.dash-head h2{font-size:20px}.dash-head p{font-size:13px}}
 /* shell */
 #app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
 aside{background:#fff;border-right:1px solid var(--line);color:var(--ink);padding:22px 14px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
@@ -169,11 +187,20 @@ input[type=radio],input[type=checkbox]{width:auto}
 .sc{flex-wrap:wrap;justify-content:flex-end}.sc button{width:34px;height:34px}
 /* Badge bookmark */
 .bmk{display:inline-flex;align-items:center;gap:8px;padding:6px 16px 6px 7px;border-radius:999px;background:linear-gradient(135deg,#ffb703,#fb6f1d);color:#fff;font-weight:800;font-size:13.5px;line-height:1;letter-spacing:.2px;box-shadow:0 4px 12px rgba(251,111,29,.35),inset 0 1px 0 rgba(255,255,255,.4);vertical-align:middle;margin:2px 6px 2px 0;white-space:nowrap;text-shadow:0 1px 1px rgba(120,53,15,.35)}
+/* Badge penanda ringkas pada kartu daftar kelas */
+.kelas-card .tag.y{float:right;margin:0 0 6px 8px;font-size:11px;padding:3px 8px;white-space:nowrap}
 .bmk::before{content:'🔖';display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.3);font-size:15px;text-shadow:none}
 .bmk.sm{font-size:12.5px;padding:5px 13px 5px 6px}.bmk.sm::before{width:22px;height:22px;font-size:13px}
 .btn.bmk-btn{font-weight:800;font-size:13.5px;min-height:36px;padding:7px 15px;border:1.5px solid #ffb703;color:#b45309;background:#fff8e1;box-shadow:none}
 .btn.bmk-btn:hover{background:#ffefbf}.btn.bmk-btn.on{background:linear-gradient(135deg,#ffb703,#fb6f1d);color:#fff;border-color:transparent;box-shadow:0 3px 10px rgba(251,111,29,.35)}
 .timeline-meeting.bm{border-left:6px solid #ffb703;background:linear-gradient(90deg,#fff8e1,transparent 160px)}
+.dash-hero{display:flex;align-items:center;gap:18px}.dash-hero .dash-logo{width:92px;height:78px;padding:5px;background:#fff;border-radius:14px;box-shadow:0 5px 16px rgba(18,49,92,.18)}.dash-hero-text{min-width:0}.dash-hero-text h2{margin:0}.dash-hero-text p{margin:4px 0 0}@media(max-width:640px){.dash-hero{gap:12px;padding:20px 16px}.dash-hero .dash-logo{width:64px;height:56px}.dash-hero-text h2{font-size:21px}.dash-hero-text p{font-size:13px}}
+.rhd-logo{width:82px;height:82px;object-fit:contain;object-position:center;background:#fff;border-radius:16px;padding:6px;margin-bottom:10px;box-shadow:0 4px 14px rgba(18,49,92,.15);display:block}
+.rhd.mini .rhd-logo{width:58px;height:58px;border-radius:12px;margin-bottom:6px;padding:4px}
+.rhd.nophoto{grid-template-columns:minmax(0,1fr)}
+.f4p .rhd-logo{width:54px;height:54px;margin-bottom:5px;border-radius:10px;padding:4px}.f4p .rhd.mini .rhd-logo{width:42px;height:42px}
+.f4l .rhd-logo{width:48px;height:48px;margin-bottom:4px;border-radius:9px;padding:3px}
+@media(max-width:760px){.rhd-logo{margin-left:auto;margin-right:auto}}
 /* Editor pengolah kata (Lembar tugas guru & Canvas jawaban siswa) */
 .modal.cv{max-width:980px}
 .rte{border:1.5px solid var(--line);border-radius:8px;background:#fff;overflow:hidden;margin:6px 0 12px}.rte:focus-within{border-color:var(--royal)}
@@ -496,7 +523,8 @@ a.btn{display:inline-block;text-align:center;text-decoration:none}
     <h1 class="bn">Castle Academy</h1>
     <p class="sub">English &amp; Mathematics Learning Center</p>
     <div class="rule"></div>
-    <p class="quote">Learn Together, Grow Together.</p>
+    <div class="logo4" role="img" aria-label="Castle Academy - Group Learning Center"></div>
+    <p class="quote">Learn Together, Grow Further.</p>
   </div>
   <div class="rside">
     <div class="lcard">
@@ -551,7 +579,7 @@ const call = (fn, ...a) => GAS ? new Promise((ok, no) => {
       .then(t => { let r; try { r = JSON.parse(t); } catch (e) { throw new Error('Server mengembalikan halaman, bukan data. Deploy ulang Code.gs terbaru (Manage deployments > Edit > New version) dengan akses "Anyone".'); }
         if (r && r.ok) return r.data; throw new Error((r && r.error) || 'Kesalahan server'); });
   });
-const RC = new Map(), RTTL = {pakets: 10000}, READS = new Set(['dashboard', 'users', 'progress', 'results', 'asesmen', 'asesmenDetail', 'pakets', 'langganan', 'myAsesmen', 'monitor', 'hasil', 'lapProgram', 'foto', 'ice', 'keuangan', 'report', 'settings', 'noteFolders', 'notes', 'kelasList', 'kelasView', 'kelasSubs', 'comments', 'fileGet', 'rekapTugas', 'tugasProg']);
+const RC = new Map(), RTTL = {pakets: 10000, noteFolders: 60000, notes: 60000, kelasList: 20000}, READS = new Set(['dashboard', 'users', 'progress', 'results', 'asesmen', 'asesmenDetail', 'pakets', 'langganan', 'myAsesmen', 'monitor', 'hasil', 'lapProgram', 'foto', 'ice', 'keuangan', 'report', 'settings', 'noteFolders', 'notes', 'kelasList', 'kelasView', 'kelasSubs', 'comments', 'fileGet', 'rekapTugas', 'tugasProg']);
 let navVersion = 0;
 const staleNavigation = () => Object.assign(new Error('Navigasi telah berubah.'), {staleNavigation: true});
 const api = (a, p) => {
@@ -589,6 +617,7 @@ function toast(m, bad) {
 const fail = e => { if (!e.staleNavigation) toast(e.message, true); };
 const kat = s => s >= 90 ? 'Excellent' : s >= 80 ? 'Very Good' : s >= 70 ? 'Good' : s >= 60 ? 'Developing' : 'Needs Improvement';
 const katTag = s => `<span class="tag ${s >= 80 ? 'g' : s >= 60 ? 'y' : 'r'}">${kat(s)}</span>`;
+const dashLogo = () => `<img class="dash-logo" src="${(S.cfg && S.cfg.LogoRect) || 'assets/castle-academy-logo.png'}" alt="Castle Academy">`;
 const stTag = s => `<span class="tag ${s === 'Selesai' ? 'g' : s === 'Menunggu termin' ? 'y' : s === 'Nonaktif' ? 'r' : ''}">${s}</span>`;
 const opts = (arr, v) => arr.map(x => `<option ${x === v ? 'selected' : ''}>${esc(x)}</option>`).join('');
 const fld = (id, lb, v, type) => `<div><label for="${id}">${lb}</label><input id="${id}" type="${type || 'text'}" value="${esc(v)}"></div>`;
@@ -694,14 +723,14 @@ async function go(v) {
   const f = {dash: S.user.Role === 'siswa' ? vStudentDash : vStaffDash, users: vUsers, progress: vProgress, results: vResults, exam: vExam, paket: vPaket, keuangan: vKeuangan, aktif: vAktif, report: vReport, settings: vSettings, asesmen: vAsesmen, catprog: vCatProg, kelas: vKelas, lap: vLap, pantau: vPantau, lpp: vLpp, notes: vNotes}[v];
   f().catch(e => { if (e.staleNavigation || S.view !== v) return; $('#main').innerHTML = `<div class="empty">${esc(e.message)}</div>`; });
 }
-const head = (t, sub, btn) => `<div class="top"><div><h2>${t}</h2><p>${sub || ''}</p></div>${btn || ''}</div>`;
+const head = (t, sub, btn, isDash) => `<div class="top${isDash ? ' dash-head' : ''}">${isDash ? `<div class="dash-title">${t}</div>` : `<div><h2>${t}</h2><p>${sub || ''}</p></div>`}${btn || ''}</div>`;
 const resRows = r => r.length ? r.map(x => `<tr><td>${esc(x.Tanggal)}</td>${S.user.Role !== 'siswa' ? `<td>${esc(x.Nama)}</td>` : ''}<td>${esc(x.Judul || x.Program)}</td><td><b>${x.Skor}</b>${Number(x.Pending) > 0 ? ' <span class="tag y">sementara</span>' : ''}</td><td>${katTag(x.Skor)}</td><td>${x.Benar}/${x.Total}</td></tr>`).join('') : '<tr><td colspan="6" class="empty">Belum ada hasil ujian.</td></tr>';
 const resHead = () => `<tr><th>Tanggal</th>${S.user.Role !== 'siswa' ? '<th>Nama</th>' : ''}<th>Asesmen</th><th>Nilai</th><th>Kategori</th><th>Benar</th></tr>`;
 
 /* ---------- Staff views ---------- */
 async function vStaffDash() {
   const d = await api('dashboard'), st = [[d.siswa, 'Siswa terdaftar'], [d.aktif, 'Paket aktif'], [d.menunggu, 'Menunggu termin'], [d.soal, 'Asesmen'], [d.ujian, 'Ujian selesai'], [d.rata, 'Rata-rata nilai ujian']];
-  $('#main').innerHTML = head(`Halo, ${esc(S.user.Nama)}`, 'Ringkasan aktivitas ' + esc(C().Nama) + '.') +
+  $('#main').innerHTML = head(dashLogo + `<div><h2>Halo, ${esc(S.user.Nama)}</h2><p>Ringkasan aktivitas ${esc(C().Nama)}.</p></div>`, '', '', true) +
     `<div class="stats">${st.map(s => `<div class="stat"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('')}</div>
     <div class="two"><div class="panel"><h3>Kemampuan rata-rata siswa per bulan</h3>${lineSVG(d.bulanan)}</div><div class="panel"><h3>Sebaran siswa per jenjang dan program</h3>${pieSVG(d.sebaran)}</div></div>
     <div class="panel"><h3>Nilai siswa terkini</h3><div id="rdr"></div></div>
@@ -1096,7 +1125,7 @@ function openKelas(id) { KL.id = id; KL.tab = 'semua'; $('#main').innerHTML = '<
 async function kelasHome() {
   const staff = S.user.Role !== 'siswa', adm = S.user.Role === 'admin', list = await api('kelasList');
   const card = k => `<div class="kc" data-k="${esc(k.ID)}"><div class="kmeta"><span class="tag">${esc(k.Program)}</span>${k.Jenjang ? `<span class="tag">${esc(k.Jenjang)}</span>` : ''}${k.Kelompok ? `<span class="tag">${esc(k.Kelompok)}</span>` : ''}${k.Status === 'Arsip' ? '<span class="tag y">Diarsipkan</span>' : ''}</div>
-    <h3>${esc(k.Nama)}</h3>${k.unread ? `<span class="tag r">${esc(k.unread)} belum dibaca</span>` : ''}${k.bookmarked ? '<span class="bmk sm">Ada materi ditandai</span>' : ''}<small>Paket ${esc(k.PaketNama)} • Pengajar: ${esc(k.Pengajar)}</small>
+    <h3>${esc(k.Nama)}</h3>${k.unread ? `<span class="tag r">${esc(k.unread)} belum dibaca</span>` : ''}${(k.bmPost || (k.bmMeet && k.bmMeet.length)) ? `<span class="tag y" title="Penanda tersimpan">${k.bmPost ? '🔖 ' + k.bmPost + ' item' : ''}${k.bmPost && k.bmMeet && k.bmMeet.length ? ' • ' : ''}${k.bmMeet && k.bmMeet.length ? 'Pertemuan ' + k.bmMeet.map(x => x || '-').join(', ') : ''}</span>` : ''}<small>Paket ${esc(k.PaketNama)} • Pengajar: ${esc(k.Pengajar)}</small>
     <div class="class-progress"><div><span>Progres pertemuan</span><b>${Number(k.persen) || 0}%</b></div><div class="bar"><i style="width:${Math.max(0, Math.min(100, Number(k.persen) || 0))}%"></i></div></div><div class="kmeta"><span class="tag g">📖 ${k.nMateri} materi</span><span class="tag y">📝 ${k.nTugas} tugas</span><span class="tag">✏️ ${k.nAsesmen} asesmen</span></div>
     ${staff ? `<small>👥 ${k.nSiswa} siswa</small><div class="kact"><button class="btn sm" data-a="open">Buka</button><button class="btn ghost sm" data-a="ed">Ubah</button>${adm ? '<button class="btn del sm" data-a="del">Hapus</button>' : ''}</div>` : k.belum ? `<span class="tag r">${k.belum} tugas belum dikumpulkan</span>` : '<small>Semua tugas sudah dikumpulkan 👍</small>'}</div>`;
   $('#main').innerHTML = head('Grup Kelas - LMS', staff ? 'Kelas daring per program paket: bagikan materi, beri tugas, dan hubungkan dengan asesmen.' : 'Materi, tugas, dan asesmen dari tutor Anda.', staff ? '<button class="btn" id="kadd">+ Buat grup kelas</button>' : '') +
@@ -1628,7 +1657,7 @@ async function vResults() {
 }
 async function vStudentDash() {
   const d = await api('dashboard'), t = d.terakhir;
-  $('#main').innerHTML = `<div class="hero"><h2>Halo, ${esc(d.user.Nama)}</h2><p>${esc(d.user.Kelompok || d.user.Jenjang)} • ${esc(d.user.Jenjang)}</p></div>
+  $('#main').innerHTML = `<div class="hero dash-hero">${dashLogo()}<div class="dash-hero-text"><h2>Halo, ${esc(d.user.Nama)}</h2><p>${esc(d.user.Kelompok || d.user.Jenjang)} • ${esc(d.user.Jenjang)}</p></div></div>
   <div class="stats"><div class="stat"><b>${d.pakets.length}</b><span>Paket belajar</span></div><div class="stat"><b>${d.pertemuan}</b><span>Pertemuan tercatat</span></div><div class="stat"><b>${d.hadir}</b><span>Kali hadir</span></div><div class="stat"><b>${d.rata || '-'}</b><span>Rata-rata nilai ujian</span></div></div>
   <div class="panel"><h3>Paket belajar saya</h3>${d.pakets.map(l => `<div class="item"><div><b>${esc(l.PaketNama)}</b><br><small>${esc(l.Program)} • termin ${l.Dibayar}/${l.Termin}</small></div><div style="min-width:160px"><div class="bar" style="margin:4px 0"><i style="width:${l.Total ? Math.min(100, l.Tercatat / l.Total * 100) : 0}%"></i></div><small>${l.Tercatat}/${l.Total} pertemuan</small></div>${stTag(l.Status)}</div>`).join('') || '<div class="empty">Belum ada paket aktif. Hubungi pengelola.</div>'}</div>
   <div class="two"><div class="panel"><h3>Ujian terakhir</h3>${t ? `<div class="score">${t.Skor}</div><p>${katTag(t.Skor)} • ${esc(t.Judul || t.Program)} • ${esc(t.Tanggal)}</p>` : '<div class="empty">Belum ada ujian.</div>'}</div>
@@ -1655,6 +1684,9 @@ function applyTheme(s) {
   const lg = s.Logo || '';
   document.querySelectorAll('img.lgi').forEach(i => { if (lg) { i.src = lg; i.classList.remove('hide'); } else { i.removeAttribute('src'); i.classList.add('hide'); } });
   document.querySelectorAll('.lgf').forEach(e => e.classList.toggle('hide', !!lg));
+  document.querySelectorAll('.logo4').forEach(e => e.style.backgroundImage = `url("${s.LogoCenter || 'assets/castle-academy-login-logo.png'}")`);
+  document.querySelectorAll('.lside .quote').forEach(e => e.style.backgroundImage = `url("${s.LogoSlogan || 'assets/castle-academy-slogan.png'}")`);
+  document.querySelectorAll('.dash-logo').forEach(e => e.src = s.LogoRect || 'assets/castle-academy-logo.png');
   let ic = document.querySelector('link[rel=icon]');
   if (lg) { if (!ic) { ic = document.createElement('link'); ic.rel = 'icon'; document.head.appendChild(ic); } ic.href = lg; } else if (ic) ic.remove();
 }
@@ -1960,7 +1992,7 @@ async function vReport() {
 }
 
 /* ---------- Pengaturan ---------- */
-const SK = ['AkunGoogle', 'SpreadsheetID', 'FolderID', 'Nama', 'WarnaUtama', 'WarnaAksen', 'WarnaLatar', 'PertemuanUjian', 'KKM', 'GithubURL', 'TurnURL', 'TurnUser', 'TurnPass', 'Logo'];
+const SK = ['AkunGoogle', 'SpreadsheetID', 'FolderID', 'Nama', 'WarnaUtama', 'WarnaAksen', 'WarnaLatar', 'PertemuanUjian', 'KKM', 'GithubURL', 'TurnURL', 'TurnUser', 'TurnPass', 'Logo', 'LogoCenter', 'LogoRect', 'LogoSlogan'];
 async function vSettings() {
   const s = await api('settings'), f = (k, l, t) => fld('s_' + k, l, s[k], t);
   $('#main').innerHTML = head('Pengaturan', 'Kelola sumber data, tampilan, dan aturan program.') +
@@ -1968,6 +2000,7 @@ async function vSettings() {
     <label for="s_logo_f">Logo (PNG, JPG, atau WebP)</label><input type="file" id="s_logo_f" accept="image/png,image/jpeg,image/webp"><input type="hidden" id="s_Logo" value="${esc(s.Logo || '')}">
     <div class="act" style="margin-top:8px"><button class="btn ghost sm" id="lgx" type="button">Hapus logo</button></div>
     <small class="mut" style="display:block;margin-top:6px">Gambar dikecilkan otomatis. Logo tampil di bagian atas menu samping; saat menu disembunyikan, logo menjadi tombol di pojok kiri atas. Klik Simpan pengaturan untuk menerapkan.</small></div></div></div>
+    <div class="panel"><h3>Variasi logo aplikasi</h3><p class="mut" style="margin-top:0">Setelah disimpan, logo berikut dipakai oleh aplikasi dan tidak lagi memerlukan unggahan ke folder Assets. Kosongkan untuk memakai gambar bawaan.</p><div class="row">${[['LogoCenter', 'Logo Deskripsi Center', 'Logo pada halaman login.'], ['LogoRect', 'Logo Deskripsi segi panjang', 'Logo pada dashboard dan header laporan.'], ['LogoSlogan', 'Slogan Logo', 'Slogan pada halaman login.']].map(x => `<div class="idf"><label for="s_${x[0]}_f">${x[1]}</label><input type="file" id="s_${x[0]}_f" accept="image/png,image/jpeg,image/webp"><input type="hidden" id="s_${x[0]}" value="${esc(s[x[0]] || '')}"><div class="lgpv" id="pv_${x[0]}" style="margin-top:8px"></div><div class="act" style="margin-top:8px"><button class="btn ghost sm" type="button" data-lgx="${x[0]}">Hapus logo</button></div><small class="mut">${x[2]}</small></div>`).join('')}</div></div>
     <div class="panel"><h3>Sumber data</h3><div class="row">${f('AkunGoogle', 'Akun Google pengelola', 'email')}${f('SpreadsheetID', 'Spreadsheet utama (URL atau ID)')}${f('FolderID', 'Folder utama Drive (URL atau ID)')}</div>
     <p style="color:var(--mute);font-size:13px">Spreadsheet utama menyimpan pengaturan, pegawai, siswa, pembayaran, dan seluruh data lain. Akun script harus punya akses edit ke spreadsheet dan folder. Jika spreadsheet diganti, sheet baru dibuat otomatis dan akun Admin awal (Admin / 123456) dibuat jika kosong.</p>
     <div class="act"><button class="btn ghost" id="tc">Uji koneksi</button><button class="btn ghost" id="bk">Backup ke Drive</button><button class="btn ghost" id="tlms">Uji penyimpanan LMS</button></div><p id="tr" style="font-weight:600"></p></div>
@@ -1994,6 +2027,11 @@ async function vSettings() {
   const pv = () => { const v = $('#s_Logo').value; $('#lgpv').innerHTML = v ? `<img src="${esc(v)}" alt="Pratinjau logo">` : 'Belum ada logo'; $('#lgx').disabled = !v; };
   $('#s_logo_f').onchange = async e => { const fl = e.target.files[0]; if (!fl) return; try { $('#s_Logo').value = await shrinkLogo(fl); pv(); toast('Logo siap. Klik Simpan pengaturan untuk menerapkan.'); } catch (er) { fail(er); } e.target.value = ''; };
   $('#lgx').onclick = () => { $('#s_Logo').value = ''; pv(); };
+  ['LogoCenter', 'LogoRect', 'LogoSlogan'].forEach(k => {
+    const pvx = () => { const v = $('#s_' + k).value; $('#pv_' + k).innerHTML = v ? `<img src="${esc(v)}" alt="Pratinjau ${k}">` : 'Gambar bawaan'; document.querySelector(`[data-lgx="${k}"]`).disabled = !v; };
+    $('#s_' + k + '_f').onchange = async e => { const fl = e.target.files[0]; if (!fl) return; try { $('#s_' + k).value = await shrinkLogo(fl); pvx(); toast('Logo siap. Klik Simpan pengaturan untuk menerapkan.'); } catch (er) { fail(er); } e.target.value = ''; };
+    document.querySelector(`[data-lgx="${k}"]`).onclick = () => { $('#s_' + k).value = ''; pvx(); }; pvx();
+  });
   pv(); tpInit(document.querySelector('.tpw'));
   $('#tlms').onclick = async () => { const b = $('#tlms'); b.disabled = true; try { const r = await api('tesLms'); viewModal('Uji penyimpanan LMS (Google Drive)', r.langkah.map(l => `<div class="sr"><b>${l.ok ? '✅' : '❌'} ${esc(l.nama)}</b><div class="mut" style="font-size:13px;margin-top:4px;overflow-wrap:anywhere">${esc(l.info)}</div></div>`).join('') + (r.petunjuk ? `<div class="panel" style="margin:12px 0 0">${esc(r.petunjuk)}</div>` : '<div class="pbar"><span class="tag g">Semua langkah berhasil. Unggah file LMS siap dipakai.</span></div>')); } catch (e) { fail(e); } b.disabled = false; };
   if ($('#apv')) {
@@ -2514,11 +2552,13 @@ const repX = d => {
   return {l, u, rows, all, names, lv, fv, ap, pgr, as, comb, rc: rec(comb == null ? null : Math.round(comb)), hadir: rows.filter(r => r.Kehadiran === 'Hadir').length,
     last: d.res.slice().sort((a, b) => String(b.Tanggal).localeCompare(String(a.Tanggal)))[0], notes: rows.filter(r => r.Catatan)};
 };
+const reportLogo = '<img class="rhd-logo" src="assets/castle-academy-logo.png" alt="Logo Castle Academy">';
+const reportLogoData = () => (S.cfg && S.cfg.LogoRect) ? `<img class="rhd-logo" src="${esc(S.cfg.LogoRect)}" alt="Logo Castle Academy">` : reportLogo;
 const repHead = (d, x, mini) => {
   const info = [['Jenjang', x.u.Jenjang], ['Kelas / kelompok', x.u.Kelompok], ['Program', x.l.Program], ['Paket belajar', x.l.PaketNama], ['Mulai', x.l.Mulai], ['Termin dibayar', `${x.l.Dibayar} dari ${x.l.Termin}`], ['Pertemuan', `${x.l.Tercatat} dari ${x.l.Total}`], ['Kehadiran', `${x.hadir} hadir dari ${x.rows.length}`],
     ['Hasil asesmen terakhir', x.last ? `${x.last.Skor}${Number(x.last.Pending) > 0 ? '*' : ''} • ${x.last.Judul || x.last.Program}` : '-']];
-  return mini ? `<div class="rhd mini"><div><div class="rl">${esc(d.lembaga)} • Catatan tutor</div><h1>${esc(x.u.Nama)}</h1><small>${esc(x.l.PaketNama)} • ${esc(x.l.Program)} • ${esc(x.u.Jenjang || '')}${x.u.Kelompok ? ' • ' + esc(x.u.Kelompok) : ''} • ${x.notes.length} catatan</small></div>${pfImg(d.foto, x.u.Nama)}</div>`
-    : `<div class="rhd"><div><div class="rl">${esc(d.lembaga)} • Laporan perkembangan belajar</div><h1>${esc(x.u.Nama)}</h1><div class="idg">${info.map(r => `<div><small>${r[0]}</small><b>${esc(r[1] || '-')}</b></div>`).join('')}</div></div>${pfImg(d.foto, x.u.Nama)}</div>`;
+  return mini ? `<div class="rhd mini"><div>${reportLogoData()}<div class="rl">${esc(d.lembaga)} • Catatan tutor</div><h1>${esc(x.u.Nama)}</h1><small>${esc(x.l.PaketNama)} • ${esc(x.l.Program)} • ${esc(x.u.Jenjang || '')}${x.u.Kelompok ? ' • ' + esc(x.u.Kelompok) : ''} • ${x.notes.length} catatan</small></div>${pfImg(d.foto, x.u.Nama)}</div>`
+    : `<div class="rhd"><div>${reportLogoData()}<div class="rl">${esc(d.lembaga)} • Laporan perkembangan belajar</div><h1>${esc(x.u.Nama)}</h1><div class="idg">${info.map(r => `<div><small>${r[0]}</small><b>${esc(r[1] || '-')}</b></div>`).join('')}</div></div>${pfImg(d.foto, x.u.Nama)}</div>`;
 };
 const repCharts = x => x.all.length >= 3 ? `<div class="pair"><div class="chc"><h4>Radar nilai terakhir</h4>${radarSVG(x.names, x.lv.map(v => v || 0), 10)}</div><div class="chc"><h4>Nilai awal dan nilai akhir</h4>${barSVG(x.names, x.fv, x.lv)}</div></div>` : '';
 const repTabs = (d, x) => aspek('Pemahaman materi', 'P', d.pk.P, x.rows) + aspek('Keterampilan', 'K', d.pk.K, x.rows);
@@ -2659,8 +2699,8 @@ function repSheets(d) {
 function progSheets(L, rows, FOTO, T) {
   const G = PG.p, W = G.w, H = Math.round(W * G.ratio), hist = histRows(rows).map(histRow);
   const info = [['Jenjang', L.Jenjang], ['Kelas / kelompok', L.Kelompok], ['Program', L.Program], ['Paket belajar', L.PaketNama], ['Pertemuan', `${L.Tercatat} dari ${L.Total}`], ['Termin dibayar', `${L.Dibayar} dari ${L.Termin}`]];
-  const head = `<div class="rhd nophoto"><div><div class="rl">${esc(C().Nama)} • Catatan progres belajar</div><h1>${esc(L.Nama)}</h1><div class="idg">${info.map(r => `<div><small>${r[0]}</small><b>${esc(r[1] || '-')}</b></div>`).join('')}</div></div></div>`;
-  const mini = `<div class="rhd mini nophoto"><div><div class="rl">${esc(C().Nama)} • Catatan progres belajar</div><h1>${esc(L.Nama)}</h1><small>${esc(L.PaketNama)} • ${esc(L.Program)} • dicetak ${today()}</small></div></div>`;
+  const head = `<div class="rhd nophoto"><div>${reportLogoData()}<div class="rl">${esc(C().Nama)} • Catatan progres belajar</div><h1>${esc(L.Nama)}</h1><div class="idg">${info.map(r => `<div><small>${r[0]}</small><b>${esc(r[1] || '-')}</b></div>`).join('')}</div></div></div>`;
+  const mini = `<div class="rhd mini nophoto"><div>${reportLogoData()}<div class="rl">${esc(C().Nama)} • Catatan progres belajar</div><h1>${esc(L.Nama)}</h1><small>${esc(L.PaketNama)} • ${esc(L.Program)} • dicetak ${today()}</small></div></div>`;
   const sh1 = b => `${head}<div class="rbd tp"><section>${progTop(L, rows, FOTO)}</section><section>${progresHtml(progres(rows))}</section>${tugasSheet(T)}${b === null ? '' : `<section><h3>Riwayat pertemuan</h3>${histTable(b)}</section>`}</div>`;
   const shN = b => `${mini}<div class="rbd tp"><section><h3>Riwayat pertemuan (lanjutan)</h3>${histTable(b)}</section></div>`;
   const pages = chunkRows(hist, sh1, shN, W, H, G.ratio);
