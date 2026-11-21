@@ -17,7 +17,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .hide{display:none!important}
 /* login */
 #login{min-height:100vh;display:grid;grid-template-columns:1.05fr 1fr;background:#fff}
-#login{background:#f7fbff url('assets/castle-academy-login-full.png') center/cover no-repeat;position:relative;overflow:hidden}
+#login{background:#f7fbff url('assets/castle-academy-login-full.png') left top/100% auto no-repeat;position:relative;overflow:hidden}
 #login .lside{background:transparent;color:var(--ink);padding:40px 30px;align-items:center;text-align:center;justify-content:center;position:relative;z-index:1}
 #login .lside::before{display:none}
 #login .lside .crest,#login .lside h1,#login .lside .sub,#login .lside .rule{display:none}
@@ -73,8 +73,8 @@ input:focus,select:focus,textarea:focus{border-color:var(--royal);outline:none}
 @media(max-width:650px){.lprog-layout{grid-template-columns:1fr;max-height:65vh}.lprog-list{max-height:180px;overflow:auto}.lprog-form{padding:12px}}
 .top.dash-head{align-items:center;padding:14px 18px;border:1px solid var(--line);border-radius:18px;background:#fff;gap:16px}
 .dash-title{display:flex;align-items:center;gap:14px;min-width:0}
-.dash-logo{width:190px;height:82px;object-fit:contain;flex:none;border-radius:12px;background:#fff;padding:6px}
-@media(max-width:640px){.top.dash-head{padding:14px;gap:10px}.dash-title{gap:12px;flex:1 1 100%;align-items:center}.dash-logo{width:126px;height:62px;padding:4px}.dash-head h2{font-size:20px}.dash-head p{font-size:13px}}
+.dash-logo{width:236px;height:100px;object-fit:contain;flex:none;border-radius:14px;background:#fff;padding:7px}
+@media(max-width:640px){.top.dash-head{padding:14px;gap:10px}.dash-title{gap:12px;flex:1 1 100%;align-items:center}.dash-logo{width:108px;height:106px;padding:4px}.dash-head h2{font-size:20px}.dash-head p{font-size:13px}}
 /* shell */
 #app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
 aside{background:#fff;border-right:1px solid var(--line);color:var(--ink);padding:22px 14px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
@@ -195,12 +195,14 @@ input[type=radio],input[type=checkbox]{width:auto}
 .btn.bmk-btn:hover{background:#ffefbf}.btn.bmk-btn.on{background:linear-gradient(135deg,#ffb703,#fb6f1d);color:#fff;border-color:transparent;box-shadow:0 3px 10px rgba(251,111,29,.35)}
 .timeline-meeting.bm{border-left:6px solid #ffb703;background:linear-gradient(90deg,#fff8e1,transparent 160px)}
 .dash-hero{display:flex;align-items:center;gap:18px}.dash-hero .dash-logo{width:200px;height:86px;padding:6px;background:#fff;border-radius:14px;box-shadow:0 5px 16px rgba(18,49,92,.18)}.dash-hero-text{min-width:0}.dash-hero-text h2{margin:0}.dash-hero-text p{margin:4px 0 0}@media(max-width:640px){.dash-hero{gap:12px;padding:20px 16px}.dash-hero .dash-logo{width:138px;height:62px}.dash-hero-text h2{font-size:21px}.dash-hero-text p{font-size:13px}}
-.rhd-logo{width:132px;height:54px;object-fit:contain;object-position:left center;background:#fff;border-radius:10px;padding:5px;margin:0 0 9px;box-shadow:0 3px 10px rgba(18,49,92,.12);display:block}
-.rhd.mini .rhd-logo{width:106px;height:42px;border-radius:8px;margin:0 0 5px;padding:4px}
-.rhd.nophoto{grid-template-columns:minmax(0,1fr)}
-.f4p .rhd-logo{width:100px;height:41px;margin:0 0 4px;border-radius:7px;padding:3px}.f4p .rhd.mini .rhd-logo{width:86px;height:35px}
-.f4l .rhd-logo{width:96px;height:39px;margin:0 0 3px;border-radius:7px;padding:3px}
-@media(max-width:760px){.rhd-logo{margin-left:auto;margin-right:auto;object-position:center}}
+.rhd{grid-template-columns:minmax(0,1fr) auto auto}
+.rhd-logo{width:190px;height:78px;object-fit:contain;object-position:center;background:#fff;border-radius:12px;padding:7px;margin:0;box-shadow:0 3px 10px rgba(18,49,92,.12);display:block;grid-column:2;grid-row:1;align-self:start}
+.rhd.mini .rhd-logo{width:148px;height:60px;border-radius:10px;margin:0;padding:5px}
+.rhd.nophoto{grid-template-columns:minmax(0,1fr) auto}
+.rhd.nophoto .rhd-logo{grid-column:2}
+.f4p .rhd-logo{width:138px;height:57px;margin:0;border-radius:9px;padding:5px}.f4p .rhd.mini .rhd-logo{width:112px;height:46px}
+.f4l .rhd-logo{width:126px;height:52px;margin:0;border-radius:8px;padding:4px}
+@media(max-width:760px){.rhd{grid-template-columns:1fr}.rhd-logo,.rhd.nophoto .rhd-logo{grid-column:1;grid-row:auto;margin:0 auto 10px;object-position:center}.rhd .rhd-logo{order:-1}.rhd .pfr{grid-column:1}}
 /* Editor pengolah kata (Lembar tugas guru & Canvas jawaban siswa) */
 .modal.cv{max-width:980px}
 .rte{border:1.5px solid var(--line);border-radius:8px;background:#fff;overflow:hidden;margin:6px 0 12px}.rte:focus-within{border-color:var(--royal)}
@@ -617,7 +619,7 @@ function toast(m, bad) {
 const fail = e => { if (!e.staleNavigation) toast(e.message, true); };
 const kat = s => s >= 90 ? 'Excellent' : s >= 80 ? 'Very Good' : s >= 70 ? 'Good' : s >= 60 ? 'Developing' : 'Needs Improvement';
 const katTag = s => `<span class="tag ${s >= 80 ? 'g' : s >= 60 ? 'y' : 'r'}">${kat(s)}</span>`;
-const dashLogo = () => `<img class="dash-logo" src="${(S.cfg && S.cfg.LogoRect) || 'assets/castle-academy-logo.png'}" alt="Castle Academy">`;
+const dashLogo = () => `<img class="dash-logo" src="${(S.cfg && (matchMedia('(max-width:640px)').matches ? S.cfg.LogoCenter : S.cfg.LogoRect)) || (matchMedia('(max-width:640px)').matches ? 'assets/castle-academy-login-logo.png' : 'assets/castle-academy-logo.png')}" alt="Castle Academy">`;
 const stTag = s => `<span class="tag ${s === 'Selesai' ? 'g' : s === 'Menunggu termin' ? 'y' : s === 'Nonaktif' ? 'r' : ''}">${s}</span>`;
 const opts = (arr, v) => arr.map(x => `<option ${x === v ? 'selected' : ''}>${esc(x)}</option>`).join('');
 const fld = (id, lb, v, type) => `<div><label for="${id}">${lb}</label><input id="${id}" type="${type || 'text'}" value="${esc(v)}"></div>`;
@@ -700,7 +702,7 @@ function start() {
   const staff = S.user.Role !== 'siswa';
   const adm = S.user.Role === 'admin';
   const items = staff
-    ? [['dash', '🏫', 'Dashboard'], ['users', '👥', adm ? 'Pengguna' : 'Siswa'], ['paket', '🎓', 'Daftar Program Paket'], ['progress', '📈', 'Catatan Progres'], ['kelas', '🎒', 'Grup Kelas - LMS'], ['keuangan', '💳', 'Keuangan'], ['aktif', '✅', 'Paket Aktif'], ['asesmen', '📚', 'Daftar asesmen'], ['lap', '📊', 'Laporan hasil asesmen'], ['pantau', '📡', 'Pantau ujian'], ['lpp', '🗓️', 'Laporan Periode Program']].concat(adm ? [['settings', '⚙️', 'Pengaturan']] : [])
+    ? [['dash', '🏫', 'Dashboard'], ['users', '👥', adm ? 'Pengguna' : 'Siswa'], ['paket', '🎓', 'Daftar Program Paket'], ['progress', '📈', 'Catatan Progres'], ['kelas', '🎒', 'Grup Kelas - LMS'], ['keuangan', '💳', 'Keuangan'], ['aktif', '✅', 'Paket Aktif'], ['asesmen', '📚', 'Daftar asesmen'], ['lap', '📊', 'Laporan hasil asesmen'], ['pantau', '📡', 'Pantau ujian'], ['lpp', '🗓️', 'Laporan Periode']].concat(adm ? [['settings', '⚙️', 'Pengaturan']] : [])
     : [['dash', '🏫', 'Beranda'], ['kelas', '🎒', 'Grup Kelas - LMS'], ['exam', '✏️', 'Ujian'], ['catprog', '📈', 'Catatan Progres'], ['results', '🏅', 'Hasil ujian & laporan'], ['report', '🖨️', 'Laporan saya']];
   if (staff) items.splice(items.findIndex(i => i[0] === 'kelas') + 1, 0, ['notes', '📝', 'Catatan Guru']);
   else items.push(['notes', '📝', 'Catatan Siswa']);
@@ -1686,7 +1688,7 @@ function applyTheme(s) {
   document.querySelectorAll('.lgf').forEach(e => e.classList.toggle('hide', !!lg));
   document.querySelectorAll('.logo4').forEach(e => e.style.backgroundImage = `url("${s.LogoCenter || 'assets/castle-academy-login-logo.png'}")`);
   document.querySelectorAll('.lside .quote').forEach(e => e.style.backgroundImage = `url("${s.LogoSlogan || 'assets/castle-academy-slogan.png'}")`);
-  document.querySelectorAll('.dash-logo').forEach(e => e.src = s.LogoRect || 'assets/castle-academy-logo.png');
+  document.querySelectorAll('.dash-logo').forEach(e => e.src = (matchMedia('(max-width:640px)').matches ? s.LogoCenter : s.LogoRect) || (matchMedia('(max-width:640px)').matches ? 'assets/castle-academy-login-logo.png' : 'assets/castle-academy-logo.png'));
   let ic = document.querySelector('link[rel=icon]');
   if (lg) { if (!ic) { ic = document.createElement('link'); ic.rel = 'icon'; document.head.appendChild(ic); } ic.href = lg; } else if (ic) ic.remove();
 }
