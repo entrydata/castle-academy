@@ -167,6 +167,34 @@ input[type=radio],input[type=checkbox]{width:auto}
 .pie{display:flex;gap:18px;align-items:center;flex-wrap:wrap}.pie svg{width:180px;flex:none}.pl div{display:flex;gap:8px;align-items:center;margin:4px 0}.pl i{width:12px;height:12px;border-radius:4px;flex:none}
 .lg{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--mute)}.lg i{display:inline-block;width:10px;height:10px;border-radius:99px;margin-right:6px}.lchart{width:100%}
 .sc{flex-wrap:wrap;justify-content:flex-end}.sc button{width:34px;height:34px}
+/* Badge bookmark */
+.bmk{display:inline-flex;align-items:center;gap:8px;padding:6px 16px 6px 7px;border-radius:999px;background:linear-gradient(135deg,#ffb703,#fb6f1d);color:#fff;font-weight:800;font-size:13.5px;line-height:1;letter-spacing:.2px;box-shadow:0 4px 12px rgba(251,111,29,.35),inset 0 1px 0 rgba(255,255,255,.4);vertical-align:middle;margin:2px 6px 2px 0;white-space:nowrap;text-shadow:0 1px 1px rgba(120,53,15,.35)}
+.bmk::before{content:'🔖';display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.3);font-size:15px;text-shadow:none}
+.bmk.sm{font-size:12.5px;padding:5px 13px 5px 6px}.bmk.sm::before{width:22px;height:22px;font-size:13px}
+.btn.bmk-btn{font-weight:800;font-size:13.5px;min-height:36px;padding:7px 15px;border:1.5px solid #ffb703;color:#b45309;background:#fff8e1;box-shadow:none}
+.btn.bmk-btn:hover{background:#ffefbf}.btn.bmk-btn.on{background:linear-gradient(135deg,#ffb703,#fb6f1d);color:#fff;border-color:transparent;box-shadow:0 3px 10px rgba(251,111,29,.35)}
+.timeline-meeting.bm{border-left:6px solid #ffb703;background:linear-gradient(90deg,#fff8e1,transparent 160px)}
+/* Editor pengolah kata (Lembar tugas guru & Canvas jawaban siswa) */
+.modal.cv{max-width:980px}
+.rte{border:1.5px solid var(--line);border-radius:8px;background:#fff;overflow:hidden;margin:6px 0 12px}.rte:focus-within{border-color:var(--royal)}
+.rtb{display:flex;flex-wrap:wrap;gap:4px;align-items:center;padding:7px;background:var(--mist);border-bottom:1.5px solid var(--line)}
+.rtb i{width:1px;height:22px;background:var(--line);margin:0 3px}
+.rtb button,.rtp button,.rtb select{width:auto;min-width:34px;height:32px;padding:0 9px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--ink);font-family:inherit;font-size:14px;font-weight:700;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:4px;margin:0}
+.rtb select{font-size:12.5px;max-width:112px;padding:0 4px}
+.rtb button:hover,.rtp button:hover{border-color:var(--royal);color:var(--royal)}.rtb button.on,.rtp button.on{background:var(--royal);color:#fff;border-color:var(--royal)}
+.rtp{padding:8px;border-bottom:1.5px solid var(--line);max-height:190px;overflow:auto;background:#fcfdff}.rtp[hidden]{display:none}
+.rtp .xpt{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}.rtp .xpg{display:grid;grid-template-columns:repeat(auto-fill,minmax(40px,1fr));gap:4px}.rtp .xpg.wide{grid-template-columns:repeat(auto-fill,minmax(78px,1fr))}
+.rtp .rtt{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:13.5px}.rtp .rtt input{width:70px;padding:5px 8px;margin:0;border-radius:4px}
+.rte-ed{min-height:260px;max-height:55vh;overflow:auto;padding:16px 18px;outline:0;line-height:1.7;font-size:15.5px;word-break:break-word;background:#fff}
+.rte-ed:empty::before{content:attr(data-ph);color:var(--mute);pointer-events:none}
+.rte.nocopy .rte-ed{-webkit-touch-callout:none}
+.rte-ed table,.rte-view table{border-collapse:collapse;width:100%;margin:10px 0}.rte-ed td,.rte-ed th,.rte-view td,.rte-view th{border:1px solid #aebdd0;padding:7px;min-width:42px}
+.rte-ed ul,.rte-ed ol,.rte-view ul,.rte-view ol{padding-left:26px;margin:6px 0}.rte-view{line-height:1.7;word-break:break-word}
+.rte-foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:6px 12px;border-top:1.5px solid var(--line);background:var(--mist);font-size:12px;color:var(--mute)}.rte-foot .bad{color:var(--bad);font-weight:700}
+.lembar{border:1px solid #f1dca0;border-left:5px solid #f4b740;background:#fffdf5;border-radius:10px;padding:14px 18px;margin:12px 0}.lembar-h{font-weight:800;color:#8a6410;margin-bottom:6px;font-size:14.5px}
+details.lembar>summary{cursor:pointer;margin-bottom:6px}
+.cvopt{border:1.5px dashed #7c5cf0;background:#f6f3ff;border-radius:10px;padding:12px 14px;margin:12px 0}
+.cvsub{border:1px solid var(--line);border-radius:8px;padding:10px 14px;background:#fff;margin:6px 0}
 /* Rekap tugas LMS */
 .rkp.modal{max-width:1120px;width:min(1120px,96vw);padding:0;display:flex;flex-direction:column;max-height:92vh;overflow:hidden}
 .rkp-body{overflow:auto;padding:22px;flex:1;min-height:200px}
@@ -1068,7 +1096,7 @@ function openKelas(id) { KL.id = id; KL.tab = 'semua'; $('#main').innerHTML = '<
 async function kelasHome() {
   const staff = S.user.Role !== 'siswa', adm = S.user.Role === 'admin', list = await api('kelasList');
   const card = k => `<div class="kc" data-k="${esc(k.ID)}"><div class="kmeta"><span class="tag">${esc(k.Program)}</span>${k.Jenjang ? `<span class="tag">${esc(k.Jenjang)}</span>` : ''}${k.Kelompok ? `<span class="tag">${esc(k.Kelompok)}</span>` : ''}${k.Status === 'Arsip' ? '<span class="tag y">Diarsipkan</span>' : ''}</div>
-    <h3>${esc(k.Nama)}</h3>${k.unread ? `<span class="tag r">${esc(k.unread)} belum dibaca</span>` : ''}${k.bookmarked ? '<span class="tag">🔖 Ada materi ditandai</span>' : ''}<small>Paket ${esc(k.PaketNama)} • Pengajar: ${esc(k.Pengajar)}</small>
+    <h3>${esc(k.Nama)}</h3>${k.unread ? `<span class="tag r">${esc(k.unread)} belum dibaca</span>` : ''}${k.bookmarked ? '<span class="bmk sm">Ada materi ditandai</span>' : ''}<small>Paket ${esc(k.PaketNama)} • Pengajar: ${esc(k.Pengajar)}</small>
     <div class="class-progress"><div><span>Progres pertemuan</span><b>${Number(k.persen) || 0}%</b></div><div class="bar"><i style="width:${Math.max(0, Math.min(100, Number(k.persen) || 0))}%"></i></div></div><div class="kmeta"><span class="tag g">📖 ${k.nMateri} materi</span><span class="tag y">📝 ${k.nTugas} tugas</span><span class="tag">✏️ ${k.nAsesmen} asesmen</span></div>
     ${staff ? `<small>👥 ${k.nSiswa} siswa</small><div class="kact"><button class="btn sm" data-a="open">Buka</button><button class="btn ghost sm" data-a="ed">Ubah</button>${adm ? '<button class="btn del sm" data-a="del">Hapus</button>' : ''}</div>` : k.belum ? `<span class="tag r">${k.belum} tugas belum dikumpulkan</span>` : '<small>Semua tugas sudah dikumpulkan 👍</small>'}</div>`;
   $('#main').innerHTML = head('Grup Kelas - LMS', staff ? 'Kelas daring per program paket: bagikan materi, beri tugas, dan hubungkan dengan asesmen.' : 'Materi, tugas, dan asesmen dari tutor Anda.', staff ? '<button class="btn" id="kadd">+ Buat grup kelas</button>' : '') +
@@ -1103,8 +1131,8 @@ function postCard(x) {
   }
   if (x.Tipe === 'materi' && !staff) extra = `<div class="pbar">${s ? `<span class="tag g">✓ Sudah dipelajari</span>${s.Dicatat ? '' : '<button class="btn ghost sm" data-a="done" data-v="0">Batalkan</button>'}` : '<button class="btn sm" data-a="done" data-v="1">Tandai selesai dipelajari</button>'}</div>`;
   if (x.Tipe === 'tugas' && !staff) {
-    extra = (s ? `<div class="sr"><div class="sh">${s.Status === 'Dinilai' ? '<span class="tag g">Dinilai</span>' : '<span class="tag y">Terkumpul</span>'}<small class="mut">${esc(s.Waktu)}${x.Tenggat && String(s.Waktu).slice(0, 10) > x.Tenggat ? ' • terlambat' : ''}</small></div>${s.Teks ? `<div class="tx">${autolink(s.Teks)}</div>` : ''}${filesHtml(s.Files)}${s.Nilai != null ? `<div class="pbar"><b>Nilai: ${s.Nilai} / ${x.Maks}</b>${s.Komentar ? `<span>💬 ${esc(s.Komentar)}</span>` : ''}</div>` : ''}</div>` : '')
-      + (s && s.Status === 'Dinilai' ? '' : `<div class="pbar">${late && !s ? '<span class="tag r">Lewat tenggat</span>' : ''}<button class="btn sm" data-a="kumpul">${s ? 'Ubah jawaban' : 'Kumpulkan tugas'}</button></div>`);
+    extra = (s ? `<div class="sr"><div class="sh">${s.Status === 'Dinilai' ? '<span class="tag g">Dinilai</span>' : '<span class="tag y">Terkumpul</span>'}<small class="mut">${esc(s.Waktu)}${x.Tenggat && String(s.Waktu).slice(0, 10) > x.Tenggat ? ' • terlambat' : ''}</small></div>${s.Teks ? `<div class="tx">${autolink(s.Teks)}</div>` : ''}${s.Canvas ? `<div class="cvsub"><small class="mut">Jawaban di Canvas</small><div class="rte-view">${lmsSafeHTML(s.Canvas)}</div></div>` : ''}${filesHtml(s.Files)}${s.Nilai != null ? `<div class="pbar"><b>Nilai: ${s.Nilai} / ${x.Maks}</b>${s.Komentar ? `<span>💬 ${esc(s.Komentar)}</span>` : ''}</div>` : ''}</div>` : '')
+      + (s && s.Status === 'Dinilai' ? '' : `<div class="pbar">${late && !s ? '<span class="tag r">Lewat tenggat</span>' : ''}<button class="btn sm" data-a="kumpul">${s ? 'Ubah jawaban' : x.Canvas ? '🖊️ Kerjakan di Canvas' : 'Kumpulkan tugas'}</button></div>`);
   }
   if (staff) {
     const lb = x.Tipe === 'tugas' ? `${x.selesai}/${x.total} terkumpul • ${x.dinilai} dinilai` : x.Tipe === 'materi' ? `${x.selesai}/${x.total} siswa selesai` : `${x.selesai}/${x.total} siswa sudah mengerjakan`;
@@ -1114,7 +1142,7 @@ function postCard(x) {
     : s && s.Dicatat ? `<div class="pbar"><span class="tag g">📈 Tercatat sebagai pertemuan ke-${s.Pertemuan}</span></div>` : '<div class="pbar"><small class="mut">📈 Item ini dihitung sebagai pertemuan daring setelah Anda menyelesaikannya.</small></div>';
   return `<div class="pst ${x.Tipe}" data-p="${esc(x.ID)}"><div class="ph"><div><span class="tag ${T[2]}">${T[0]} ${T[1]}</span><h3>${esc(x.Judul)}</h3><small class="mut">Diposting ${fmtD(x.Dibuat)} • ${esc(x.Penulis)}${x.Tenggat ? ` • Tenggat <b${late ? ' style="color:var(--bad)"' : ''}>${fmtD(x.Tenggat)}</b>` : ''}</small></div>
     ${staff ? '<div class="act"><button class="btn ghost sm" data-a="ed">Ubah</button><button class="btn del sm" data-a="del">Hapus</button></div>' : ''}</div>
-    ${x.GuruOnly ? '<span class="tag y">🔒 Hanya guru</span>' : ''}${KL.D && KL.D.bookmarkPostID === x.ID ? ' <span class="tag">🔖 Materi terakhir diberikan</span>' : ''}${x.Isi ? `<div class="tx">${autolink(x.Isi)}</div>` : ''}${filesHtml(x.Files)}${linksHtml(x.Links)}${extra}<div class="cm"><button class="btn ghost sm" data-a="comments">💬 Komentar (${Number(x.nKomentar) || 0})</button>${x.unread ? `<span class="cmnew"> ${Number(x.unread)} aktivitas baru</span>` : ''}<div class="cmitems"></div></div></div>`;
+    ${x.GuruOnly ? '<span class="tag y">🔒 Hanya guru</span>' : ''}${KL.D && KL.D.bookmarkPostID === x.ID ? ' <span class="bmk">Materi terakhir diberikan</span>' : ''}${x.Isi ? `<div class="tx">${autolink(x.Isi)}</div>` : ''}${x.Tipe === 'tugas' && x.Lembar ? `<div class="lembar"><div class="lembar-h">📋 Lembar tugas</div><div class="rte-view">${lmsSafeHTML(x.Lembar)}</div></div>` : ''}${filesHtml(x.Files)}${linksHtml(x.Links)}${x.Tipe === 'tugas' && x.Canvas ? '<div class="info">🖊️ Tugas ini dijawab langsung di <b>Lembar Jawaban (Canvas)</b>' + (staff ? '.' : '. Klik tombol di bawah untuk mulai menulis.') + '</div>' : ''}${extra}<div class="cm"><button class="btn ghost sm" data-a="comments">💬 Komentar (${Number(x.nKomentar) || 0})</button>${x.unread ? `<span class="cmnew"> ${Number(x.unread)} aktivitas baru</span>` : ''}<div class="cmitems"></div></div></div>`;
 }
 let zoomClient = null, zoomGeneration = 0, zoomLoadPromise = null;
 async function zoomLeave() {
@@ -1196,8 +1224,8 @@ function timelineHtml(D, list, staff) {
   const card = (p, posts, i) => `${staff ? `<div class="timeline-post-actions"><select data-tmove="${esc(p.ID)}" aria-label="Pindahkan ${esc(p.Judul)}">${!p.Pertemuan || !known.has(String(p.Pertemuan)) ? '<option value="" selected disabled>Pilih pertemuan</option>' : ''}${meetings.map(m => `<option value="${esc(m.Pertemuan)}" ${String(p.Pertemuan || '') === String(m.Pertemuan) ? 'selected' : ''}>Pertemuan ${esc(m.Pertemuan)}</option>`).join('')}</select><button class="btn ghost sm" data-torder="up" data-post="${esc(p.ID)}" ${KL.tab !== 'semua' || i === 0 ? 'disabled' : ''} title="Urutkan melalui tab Semua" aria-label="Naikkan ${esc(p.Judul)}">↑</button><button class="btn ghost sm" data-torder="down" data-post="${esc(p.ID)}" ${KL.tab !== 'semua' || i === posts.length - 1 ? 'disabled' : ''} title="Urutkan melalui tab Semua" aria-label="Turunkan ${esc(p.Judul)}">↓</button></div>` : ''}${postCard(p)}`;
   return groups.map(({m, posts}) => {
     posts = posts.slice().sort((a, b) => (Number(a.Urutan) || 0) - (Number(b.Urutan) || 0));
-    const locked = m && timelineFlag(m.Locked, false), visible = !m || timelineFlag(m.Visible, true), executed = m && timelineFlag(m.Executed, false);
-    return `<section class="timeline-meeting"><div class="timeline-head"><div><h3>${esc(m ? 'Pertemuan ' + m.Pertemuan : 'Belum dikelompokkan')}</h3>${m ? `<span class="tag ${executed ? 'g' : 'y'}">${executed ? 'Sudah dilaksanakan' : 'Belum dilaksanakan'}</span> ${locked ? '<span class="tag y">🔒 Terkunci</span>' : '<span class="tag g">Terbuka</span>'} ${staff && !visible ? '<span class="tag y">Disembunyikan</span>' : ''}` : ''}</div>${staff && m ? `<div class="timeline-actions"><button class="btn ghost sm" data-tbookmark="${esc(m.Pertemuan)}" aria-pressed="${(D.bookmarkedMeetings || []).includes(Number(m.Pertemuan))}">${(D.bookmarkedMeetings || []).includes(Number(m.Pertemuan)) ? '🔖 Hapus penanda' : '🔖 Tandai'}</button><button class="btn ghost sm" data-tedit="${esc(m.Pertemuan)}">Ubah status &amp; room</button>${['materi','tugas','asesmen'].map(type => `<button class="btn sm" data-taddpost="${type}" data-meeting="${esc(m.Pertemuan)}">+ ${TIPE[type][1]}</button>`).join('')}</div>` : ''}</div>${m ? `<div class="meeting-room">${staff ? `<button class="btn sm" data-zcreate="${esc(m.Pertemuan)}">Buat room Zoom</button>` : ''}${staff || !locked ? `<button class="btn sm" data-zjoin="${esc(m.Pertemuan)}">Gabung Zoom di sini</button><button class="btn ghost sm" data-zleave="1">Keluar Zoom</button><small class="mut">Tampilan Zoom dirancang untuk browser desktop; perangkat seluler tidak dijamin.</small><div class="zoom-root" hidden style="width:100%;min-height:500px"></div>` : ''}</div>` : ''}${m && m.Room && (staff || !locked) ? `<div class="meeting-room"><span>🎥 Pertemuan daring</span><a class="btn sm" href="${esc(m.Room)}" target="_blank" rel="noopener noreferrer">Buka Zoom / Google Meet ↗</a><small class="mut">Rapat terbuka di layanan penyedia.</small></div>` : ''}${locked && !staff ? '<div class="timeline-locked">Pertemuan ini terkunci.</div>' : posts.map(card).join('') || '<div class="empty">Belum ada item di bagian ini.</div>'}</section>`;
+    const locked = m && timelineFlag(m.Locked, false), visible = !m || timelineFlag(m.Visible, true), executed = m && timelineFlag(m.Executed, false), bmOn = !!(m && (D.bookmarkedMeetings || []).includes(Number(m.Pertemuan)));
+    return `<section class="timeline-meeting${bmOn ? ' bm' : ''}"><div class="timeline-head"><div><h3>${esc(m ? 'Pertemuan ' + m.Pertemuan : 'Belum dikelompokkan')}</h3>${staff && bmOn ? '<span class="bmk">Pertemuan ditandai</span>' : ''}${m ? `<span class="tag ${executed ? 'g' : 'y'}">${executed ? 'Sudah dilaksanakan' : 'Belum dilaksanakan'}</span> ${locked ? '<span class="tag y">🔒 Terkunci</span>' : '<span class="tag g">Terbuka</span>'} ${staff && !visible ? '<span class="tag y">Disembunyikan</span>' : ''}` : ''}</div>${staff && m ? `<div class="timeline-actions"><button class="btn sm bmk-btn${bmOn ? ' on' : ''}" data-tbookmark="${esc(m.Pertemuan)}" aria-pressed="${bmOn}">${bmOn ? '🔖 Hapus penanda' : '🔖 Tandai pertemuan'}</button><button class="btn ghost sm" data-tedit="${esc(m.Pertemuan)}">Ubah status &amp; room</button>${['materi','tugas','asesmen'].map(type => `<button class="btn sm" data-taddpost="${type}" data-meeting="${esc(m.Pertemuan)}">+ ${TIPE[type][1]}</button>`).join('')}</div>` : ''}</div>${m ? `<div class="meeting-room">${staff ? `<button class="btn sm" data-zcreate="${esc(m.Pertemuan)}">Buat room Zoom</button>` : ''}${staff || !locked ? `<button class="btn sm" data-zjoin="${esc(m.Pertemuan)}">Gabung Zoom di sini</button><button class="btn ghost sm" data-zleave="1">Keluar Zoom</button><small class="mut">Tampilan Zoom dirancang untuk browser desktop; perangkat seluler tidak dijamin.</small><div class="zoom-root" hidden style="width:100%;min-height:500px"></div>` : ''}</div>` : ''}${m && m.Room && (staff || !locked) ? `<div class="meeting-room"><span>🎥 Pertemuan daring</span><a class="btn sm" href="${esc(m.Room)}" target="_blank" rel="noopener noreferrer">Buka Zoom / Google Meet ↗</a><small class="mut">Rapat terbuka di layanan penyedia.</small></div>` : ''}${locked && !staff ? '<div class="timeline-locked">Pertemuan ini terkunci.</div>' : posts.map(card).join('') || '<div class="empty">Belum ada item di bagian ini.</div>'}</section>`;
   }).join('') || '<div class="panel empty">Belum ada item di bagian ini.</div>';
 }
 function drawKelas() {
@@ -1207,7 +1235,7 @@ function drawKelas() {
   $('#main').innerHTML = '<div id="kroot">' + head(esc(k.Nama), `${esc(k.Program)} • ${esc(k.PaketNama)}${k.Kelompok ? ' • ' + esc(k.Kelompok) : ''} • Pengajar: ${esc(k.Pengajar)}`, '<button class="btn ghost" id="kback">‹ Semua grup kelas</button>') +
     `<div class="panel class-progress"><div><span>Progres pertemuan</span><b>${Number(k.persen) || 0}%</b></div><div class="bar"><i style="width:${Math.max(0, Math.min(100, Number(k.persen) || 0))}%"></i></div></div>` +
     (k.Deskripsi ? `<div class="panel tx" style="margin-top:0">${autolink(k.Deskripsi)}</div>` : '') +
-    `<div class="bookmark"><button class="btn ghost sm" id="knote">📝 Buka catatan pribadi</button>${staff ? `<span>🔖 Materi terakhir diberikan:</span><select id="kbookmark"><option value="">Belum ditandai</option>${D.posts.filter(p => p.Tipe === 'materi').map(p => `<option value="${esc(p.ID)}" ${D.bookmarkPostID === p.ID ? 'selected' : ''}>${esc(p.Judul)}</option>`).join('')}</select>` : ''}</div>` +
+    `<div class="bookmark"><button class="btn ghost sm" id="knote">📝 Buka catatan pribadi</button>${staff ? `<span class="bmk">Materi terakhir diberikan</span><select id="kbookmark"><option value="">Belum ditandai</option>${D.posts.filter(p => p.Tipe === 'materi').map(p => `<option value="${esc(p.ID)}" ${D.bookmarkPostID === p.ID ? 'selected' : ''}>${esc(p.Judul)}</option>`).join('')}</select>` : ''}</div>` +
     (staff ? '<div class="panel" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><b>Tambah ke kelas:</b><button class="btn sm" data-add="materi">+ Materi</button><button class="btn sm" data-add="tugas">+ Tugas</button><button class="btn sm" data-add="asesmen">+ Asesmen</button><span style="flex:1"></span><button class="btn sm" id="krekap" style="background:#7c5cf0">📊 Rekap Tugas</button></div>' : '') +
     `<div class="tabs">${tabs.map(t => `<button data-tab="${t[0]}" class="${KL.tab === t[0] ? 'on' : ''}">${t[1]}</button>`).join('')}</div>` +
     (KL.tab === 'anggota' ? `<div class="panel tw"><table><tr><th>Nama</th><th>Username</th><th>Kelompok</th></tr>${D.members.map(m => `<tr><td><b>${esc(m.Nama)}</b></td><td>${esc(m.Username)}</td><td>${esc(m.Kelompok || '-')}</td></tr>`).join('') || '<tr><td colspan="3" class="empty">Belum ada siswa dengan paket ini.</td></tr>'}</table></div>`
@@ -1222,7 +1250,7 @@ function drawKelas() {
     if (staff && t.dataset.zcreate) { t.disabled = true; try { await api('createZoomMeeting', {KelasID: k.ID, Pertemuan: Number(t.dataset.zcreate)}); toast('Room Zoom siap.'); await kelasDetail(); } catch (err) { fail(err); } finally { t.disabled = false; } return; }
     if (t.dataset.zjoin) return zoomJoin(t, t.dataset.zjoin);
     if (t.dataset.zleave) { await zoomLeave(); const root = t.closest('.timeline-meeting').querySelector('.zoom-root'); if (root) { root.innerHTML = ''; root.hidden = true; } return; }
-    if (staff && t.dataset.tbookmark) { t.disabled = true; return api('toggleMeetingBookmark', {KelasID: k.ID, Pertemuan: Number(t.dataset.tbookmark)}).then(() => kelasDetail()).catch(e => { t.disabled = false; fail(e); }); }
+    if (staff && t.dataset.tbookmark) { t.disabled = true; return api('toggleMeetingBookmark', {ID: k.ID, KelasID: k.ID, Pertemuan: Number(t.dataset.tbookmark)}).then(() => kelasDetail()).catch(e => { t.disabled = false; fail(e); }); }
     if (staff && t.dataset.tedit) { const m = (D.meetings || []).find(m => String(m.Pertemuan) === t.dataset.tedit); if (m) timelineForm(m); return; }
     if (staff && t.dataset.taddpost) return postForm(t.dataset.taddpost, undefined, Number(t.dataset.meeting)).catch(fail);
     if (staff && t.dataset.torder) {
@@ -1272,21 +1300,27 @@ async function postForm(tipe, x, meetingNumber) {
   const body = (tipe === 'asesmen' ? sel('p_kd', 'Asesmen', asm.map(a => `<option value="${esc(a.Kode)}" ${x && x.Kode === a.Kode ? 'selected' : ''}>${esc(a.Nama)} • ${esc(a.Tipe)}${a.Status !== 'Aktif' ? ' • ' + esc(a.Status) : ''}</option>`).join('')) : '')
     + sel('p_meeting', 'Pertemuan', meetings.map(m => `<option value="${esc(m.Pertemuan)}" ${Number(m.Pertemuan) === selectedMeeting ? 'selected' : ''}>Pertemuan ${esc(m.Pertemuan)}</option>`).join(''))
     + fld('p_jd', tipe === 'asesmen' ? 'Judul (opsional, otomatis dari nama asesmen)' : 'Judul', x ? x.Judul : '')
-    + `<label for="p_is">${tipe === 'tugas' ? 'Instruksi tugas' : tipe === 'materi' ? 'Isi materi (teks)' : 'Catatan untuk siswa (opsional)'}</label><textarea id="p_is" rows="${tipe === 'asesmen' ? 3 : 7}">${esc(x ? x.Isi : '')}</textarea>`
+    + `<label for="p_is">${tipe === 'tugas' ? 'Instruksi / keterangan tugas (singkat)' : tipe === 'materi' ? 'Isi materi (teks)' : 'Catatan untuk siswa (opsional)'}</label><textarea id="p_is" rows="${tipe === 'asesmen' ? 3 : tipe === 'tugas' ? 3 : 7}">${esc(x ? x.Isi : '')}</textarea>`
+    + (tipe === 'tugas' ? `<label>📋 Lembar tugas — tulis soal / pertanyaan di sini <small class="mut">(boleh dikosongkan bila Anda melampirkan file Word / PDF / Video di bawah)</small></label><div id="p_lembar"></div>` : '')
     + (tipe === 'tugas' ? `<div class="row">${fld('p_tg', 'Tenggat (opsional)', x ? x.Tenggat : '', 'date')}${fld('p_mx', 'Nilai maksimal', x ? x.Maks : 100, 'number')}</div>` : '')
     + (tipe !== 'asesmen' ? `<label>Lampiran file &amp; akses siswa (maks. 15 MB per file, hingga 10 file)</label>${uplHtml('p_up', 'Pilih akses siswa untuk tiap file: <b>Tampil di LMS</b> (dibuka langsung di halaman LMS: PDF, Word .docx, Excel, gambar, suara, video), <b>Hanya tautan unduh</b>, atau <b>Hanya guru</b> (tidak terlihat siswa). Word .doc, PowerPoint, dan ZIP hanya bisa berupa unduhan. Untuk video besar, gunakan tautan di bawah. Penyimpanan di Drive: Dokumen File LMS › nama grup kelas › judul materi.')}<label>Tautan video / materi (maksimal 10)</label><div id="p_links"></div><button type="button" class="btn ghost sm" id="p_addlink">+ Tambah Link</button><small class="mut">Tautan YouTube, Vimeo, Google Drive / Docs / Sheets / Slides, atau alamat langsung file video (.mp4, .webm) dan audio akan diputar di dalam LMS. Tautan lain dibuka di tab baru. File Drive harus dibagikan “siapa pun yang memiliki tautan”.</small>` : '')
+    + (tipe === 'tugas' ? `<div class="cvopt"><label class="chk"><input type="checkbox" id="p_canvas" ${x && x.Canvas ? 'checked' : ''}><span><b>🖊️ Aktifkan Lembar Jawaban Siswa (Canvas)</b></span></label><small class="mut" style="display:block;margin-top:4px">Siswa menjawab langsung di Canvas yang memiliki toolbar pengolah kata (tebal, miring, garis bawah, daftar, tabel, simbol, rumus). <b>Salin &amp; tempel dinonaktifkan</b> di Canvas siswa. Cocok dipasangkan dengan lembar tugas tertulis atau file Word / PDF / Video di atas.</small></div>` : '')
     + (tipe === 'materi' ? `<label class="chk"><input type="checkbox" id="p_private" ${x && x.GuruOnly ? 'checked' : ''}><span>Hanya guru / pegawai yang dapat melihat materi ini</span></label>` : '')
     + `<label class="chk"><input type="checkbox" id="p_ct" ${x && x.Catat ? 'checked' : ''}><span>Hitung sebagai pertemuan di <b>Catatan Progres</b> (daring / asinkron)</span></label><small class="mut" style="display:block;margin-top:4px">Siswa yang sudah menyelesaikan item ini (menandai materi selesai, mengumpulkan tugas, atau menyelesaikan asesmen) dapat dicatat otomatis sebagai pertemuan daring lewat tombol “Catat ke Catatan Progres”. Kosongkan untuk item latihan tambahan.</small>`;
-  modal((x ? 'Ubah ' : 'Tambah ') + T[1].toLowerCase(), body, async () => {
+  let lembarEd = null;
+  const mo = modal((x ? 'Ubah ' : 'Tambah ') + T[1].toLowerCase(), body, async () => {
     if (chk) chk();
+    if (lembarEd && lembarEd.html().length > RT_MAX) throw new Error('Lembar tugas terlalu panjang. Persingkat teks atau pindahkan sebagian soal ke file lampiran.');
     const meeting = Number(val('p_meeting'));
     if (!meetings.some(m => Number(m.Pertemuan) === meeting)) throw new Error('Pilih pertemuan yang valid.');
     const linkValues = tipe !== 'asesmen' ? Array.from($('#p_links').querySelectorAll('input')).map(input => input.value.trim()).filter(Boolean) : [];
     if (linkValues.length > 10) throw new Error('Maksimal 10 tautan.');
     await api('savePost', {ID: x && x.ID, KelasID: KL.id, Tipe: tipe, Kode: tipe === 'asesmen' ? val('p_kd') : '', Judul: val('p_jd'), Isi: $('#p_is').value, Tenggat: tipe === 'tugas' ? val('p_tg') : '', Maks: tipe === 'tugas' ? val('p_mx') : '',
-      Files: arr.map(f => ({id: f.id, mode: f.mode})), Links: linkValues.join('\n'), Catat: $('#p_ct').checked, GuruOnly: tipe === 'materi' && $('#p_private').checked, Pertemuan: meeting});
+      Files: arr.map(f => ({id: f.id, mode: f.mode})), Links: linkValues.join('\n'), Catat: $('#p_ct').checked, GuruOnly: tipe === 'materi' && $('#p_private').checked, Pertemuan: meeting,
+      Lembar: tipe === 'tugas' && lembarEd ? lembarEd.html() : '', Canvas: tipe === 'tugas' && $('#p_canvas').checked});
     toast('Tersimpan'); await kelasDetail();
   });
+  if (tipe === 'tugas') { mo.firstElementChild.classList.add('cv'); lembarEd = rtEditor($('#p_lembar'), {html: x ? x.Lembar : '', ph: 'Tulis soal atau pertanyaan untuk siswa di sini…', minH: 180}); }
   const chk = tipe !== 'asesmen' ? uploader('p_up', arr, () => ({KelasID: KL.id, Judul: val('p_jd')}), 15, 10, true) : null;
   if (tipe !== 'asesmen') {
     const input = $('#p_up').querySelector('input[type="file"]');
@@ -1304,10 +1338,25 @@ async function postForm(tipe, x, meetingNumber) {
   }
 }
 
+const CVDRAFT = {};
 function tugasForm(x) {
-  const s = x.sub, arr = s ? s.Files.map(f => Object.assign({}, f)) : [];
-  modal('Kumpulkan tugas', `<p style="margin:0 0 4px"><b>${esc(x.Judul)}</b></p><label for="t_tx">Jawaban (boleh kosong jika melampirkan file)</label><textarea id="t_tx" rows="6" placeholder="Tulis jawaban Anda di sini...">${esc(s ? s.Teks : '')}</textarea><label>File tugas (maks. 10 MB per file, hingga 5 file)</label>${uplHtml('t_up', 'PDF, Word, Excel, PowerPoint, gambar, audio, video, atau ZIP.')}`,
-    async () => { chk(); await api('submitTugas', {PostID: x.ID, Teks: $('#t_tx').value, Files: arr.map(f => ({id: f.id}))}); toast('Tugas terkirim'); await kelasDetail(); }, 'Kirim tugas');
+  const s = x.sub, arr = s ? s.Files.map(f => Object.assign({}, f)) : [], cvOn = !!x.Canvas;
+  const lembar = x.Lembar ? `<details class="lembar" open><summary class="lembar-h">📋 Lembar tugas (klik untuk membuka / menutup)</summary><div class="rte-view" style="max-height:34vh;overflow:auto">${lmsSafeHTML(x.Lembar)}</div></details>` : '';
+  const answer = cvOn
+    ? `<label>🖊️ Lembar jawaban (Canvas)</label><div id="t_cv"></div><small class="mut">Tulis jawaban langsung di Canvas. Salin dan tempel dinonaktifkan. Jawaban belum terkirim sebelum Anda menekan <b>Kirim tugas</b>.</small>`
+    : `<label for="t_tx">Jawaban (boleh kosong jika melampirkan file)</label><textarea id="t_tx" rows="6" placeholder="Tulis jawaban Anda di sini...">${esc(s ? s.Teks : '')}</textarea>`;
+  let cv = null;
+  const o = modal('Kumpulkan tugas', `<p style="margin:0 0 4px"><b>${esc(x.Judul)}</b></p>${lembar}${answer}<label>${cvOn ? 'File tugas tambahan (opsional, ' : 'File tugas ('}maks. 10 MB per file, hingga 5 file)</label>${uplHtml('t_up', 'PDF, Word, Excel, PowerPoint, gambar, audio, video, atau ZIP.')}`,
+    async () => {
+      chk();
+      if (cv && cv.html().length > RT_MAX) throw new Error('Jawaban Canvas terlalu panjang. Persingkat jawaban atau lampirkan file.');
+      await api('submitTugas', {PostID: x.ID, Teks: cvOn ? (s ? s.Teks : '') : $('#t_tx').value, Canvas: cvOn ? cv.html() : undefined, Files: arr.map(f => ({id: f.id}))});
+      delete CVDRAFT[x.ID]; toast('Tugas terkirim'); await kelasDetail();
+    }, 'Kirim tugas');
+  if (cvOn) {
+    o.firstElementChild.classList.add('cv');
+    cv = rtEditor($('#t_cv'), {html: CVDRAFT[x.ID] !== undefined ? CVDRAFT[x.ID] : (s ? s.Canvas : ''), nocopy: true, ph: 'Tulis jawaban Anda di sini…', minH: 300, onInput: () => { if (cv) CVDRAFT[x.ID] = cv.html(); }});
+  }
   const chk = uploader('t_up', arr, {PostID: x.ID}, 10, 5);
 }
 
@@ -1379,7 +1428,7 @@ async function subsModal(x) {
   const D = await api('kelasSubs', {ID: x.ID}), p = D.post, tg = p.Tipe === 'tugas';
   const stat = r => p.Tipe === 'asesmen' ? (r.selesaiAsm ? `<span class="tag g">Sudah • skor ${r.skor}</span>` : '<span class="tag">Belum</span>') : !r.sub ? '<span class="tag">Belum</span>' : r.sub.Status === 'Dinilai' ? '<span class="tag g">Dinilai</span>' : r.sub.Status === 'Selesai' ? '<span class="tag g">Selesai</span>' : '<span class="tag y">Terkumpul</span>';
   const row = r => { const s = r.sub; return `<div class="sr" data-u="${esc(r.Username)}"><div class="sh"><b>${esc(r.Nama)}</b>${stat(r)}${s ? `<small class="mut">${esc(s.Waktu)}${tg && p.Tenggat && String(s.Waktu).slice(0, 10) > p.Tenggat ? ' • terlambat' : ''}</small>` : ''}${s && s.Dicatat ? `<span class="tag">📈 pertemuan ${s.Pertemuan}</span>` : ''}</div>
-    ${tg && s ? `${s.Teks ? `<div class="tx">${autolink(s.Teks)}</div>` : ''}${filesHtml(s.Files)}<div class="gr"><input type="number" class="gn" min="0" max="${p.Maks}" step="0.5" placeholder="Nilai (0–${p.Maks})" value="${s.Nilai == null ? '' : s.Nilai}"><input class="gc" maxlength="1000" placeholder="Komentar untuk siswa (opsional)" value="${esc(s.Komentar)}"><button class="btn sm" data-save>Simpan nilai</button></div>` : ''}</div>`; };
+    ${tg && s ? `${s.Teks ? `<div class="tx">${autolink(s.Teks)}</div>` : ''}${s.Canvas ? `<div class="cvsub"><small class="mut">Jawaban di Canvas</small><div class="rte-view">${lmsSafeHTML(s.Canvas)}</div></div>` : ''}${filesHtml(s.Files)}<div class="gr"><input type="number" class="gn" min="0" max="${p.Maks}" step="0.5" placeholder="Nilai (0–${p.Maks})" value="${s.Nilai == null ? '' : s.Nilai}"><input class="gc" maxlength="1000" placeholder="Komentar untuk siswa (opsional)" value="${esc(s.Komentar)}"><button class="btn sm" data-save>Simpan nilai</button></div>` : ''}</div>`; };
   const o = viewModal((tg ? 'Pengumpulan: ' : 'Progres: ') + p.Judul, `<div style="max-height:62vh;overflow:auto">${D.rows.map(row).join('') || '<div class="empty">Belum ada siswa di kelas ini.</div>'}</div>`);
   if (tg) { const rb = document.createElement('button'); rb.className = 'btn ghost'; rb.textContent = '📊 Rekap seluruh tugas'; rb.onclick = () => rekapTugas(KL.id).catch(fail); o.querySelector('.foot').prepend(rb); }
   if (p.Catat) { const b = document.createElement('button'); b.className = 'btn'; b.textContent = 'Catat ke Catatan Progres'; b.onclick = () => catatLms(x); o.querySelector('.foot').prepend(b); }
@@ -1470,6 +1519,105 @@ async function rekapTugas(kid) {
     if (x === 'all') { const n = D.siswa.filter(r => r.dinilai).length; if (!n) return toast('Belum ada tugas yang dinilai.', true); if (await askConfirm(`Masukkan rata-rata nilai tugas ${n} siswa ke Catatan Progres?\n\nSiswa yang belum punya nilai tugas dilewati. Rekap yang sudah ada akan diperbarui.`)) save([], b); }
   });
   try { await load(); } catch (e) { o.remove(); throw e; }
+}
+
+
+/* ---------- Editor pengolah kata: Lembar tugas (guru) & Canvas jawaban (siswa) ---------- */
+function lmsSafeHTML(html) {
+  const doc = new DOMParser().parseFromString('<body>' + (html || '') + '</body>', 'text/html');
+  const allowed = new Set(['B', 'STRONG', 'I', 'EM', 'U', 'S', 'STRIKE', 'SUP', 'SUB', 'BR', 'P', 'DIV', 'SPAN', 'UL', 'OL', 'LI', 'TABLE', 'THEAD', 'TBODY', 'TR', 'TD', 'TH', 'H3', 'BLOCKQUOTE']);
+  const drop = new Set(['SCRIPT', 'STYLE', 'IFRAME', 'OBJECT', 'EMBED', 'SVG', 'MATH', 'FORM', 'TEXTAREA', 'SELECT', 'BUTTON', 'VIDEO', 'AUDIO', 'NOSCRIPT', 'IMG', 'LINK', 'META', 'TITLE', 'HEAD']);
+  const alignable = new Set(['P', 'DIV', 'LI', 'TD', 'TH', 'H3', 'BLOCKQUOTE']);
+  const clean = parent => {
+    for (const n of Array.from(parent.childNodes)) {
+      if (n.nodeType === 3) continue;
+      if (n.nodeType !== 1 || drop.has(n.tagName)) { n.remove(); continue; }
+      if (!allowed.has(n.tagName)) { clean(n); n.replaceWith(...n.childNodes); continue; }
+      const ta = n.style && n.style.textAlign, ls = n.style && n.style.listStyleType, cs = n.getAttribute('colspan') || '', rs = n.getAttribute('rowspan') || '';
+      Array.from(n.attributes).forEach(a => n.removeAttribute(a.name));
+      if (ta && /^(left|center|right|justify)$/.test(ta) && alignable.has(n.tagName)) n.style.textAlign = ta;
+      if (n.tagName === 'OL' && /^(decimal|lower-alpha|upper-alpha|lower-roman|upper-roman)$/.test(ls || '')) n.style.listStyleType = ls;
+      if (n.tagName === 'TD' || n.tagName === 'TH') { if (/^\d{1,2}$/.test(cs)) n.setAttribute('colspan', cs); if (/^\d{1,2}$/.test(rs)) n.setAttribute('rowspan', rs); }
+      clean(n);
+    }
+  };
+  clean(doc.body); return doc.body.innerHTML;
+}
+const RT_ALN = {justifyLeft: 'M1 2h14M1 5.5h9M1 9h14M1 12.5h9', justifyCenter: 'M1 2h14M4 5.5h8M1 9h14M4 12.5h8', justifyRight: 'M1 2h14M6 5.5h9M1 9h14M6 12.5h9'};
+const RT_MAX = 40000;
+/* host: elemen kosong tempat editor dipasang. opsi: html (isi awal), nocopy (blokir salin/tempel), ph (placeholder), minH (tinggi minimal px), onInput(fn) */
+function rtEditor(host, o) {
+  o = o || {};
+  const nocopy = !!o.nocopy, btn = (cmd, label, title) => `<button type="button" data-rc="${cmd}" title="${title}" aria-label="${title}">${label}</button>`;
+  host.innerHTML = `<div class="rte${nocopy ? ' nocopy' : ''}"><div class="rtb" role="toolbar" aria-label="Toolbar pengolah kata">`
+    + btn('bold', '<b>B</b>', 'Tebal') + btn('italic', '<i>I</i>', 'Miring') + btn('underline', '<u>U</u>', 'Garis bawah') + btn('strikeThrough', '<s>S</s>', 'Coret') + btn('superscript', 'x²', 'Pangkat (superscript)') + btn('subscript', 'x₂', 'Indeks (subscript)') + '<i></i>'
+    + btn('insertUnorderedList', '• Poin', 'Daftar poin') + btn('insertOrderedList', '1. Nomor', 'Daftar bernomor')
+    + '<select data-rlist title="Jenis daftar bernomor" aria-label="Jenis daftar bernomor"><option value="">Nomor/huruf</option><option value="decimal">1, 2, 3</option><option value="lower-alpha">a, b, c</option><option value="upper-alpha">A, B, C</option><option value="lower-roman">i, ii, iii</option></select><i></i>'
+    + Object.keys(RT_ALN).map(c => btn(c, `<svg width="16" height="14" viewBox="0 0 16 14" aria-hidden="true"><path d="${RT_ALN[c]}" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>`, c === 'justifyLeft' ? 'Rata kiri' : c === 'justifyCenter' ? 'Rata tengah' : 'Rata kanan')).join('') + '<i></i>'
+    + '<button type="button" data-rp="tbl" title="Sisipkan tabel">▦ Tabel</button><button type="button" data-rp="sym" title="Daftar simbol">Ω Simbol</button><button type="button" data-rp="rum" title="Daftar rumus">ƒx Rumus</button><i></i>'
+    + XQUICK.filter(c => ['√', '×', '÷', '±', '≤', '≥', '≠', '°', 'π', '→'].indexOf(c[1]) >= 0).map(c => `<button type="button" data-ri="${esc(c[1])}" title="${esc(c[1])}">${esc(c[0])}</button>`).join('') + '<i></i>'
+    + btn('undo', '↶', 'Urungkan') + btn('redo', '↷', 'Ulangi') + btn('removeFormat', 'Tx', 'Hapus format')
+    + `</div><div class="rtp" hidden></div><div class="rte-ed" contenteditable="true" role="textbox" aria-multiline="true" data-ph="${esc(o.ph || 'Tulis di sini…')}" spellcheck="false" ${o.minH ? `style="min-height:${Number(o.minH)}px"` : ''}></div><div class="rte-foot"><span class="rte-cnt"></span><span>${nocopy ? '🔒 Salin &amp; tempel dinonaktifkan' : 'Tempel dari Word diperbolehkan (format disederhanakan)'}</span></div></div>`;
+  const ed = host.querySelector('.rte-ed'), pn = host.querySelector('.rtp'), cnt = host.querySelector('.rte-cnt');
+  ed.innerHTML = lmsSafeHTML(o.html || '');
+  let saved = null, kind = '', tab = 0, warnAt = 0;
+  const remember = () => { const sl = getSelection(); if (sl && sl.rangeCount && ed.contains(sl.anchorNode) && ed.contains(sl.focusNode)) saved = sl.getRangeAt(0).cloneRange(); };
+  const restore = () => { ed.focus({preventScroll: true}); if (saved && ed.contains(saved.commonAncestorContainer)) { const sl = getSelection(); sl.removeAllRanges(); sl.addRange(saved); } };
+  const textOf = () => ed.textContent.replace(/\u00a0/g, ' ').trim();
+  const update = () => { const len = lmsSafeHTML(ed.innerHTML).length; cnt.innerHTML = len > RT_MAX ? '<span class="bad">Terlalu panjang, persingkat teks Anda</span>' : textOf().length + ' karakter'; if (o.onInput) o.onInput(); };
+  ['keyup', 'mouseup', 'touchend', 'focus', 'blur'].forEach(n => ed.addEventListener(n, remember));
+  ed.addEventListener('input', () => { remember(); update(); });
+  const onSel = () => { if (!ed.isConnected) return document.removeEventListener('selectionchange', onSel); if (document.activeElement === ed) remember(); };
+  document.addEventListener('selectionchange', onSel);
+  const done = () => { remember(); update(); };
+  const run = (cmd, v) => { restore(); document.execCommand(cmd, false, v == null ? null : v); done(); };
+  const putText = (t, c) => { restore(); document.execCommand('insertText', false, t); const sl = getSelection(); if (c != null && c < t.length && sl && sl.modify) for (let i = 0; i < t.length - c; i++) sl.modify('move', 'backward', 'character'); done(); };
+  const drawPn = () => {
+    host.querySelectorAll('[data-rp]').forEach(b => b.classList.toggle('on', b.dataset.rp === kind));
+    if (!kind) { pn.hidden = true; pn.innerHTML = ''; return; }
+    pn.hidden = false;
+    pn.innerHTML = kind === 'sym' ? `<div class="xpt">${XSYM.map((g, i) => `<button type="button" data-rtab="${i}" class="${i === tab ? 'on' : ''}">${esc(g[0])}</button>`).join('')}</div><div class="xpg">${XSYM[tab][1].map(c => `<button type="button" data-ri="${esc(c)}">${esc(c)}</button>`).join('')}</div>`
+      : kind === 'rum' ? `<div class="xpg wide">${XRUM.map(f => `<button type="button" data-ri="${esc(f[1])}" ${f[2] == null ? '' : `data-rcaret="${f[2]}"`}>${esc(f[0])}</button>`).join('')}</div>`
+      : '<div class="rtt">Baris <input type="number" min="1" max="10" value="3" data-trow aria-label="Jumlah baris"> Kolom <input type="number" min="1" max="8" value="3" data-tcol aria-label="Jumlah kolom"> <button type="button" data-rtgo>Sisipkan tabel</button></div>';
+  };
+  const warn = () => { const t = Date.now(); if (t - warnAt > 1500) { warnAt = t; toast('Salin dan tempel dinonaktifkan pada lembar jawaban ini.', true); } };
+  const tbar = host.querySelector('.rte');
+  tbar.addEventListener('mousedown', e => { if (e.target.closest('.rtb,.rtp') && !e.target.closest('input,select')) e.preventDefault(); });
+  tbar.addEventListener('change', e => {
+    if (!e.target.matches('[data-rlist]')) return; const v = e.target.value; e.target.value = ''; if (!v) return;
+    restore(); const sl = getSelection(), el = sl && sl.anchorNode && (sl.anchorNode.nodeType === 1 ? sl.anchorNode : sl.anchorNode.parentElement); let ol = el && el.closest('ol');
+    if (!ol || !ed.contains(ol)) { document.execCommand('insertOrderedList'); const s2 = getSelection(), e2 = s2 && s2.anchorNode && (s2.anchorNode.nodeType === 1 ? s2.anchorNode : s2.anchorNode.parentElement); ol = e2 && e2.closest('ol'); }
+    if (ol && ed.contains(ol)) ol.style.listStyleType = v; done();
+  });
+  tbar.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b || !tbar.contains(b)) return;
+    e.preventDefault();
+    if (b.dataset.rc) return run(b.dataset.rc);
+    if (b.dataset.rp) { kind = kind === b.dataset.rp ? '' : b.dataset.rp; if (kind === 'sym') tab = 0; return drawPn(); }
+    if (b.dataset.rtab != null) { tab = Number(b.dataset.rtab) || 0; return drawPn(); }
+    if (b.dataset.ri != null) return putText(b.dataset.ri, b.dataset.rcaret != null ? Number(b.dataset.rcaret) : null);
+    if (b.hasAttribute('data-rtgo')) {
+      const r = Math.min(10, Math.max(1, Number(pn.querySelector('[data-trow]').value) || 3)), c = Math.min(8, Math.max(1, Number(pn.querySelector('[data-tcol]').value) || 3));
+      restore(); document.execCommand('insertHTML', false, '<table><tbody>' + ('<tr>' + '<td>&nbsp;</td>'.repeat(c) + '</tr>').repeat(r) + '</tbody></table><p><br></p>'); kind = ''; drawPn(); done();
+    }
+  });
+  if (nocopy) {
+    /* Canvas siswa: salin, potong, tempel, seret-lepas teks, dan menu klik kanan diblokir */
+    ['copy', 'cut', 'paste', 'drop'].forEach(n => ed.addEventListener(n, e => { e.preventDefault(); e.stopPropagation(); warn(); }));
+    ['dragstart', 'dragover', 'contextmenu'].forEach(n => ed.addEventListener(n, e => e.preventDefault()));
+    ed.addEventListener('beforeinput', e => { if (/^(insertFromPaste|insertFromPasteAsQuotation|insertFromDrop|insertFromYank|deleteByCut)$/.test(e.inputType)) { e.preventDefault(); warn(); } });
+    ed.addEventListener('keydown', e => { const k = String(e.key || '').toLowerCase(); if (((e.ctrlKey || e.metaKey) && ['c', 'v', 'x', 'insert'].includes(k)) || (e.shiftKey && ['insert', 'delete'].includes(k))) { e.preventDefault(); warn(); } });
+  } else {
+    ed.addEventListener('paste', e => {
+      e.preventDefault(); const cd = e.clipboardData; if (!cd) return;
+      const h = cd.getData('text/html'), t = cd.getData('text/plain');
+      if (h) document.execCommand('insertHTML', false, lmsSafeHTML(h)); else if (t) document.execCommand('insertText', false, t);
+      done();
+    });
+  }
+  update();
+  return {el: ed, focus: () => ed.focus(), text: textOf,
+    html: () => { const h = lmsSafeHTML(ed.innerHTML).trim(); return !textOf() && !ed.querySelector('table') ? '' : h; }};
 }
 
 /* ---------- Hasil & dashboard siswa ---------- */
