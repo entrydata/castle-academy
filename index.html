@@ -149,7 +149,7 @@ input[type=radio],input[type=checkbox]{width:auto}
 .xq{font-size:19px;line-height:1.5;margin-bottom:12px;white-space:pre-wrap}
 .xopt{display:flex;gap:12px;align-items:center;padding:13px 16px;margin-top:10px;border:1.5px solid var(--xbd);background:var(--xo);border-radius:var(--xr);cursor:pointer;font-weight:600}
 .xopt.on{background:var(--xs);color:var(--xst);border-color:var(--xa)}.xopt b{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;border:1.5px solid currentColor;flex:none}
-.xroot input.xi,.xroot textarea.xi{width:100%;padding:13px;border-radius:var(--xr);border:1.5px solid var(--xbd);background:var(--xo);color:var(--xt);font:inherit}
+.xroot input.xi,.xroot textarea.xi{width:100%;padding:13px;border-radius:min(var(--xr),8px);border:1.5px solid var(--xbd);background:var(--xo);color:var(--xt);font:inherit}
 .xbtn{background:var(--xa);color:var(--xbt);border:0;border-radius:var(--xr);padding:11px 20px;font-weight:700;cursor:pointer;font-family:inherit}.xbtn:disabled{opacity:.5;cursor:not-allowed}.xbtn.ghost{background:transparent;color:var(--xt);border:1.5px solid var(--xbd)}.xbtn.sm{padding:7px 14px}
 .xnav{display:flex;justify-content:space-between;gap:10px;margin-top:20px}
 .xmap{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.xmap b{width:34px;height:34px;display:grid;place-items:center;border-radius:8px;border:1.5px solid var(--xbd);cursor:pointer;font-size:13px}.xmap b.g{background:var(--xs);color:var(--xst)}.xmap b.y{background:var(--xw);color:#222}.xmap b.c{outline:3px solid var(--xa)}
@@ -167,6 +167,47 @@ input[type=radio],input[type=checkbox]{width:auto}
 .pie{display:flex;gap:18px;align-items:center;flex-wrap:wrap}.pie svg{width:180px;flex:none}.pl div{display:flex;gap:8px;align-items:center;margin:4px 0}.pl i{width:12px;height:12px;border-radius:4px;flex:none}
 .lg{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--mute)}.lg i{display:inline-block;width:10px;height:10px;border-radius:99px;margin-right:6px}.lchart{width:100%}
 .sc{flex-wrap:wrap;justify-content:flex-end}.sc button{width:34px;height:34px}
+/* Rekap tugas LMS */
+.rkp.modal{max-width:1120px;width:min(1120px,96vw);padding:0;display:flex;flex-direction:column;max-height:92vh;overflow:hidden}
+.rkp-body{overflow:auto;padding:22px;flex:1;min-height:200px}
+.rkp-foot{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;padding:14px 22px;border-top:1px solid var(--line);background:#fff}
+.rkp-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start;margin-bottom:16px}.rkp-top h3{margin:0;font-size:22px}.rkp-top small{color:var(--mute)}
+.rkp-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:18px}
+.rkp-st{border-radius:14px;padding:14px 16px;color:#fff}.rkp-st b{display:block;font:800 30px 'Bricolage Grotesque',Figtree,system-ui,sans-serif;line-height:1.1}.rkp-st span{font-size:12.5px;opacity:.95}.rkp-st small{display:block;font-size:11.5px;opacity:.85;margin-top:2px}
+.rkp-st.a{background:linear-gradient(135deg,#2a7de1,#5aa8ff)}.rkp-st.b{background:linear-gradient(135deg,#1f9d78,#4cc9a0)}.rkp-st.c{background:linear-gradient(135deg,#f4b740,#ffd27a);color:#4a3200}.rkp-st.d{background:linear-gradient(135deg,#7c5cf0,#a48bff)}
+.rkp-bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}.rkp-bar input{max-width:250px;width:100%}
+.rkp-tg{border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px;background:#fff}
+.rkp-th{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}.rkp-th b{font-size:16px}.rkp-th small{display:block;color:var(--mute);font-size:12.5px}
+.rkp-avg{text-align:right}.rkp-avg b{font:800 24px 'Bricolage Grotesque',Figtree,system-ui,sans-serif}.rkp-avg small{display:block}
+.rkp-seg{display:flex;height:10px;border-radius:99px;overflow:hidden;background:var(--line);margin:10px 0 6px}.rkp-seg i{display:block;height:100%}.rkp-seg .d{background:var(--ok)}.rkp-seg .w{background:var(--brass)}
+.rkp-leg{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--mute)}.rkp-leg b{color:var(--ink)}
+.rkp-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px}@media(max-width:760px){.rkp-cols{grid-template-columns:1fr}}
+.rkp-cols h5{margin:0 0 6px;font-size:13px;color:var(--mute)}
+.rkp-chips{display:flex;gap:6px;flex-wrap:wrap}
+.rkp-chip{padding:4px 10px;border-radius:99px;font-size:12.5px;font-weight:600;background:#dff4ec;color:#157a5c;border:1px solid #bfe8d8}.rkp-chip.y{background:#fbf0d6;color:#8a6410;border-color:#f1dca0}.rkp-chip.r{background:#fbe3e3;color:var(--bad);border-color:#f3c3c3}.rkp-chip small{font-weight:800;margin-left:5px}
+.rkp-mx{overflow:auto;border:1px solid var(--line);border-radius:14px;max-height:50vh}
+.rkp-mx table{border-collapse:separate;border-spacing:0;font-size:13px;min-width:100%;width:auto}
+.rkp-mx th,.rkp-mx td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:center;background:#fff;white-space:nowrap}
+.rkp-mx thead th{position:sticky;top:0;z-index:3;background:#eef4fc;color:var(--ink);font-size:12px;vertical-align:bottom}.rkp-mx thead th small{display:block;color:var(--mute);font-weight:600}
+.rkp-mx .sk{position:sticky;left:0;z-index:2;text-align:left;min-width:150px;box-shadow:2px 0 4px rgba(18,49,92,.06)}.rkp-mx thead .sk{z-index:4;background:#eef4fc}
+.rkp-mx tbody tr:nth-child(even) td{background:#f8fbff}
+.rkp-th2{max-width:130px;white-space:normal!important;line-height:1.25}
+.rkp-n{display:inline-block;min-width:38px;padding:3px 8px;border-radius:8px;font-weight:800}.rkp-n.ok{background:#dff4ec;color:#157a5c}.rkp-n.mid{background:#fbf0d6;color:#8a6410}.rkp-n.low{background:#fbe3e3;color:var(--bad)}.rkp-n.wait{background:#fff6dc;color:#8a6410;font-weight:700;font-size:12px}.rkp-n.none{background:#f1f4f9;color:#8aa0bd;font-weight:600;font-size:12px}
+.rkp-late{margin-left:3px;font-size:11px}
+.tgs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:12px}.tgs>div{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--mist)}.tgs b{display:block;font:800 24px 'Bricolage Grotesque',Figtree,system-ui,sans-serif}.tgs span{font-size:12.5px;color:var(--mute)}
+/* Kotak jawaban + toolbar ujian */
+.xroot .xed{border:1.5px solid var(--xbd);border-radius:min(var(--xr),8px);background:var(--xo);overflow:hidden;margin-top:6px}
+.xroot .xed:focus-within{border-color:var(--xa)}.xroot .xed.full{border-color:var(--xcr)}
+.xtb{display:flex;flex-wrap:wrap;gap:4px;align-items:center;padding:6px;border-bottom:1.5px solid var(--xbd);background:rgba(127,127,127,.14)}
+.xtb i{width:1px;height:20px;background:var(--xbd);margin:0 3px;opacity:.7}
+.xroot .xed button{min-width:34px;height:32px;padding:0 9px;border:1px solid var(--xbd);border-radius:min(var(--xr),4px);background:var(--xc);color:var(--xt);font-family:inherit;font-size:15px;font-weight:600;line-height:1;cursor:pointer;transition:none}
+.xroot .xed button:hover{border-color:var(--xa)}.xroot .xed button.on{background:var(--xa);color:var(--xbt);border-color:var(--xa)}
+.xpn{padding:8px;border-bottom:1.5px solid var(--xbd);max-height:190px;overflow:auto}.xpn[hidden]{display:none}
+.xpt{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}.xpt button{font-size:13px!important;height:28px!important}
+.xpg{display:grid;grid-template-columns:repeat(auto-fill,minmax(40px,1fr));gap:4px}.xpg.wide{grid-template-columns:repeat(auto-fill,minmax(78px,1fr))}
+.xroot .xed input.xi,.xroot .xed textarea.xi{display:block;width:100%;padding:13px;border:0;border-radius:0;background:transparent;box-shadow:none;outline:0;color:var(--xt);font:inherit}
+.xroot .xed textarea.xi{resize:vertical;min-height:150px}
+.xcnt{padding:0 12px 6px;text-align:right;font-size:12px;opacity:.75}.xcnt:empty{display:none}
 @media(prefers-reduced-motion:reduce){.rd,.rdp{animation:none}}
 #prt .rdp,#prt .rd,.jpgbox .rdp,.jpgbox .rd{animation:none!important;opacity:1!important;transform:none!important}
 .sym{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px;align-items:stretch}.rdc{min-width:0;display:flex;flex-direction:column;justify-content:center}
@@ -205,6 +246,7 @@ html{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .lpt thead th{font-size:12px;font-weight:700;color:var(--ink);background:color-mix(in srgb,var(--royal) 5%,#fff);border-bottom:1px solid var(--line)}
 .lpt thead th.gp{background:color-mix(in srgb,var(--royal) 15%,#fff);color:var(--royal);border-top:3px solid var(--royal)}
 .lpt thead th.gk{background:color-mix(in srgb,var(--brass) 24%,#fff);color:#8a5a00;border-top:3px solid var(--brass)}
+.lpt thead th.gr{background:color-mix(in srgb,#7c5cf0 14%,#fff);color:#5b3fc7;border-top:3px solid #7c5cf0}
 .lpt thead th.ga{background:color-mix(in srgb,var(--ok) 14%,#fff);color:#157a5c;border-top:3px solid var(--ok)}
 .lpt thead tr.g2 th{font-weight:600;font-size:11px;line-height:1.25;min-width:84px;color:var(--mute);background:#fff}
 .lpt thead th:first-child{border-top-left-radius:15px}.lpt thead th:last-child{border-top-right-radius:15px}
@@ -481,7 +523,7 @@ const call = (fn, ...a) => GAS ? new Promise((ok, no) => {
       .then(t => { let r; try { r = JSON.parse(t); } catch (e) { throw new Error('Server mengembalikan halaman, bukan data. Deploy ulang Code.gs terbaru (Manage deployments > Edit > New version) dengan akses "Anyone".'); }
         if (r && r.ok) return r.data; throw new Error((r && r.error) || 'Kesalahan server'); });
   });
-const RC = new Map(), RTTL = {pakets: 10000}, READS = new Set(['dashboard', 'users', 'progress', 'results', 'asesmen', 'asesmenDetail', 'pakets', 'langganan', 'myAsesmen', 'monitor', 'hasil', 'lapProgram', 'foto', 'ice', 'keuangan', 'report', 'settings', 'noteFolders', 'notes', 'kelasList', 'kelasView', 'kelasSubs', 'comments', 'fileGet']);
+const RC = new Map(), RTTL = {pakets: 10000}, READS = new Set(['dashboard', 'users', 'progress', 'results', 'asesmen', 'asesmenDetail', 'pakets', 'langganan', 'myAsesmen', 'monitor', 'hasil', 'lapProgram', 'foto', 'ice', 'keuangan', 'report', 'settings', 'noteFolders', 'notes', 'kelasList', 'kelasView', 'kelasSubs', 'comments', 'fileGet', 'rekapTugas', 'tugasProg']);
 let navVersion = 0;
 const staleNavigation = () => Object.assign(new Error('Navigasi telah berubah.'), {staleNavigation: true});
 const api = (a, p) => {
@@ -721,7 +763,7 @@ async function vProgress() {
     `<div class="panel"><div class="row">${sel('ps', 'Siswa', us.map(u => `<option value="${esc(u[0])}">${esc(u[1])}</option>`).join(''))}${sel('pl2', 'Paket aktif', '')}</div><button class="btn ghost sm" id="pscan" type="button" style="margin-top:10px">Scan kartu siswa</button><div id="pinfo" style="margin-top:10px"></div></div><div id="pform"></div><div id="plist"></div>` :
     '<div class="panel empty">Belum ada siswa dengan paket aktif. Catat pembayaran paket di menu Keuangan.</div>');
   if (!ls.length) return;
-  let L = null, rows = [], FOTO = '', FU = '';
+  let L = null, rows = [], FOTO = '', FU = '', T = null;
   const draw = () => {
     const next = Math.min(L.Total, rows.reduce((m, r) => Math.max(m, Number(r.Pertemuan)), 0) + 1);
     $('#pinfo').innerHTML = `<span class="tag">${esc(L.Program)}</span> <span class="tag">${esc(L.PaketNama)}</span> ${stTag(L.Status)} <small>Termin ${L.Dibayar}/${L.Termin} • pertemuan tercatat ${rows.length}/${L.Total}</small>`;
@@ -738,13 +780,13 @@ async function vProgress() {
       const N = {P: {}, K: {}}; document.querySelectorAll('#pform .sc').forEach(s => { const a = s.querySelector('.on'); if (a) N[s.dataset.g][nm(s)] = +a.dataset.v; });
       try { await api('saveProgress', {Username: L.Username, LID: L.ID, Pertemuan: val('pm'), Tanggal: val('pt'), Kehadiran: val('pk'), Catatan: val('pc'), Nilai: N}); toast('Catatan tersimpan'); await load(); } catch (e) { fail(e); }
     };
-    $('#plist').innerHTML = progBlock(L, rows, FOTO);
+    $('#plist').innerHTML = progBlock(L, rows, FOTO) + tugasPanel(T, true);
   };
-  const load = async () => { L = ls.find(l => l.ID === val('pl2')); rows = await api('progress', {Username: L.Username, LID: L.ID}); if (FU !== L.Username) { FOTO = await api('foto', {Username: L.Username}).catch(() => ''); FU = L.Username; } draw(); };
+  const load = async () => { L = ls.find(l => l.ID === val('pl2')); rows = await api('progress', {Username: L.Username, LID: L.ID}); T = await api('tugasProg', {LID: L.ID}).catch(() => null); if (FU !== L.Username) { FOTO = await api('foto', {Username: L.Username}).catch(() => ''); FU = L.Username; } draw(); };
   const fillPk = () => { $('#pl2').innerHTML = ls.filter(l => l.Username === val('ps')).map(l => `<option value="${l.ID}">${esc(l.Program + ' – ' + l.PaketNama)}</option>`).join(''); load().catch(fail); };
   $('#ps').onchange = fillPk; $('#pl2').onchange = () => load().catch(fail); fillPk();
-  $('#pdfb').onclick = () => L && exportSheets(progSheets(L, rows, FOTO), {orient: 'p', kind: 'pdf', name: fname('Catatan-Progres', L.Nama)});
-  $('#jpgb').onclick = () => L && exportSheets(progSheets(L, rows, FOTO), {orient: 'p', kind: 'jpg', name: fname('Catatan-Progres', L.Nama)});
+  $('#pdfb').onclick = () => L && exportSheets(progSheets(L, rows, FOTO, T), {orient: 'p', kind: 'pdf', name: fname('Catatan-Progres', L.Nama)});
+  $('#jpgb').onclick = () => L && exportSheets(progSheets(L, rows, FOTO, T), {orient: 'p', kind: 'jpg', name: fname('Catatan-Progres', L.Nama)});
   $('#pscan').onclick = () => scanCode(c => { const l = ls.find(x => x.KodeReg === c); if (!l) return toast('Kode tidak dikenali atau siswa belum punya paket aktif.', true); $('#ps').value = l.Username; fillPk(); });
 }
 
@@ -1166,7 +1208,7 @@ function drawKelas() {
     `<div class="panel class-progress"><div><span>Progres pertemuan</span><b>${Number(k.persen) || 0}%</b></div><div class="bar"><i style="width:${Math.max(0, Math.min(100, Number(k.persen) || 0))}%"></i></div></div>` +
     (k.Deskripsi ? `<div class="panel tx" style="margin-top:0">${autolink(k.Deskripsi)}</div>` : '') +
     `<div class="bookmark"><button class="btn ghost sm" id="knote">📝 Buka catatan pribadi</button>${staff ? `<span>🔖 Materi terakhir diberikan:</span><select id="kbookmark"><option value="">Belum ditandai</option>${D.posts.filter(p => p.Tipe === 'materi').map(p => `<option value="${esc(p.ID)}" ${D.bookmarkPostID === p.ID ? 'selected' : ''}>${esc(p.Judul)}</option>`).join('')}</select>` : ''}</div>` +
-    (staff ? '<div class="panel" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><b>Tambah ke kelas:</b><button class="btn sm" data-add="materi">+ Materi</button><button class="btn sm" data-add="tugas">+ Tugas</button><button class="btn sm" data-add="asesmen">+ Asesmen</button></div>' : '') +
+    (staff ? '<div class="panel" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><b>Tambah ke kelas:</b><button class="btn sm" data-add="materi">+ Materi</button><button class="btn sm" data-add="tugas">+ Tugas</button><button class="btn sm" data-add="asesmen">+ Asesmen</button><span style="flex:1"></span><button class="btn sm" id="krekap" style="background:#7c5cf0">📊 Rekap Tugas</button></div>' : '') +
     `<div class="tabs">${tabs.map(t => `<button data-tab="${t[0]}" class="${KL.tab === t[0] ? 'on' : ''}">${t[1]}</button>`).join('')}</div>` +
     (KL.tab === 'anggota' ? `<div class="panel tw"><table><tr><th>Nama</th><th>Username</th><th>Kelompok</th></tr>${D.members.map(m => `<tr><td><b>${esc(m.Nama)}</b></td><td>${esc(m.Username)}</td><td>${esc(m.Kelompok || '-')}</td></tr>`).join('') || '<tr><td colspan="3" class="empty">Belum ada siswa dengan paket ini.</td></tr>'}</table></div>`
       : timelineHtml(D, list, staff)) + '</div>';
@@ -1189,6 +1231,7 @@ function drawKelas() {
       const index = group.indexOf(p), target = index + (t.dataset.torder === 'up' ? -1 : 1); if (target < 0 || target >= group.length) return;
       t.disabled = true; api('movePost', {ID: p.ID, Pertemuan: Number(p.Pertemuan) || 1, Urutan: target + 1}).then(() => kelasDetail()).catch(e => { fail(e); kelasDetail().catch(fail); }); return;
     }
+    if (staff && t.id === 'krekap') return rekapTugas(k.ID).catch(fail);
     if (t.id === 'knote') return notesShortcut();
     if (t.id === 'kback') { await zoomLeave(); KL.id = null; return kelasHome().catch(fail); }
     if (t.dataset.tab) { await zoomLeave(); KL.tab = t.dataset.tab; return drawKelas(); }
@@ -1338,6 +1381,7 @@ async function subsModal(x) {
   const row = r => { const s = r.sub; return `<div class="sr" data-u="${esc(r.Username)}"><div class="sh"><b>${esc(r.Nama)}</b>${stat(r)}${s ? `<small class="mut">${esc(s.Waktu)}${tg && p.Tenggat && String(s.Waktu).slice(0, 10) > p.Tenggat ? ' • terlambat' : ''}</small>` : ''}${s && s.Dicatat ? `<span class="tag">📈 pertemuan ${s.Pertemuan}</span>` : ''}</div>
     ${tg && s ? `${s.Teks ? `<div class="tx">${autolink(s.Teks)}</div>` : ''}${filesHtml(s.Files)}<div class="gr"><input type="number" class="gn" min="0" max="${p.Maks}" step="0.5" placeholder="Nilai (0–${p.Maks})" value="${s.Nilai == null ? '' : s.Nilai}"><input class="gc" maxlength="1000" placeholder="Komentar untuk siswa (opsional)" value="${esc(s.Komentar)}"><button class="btn sm" data-save>Simpan nilai</button></div>` : ''}</div>`; };
   const o = viewModal((tg ? 'Pengumpulan: ' : 'Progres: ') + p.Judul, `<div style="max-height:62vh;overflow:auto">${D.rows.map(row).join('') || '<div class="empty">Belum ada siswa di kelas ini.</div>'}</div>`);
+  if (tg) { const rb = document.createElement('button'); rb.className = 'btn ghost'; rb.textContent = '📊 Rekap seluruh tugas'; rb.onclick = () => rekapTugas(KL.id).catch(fail); o.querySelector('.foot').prepend(rb); }
   if (p.Catat) { const b = document.createElement('button'); b.className = 'btn'; b.textContent = 'Catat ke Catatan Progres'; b.onclick = () => catatLms(x); o.querySelector('.foot').prepend(b); }
   o.addEventListener('click', async e => {
     const f = e.target.closest('[data-fid]'); if (f) return openFile(FREG[f.dataset.fid]);
@@ -1347,6 +1391,85 @@ async function subsModal(x) {
     catch (er) { fail(er); }
     b.disabled = false;
   });
+}
+
+
+/* ---------- Rekap tugas kelas: siapa sudah / belum mengumpulkan, nilai, dan masuk ke Catatan Progres ---------- */
+const tgCls = (v, kkm) => v == null ? 'none' : v >= kkm ? 'ok' : v >= kkm - 15 ? 'mid' : 'low';
+const tgTag = i => i.s === 'dinilai' ? '<span class="tag g">Dinilai</span>' : i.s === 'terkumpul' ? '<span class="tag y">Menunggu nilai</span>' : '<span class="tag r">Belum mengumpulkan</span>';
+function tugasBlock(T, staff) {
+  if (!T || !T.total) return `<h3>Rekap nilai tugas</h3><p class="mut" style="margin:0">${staff ? 'Belum ada rekap tugas yang masuk. Buka Grup Kelas - LMS, pilih kelas, lalu klik <b>Rekap Tugas</b> &rsaquo; <b>Masukkan ke Catatan Progres</b>.' : 'Belum ada rekap nilai tugas.'}</p>`;
+  const k = Number(C().KKM) || 70;
+  return `<h3>Rekap nilai tugas</h3><div class="tgs"><div><b>${T.rata == null ? '-' : T.rata}</b><span>Rata-rata nilai tugas (0–100)</span></div><div><b>${T.dinilai}/${T.total}</b><span>Tugas sudah dinilai</span></div><div><b>${T.items.filter(i => i.s === 'belum').length}</b><span>Belum dikumpulkan</span></div></div>
+    <table><tr><th>Tugas</th><th>Pertemuan</th><th>Status</th><th>Nilai</th></tr>${T.items.map(i => `<tr data-pr><td>${esc(i.j)}</td><td>${i.p}</td><td>${tgTag(i)}${i.t ? ' <span class="tag r">Terlambat</span>' : ''}</td><td>${i.s === 'dinilai' ? `<span class="rkp-n ${tgCls(pctOf(i), k)}">${i.v}/${i.m}</span>` : '-'}</td></tr>`).join('')}</table><small class="mut">Rata-rata dihitung dari tugas yang sudah dinilai, dengan setiap nilai diubah ke skala 0–100.${T.waktu ? ' Diperbarui ' + esc(T.waktu) + '.' : ''}</small>`;
+}
+const pctOf = i => i.v == null ? null : Math.round(Number(i.v) / (Number(i.m) || 100) * 1000) / 10;
+const tugasPanel = (T, staff) => `<div class="panel tw">${tugasBlock(T, staff)}</div>`;
+// versi ringkas untuk lembar cetak
+const tugasSheet = T => !T || !T.total ? '' : `<section><h3>Rekap nilai tugas</h3><p style="margin:0 0 6px"><b>Rata-rata ${T.rata == null ? '-' : T.rata}</b> • ${T.dinilai} dari ${T.total} tugas dinilai</p><table><tr><th>Tugas</th><th>Pertemuan</th><th>Status</th><th>Nilai</th></tr>${T.items.slice(0, 12).map(i => `<tr data-pr><td>${esc(i.j)}</td><td>${i.p}</td><td>${i.s === 'dinilai' ? 'Dinilai' : i.s === 'terkumpul' ? 'Menunggu nilai' : 'Belum mengumpulkan'}${i.t ? ' (terlambat)' : ''}</td><td>${i.s === 'dinilai' ? i.v + '/' + i.m : '-'}</td></tr>`).join('')}${T.items.length > 12 ? `<tr data-pr><td colspan="4">… dan ${T.items.length - 12} tugas lainnya</td></tr>` : ''}</table></section>`;
+const repTugas = d => `<h3>Rekap nilai tugas</h3>${d.tugas && d.tugas.total ? `<div class="tw"><table><tr><th>Tugas</th><th>Pertemuan</th><th>Status</th><th>Nilai</th></tr>${d.tugas.items.map(i => `<tr><td>${esc(i.j)}</td><td>${i.p}</td><td>${i.s === 'dinilai' ? 'Dinilai' : i.s === 'terkumpul' ? 'Menunggu nilai' : 'Belum mengumpulkan'}${i.t ? ' (terlambat)' : ''}</td><td>${i.s === 'dinilai' ? i.v + '/' + i.m : '-'}</td></tr>`).join('')}<tr><td colspan="3"><b>Rata-rata nilai tugas (0–100)</b></td><td><b>${d.tugas.rata == null ? '-' : d.tugas.rata}</b></td></tr></table></div>` : '<p>Belum ada rekap nilai tugas pada paket ini.</p>'}`;
+
+async function rekapTugas(kid) {
+  const o = document.createElement('div'); o.className = 'ov';
+  o.innerHTML = '<div class="modal fv rkp" role="dialog" aria-label="Rekap tugas"><div class="rkp-body"><div class="empty"><span class="spn"></span> Memuat rekap tugas…</div></div><div class="rkp-foot"></div></div>';
+  document.body.appendChild(o);
+  const body = o.querySelector('.rkp-body'), foot = o.querySelector('.rkp-foot');
+  o.addEventListener('mousedown', e => { if (e.target === o) o.remove(); });
+  let D = null, tab = 'siswa', q = '', flt = 'semua', busy = false;
+  const cell = i => i.s === 'dinilai' ? `<span class="rkp-n ${tgCls(i.pc, D.kkm)}" title="${i.v} dari ${i.m}">${i.pc}</span>${i.t ? '<span class="rkp-late" title="Terlambat">⏰</span>' : ''}` : i.s === 'terkumpul' ? `<span class="rkp-n wait" title="Sudah mengumpulkan, belum dinilai">✓ Menunggu</span>${i.t ? '<span class="rkp-late" title="Terlambat">⏰</span>' : ''}` : '<span class="rkp-n none">Belum</span>';
+  const snapTag = r => r.snap ? `<span class="tag ${r.snap.basi ? 'y' : 'g'}">${r.snap.basi ? 'Perlu diperbarui' : '✔ Sudah masuk'}</span><br><small class="mut">rata ${r.snap.Rata} • ${esc(r.snap.Waktu)}</small>` : '<span class="tag">Belum masuk</span>';
+  const siswaView = () => {
+    const list = D.siswa.filter(r => (!q || String(r.Nama).toLowerCase().includes(q)) && (flt === 'semua' || (flt === 'belum' ? r.belum > 0 : r.belum === 0)));
+    return `<div class="rkp-bar"><input id="rkq" placeholder="Cari nama siswa…" value="${esc(q)}"><div class="tabs" style="margin:0">${[['semua', 'Semua'], ['belum', 'Ada yang belum mengumpulkan'], ['lengkap', 'Lengkap']].map(t => `<button data-rkf="${t[0]}" class="${flt === t[0] ? 'on' : ''}">${t[1]}</button>`).join('')}</div></div>
+      <div class="rkp-mx"><table><thead><tr><th class="sk">Siswa</th>${D.tugas.map(t => `<th><div class="rkp-th2" title="${esc(t.Judul)}">${esc(t.Judul)}</div><small>P${t.Pertemuan} • maks ${t.Maks}</small></th>`).join('')}<th>Terkumpul</th><th>Rata-rata<small>(0–100)</small></th><th>Catatan Progres</th><th></th></tr></thead>
+      <tbody>${list.map(r => `<tr><td class="sk"><b>${esc(r.Nama)}</b>${r.Kelompok ? `<br><small class="mut">${esc(r.Kelompok)}</small>` : ''}</td>${r.items.map(i => `<td>${cell(i)}</td>`).join('')}<td><b>${r.kumpul}/${D.tugas.length}</b>${r.belum ? `<br><small style="color:var(--bad)">${r.belum} belum</small>` : '<br><small style="color:var(--ok)">lengkap</small>'}</td><td>${r.rata == null ? '-' : `<span class="rkp-n ${tgCls(r.rata, D.kkm)}">${r.rata}</span>`}</td><td>${snapTag(r)}</td><td><button class="btn ghost sm" data-rks="${esc(r.Username)}" ${r.dinilai ? '' : 'disabled title="Belum ada tugas yang dinilai"'}>${r.snap ? 'Perbarui' : 'Masukkan'}</button></td></tr>`).join('') || `<tr><td colspan="${D.tugas.length + 5}" class="empty">Tidak ada siswa yang cocok.</td></tr>`}</tbody></table></div>
+      <p class="mut" style="font-size:12.5px;margin:8px 0 0">Angka = nilai tugas dalam skala 0–100 (hijau ≥ KKM ${D.kkm}). Rata-rata hanya dari tugas yang sudah dinilai. ⏰ = dikumpulkan setelah tenggat.</p>`;
+  };
+  const tugasView = () => D.tugas.map((t, idx) => {
+    const rows = D.siswa.map(r => ({r, i: r.items[idx]})), done = rows.filter(x => x.i.s === 'dinilai'), wait = rows.filter(x => x.i.s === 'terkumpul'), none = rows.filter(x => x.i.s === 'belum'), n = rows.length || 1;
+    const chip = (x, c) => `<span class="rkp-chip ${c}">${esc(x.r.Nama)}${x.i.s === 'dinilai' ? `<small>${x.i.pc}</small>` : ''}${x.i.t ? '<small>⏰</small>' : ''}</span>`;
+    return `<div class="rkp-tg"><div class="rkp-th"><div><b>${esc(t.Judul)}</b><small>Pertemuan ${t.Pertemuan} • Tenggat ${t.Tenggat ? esc(t.Tenggat) : 'tidak ada'} • Nilai maks ${t.Maks}</small></div><div class="rkp-avg"><b>${t.rata == null ? '-' : t.rata}</b><small class="mut">rata-rata nilai</small></div></div>
+      <div class="rkp-seg" title="Dinilai / menunggu nilai / belum"><i class="d" style="width:${done.length / n * 100}%"></i><i class="w" style="width:${wait.length / n * 100}%"></i></div>
+      <div class="rkp-leg"><span>✅ Dinilai <b>${done.length}</b></span><span>🕒 Menunggu nilai <b>${wait.length}</b></span><span>⛔ Belum mengumpulkan <b>${none.length}</b></span>${t.telat ? `<span>⏰ Terlambat <b>${t.telat}</b></span>` : ''}</div>
+      <div class="rkp-cols"><div><h5>Sudah mengumpulkan (${done.length + wait.length})</h5><div class="rkp-chips">${done.map(x => chip(x, '')).join('')}${wait.map(x => chip(x, 'y')).join('') || ''}${done.length + wait.length ? '' : '<small class="mut">Belum ada.</small>'}</div></div>
+      <div><h5>Belum mengumpulkan (${none.length})</h5><div class="rkp-chips">${none.map(x => chip(x, 'r')).join('') || '<small class="mut">Semua sudah mengumpulkan 🎉</small>'}</div></div></div></div>`;
+  }).join('');
+  const draw = () => {
+    const R = D.ringkas, k = D.k;
+    body.innerHTML = `<div class="rkp-top"><div><h3>📊 Rekap Tugas</h3><small>${esc(k.Nama)} • ${esc(k.Program)} • ${esc(k.PaketNama)}${k.Kelompok ? ' • ' + esc(k.Kelompok) : ''}</small></div><div class="tabs" style="margin:0"><button data-rkt="siswa" class="${tab === 'siswa' ? 'on' : ''}">Per siswa</button><button data-rkt="tugas" class="${tab === 'tugas' ? 'on' : ''}">Per tugas</button></div></div>
+      <div class="rkp-stats"><div class="rkp-st a"><b>${R.tugas}</b><span>Jumlah tugas</span><small>${R.siswa} siswa dalam kelas</small></div><div class="rkp-st b"><b>${R.pctKumpul}%</b><span>Tingkat pengumpulan</span><small>${R.lengkap} siswa mengumpulkan semua</small></div><div class="rkp-st c"><b>${R.rata == null ? '-' : R.rata}</b><span>Rata-rata nilai kelas</span><small>skala 0–100, KKM ${D.kkm}</small></div><div class="rkp-st d"><b>${R.masuk}/${R.siswa}</b><span>Masuk Catatan Progres</span><small>rata-rata nilai tugas per siswa</small></div></div>
+      ${D.tugas.length ? (tab === 'siswa' ? siswaView() : tugasView()) : '<div class="empty">Belum ada tugas di grup kelas ini. Tambahkan lewat tombol <b>+ Tugas</b>.</div>'}`;
+    foot.innerHTML = `<button class="btn ghost" data-rkx="close">Tutup</button>${D.tugas.length ? '<button class="btn ghost" data-rkx="pdf">Cetak PDF</button><button class="btn ghost" data-rkx="jpg">JPG</button><button class="btn" data-rkx="all">Masukkan semua ke Catatan Progres</button>' : ''}`;
+  };
+  const load = async () => { D = await api('rekapTugas', {ID: kid}); if (o.isConnected) draw(); };
+  const rekapSheets = () => {
+    const G = PG.l, W = G.w, H = Math.round(W * G.ratio), k = D.k, R = D.ringkas;
+    const head = `<div class="rhd mini"><div><div class="rl">${esc(C().Nama)} • Rekap tugas</div><h1>${esc(k.Nama)}</h1><small>${esc(k.Program)} – ${esc(k.PaketNama)} • dicetak ${today()}</small></div><div class="lpst">${[[R.tugas, 'Tugas'], [R.pctKumpul + '%', 'Pengumpulan'], [R.rata == null ? '-' : R.rata, 'Rata-rata kelas']].map(s => `<div class="lpsi"><b>${s[0]}</b><small>${s[1]}</small></div>`).join('')}</div></div>`;
+    const th = `<thead><tr><th class="sk">Siswa</th>${D.tugas.map(t => `<th>${esc(t.Judul)}<span class="dl">P${t.Pertemuan} • maks ${t.Maks}</span></th>`).join('')}<th>Terkumpul</th><th>Rata-rata</th><th>Catatan Progres</th></tr></thead>`;
+    const rowH = r => `<tr data-pr><td class="sk"><b>${esc(r.Nama)}</b><br><small style="color:var(--mute)">${esc(r.Kelompok)}</small></td>${r.items.map(i => `<td class="c">${i.s === 'dinilai' ? `<b>${i.pc}</b>` : i.s === 'terkumpul' ? 'Menunggu' : '<span style="color:var(--bad)">Belum</span>'}</td>`).join('')}<td class="c">${r.kumpul}/${D.tugas.length}</td><td class="c"><b>${r.rata == null ? '-' : r.rata}</b></td><td class="c">${r.snap ? (r.snap.basi ? 'Perlu diperbarui' : '✔ Masuk') : '-'}</td></tr>`;
+    const shell = b => `${head}<div class="rbd tp"><section><div class="tw lpw"><table class="lpt">${th}<tbody>${b}</tbody></table></div></section></div>`;
+    return chunkRows(D.siswa.map(rowH), shell, shell, W, H, G.ratio, 'f4l').map(p => shell(p.join('')));
+  };
+  const save = async (usernames, btn) => {
+    if (busy) return; busy = true; if (btn) btn.disabled = true;
+    try {
+      const x = await api('saveRekapTugas', {ID: kid, Usernames: usernames || []});
+      toast(x.disimpan ? `Rekap tugas ${x.disimpan} siswa masuk ke Catatan Progres${x.kosong ? ` (${x.kosong} siswa dilewati karena belum ada nilai tugas)` : ''}` : 'Belum ada siswa dengan nilai tugas untuk dimasukkan.', !x.disimpan);
+      await load();
+    } catch (e) { fail(e); } finally { busy = false; if (btn && btn.isConnected) btn.disabled = false; }
+  };
+  o.addEventListener('input', e => { if (e.target.id === 'rkq') { q = e.target.value.trim().toLowerCase(); const pos = e.target.selectionStart; draw(); const el = $('#rkq'); if (el) { el.focus(); el.setSelectionRange(pos, pos); } } });
+  o.addEventListener('click', async e => {
+    const b = e.target.closest('button'); if (!b || !D) return;
+    if (b.dataset.rkt) { tab = b.dataset.rkt; return draw(); }
+    if (b.dataset.rkf) { flt = b.dataset.rkf; return draw(); }
+    if (b.dataset.rks) return save([b.dataset.rks], b);
+    const x = b.dataset.rkx; if (!x) return;
+    if (x === 'close') return o.remove();
+    if (x === 'pdf' || x === 'jpg') return exportSheets(rekapSheets(), {orient: 'l', cls: 'f4l', kind: x, name: fname('Rekap-Tugas', D.k.Nama)});
+    if (x === 'all') { const n = D.siswa.filter(r => r.dinilai).length; if (!n) return toast('Belum ada tugas yang dinilai.', true); if (await askConfirm(`Masukkan rata-rata nilai tugas ${n} siswa ke Catatan Progres?\n\nSiswa yang belum punya nilai tugas dilewati. Rekap yang sudah ada akan diperbarui.`)) save([], b); }
+  });
+  try { await load(); } catch (e) { o.remove(); throw e; }
 }
 
 /* ---------- Hasil & dashboard siswa ---------- */
@@ -1826,7 +1949,7 @@ async function vPantau() {
 /* ---------- Laporan Periode Program ---------- */
 async function vLpp() {
   const pks = await api('pakets');
-  $('#main').innerHTML = head('Laporan periode program', 'Kemajuan tiap aspek (nilai akhir dan perubahannya) serta nilai asesmen pada paket dan periode tertentu.', '<div class="act"><button class="btn" id="pr">Cetak PDF (F4 landscape)</button><button class="btn ghost" id="pj">JPG</button></div>') +
+  $('#main').innerHTML = head('Laporan periode program', 'Kemajuan tiap aspek, rekap nilai catatan progres (pemahaman materi, keterampilan, nilai tugas, dan nilai asesmen) pada paket dan periode tertentu.', '<div class="act"><button class="btn" id="pr">Cetak PDF (F4 landscape)</button><button class="btn ghost" id="pj">JPG</button></div>') +
     (pks.length ? `<div class="panel noprint"><div class="row">${sel('lg', 'Program', [...new Set(pks.map(p => p.Program))].map(x => `<option>${esc(x)}</option>`).join(''))}${sel('lk2', 'Paket belajar', '')}${sel('ln', 'Periode paket', '')}${fld('lq', 'Kelompok', '')}</div></div><div id="lr"></div>` : '<div class="panel empty">Belum ada paket. Buat di menu Daftar Program Paket.</div>');
   if (!pks.length) return;
   let D = null;
@@ -1834,19 +1957,19 @@ async function vLpp() {
   const comb = r => { const a = r.akhir == null ? null : r.akhir * 10; return a != null && r.avgAs != null ? (a + r.avgAs) / 2 : a != null ? a : r.avgAs; };
   const cell = a => !a ? '<td class="c">-</td>' : `<td class="c"><b>${a.l}</b>${a.d == null ? '<span class="dl">baru 1x</span>' : `<span class="dl ${a.d > 0 ? 'up' : a.d < 0 ? 'dn' : ''}">${a.d > 0 ? '▲' : a.d < 0 ? '▼' : '='} ${sg(a.d)}</span>`}</td>`;
   const rows = () => { const q = val('lq').toLowerCase(); return D.rows.filter(r => !q || String(r.Kelompok).toLowerCase().includes(q)); };
-  const stats = R => { const km = mean(R.map(r => r.kem).filter(v => v != null)), up = R.filter(r => r.kem != null && r.kem > 0).length, wk = R.filter(r => r.kem != null).length, as = mean(R.map(r => r.avgAs).filter(v => v != null));
-    return {km, as, list: [[R.length, 'Siswa'], [km == null ? '-' : sg(km), 'Rata-rata kemajuan (poin)'], [wk ? `${up} dari ${wk}` : '-', 'Siswa yang naik'], [as ?? '-', 'Rata-rata asesmen']]}; };
-  const rowHtml = (r, i, pr) => { const c = comb(r), rc = c == null ? null : rec(Math.round(c)); return `<tr data-pr><td class="sk"><b>${esc(r.Nama)}</b><br><small style="color:var(--mute)">${esc(r.Kelompok)}</small></td><td>${r.Hadir}/${r.Tercatat}</td>${r.P.map(cell).join('')}${r.K.map(cell).join('')}${r.nilai.map(n => `<td class="c">${!n ? '-' : `<b>${n.n}${n.p > 0 ? '*' : ''}</b>`}</td>`).join('')}<td class="c">${r.kem == null ? '-' : `<b>${sg(r.kem)}</b>${pbdg(r.kem)}`}</td><td class="c"><b>${r.avgAs == null ? '-' : r.avgAs}</b></td><td>${rc ? `<span class="tag ${rc === 'Reinforcement' ? 'y' : 'g'}">${rc}</span>` : '-'}</td>${pr ? '' : `<td class="noprint"><button class="btn ghost sm" data-u="${i}">Laporan siswa</button></td>`}</tr>`; };
+  const stats = R => { const km = mean(R.map(r => r.kem).filter(v => v != null)), up = R.filter(r => r.kem != null && r.kem > 0).length, wk = R.filter(r => r.kem != null).length, as = mean(R.map(r => r.avgAs).filter(v => v != null)), tg = mean(R.map(r => r.avgTg).filter(v => v != null));
+    return {km, as, list: [[R.length, 'Siswa'], [km == null ? '-' : sg(km), 'Rata-rata kemajuan (poin)'], [wk ? `${up} dari ${wk}` : '-', 'Siswa yang naik'], [tg ?? '-', 'Rata-rata nilai tugas'], [as ?? '-', 'Rata-rata asesmen']]}; };
+  const rowHtml = (r, i, pr) => { const c = comb(r), rc = c == null ? null : rec(Math.round(c)); return `<tr data-pr><td class="sk"><b>${esc(r.Nama)}</b><br><small style="color:var(--mute)">${esc(r.Kelompok)}</small></td><td>${r.Hadir}/${r.Tercatat}</td>${r.P.map(cell).join('')}${r.K.map(cell).join('')}${r.nilai.map(n => `<td class="c">${!n ? '-' : `<b>${n.n}${n.p > 0 ? '*' : ''}</b>`}</td>`).join('')}<td class="c">${r.kem == null ? '-' : `<b>${sg(r.kem)}</b>${pbdg(r.kem)}`}</td><td class="c">${r.avgP == null ? '-' : `<b>${r.avgP}</b>`}</td><td class="c">${r.avgK == null ? '-' : `<b>${r.avgK}</b>`}</td><td class="c">${r.avgTg == null ? '-' : `<b>${r.avgTg}</b><span class="dl">${r.tgN}/${r.tgT} tugas</span>`}</td><td class="c">${r.avgAs == null ? '-' : `<b>${r.avgAs}</b>`}</td><td>${rc ? `<span class="tag ${rc === 'Reinforcement' ? 'y' : 'g'}">${rc}</span>` : '-'}</td>${pr ? '' : `<td class="noprint"><button class="btn ghost sm" data-u="${i}">Laporan siswa</button></td>`}</tr>`; };
   const headHtml = pr => { const pk = D.pk, nP = pk.P.length, nK = pk.K.length, nA = D.asesmen.length;
-    const cg = pr ? `<colgroup><col style="width:32mm"><col style="width:13mm">${'<col>'.repeat(nP + nK + nA)}<col style="width:25mm"><col style="width:17mm"><col style="width:26mm"></colgroup>` : '';
-    return `${cg}<thead><tr><th rowspan="2" class="sk">Siswa</th><th rowspan="2">Hadir</th>${nP ? `<th colspan="${nP}" class="gp">Pemahaman materi</th>` : ''}${nK ? `<th colspan="${nK}" class="gk">Keterampilan</th>` : ''}${nA ? `<th colspan="${nA}" class="ga">Asesmen</th>` : ''}<th rowspan="2">Kemajuan</th><th rowspan="2">Asesmen</th><th rowspan="2">Rekomendasi</th>${pr ? '' : '<th rowspan="2" class="noprint"></th>'}</tr>
-      <tr class="g2">${pk.P.concat(pk.K).map(n => `<th>${esc(n)}</th>`).join('')}${D.asesmen.map(a => `<th>${esc(a.Nama)}</th>`).join('')}</tr></thead>`; };
+    const cg = pr ? `<colgroup><col style="width:32mm"><col style="width:13mm">${'<col>'.repeat(nP + nK + nA)}<col style="width:20mm"><col style="width:17mm"><col style="width:19mm"><col style="width:17mm"><col style="width:17mm"><col style="width:24mm"></colgroup>` : '';
+    return `${cg}<thead><tr><th rowspan="2" class="sk">Siswa</th><th rowspan="2">Hadir</th>${nP ? `<th colspan="${nP}" class="gp">Pemahaman materi</th>` : ''}${nK ? `<th colspan="${nK}" class="gk">Keterampilan</th>` : ''}${nA ? `<th colspan="${nA}" class="ga">Asesmen</th>` : ''}<th rowspan="2">Kemajuan</th><th colspan="4" class="gr">Rekap nilai catatan progres</th><th rowspan="2">Rekomendasi</th>${pr ? '' : '<th rowspan="2" class="noprint"></th>'}</tr>
+      <tr class="g2">${pk.P.concat(pk.K).map(n => `<th>${esc(n)}</th>`).join('')}${D.asesmen.map(a => `<th>${esc(a.Nama)}</th>`).join('')}<th>Pemahaman<br>(1–10)</th><th>Keterampilan<br>(1–10)</th><th>Tugas<br>(0–100)</th><th>Asesmen<br>(0–100)</th></tr></thead>`; };
   const footHtml = (R, pr) => { const pk = D.pk, st = stats(R), colAvg = (arr, k) => { const v = R.map(r => r[arr][k]).filter(Boolean); return {l: mean(v.map(x => x.l)), d: mean(v.map(x => x.d).filter(x => x != null))}; };
     const foot = (arr, n) => Array.from({length: n}, (_, k) => { const a = colAvg(arr, k); return a.l == null ? '<td class="c">-</td>' : `<td class="c"><b>${a.l}</b>${a.d == null ? '' : `<span class="dl ${a.d > 0 ? 'up' : a.d < 0 ? 'dn' : ''}">${sg(a.d)}</span>`}</td>`; }).join('');
-    return R.length ? `<tfoot><tr><td class="sk">Rata-rata kelas</td><td></td>${foot('P', pk.P.length)}${foot('K', pk.K.length)}${D.asesmen.map((a, k) => { const v = R.map(r => r.nilai[k]).filter(Boolean); return `<td class="c">${v.length ? '<b>' + mean(v.map(x => x.n)) + '</b>' : '-'}</td>`; }).join('')}<td class="c">${st.km == null ? '-' : sg(st.km)}</td><td class="c">${st.as ?? '-'}</td><td></td>${pr ? '' : '<td class="noprint"></td>'}</tr></tfoot>` : ''; };
+    return R.length ? `<tfoot><tr><td class="sk">Rata-rata kelas</td><td></td>${foot('P', pk.P.length)}${foot('K', pk.K.length)}${D.asesmen.map((a, k) => { const v = R.map(r => r.nilai[k]).filter(Boolean); return `<td class="c">${v.length ? '<b>' + mean(v.map(x => x.n)) + '</b>' : '-'}</td>`; }).join('')}<td class="c">${st.km == null ? '-' : sg(st.km)}</td>${['avgP', 'avgK', 'avgTg'].map(k => `<td class="c">${mean(R.map(r => r[k]).filter(v => v != null)) ?? '-'}</td>`).join('')}<td class="c">${st.as ?? '-'}</td><td></td>${pr ? '' : '<td class="noprint"></td>'}</tr></tfoot>` : ''; };
   const table = (bodyHtml, R, pr, foot) => `<div class="tw lpw"><table class="lpt">${headHtml(pr)}<tbody>${bodyHtml}</tbody>${foot ? footHtml(R, pr) : ''}</table></div>`;
-  const NOTE = 'Sel aspek: nilai akhir (besar) dan perubahan dari pertemuan pertama ke terakhir pada periode ini. Kemajuan = rata-rata perubahan seluruh aspek. * = nilai asesmen sementara.';
-  const empty = `<tr><td colspan="${D ? D.pk.P.length + D.pk.K.length + D.asesmen.length + 5 : 5}" class="empty">Belum ada siswa pada paket ini. Siswa muncul setelah pembayaran paket dicatat.</td></tr>`;
+  const NOTE = 'Sel aspek: nilai akhir (besar) dan perubahan dari pertemuan pertama ke terakhir pada periode ini. Kemajuan = rata-rata perubahan seluruh aspek. Rekap nilai: Pemahaman dan Keterampilan = rata-rata nilai akhir tiap aspek (skala 1-10); Tugas = rata-rata seluruh nilai tugas yang sudah dimasukkan ke Catatan Progres pada pertemuan periode ini (skala 0-100); Asesmen = rata-rata nilai asesmen (skala 0-100). * = nilai asesmen sementara.';
+  const empty = `<tr><td colspan="${D ? D.pk.P.length + D.pk.K.length + D.asesmen.length + 8 : 5}" class="empty">Belum ada siswa pada paket ini. Siswa muncul setelah pembayaran paket dicatat.</td></tr>`;
   const lppSheets = () => {
     const R = rows(), pk = D.pk, st = stats(R), G = PG.l, W = G.w, H = Math.round(W * G.ratio);
     const head = `<div class="rhd mini"><div><div class="rl">${esc(C().Nama)} • Laporan periode program</div><h1>${esc(pk.Program)} – ${esc(pk.Nama)}</h1><small>${D.n ? 'Bulan ' + D.n : 'Seluruh paket'} • pertemuan ${D.lo}–${D.hi} • ${esc(pk.Jenjang)} • dicetak ${today()}</small></div><div class="lpst">${st.list.map(s => `<div class="lpsi"><b>${s[0]}</b><small>${s[1]}</small></div>`).join('')}</div></div>`;
@@ -1970,6 +2093,55 @@ function xask(r, msg, yes, cb) {
   const d = document.createElement('div'); d.className = 'xdlg'; d.innerHTML = `<div class="xcard"><p>${esc(msg)}</p><div style="display:flex;gap:10px;justify-content:center"><button class="xbtn" id="xy">${yes}</button><button class="xbtn ghost" id="xn2">Kembali</button></div></div>`;
   r.appendChild(d); d.querySelector('#xn2').onclick = () => d.remove(); d.querySelector('#xy').onclick = () => { d.remove(); cb(); };
 }
+
+/* ---------- Toolbar simbol & rumus untuk jawaban Singkat / Essay ---------- */
+const XSYM = [
+  ['Matematika', ['±', '×', '÷', '≠', '≈', '≤', '≥', '<', '>', '√', '∛', '∞', '%', '‰', '°', '′', '″', '∑', '∏', '∫', '∂', '∠', '⊥', '∥', '∴', '∵', '∈', '∉', '∪', '∩', '⊂', '⊆', '∅', '½', '⅓', '¼', '¾']],
+  ['Pangkat & indeks', ['⁰', '¹', '²', '³', '⁴', '⁵', '⁶', '⁷', '⁸', '⁹', '⁺', '⁻', '⁼', '⁽', '⁾', 'ⁿ', '₀', '₁', '₂', '₃', '₄', '₅', '₆', '₇', '₈', '₉', '₊', '₋', '₌', '₍', '₎', 'ₙ']],
+  ['Yunani', ['α', 'β', 'γ', 'δ', 'ε', 'θ', 'λ', 'μ', 'π', 'ρ', 'σ', 'τ', 'φ', 'ω', 'Δ', 'Σ', 'Ω', 'Φ', 'Ψ', 'Λ', 'Π', 'Θ']],
+  ['Sains', ['→', '←', '↔', '⇌', '⇒', '↑', '↓', '℃', '℉', 'Å', 'Ω', 'µ', '·', '∝', '≡', '⊕', '⊗', '‖', '⟂', '•']]
+];
+const XRUM = [['a/b', '()/()', 1], ['√( )', '√()', 2], ['xⁿ', '^()', 2], ['xₙ', '_()', 2], ['log', 'log()', 4], ['ln', 'ln()', 3], ['sin', 'sin()', 4], ['cos', 'cos()', 4], ['tan', 'tan()', 4],
+  ['lim', 'lim(x→) ', 6], ['Σ', 'Σ(i=1→n) ', null], ['∫', '∫(a→b)  dx', 8], ['|x|', '||', 1], ['( )', '()', 1], ['H₂O', 'H₂O', null], ['CO₂', 'CO₂', null], ['Δx', 'Δx', null], ['x ± y', ' ± ', null]];
+const XQUICK = [['x²', '²'], ['x₂', '₂'], ['√', '√'], ['×', '×'], ['÷', '÷'], ['±', '±'], ['≤', '≤'], ['≥', '≥'], ['≠', '≠'], ['°', '°'], ['π', 'π'], ['→', '→']];
+const xtbHtml = () => `<div class="xtb" role="toolbar" aria-label="Alat bantu jawaban"><button type="button" data-xp="sym" title="Daftar simbol">Ω Simbol</button><button type="button" data-xp="rum" title="Daftar rumus">ƒx Rumus</button><i></i>${XQUICK.map(c => `<button type="button" data-xi="${esc(c[1])}" title="${esc(c[1])}">${esc(c[0])}</button>`).join('')}</div>`;
+const xedHtml = (inner, counter) => `<div class="xed">${xtbHtml()}<div class="xpn" hidden></div>${inner}${counter ? '<div class="xcnt"></div>' : ''}</div>`;
+// Toolbar bekerja di tempat (tanpa menggambar ulang soal): fokus & posisi kursor tetap di kotak jawaban saat tombol ditekan.
+function xwire(root, inp, mark) {
+  const ed = root.querySelector('.xed'); if (!ed || !inp) return;
+  const pn = ed.querySelector('.xpn'), cn = ed.querySelector('.xcnt'), max = inp.maxLength > 0 ? inp.maxLength : 0;
+  let kind = '', tab = 0, sel = [inp.value.length, inp.value.length];
+  const cnt = () => { if (cn && max) cn.textContent = inp.value.length + '/' + max; };
+  const keep = () => { if (typeof inp.selectionStart === 'number') sel = [inp.selectionStart, inp.selectionEnd]; };
+  ['keyup', 'mouseup', 'touchend', 'select', 'input'].forEach(n => inp.addEventListener(n, keep));
+  inp.addEventListener('blur', () => { keep(); mark(); }); inp.addEventListener('focus', mark); inp.addEventListener('input', cnt);
+  ed.addEventListener('pointerdown', mark, true); ed.addEventListener('touchstart', mark, {capture: true, passive: true});
+  ed.addEventListener('mousedown', e => { if (e.target.closest('.xtb,.xpn')) e.preventDefault(); });
+  const drawPn = () => {
+    ed.querySelectorAll('.xtb [data-xp]').forEach(b => b.classList.toggle('on', b.dataset.xp === kind));
+    if (!kind) { pn.hidden = true; pn.innerHTML = ''; return; }
+    pn.hidden = false;
+    pn.innerHTML = kind === 'sym'
+      ? `<div class="xpt">${XSYM.map((g, i) => `<button type="button" data-xtab="${i}" class="${i === tab ? 'on' : ''}">${esc(g[0])}</button>`).join('')}</div><div class="xpg">${XSYM[tab][1].map(c => `<button type="button" data-xi="${esc(c)}">${esc(c)}</button>`).join('')}</div>`
+      : `<div class="xpg wide">${XRUM.map(f => `<button type="button" data-xi="${esc(f[1])}" ${f[2] == null ? '' : `data-xc="${f[2]}"`}>${esc(f[0])}</button>`).join('')}</div>`;
+  };
+  const put = (t, c) => {
+    const v = inp.value, a = Math.min(sel[0], v.length), b = Math.min(Math.max(sel[1], a), v.length);
+    if (max && v.length - (b - a) + t.length > max) { ed.classList.add('full'); setTimeout(() => ed.classList.remove('full'), 700); return; }
+    inp.value = v.slice(0, a) + t + v.slice(b);
+    const pos = a + (c == null ? t.length : c);
+    try { inp.focus({preventScroll: true}); inp.setSelectionRange(pos, pos); } catch (e) {}
+    sel = [pos, pos]; inp.dispatchEvent(new Event('input', {bubbles: true}));
+  };
+  ed.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b || !ed.contains(b)) return;
+    e.preventDefault(); e.stopPropagation(); mark();
+    if (b.dataset.xp) { kind = kind === b.dataset.xp ? '' : b.dataset.xp; if (kind === 'sym') tab = 0; drawPn(); return; }
+    if (b.dataset.xtab != null) { tab = Number(b.dataset.xtab) || 0; drawPn(); return; }
+    if (b.dataset.xi != null) put(b.dataset.xi, b.dataset.xc != null ? Number(b.dataset.xc) : null);
+  });
+  cnt();
+}
 function examIntro(a, pv) {
   const r = xroot(a.Tema), cam = a.Kamera === 'Ya' && !pv;
   r.innerHTML = `<div class="xin"><div class="xcard" style="max-width:660px;margin:6vh auto 0"><h2 style="margin-top:0">${esc(a.Nama)}</h2><p>${esc(a.Program)} • ${a.Jumlah} soal • ${a.Durasi} menit${pv ? ' • <b>PRATINJAU</b> (aturan keamanan tidak diberlakukan)' : ''}</p>
@@ -1991,19 +2163,19 @@ function examIntro(a, pv) {
 }
 function examRun(r, ex, a, pv, stream, needFs) {
   const Q = ex.soal.map(q => Object.assign({}, q)); for (let i = Q.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [Q[i], Q[j]] = [Q[j], Q[i]]; }
-  const ans = {}, seen = {}, t0 = Date.now(), tot = ex.Durasi * 60000, end = t0 + tot; let cur = 0, done = false, tmr = 0, png = 0, BL = 0, rtc = null;
+  const ans = {}, seen = {}, t0 = Date.now(), tot = ex.Durasi * 60000, end = t0 + tot; let cur = 0, done = false, tmr = 0, png = 0, BL = 0, rtc = null, TB = 0;
   S.busy = !pv;
   const cnt = () => Object.keys(ans).filter(k => String(ans[k]).trim() !== '').length;
   const draw = () => {
     const q = Q[cur]; seen[q.i] = 1;
     const body = q.t === 'pg' ? q.o.map((t, j) => t ? `<div class="xopt ${ans[q.i] === 'ABCD'[j] ? 'on' : ''}" data-v="${'ABCD'[j]}"><b>${'ABCD'[j]}</b><span>${esc(t)}</span></div>` : '').join('')
-      : q.t === 'js' ? `<input class="xi" id="xin" maxlength="60" value="${esc(ans[q.i] || '')}" placeholder="Ketik jawaban singkat" autocomplete="off">` : `<textarea class="xi" id="xin" rows="7" placeholder="Tulis jawabanmu di sini">${esc(ans[q.i] || '')}</textarea>`;
+      : q.t === 'js' ? xedHtml(`<input class="xi" id="xin" maxlength="60" value="${esc(ans[q.i] || '')}" placeholder="Ketik jawaban singkat" autocomplete="off" autocapitalize="off" spellcheck="false">`, true) : xedHtml(`<textarea class="xi" id="xin" rows="7" placeholder="Tulis jawabanmu di sini">${esc(ans[q.i] || '')}</textarea>`, false);
     r.innerHTML = `<div class="xin"><div class="xhead"><b style="font-size:18px">${esc(ex.Nama)}</b>${pv ? '<span class="xtag">Pratinjau</span>' : ''}<span class="xtmr" id="xt"><span id="xtt"></span></span><button class="xbtn sm ghost" id="xend">${pv ? 'Tutup pratinjau' : 'Akhiri asesmen'}</button></div><div class="xbar"><i id="xb"></i></div>
       <div class="xg"><div class="xcard"><div class="xqh"><span>Soal ${cur + 1} dari ${Q.length}</span><span class="xtype" style="background:var(--${q.t === 'pg' ? 'xpg' : q.t === 'js' ? 'xjs' : 'xes'});color:var(--xqt)">${TJ[q.t]}</span></div><div class="xq">${esc(q.q)}</div>${body}
       <div class="xnav"><button class="xbtn" id="xp" ${cur ? '' : 'disabled'}>Sebelumnya</button><button class="xbtn" id="xn">${cur < Q.length - 1 ? 'Berikutnya' : 'Selesai'}</button></div></div>
       <div class="xcard xside"><b>Navigasi soal</b><div class="xmap">${Q.map((s, n) => `<b class="${ans[s.i] ? 'g' : seen[s.i] ? 'y' : ''} ${n === cur ? 'c' : ''}" data-n="${n}">${n + 1}</b>`).join('')}</div><small>Terjawab ${cnt()} dari ${Q.length}</small>${stream ? '<br><small>📷 Kamera aktif</small>' : ''}</div></div></div>`;
     r.querySelectorAll('.xopt').forEach(o => o.onclick = () => { ans[q.i] = o.dataset.v; draw(); });
-    const inp = r.querySelector('#xin'); if (inp) inp.oninput = () => { ans[q.i] = inp.value; };
+    const inp = r.querySelector('#xin'); if (inp) { inp.oninput = () => { ans[q.i] = inp.value; }; xwire(r, inp, () => { TB = Date.now(); }); }
     r.querySelectorAll('.xmap b').forEach(b => b.onclick = () => { cur = +b.dataset.n; draw(); });
     $('#xp').onclick = () => { cur--; draw(); };
     $('#xn').onclick = () => { if (cur < Q.length - 1) { cur++; draw(); } else endAsk(); };
@@ -2020,7 +2192,9 @@ function examRun(r, ex, a, pv, stream, needFs) {
   const vc = () => { if (document.hidden) finish('Pindah tab/minimize'); };
   const bl = () => { if (Date.now() - t0 < 3000) return; clearTimeout(BL); BL = setTimeout(() => { if (!done && !document.hasFocus()) finish('Meninggalkan layar ujian'); }, 400); };
   const bf = () => clearTimeout(BL);
-  const rz = () => { if (MOB && (innerWidth < screen.width * .8 || (innerHeight < screen.height * .5 && !(document.activeElement && document.activeElement.tagName === 'TEXTAREA')))) finish('Split screen'); };
+  /* keyboard layar (HP) memperkecil tinggi jendela: jangan dianggap split screen saat siswa mengetik atau memakai toolbar */
+  const typing = () => { const a = document.activeElement; return Date.now() - TB < 3000 || !!(a && (a.tagName === 'TEXTAREA' || a.tagName === 'INPUT' || a.isContentEditable)); };
+  const rz = () => { if (MOB && (innerWidth < screen.width * .8 || (innerHeight < screen.height * .5 && !typing()))) finish('Split screen'); };
   const fs = () => { if (!document.fullscreenElement && needFs) finish('Keluar layar penuh'); };
   const nc = e => e.preventDefault();
   const kb = e => { const k = e.key || ''; if (/^F([1-9]|1\d|2[0-4])$/.test(k) || ['Meta', 'OS', 'ContextMenu', 'Apps', 'PrintScreen', 'Escape', 'Help', 'Pause', 'ScrollLock'].includes(k) || e.metaKey || e.altKey || (k.length === 1 && e.ctrlKey) || (e.ctrlKey && ['Tab', 'PageUp', 'PageDown'].includes(k))) { e.preventDefault(); e.stopPropagation(); return false; } };
@@ -2208,7 +2382,7 @@ const REPFOOT = '<p class="mut" style="font-size:12px">Nilai akhir adalah rata-r
 const repNoteCard = r => { const a = rowAvg(r); return `<div class="nt"><div class="nn">${r.Pertemuan}</div><div class="nb"><div class="nth"><b>Pertemuan ${r.Pertemuan}</b><small>${esc(r.Tanggal)} • ${esc(r.Kehadiran)}</small></div><p>${esc(r.Catatan)}</p><small>${esc(r.Tutor)}${a != null ? ' • skor ' + a : ''}</small></div></div>`; };
 const repNotes = x => { const half = Math.ceil(x.notes.length / 2), g = []; for (let i = 0; i < half; i++) { g.push(repNoteCard(x.notes[i])); if (x.notes[half + i]) g.push(repNoteCard(x.notes[half + i])); } return x.notes.length ? `<div class="nts">${g.join('')}</div>` : '<p>Belum ada catatan.</p>'; };
 const sigHtml = d => `<div class="sig"><div><div class="sigl"></div>Tutor</div><small>Dicetak ${esc(d.tgl)}</small><div><div class="sigl"></div>Pengelola</div></div>`;
-const repBody = d => { const x = repX(d); return repHead(d, x) + `<div class="rbd">${repCharts(x)}${repTabs(d, x)}<h3>Catatan tutor</h3>${repNotes(x)}${repAses(d)}${repRec(x)}${REPFOOT}</div>`; };
+const repBody = d => { const x = repX(d); return repHead(d, x) + `<div class="rbd">${repCharts(x)}${repTabs(d, x)}<h3>Catatan tutor</h3>${repNotes(x)}${repAses(d)}${repTugas(d)}${repRec(x)}${REPFOOT}</div>`; };
 const insight = (names, lv, fv) => {
   const v = names.map((n, i) => ({n, l: lv[i], d: lv[i] != null && fv[i] != null ? Math.round((lv[i] - fv[i]) * 10) / 10 : null})).filter(x => x.l != null);
   if (!v.length) return '';
@@ -2228,10 +2402,10 @@ async function vCatProg() {
   const d = await api('dashboard'), ps = d.pakets; let cur = null;
   $('#main').innerHTML = head('Catatan progres', 'Perkembangan belajarmu di setiap pertemuan.', progBar) + (ps.length ? `<div class="panel noprint" style="max-width:420px">${sel('cp', 'Paket belajar', ps.map(p => `<option value="${p.ID}">${esc(p.Program + ' – ' + p.PaketNama)}</option>`).join(''))}</div><div id="cpb"></div>` : '<div class="panel empty">Belum ada paket aktif. Hubungi pengelola.</div>');
   if (!ps.length) return;
-  const load = async () => { const L = ps.find(p => p.ID === val('cp')), [rows, foto] = await Promise.all([api('progress', {LID: L.ID}), api('foto', {}).catch(() => '')]); cur = {L, rows, foto}; $('#cpb').innerHTML = progBlock(L, rows, foto); };
+  const load = async () => { const L = ps.find(p => p.ID === val('cp')), [rows, foto, T] = await Promise.all([api('progress', {LID: L.ID}), api('foto', {}).catch(() => ''), api('tugasProg', {LID: L.ID}).catch(() => null)]); cur = {L, rows, foto, T}; $('#cpb').innerHTML = progBlock(L, rows, foto) + tugasPanel(T, false); };
   $('#cp').onchange = () => load().catch(fail);
-  $('#pdfb').onclick = () => cur && exportSheets(progSheets(cur.L, cur.rows, cur.foto), {orient: 'p', kind: 'pdf', name: fname('Catatan-Progres', cur.L.Nama)});
-  $('#jpgb').onclick = () => cur && exportSheets(progSheets(cur.L, cur.rows, cur.foto), {orient: 'p', kind: 'jpg', name: fname('Catatan-Progres', cur.L.Nama)});
+  $('#pdfb').onclick = () => cur && exportSheets(progSheets(cur.L, cur.rows, cur.foto, cur.T), {orient: 'p', kind: 'pdf', name: fname('Catatan-Progres', cur.L.Nama)});
+  $('#jpgb').onclick = () => cur && exportSheets(progSheets(cur.L, cur.rows, cur.foto, cur.T), {orient: 'p', kind: 'jpg', name: fname('Catatan-Progres', cur.L.Nama)});
   load().catch(fail);
 }
 
@@ -2329,17 +2503,17 @@ const noteShell = (d, x, grid, i, n) => `${repHead(d, x, 1)}<div class="rbd tp">
 function repSheets(d) {
   const x = repX(d), G = PG.p, W = G.w, H = Math.round(W * G.ratio), dense = x.all.length > 6;
   const tabs = dense ? `<div class="tabs2">${aspekC('Pemahaman materi', 'P', d.pk.P, x.rows)}${aspekC('Keterampilan', 'K', d.pk.K, x.rows)}</div>` : repTabs(d, x);
-  const out = [`${repHead(d, x)}<div class="rbd"><section>${repCharts(x)}</section><section>${tabs}</section><section>${repAses(d)}</section><section>${repRec(x)}${REPFOOT}</section><section>${sigHtml(d)}</section></div>`];
+  const out = [`${repHead(d, x)}<div class="rbd"><section>${repCharts(x)}</section><section>${tabs}</section><section>${repAses(d)}</section><section>${repTugas(d)}</section><section>${repRec(x)}${REPFOOT}</section><section>${sigHtml(d)}</section></div>`];
   if (x.notes.length) { const pages = chunkNotes(x.notes, W, H, g => noteShell(d, x, g, 1, 1)); pages.forEach((p, i) => out.push(noteShell(d, x, repNotes({notes: p}), i + 1, pages.length))); }
   return out;
 }
 // Catatan progres: lembar 1 = header, nilai terakhir (radar + foto), aspek, kemajuan; riwayat pertemuan mengisi sisa halaman lalu lembar berikutnya.
-function progSheets(L, rows, FOTO) {
+function progSheets(L, rows, FOTO, T) {
   const G = PG.p, W = G.w, H = Math.round(W * G.ratio), hist = histRows(rows).map(histRow);
   const info = [['Jenjang', L.Jenjang], ['Kelas / kelompok', L.Kelompok], ['Program', L.Program], ['Paket belajar', L.PaketNama], ['Pertemuan', `${L.Tercatat} dari ${L.Total}`], ['Termin dibayar', `${L.Dibayar} dari ${L.Termin}`]];
   const head = `<div class="rhd nophoto"><div><div class="rl">${esc(C().Nama)} • Catatan progres belajar</div><h1>${esc(L.Nama)}</h1><div class="idg">${info.map(r => `<div><small>${r[0]}</small><b>${esc(r[1] || '-')}</b></div>`).join('')}</div></div></div>`;
   const mini = `<div class="rhd mini nophoto"><div><div class="rl">${esc(C().Nama)} • Catatan progres belajar</div><h1>${esc(L.Nama)}</h1><small>${esc(L.PaketNama)} • ${esc(L.Program)} • dicetak ${today()}</small></div></div>`;
-  const sh1 = b => `${head}<div class="rbd tp"><section>${progTop(L, rows, FOTO)}</section><section>${progresHtml(progres(rows))}</section>${b === null ? '' : `<section><h3>Riwayat pertemuan</h3>${histTable(b)}</section>`}</div>`;
+  const sh1 = b => `${head}<div class="rbd tp"><section>${progTop(L, rows, FOTO)}</section><section>${progresHtml(progres(rows))}</section>${tugasSheet(T)}${b === null ? '' : `<section><h3>Riwayat pertemuan</h3>${histTable(b)}</section>`}</div>`;
   const shN = b => `${mini}<div class="rbd tp"><section><h3>Riwayat pertemuan (lanjutan)</h3>${histTable(b)}</section></div>`;
   const pages = chunkRows(hist, sh1, shN, W, H, G.ratio);
   return pages.map((p, i) => i === 0 ? sh1(p.length ? p.join('') : (hist.length ? null : '')) : shN(p.join('')));
