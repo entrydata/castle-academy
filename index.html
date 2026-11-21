@@ -17,13 +17,13 @@ button,input,select,textarea{font:inherit;color:inherit}
 .hide{display:none!important}
 /* login */
 #login{min-height:100vh;display:grid;grid-template-columns:1.05fr 1fr;background:#fff}
-#login{background:#f7fbff}
-#login .lside{background:#f7fbff;color:var(--ink);padding:40px 30px;align-items:center;text-align:center;justify-content:center}
-#login .lside::before{display:none}
+#login{background:#f7fbff;position:relative;overflow:hidden}
+#login .lside{background:transparent;color:var(--ink);padding:40px 30px;align-items:center;text-align:center;justify-content:center;position:relative;z-index:1}
+#login .lside::before{display:block;content:'';position:absolute;left:5%;bottom:5%;width:160px;height:210px;opacity:.08;background:var(--royal);clip-path:polygon(42% 0,58% 17%,58% 31%,70% 31%,70% 43%,83% 43%,83% 100%,17% 100%,17% 43%,30% 43%,30% 31%,42% 31%)}
 #login .lside .crest,#login .lside h1,#login .lside .sub,#login .lside .rule{display:none}
 #login .lside .logo4{display:block;width:min(300px,70%);height:250px;margin:0 auto 12px;background:url('assets/castle-academy-login-logo.png') center/contain no-repeat}
-#login .lside .quote{font-family:'Bricolage Grotesque',Figtree,sans-serif;font-style:normal;font-size:18px;line-height:1.25;color:var(--ink);text-indent:0;overflow:visible;background:url('assets/castle-academy-slogan.png') center/contain no-repeat;width:min(360px,90%);height:100px;margin:8px auto 0;font-weight:700;letter-spacing:.01em;color:transparent;user-select:none}
-#login .rside{background:#f7fbff;justify-items:center}
+#login .lside .quote{font-family:'Bricolage Grotesque',Figtree,sans-serif;font-style:normal;font-size:18px;line-height:1.25;color:var(--ink);text-indent:0;overflow:visible;background:url('assets/castle-academy-slogan.png') center/contain no-repeat;width:min(360px,90%);height:auto;aspect-ratio:406/156;max-height:120px;margin:8px auto 0;font-weight:700;letter-spacing:.01em;color:transparent;user-select:none}
+#login .rside{background:transparent;justify-items:center;position:relative;z-index:1}
 #login .rside .lcard{background:rgba(255,255,255,.94);border:1px solid rgba(42,125,225,.12);border-radius:24px;padding:38px 42px;max-width:470px;box-shadow:0 18px 55px rgba(18,49,92,.12)}
 #login .lcard h2{font-family:'Bricolage Grotesque',Figtree,sans-serif;font-size:34px;color:var(--ink);text-align:center}
 #login .lcard>p:first-of-type{text-align:center;font-size:15px}
@@ -73,8 +73,8 @@ input:focus,select:focus,textarea:focus{border-color:var(--royal);outline:none}
 @media(max-width:650px){.lprog-layout{grid-template-columns:1fr;max-height:65vh}.lprog-list{max-height:180px;overflow:auto}.lprog-form{padding:12px}}
 .top.dash-head{align-items:center;padding:14px 18px;border:1px solid var(--line);border-radius:18px;background:#fff;gap:16px}
 .dash-title{display:flex;align-items:center;gap:14px;min-width:0}
-.dash-logo{width:76px;height:68px;object-fit:contain;flex:none;border-radius:12px;background:#fff}
-@media(max-width:640px){.top.dash-head{padding:12px;gap:10px}.dash-title{gap:9px;flex:1 1 100%}.dash-logo{width:58px;height:52px}.dash-head h2{font-size:20px}.dash-head p{font-size:13px}}
+.dash-logo{width:148px;height:66px;object-fit:contain;flex:none;border-radius:12px;background:#fff;padding:5px}
+@media(max-width:640px){.top.dash-head{padding:12px;gap:10px}.dash-title{gap:10px;flex:1 1 100%;align-items:center}.dash-logo{width:98px;height:52px;padding:3px}.dash-head h2{font-size:20px}.dash-head p{font-size:13px}}
 /* shell */
 #app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
 aside{background:#fff;border-right:1px solid var(--line);color:var(--ink);padding:22px 14px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
@@ -194,13 +194,13 @@ input[type=radio],input[type=checkbox]{width:auto}
 .btn.bmk-btn{font-weight:800;font-size:13.5px;min-height:36px;padding:7px 15px;border:1.5px solid #ffb703;color:#b45309;background:#fff8e1;box-shadow:none}
 .btn.bmk-btn:hover{background:#ffefbf}.btn.bmk-btn.on{background:linear-gradient(135deg,#ffb703,#fb6f1d);color:#fff;border-color:transparent;box-shadow:0 3px 10px rgba(251,111,29,.35)}
 .timeline-meeting.bm{border-left:6px solid #ffb703;background:linear-gradient(90deg,#fff8e1,transparent 160px)}
-.dash-hero{display:flex;align-items:center;gap:18px}.dash-hero .dash-logo{width:92px;height:78px;padding:5px;background:#fff;border-radius:14px;box-shadow:0 5px 16px rgba(18,49,92,.18)}.dash-hero-text{min-width:0}.dash-hero-text h2{margin:0}.dash-hero-text p{margin:4px 0 0}@media(max-width:640px){.dash-hero{gap:12px;padding:20px 16px}.dash-hero .dash-logo{width:64px;height:56px}.dash-hero-text h2{font-size:21px}.dash-hero-text p{font-size:13px}}
-.rhd-logo{width:82px;height:82px;object-fit:contain;object-position:center;background:#fff;border-radius:16px;padding:6px;margin-bottom:10px;box-shadow:0 4px 14px rgba(18,49,92,.15);display:block}
-.rhd.mini .rhd-logo{width:58px;height:58px;border-radius:12px;margin-bottom:6px;padding:4px}
+.dash-hero{display:flex;align-items:center;gap:18px}.dash-hero .dash-logo{width:158px;height:70px;padding:5px;background:#fff;border-radius:14px;box-shadow:0 5px 16px rgba(18,49,92,.18)}.dash-hero-text{min-width:0}.dash-hero-text h2{margin:0}.dash-hero-text p{margin:4px 0 0}@media(max-width:640px){.dash-hero{gap:12px;padding:20px 16px}.dash-hero .dash-logo{width:112px;height:52px}.dash-hero-text h2{font-size:21px}.dash-hero-text p{font-size:13px}}
+.rhd-logo{width:132px;height:54px;object-fit:contain;object-position:left center;background:#fff;border-radius:10px;padding:5px;margin:0 0 9px;box-shadow:0 3px 10px rgba(18,49,92,.12);display:block}
+.rhd.mini .rhd-logo{width:106px;height:42px;border-radius:8px;margin:0 0 5px;padding:4px}
 .rhd.nophoto{grid-template-columns:minmax(0,1fr)}
-.f4p .rhd-logo{width:54px;height:54px;margin-bottom:5px;border-radius:10px;padding:4px}.f4p .rhd.mini .rhd-logo{width:42px;height:42px}
-.f4l .rhd-logo{width:48px;height:48px;margin-bottom:4px;border-radius:9px;padding:3px}
-@media(max-width:760px){.rhd-logo{margin-left:auto;margin-right:auto}}
+.f4p .rhd-logo{width:100px;height:41px;margin:0 0 4px;border-radius:7px;padding:3px}.f4p .rhd.mini .rhd-logo{width:86px;height:35px}
+.f4l .rhd-logo{width:96px;height:39px;margin:0 0 3px;border-radius:7px;padding:3px}
+@media(max-width:760px){.rhd-logo{margin-left:auto;margin-right:auto;object-position:center}}
 /* Editor pengolah kata (Lembar tugas guru & Canvas jawaban siswa) */
 .modal.cv{max-width:980px}
 .rte{border:1.5px solid var(--line);border-radius:8px;background:#fff;overflow:hidden;margin:6px 0 12px}.rte:focus-within{border-color:var(--royal)}
@@ -730,7 +730,7 @@ const resHead = () => `<tr><th>Tanggal</th>${S.user.Role !== 'siswa' ? '<th>Nama
 /* ---------- Staff views ---------- */
 async function vStaffDash() {
   const d = await api('dashboard'), st = [[d.siswa, 'Siswa terdaftar'], [d.aktif, 'Paket aktif'], [d.menunggu, 'Menunggu termin'], [d.soal, 'Asesmen'], [d.ujian, 'Ujian selesai'], [d.rata, 'Rata-rata nilai ujian']];
-  $('#main').innerHTML = head(dashLogo + `<div><h2>Halo, ${esc(S.user.Nama)}</h2><p>Ringkasan aktivitas ${esc(C().Nama)}.</p></div>`, '', '', true) +
+  $('#main').innerHTML = head(dashLogo() + `<div><h2>Halo, ${esc(S.user.Nama)}</h2><p>Ringkasan aktivitas ${esc(C().Nama)}.</p></div>`, '', '', true) +
     `<div class="stats">${st.map(s => `<div class="stat"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('')}</div>
     <div class="two"><div class="panel"><h3>Kemampuan rata-rata siswa per bulan</h3>${lineSVG(d.bulanan)}</div><div class="panel"><h3>Sebaran siswa per jenjang dan program</h3>${pieSVG(d.sebaran)}</div></div>
     <div class="panel"><h3>Nilai siswa terkini</h3><div id="rdr"></div></div>
