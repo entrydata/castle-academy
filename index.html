@@ -17,8 +17,8 @@ button,input,select,textarea{font:inherit;color:inherit}
 .hide{display:none!important}
 /* login */
 #login{min-height:100vh;display:grid;grid-template-columns:1.05fr 1fr;background:#fff}
-#login{background:#f7fbff url('assets/castle-academy-login-desktop.png') center/contain no-repeat;position:relative;overflow:hidden}
-@media(min-width:901px) and (max-width:1440px){#login{background-image:url('assets/castle-academy-login-laptop.png')}}
+#login{background:#f7fbff url('assets/castle-academy-login-laptop.png') center/contain no-repeat;position:relative;overflow:hidden}
+@media(max-width:900px){#login{background:#f7fbff;position:relative;overflow:hidden}#login .lside .logo4{display:block;width:min(280px,70%);height:220px;margin:0 auto 10px;background:url('assets/castle-academy-login-logo.png') center/contain no-repeat}#login .lside .quote{display:block;background:url('assets/castle-academy-slogan.png') center/contain no-repeat;width:min(330px,90%);height:auto;aspect-ratio:406/156;margin:8px auto 0;color:transparent;user-select:none}#login .lside::after{content:'';position:absolute;left:-5%;right:-5%;bottom:0;height:16px;background:linear-gradient(90deg,#0e4e93 0 65%,#1475d1 65% 82%,#f4b740 82%);transform:skewY(-2deg);transform-origin:left bottom}}
 #login .lside{background:transparent;color:var(--ink);padding:40px 30px;align-items:center;text-align:center;justify-content:center;position:relative;z-index:1}
 #login .lside::before{display:none}
 #login .lside .crest,#login .lside h1,#login .lside .sub,#login .lside .rule{display:none}
@@ -74,7 +74,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--royal);outline:none}
 @media(max-width:650px){.lprog-layout{grid-template-columns:1fr;max-height:65vh}.lprog-list{max-height:180px;overflow:auto}.lprog-form{padding:12px}}
 .top.dash-head{align-items:center;padding:14px 18px;border:1px solid var(--line);border-radius:18px;background:#fff;gap:16px}
 .dash-title{display:flex;align-items:center;gap:14px;min-width:0}
-.dash-logo{width:290px;height:120px;object-fit:contain;flex:none;border-radius:14px;background:#fff;padding:8px}
+.dash-logo{width:340px;height:140px;object-fit:contain;flex:none;border-radius:14px;background:#fff;padding:8px}
 @media(max-width:640px){.top.dash-head{padding:14px;gap:10px}.dash-title{gap:12px;flex:1 1 100%;align-items:center}.dash-logo{width:108px;height:106px;padding:4px}.dash-head h2{font-size:20px}.dash-head p{font-size:13px}}
 /* shell */
 #app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
@@ -2560,7 +2560,7 @@ const repX = d => {
     last: d.res.slice().sort((a, b) => String(b.Tanggal).localeCompare(String(a.Tanggal)))[0], notes: rows.filter(r => r.Catatan)};
 };
 const reportLogo = '<img class="rhd-logo" src="assets/castle-academy-logo.png" alt="Logo Castle Academy">';
-const reportLogoData = () => (S.cfg && S.cfg.LogoRect) ? `<img class="rhd-logo" src="${esc(S.cfg.LogoRect)}" alt="Logo Castle Academy">` : reportLogo;
+const reportLogoData = () => '';
 const repHead = (d, x, mini) => {
   const info = [['Jenjang', x.u.Jenjang], ['Kelas / kelompok', x.u.Kelompok], ['Program', x.l.Program], ['Paket belajar', x.l.PaketNama], ['Mulai', x.l.Mulai], ['Termin dibayar', `${x.l.Dibayar} dari ${x.l.Termin}`], ['Pertemuan', `${x.l.Tercatat} dari ${x.l.Total}`], ['Kehadiran', `${x.hadir} hadir dari ${x.rows.length}`],
     ['Hasil asesmen terakhir', x.last ? `${x.last.Skor}${Number(x.last.Pending) > 0 ? '*' : ''} • ${x.last.Judul || x.last.Program}` : '-']];
