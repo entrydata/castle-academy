@@ -1692,22 +1692,29 @@ function applyTheme(s) {
   const lg = s.Logo || '';
   document.querySelectorAll('img.lgi').forEach(i => { if (lg) { i.src = lg; i.classList.remove('hide'); } else { i.removeAttribute('src'); i.classList.add('hide'); } });
   document.querySelectorAll('.lgf').forEach(e => e.classList.toggle('hide', !!lg));
-  document.querySelectorAll('.logo4').forEach(e => e.style.backgroundImage = `url("${s.LogoCenter || 'assets/castle-academy-login-logo.png'}")`);
-  document.querySelectorAll('.lside .quote').forEach(e => e.style.backgroundImage = `url("${s.LogoSlogan || 'assets/castle-academy-slogan.png'}")`);
-  document.querySelectorAll('.dash-logo').forEach(e => e.src = (matchMedia('(max-width:640px)').matches ? s.LogoCenter : s.LogoRect) || (matchMedia('(max-width:640px)').matches ? 'assets/castle-academy-login-logo.png' : 'assets/castle-academy-logo.png'));
+  // Preload logo untuk performa
+  if (s.LogoCenter) { const i1 = new Image(); i1.src = s.LogoCenter; }
+  if (s.LogoRect) { const i2 = new Image(); i2.src = s.LogoRect; }
+  if (s.LogoSlogan) { const i3 = new Image(); i3.src = s.LogoSlogan; }
+  // Apply logo dengan lazy loading
+  requestIdleCallback(() => {
+    document.querySelectorAll('.logo4').forEach(e => e.style.backgroundImage = `url("${s.LogoCenter || 'assets/castle-academy-login-logo.png'}")`);
+    document.querySelectorAll('.lside .quote').forEach(e => e.style.backgroundImage = `url("${s.LogoSlogan || 'assets/castle-academy-slogan.png'}")`);
+    document.querySelectorAll('.dash-logo').forEach(e => e.src = (matchMedia('(max-width:640px)').matches ? s.LogoCenter : s.LogoRect) || (matchMedia('(max-width:640px)').matches ? 'assets/castle-academy-login-logo.png' : 'assets/castle-academy-logo.png'));
+  }, { timeout: 1000 });
   let ic = document.querySelector('link[rel=icon]');
   if (lg) { if (!ic) { ic = document.createElement('link'); ic.rel = 'icon'; document.head.appendChild(ic); } ic.href = lg; } else if (ic) ic.remove();
 }
-// Logo: dikecilkan di browser (maks. 256px) agar muat di satu sel Spreadsheet.
+// Logo: dikecilkan di browser (maks. 200px untuk performa optimal) agar muat di satu sel Spreadsheet.
 async function shrinkLogo(file) {
   if (!/^image\/(png|jpeg|webp)$/.test(file.type)) throw new Error('Format logo harus PNG, JPG, atau WebP.');
   const url = URL.createObjectURL(file);
   try {
     const img = await new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => no(new Error('Gambar tidak dapat dibaca. Pilih file lain.')); i.src = url; });
-    for (const m of [256, 200, 160, 128, 96]) {
+    for (const m of [200, 160, 128, 96]) {
       const k = Math.min(1, m / Math.max(img.naturalWidth, img.naturalHeight)), w = Math.max(1, Math.round(img.naturalWidth * k)), h = Math.max(1, Math.round(img.naturalHeight * k));
       const cv = document.createElement('canvas'); cv.width = w; cv.height = h; cv.getContext('2d').drawImage(img, 0, 0, w, h);
-      for (const q of [.92, .8, .65]) { const d = cv.toDataURL('image/webp', q); if (/^data:image\/(webp|png);base64,/.test(d) && d.length <= 44000) return d; }
+      for (const q of [.85, .7, .55]) { const d = cv.toDataURL('image/webp', q); if (/^data:image\/(webp|png);base64,/.test(d) && d.length <= 38000) return d; }
     }
     throw new Error('Logo terlalu besar. Gunakan gambar yang lebih sederhana.');
   } finally { URL.revokeObjectURL(url); }
@@ -1733,13 +1740,14 @@ function paketForm(k, pks) {
     `<div class="row">${fld('kp', 'Nama program', k.Program)}${sel('kj', 'Jenjang', '<option value="">Pilih</option>' + opts(JENJANG, k.Jenjang))}</div>
      <div class="row">${fld('kn', 'Paket belajar', k.Nama)}${sel('ks', 'Status', opts(['Aktif', 'Nonaktif'], k.Status))}</div>
      <div class="row">${fld('kt', 'Total jumlah pertemuan', k.Pertemuan || 48, 'number')}${fld('kb', 'Pertemuan per bulan', k.PerBulan || 8, 'number')}${fld('kh', 'Harga paket total (Rp)', k.Harga || '', 'number')}</div>
+     <div class="row">${fld('kpu', 'Pertemuan sebelum ujian akhir', k.PertemuanUjian || 8, 'number')}${fld('kkkm', 'KKM (%)', k.KKM || 70, 'number')}</div>
      <p id="ki" style="color:var(--royal);font-weight:600;margin:8px 0 0"></p>
      <label for="km">Jenis materi / keterampilan</label><textarea id="km" rows="2">${esc(k.Materi)}</textarea>
      <label for="kd">Deskripsi paket pembelajaran</label><textarea id="kd" rows="3">${esc(k.Deskripsi)}</textarea>
      <h3 style="margin:18px 0 4px;font-size:16px">Pemahaman materi</h3><div id="pl"></div><button class="btn ghost sm" id="pa" type="button">+ Tambah pemahaman materi</button>
      <h3 style="margin:18px 0 4px;font-size:16px">Keterampilan</h3><div id="kl"></div><button class="btn ghost sm" id="ka" type="button">+ Tambah keterampilan</button>
      <small style="display:block;color:var(--mute);margin-top:10px">Maksimal 6 per daftar. Tiap pertemuan dinilai skala 1-10, lalu diakumulasi menjadi rata-rata di laporan.</small>`,
-    async () => { await api('savePaket', {ID: k.ID, Program: val('kp'), Jenjang: val('kj'), Nama: val('kn'), Status: val('ks'), Pertemuan: val('kt'), PerBulan: val('kb'), Harga: val('kh'), Materi: val('km'), Deskripsi: val('kd'), P: PL, K: KL}); toast('Paket tersimpan'); vPaket(); });
+    async () => { await api('savePaket', {ID: k.ID, Program: val('kp'), Jenjang: val('kj'), Nama: val('kn'), Status: val('ks'), Pertemuan: val('kt'), PerBulan: val('kb'), Harga: val('kh'), Materi: val('km'), Deskripsi: val('kd'), P: PL, K: KL, PertemuanUjian: val('kpu'), KKM: val('kkkm')}); toast('Paket tersimpan'); vPaket(); });
   $('#kp').setAttribute('list', 'dl'); $('#kp').insertAdjacentHTML('afterend', `<datalist id="dl">${[...new Set(pks.map(p => p.Program).concat(['English', 'Mathematics']))].map(x => `<option value="${esc(x)}">`).join('')}</datalist>`);
   listEd('#pl', PL, 'Pemahaman materi', '#pa'); listEd('#kl', KL, 'Keterampilan', '#ka');
   const inf = () => { const n = +val('kt'), b = +val('kb') || 8, h = +val('kh'), t = Math.max(1, Math.ceil(n / b)); $('#ki').textContent = n > 0 ? `${t} termin bulanan × ${rp(Math.ceil(h / t))} = ${rp(h)}` : ''; };

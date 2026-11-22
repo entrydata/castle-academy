@@ -16,8 +16,17 @@ Aturan ini berlaku untuk setiap pembaruan dan fitur baru. Jangan menghapus optim
 - Muat data independen secara paralel dengan `Promise.all`; jangan membuat antrean request yang tidak perlu.
 - Navigasi tab tidak boleh menunggu pemuatan data tab lain. Jangan me-render ulang seluruh tampilan untuk perubahan kecil.
 - Input dan editor tidak boleh memanggil server pada setiap ketukan tombol. Simpan hanya atas aksi pengguna atau debounce autosave bila ditambahkan.
-- Gambar harus dikompresi dan memiliki dimensi tampilan yang sesuai. Hindari base64 besar pada HTML atau cache request.
+- **Logo dan gambar:**
+  - Logo disimpan maksimal 200px dengan kompresi optimal (target <38KB) untuk mempercepat loading.
+  - Logo di-preload saat aplikasi dimuat pertama kali agar tidak lag saat pindah tab.
+  - Pemasangan logo ke DOM menggunakan `requestIdleCallback` untuk menghindari blocking rendering utama.
+  - Gambar background login dipisah per ukuran layar untuk mengurangi ukuran file yang dimuat.
 - Gunakan lazy loading untuk gambar/file berat dan tunda render grafik atau iframe sampai diperlukan.
+
+## Pengaturan Asesmen
+- **Pertemuan Ujian** dan **KKM** sekarang diatur **per Program Paket**, bukan global di Settings.
+- Setiap paket memiliki nilai `PertemuanUjian` (minimal pertemuan sebelum ujian akhir) dan `KKM` (standar kelulusan) sendiri.
+- Laporan periode dan tampilan ujian akhir menggunakan nilai dari paket yang dipilih, bukan dari Settings.
 
 ## Verifikasi sebelum rilis
 1. Periksa sintaks JavaScript `Code.gs` dan `index.html`.
@@ -25,4 +34,5 @@ Aturan ini berlaku untuk setiap pembaruan dan fitur baru. Jangan menghapus optim
 3. Uji tambah/edit/hapus; data harus langsung diperbarui dan tidak membaca cache lama.
 4. Uji navigasi cepat antartab untuk memastikan respons lama tidak menimpa tab baru.
 5. Uji desktop dan ponsel pada koneksi lambat.
-6. Jangan mengklaim lebih cepat tanpa pengujian pada deployment yang sebenarnya.
+6. Uji loading logo saat login dan pindah tab; harus smooth tanpa lag.
+7. Jangan mengklaim lebih cepat tanpa pengujian pada deployment yang sebenarnya.
