@@ -7,6 +7,7 @@
 <title>Castle Academy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/castle-academy-login-logo.webp"><link rel="preload" as="image" href="assets/castle-academy-slogan.webp"><link rel="preload" as="image" href="assets/castle-academy-login-web.webp" media="(min-width:901px)">
 <style>
 :root{--ink:#12315c;--royal:#2a7de1;--brass:#f4b740;--mist:#f0f6fd;--line:color-mix(in srgb,var(--royal) 16%,#fff);--ok:#1f9d78;--bad:#d64545;--mute:#5d7394;--r:14px}
 *{box-sizing:border-box}
@@ -17,19 +18,19 @@ button,input,select,textarea{font:inherit;color:inherit}
 .hide{display:none!important}
 /* login */
 #login{min-height:100vh;display:grid;grid-template-columns:1.05fr 1fr;background:#fff}
-#login{background:#f7fbff url('assets/castle-academy-login-web.png') center/100% 100% no-repeat;position:relative;overflow:hidden}
-@media(max-width:900px){#login{background:#f7fbff;position:relative;overflow:hidden}#login .lside .logo4{display:block;width:min(280px,70%);height:220px;margin:0 auto 10px;background:url('assets/castle-academy-login-logo.png') center/contain no-repeat}#login .lside .quote{display:block;background:url('assets/castle-academy-slogan.png') center/contain no-repeat;width:min(330px,90%);height:auto;aspect-ratio:406/156;margin:8px auto 0;color:transparent;user-select:none}#login .lside::after{display:none}}
+#login{background:#f7fbff url('assets/castle-academy-login-web.webp') center/100% 100% no-repeat;position:relative;overflow:hidden}
+@media(max-width:900px){#login{background:#f7fbff;position:relative;overflow:hidden}#login .lside .logo4{display:block;width:min(280px,70%);height:220px;margin:0 auto 10px;background:url('assets/castle-academy-login-logo.webp') center/contain no-repeat}#login .lside .quote{display:block;background:url('assets/castle-academy-slogan.webp') center/contain no-repeat;width:min(330px,90%);height:auto;aspect-ratio:406/156;margin:8px auto 0;color:transparent;user-select:none}#login .lside::after{display:none}}
 #login .lside{background:transparent;color:var(--ink);padding:40px 30px;align-items:center;text-align:center;justify-content:center;position:relative;z-index:1}
 #login .lside::before{display:none}
 #login .lside .crest,#login .lside h1,#login .lside .sub,#login .lside .rule{display:none}
-#login .lside .logo4{display:block;width:min(300px,70%);height:250px;margin:0 auto 12px;background:url('assets/castle-academy-login-logo.png') center/contain no-repeat}
-#login .lside .quote{display:block;background:url('assets/castle-academy-slogan.png') center/contain no-repeat;width:min(360px,90%);height:auto;aspect-ratio:406/156;margin:8px auto 0;color:transparent;user-select:none}
+#login .lside .logo4{display:block;width:min(300px,70%);height:250px;margin:0 auto 12px;background:url('assets/castle-academy-login-logo.webp') center/contain no-repeat}
+#login .lside .quote{display:block;background:url('assets/castle-academy-slogan.webp') center/contain no-repeat;width:min(360px,90%);height:auto;aspect-ratio:406/156;margin:8px auto 0;color:transparent;user-select:none}
 #login .rside{background:transparent;justify-items:center;position:relative;z-index:1}
 #login .rside .lcard{background:rgba(255,255,255,.94);border:1px solid rgba(42,125,225,.12);border-radius:24px;padding:38px 42px;max-width:470px;box-shadow:0 18px 55px rgba(18,49,92,.12)}
 #login .lcard h2{font-family:'Bricolage Grotesque',Figtree,sans-serif;font-size:34px;color:var(--ink);text-align:center}
 #login .lcard>p:first-of-type{text-align:center;font-size:15px}
 #login .btn.full{border-radius:999px;background:linear-gradient(135deg,#1475d1,#1262b4);box-shadow:0 8px 18px rgba(42,125,225,.24)}
-#login .lcard:before{content:'';display:block;width:120px;height:78px;margin:-10px auto 12px;background:url('assets/castle-academy-login-logo.png') center/contain no-repeat}
+#login .lcard:before{content:'';display:block;width:120px;height:78px;margin:-10px auto 12px;background:url('assets/castle-academy-login-logo.webp') center/contain no-repeat}
 #login .lcard:before{display:none}
 @media(max-width:860px){#login{background-position:35% center;grid-template-columns:1fr}#login .lside{min-height:0;padding:28px 18px 20px}#login .lside .logo4{width:180px;height:145px;margin-bottom:6px}#login .lside .quote{width:240px;height:auto;aspect-ratio:406/156}.rside{padding:20px 16px 42px;align-items:start}#login .rside .lcard{padding:30px 24px}}
 .lside{background:linear-gradient(160deg,var(--ink),color-mix(in srgb,var(--ink) 55%,var(--royal)));color:#fff;padding:64px 56px;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
@@ -127,7 +128,13 @@ tr:last-child td{border-bottom:0}
 .paper{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:34px;max-width:820px}
 .paper h3{margin:24px 0 8px;font-size:17px;border-bottom:2px solid var(--royal);padding-bottom:4px}
 input[type=color]{padding:3px;height:42px;cursor:pointer}
+@media(min-width:901px){main:has(.report-wide){max-width:1480px}.report-wide{width:100%;max-width:none}.report-wide .rhd{padding:28px 36px}.report-wide .rbd{padding:26px 36px}.report-wide .lpt{font-size:14px}.report-wide .lpt th,.report-wide .lpt td{padding:12px 10px}}
 @media print{aside,.mbar,.top,.noprint{display:none!important}#app{display:block}main{padding:0;max-width:none}body{background:#fff}.paper{border:0;padding:0;max-width:none}}
+/* Sertifikat */
+.cert-toolbar{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:18px;align-items:start}.cert-stage{min-width:0;overflow:auto;padding:18px;background:#e9eef6;border-radius:16px}.cert{--cp:#12315c;--ca:#d6a638;position:relative;width:1123px;height:794px;max-width:none;background:#fff;color:var(--cp);overflow:hidden;text-align:center;padding:62px 78px;font-family:Figtree,Arial,sans-serif}.cert *{box-sizing:border-box}.cert-frame{position:absolute;inset:24px;border:3px solid var(--ca);pointer-events:none}.cert-frame:after{content:'';position:absolute;inset:8px;border:1px solid var(--cp)}.cert-inner{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;align-items:center}.cert-logo{height:82px;max-width:230px;object-fit:contain;margin-bottom:10px}.cert-kicker{font-size:17px;letter-spacing:5px;text-transform:uppercase;font-weight:700}.cert h1{font:700 45px/1.1 'Cormorant Garamond',Georgia,serif;letter-spacing:3px;margin:6px 0 12px;color:var(--cp)}.cert-given{font-size:16px;margin:2px 0 8px}.cert-name{font:600 57px/1.05 'Cormorant Garamond',Georgia,serif;color:var(--cp);max-width:900px;padding:0 25px 10px;border-bottom:2px solid var(--ca);overflow-wrap:anywhere}.cert-desc{font-size:18px;line-height:1.55;max-width:820px;margin:17px auto 0}.cert-meta{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:14px}.cert-meta span{border:1px solid var(--ca);border-radius:999px;padding:4px 14px;font-size:14px}.cert-foot{margin-top:auto;width:100%;display:grid;grid-template-columns:1fr 1.2fr 1fr;align-items:end;gap:30px;padding-top:18px;font-size:14px}.cert-sign{border-top:1px solid var(--cp);padding-top:8px}.cert-sign b{display:block;font-size:17px}.cert-seal{width:86px;height:86px;border:4px double var(--ca);border-radius:50%;display:grid;place-items:center;margin:auto;color:var(--ca);font-size:33px;transform:rotate(-10deg)}.cert-no{position:absolute;left:42px;bottom:31px;font-size:10px;letter-spacing:1px;opacity:.65}.cert.d2{background:linear-gradient(135deg,#fff 70%,color-mix(in srgb,var(--cp) 12%,#fff))}.cert.d2:before{content:'';position:absolute;left:-160px;top:-180px;width:490px;height:490px;border-radius:50%;background:var(--cp);opacity:.1}.cert.d2 .cert-frame{border-style:double;border-width:7px}.cert.d3{background:color-mix(in srgb,var(--cp) 5%,#fff)}.cert.d3:before,.cert.d3:after{content:'';position:absolute;width:0;height:0;border-style:solid}.cert.d3:before{left:0;top:0;border-width:230px 300px 0 0;border-color:var(--cp) transparent transparent transparent}.cert.d3:after{right:0;bottom:0;border-width:0 0 220px 290px;border-color:transparent transparent var(--ca) transparent}.cert.d3 .cert-frame{inset:30px;border-width:2px}.cert.d4{background:linear-gradient(180deg,#fff,color-mix(in srgb,var(--ca) 9%,#fff))}.cert.d4 .cert-frame{inset:0;border:0;border-top:20px solid var(--cp);border-bottom:20px solid var(--cp)}.cert.d4 .cert-frame:after{inset:18px;border:2px solid var(--ca)}.cert.d5{background:radial-gradient(circle at 50% 44%,#fff 0 42%,color-mix(in srgb,var(--cp) 7%,#fff) 100%)}.cert.d5 .cert-frame{inset:32px;border:1px solid var(--cp);border-radius:50% / 9%}.cert.d5 .cert-frame:after{border-color:var(--ca);border-radius:50% / 9%}.cert.d5 .cert-name{font-style:italic}.cert.d6{background:#fff}.cert.d6:before{content:'';position:absolute;inset:0;background:linear-gradient(115deg,var(--cp) 0 12%,transparent 12% 88%,var(--cp) 88%)}.cert.d6 .cert-frame{inset:27px;border-color:var(--ca)}.cert-preview{transform-origin:top left}.cert-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}.cert-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}.cert-card h3{margin:4px 0}.cert-mini{height:135px;display:grid;place-items:center;background:linear-gradient(135deg,color-mix(in srgb,var(--cp) 8%,#fff),#fff);border:4px double var(--ca);color:var(--cp);margin-bottom:12px;font:600 23px 'Cormorant Garamond',Georgia,serif;text-align:center;padding:12px}.design-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.design-choice{border:2px solid var(--line);background:#fff;border-radius:10px;padding:8px;cursor:pointer;text-align:center}.design-choice.on{border-color:var(--royal);background:var(--mist)}.design-choice i{display:block;height:52px;border:4px double var(--ca);background:var(--cp);margin-bottom:5px}.cert-form{max-height:68vh;overflow:auto;padding-right:6px}.cert-modal.modal{width:min(1240px,97vw);max-width:1240px}.cert-modal .cert-stage{max-height:68vh}.cert-modal .cert-toolbar{grid-template-columns:320px minmax(0,1fr)}
+@media(max-width:1000px){.cert-toolbar,.cert-modal .cert-toolbar{grid-template-columns:1fr}.cert-stage{padding:10px}.design-grid{grid-template-columns:repeat(6,minmax(90px,1fr));overflow:auto}}
+@media(max-width:640px){.design-grid{grid-template-columns:repeat(3,1fr)}.cert-list{grid-template-columns:1fr}}
+
 .qc{border:1.5px solid var(--line);border-radius:12px;padding:12px;margin:12px 0}
 .qh{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-bottom:8px}.qh select{width:auto}
 .qo{display:flex;gap:8px;align-items:center;margin-top:6px}.qo label{margin:0;white-space:nowrap;font-weight:600}
@@ -625,7 +632,7 @@ function toast(m, bad) {
 const fail = e => { if (!e.staleNavigation) toast(e.message, true); };
 const kat = s => s >= 90 ? 'Excellent' : s >= 80 ? 'Very Good' : s >= 70 ? 'Good' : s >= 60 ? 'Developing' : 'Needs Improvement';
 const katTag = s => `<span class="tag ${s >= 80 ? 'g' : s >= 60 ? 'y' : 'r'}">${kat(s)}</span>`;
-const dashLogo = () => `<img class="dash-logo" src="${(S.cfg && (matchMedia('(max-width:640px)').matches ? S.cfg.LogoCenter : S.cfg.LogoRect)) || (matchMedia('(max-width:640px)').matches ? 'assets/castle-academy-login-logo.png' : 'assets/castle-academy-logo.png')}" alt="Castle Academy">`;
+const dashLogo = () => `<img class="dash-logo" src="${(S.cfg && (matchMedia('(max-width:640px)').matches ? S.cfg.LogoCenter : S.cfg.LogoRect)) || (matchMedia('(max-width:640px)').matches ? 'assets/castle-academy-login-logo.webp' : 'assets/castle-academy-logo.png')}" alt="Castle Academy">`;
 const stTag = s => `<span class="tag ${s === 'Selesai' ? 'g' : s === 'Menunggu termin' ? 'y' : s === 'Nonaktif' ? 'r' : ''}">${s}</span>`;
 const opts = (arr, v) => arr.map(x => `<option ${x === v ? 'selected' : ''}>${esc(x)}</option>`).join('');
 const fld = (id, lb, v, type) => `<div><label for="${id}">${lb}</label><input id="${id}" type="${type || 'text'}" value="${esc(v)}"></div>`;
@@ -708,8 +715,8 @@ function start() {
   const staff = S.user.Role !== 'siswa';
   const adm = S.user.Role === 'admin';
   const items = staff
-    ? [['dash', '🏫', 'Dashboard'], ['users', '👥', adm ? 'Pengguna' : 'Siswa'], ['paket', '🎓', 'Daftar Program Paket'], ['progress', '📈', 'Catatan Progres'], ['kelas', '🎒', 'Grup Kelas - LMS'], ['keuangan', '💳', 'Keuangan'], ['aktif', '✅', 'Paket Aktif'], ['asesmen', '📚', 'Daftar asesmen'], ['lap', '📊', 'Laporan hasil asesmen'], ['pantau', '📡', 'Pantau ujian'], ['lpp', '🗓️', 'Laporan Periode']].concat(adm ? [['settings', '⚙️', 'Pengaturan']] : [])
-    : [['dash', '🏫', 'Beranda'], ['kelas', '🎒', 'Grup Kelas - LMS'], ['exam', '✏️', 'Ujian'], ['catprog', '📈', 'Catatan Progres'], ['results', '🏅', 'Hasil ujian & laporan'], ['report', '🖨️', 'Laporan saya']];
+    ? [['dash', '🏫', 'Dashboard'], ['users', '👥', adm ? 'Pengguna' : 'Siswa'], ['paket', '🎓', 'Daftar Program Paket'], ['progress', '📈', 'Catatan Progres'], ['kelas', '🎒', 'Grup Kelas - LMS'], ['cert', '🏆', 'Sertifikat'], ['keuangan', '💳', 'Keuangan'], ['aktif', '✅', 'Paket Aktif'], ['asesmen', '📚', 'Daftar asesmen'], ['lap', '📊', 'Laporan hasil asesmen'], ['pantau', '📡', 'Pantau ujian'], ['lpp', '🗓️', 'Laporan Periode']].concat(adm ? [['settings', '⚙️', 'Pengaturan']] : [])
+    : [['dash', '🏫', 'Beranda'], ['aktif', '✅', 'Paket aktif'], ['kelas', '🎒', 'Grup Kelas - LMS'], ['exam', '✏️', 'Ujian'], ['catprog', '📈', 'Catatan Progres'], ['report', '🖨️', 'Laporan saya'], ['cert', '🏆', 'Sertifikat saya']];
   if (staff) items.splice(items.findIndex(i => i[0] === 'kelas') + 1, 0, ['notes', '📝', 'Catatan Guru']);
   else items.push(['notes', '📝', 'Catatan Siswa']);
   $('#nav').innerHTML = items.map(i => `<button data-v="${i[0]}">${i[1]} ${i[2]}</button>`).join('');
@@ -728,7 +735,7 @@ async function go(v) {
   clearInterval(S.tm); S.view = v; $('#side').classList.remove('open'); $('#scrim').classList.add('hide');
   document.querySelectorAll('#nav button').forEach(b => b.classList.toggle('on', b.dataset.v === v));
   $('#main').innerHTML = '<div class="empty"><span class="spn"></span> Memuat...</div>';
-  const f = {dash: S.user.Role === 'siswa' ? vStudentDash : vStaffDash, users: vUsers, progress: vProgress, results: vResults, exam: vExam, paket: vPaket, keuangan: vKeuangan, aktif: vAktif, report: vReport, settings: vSettings, asesmen: vAsesmen, catprog: vCatProg, kelas: vKelas, lap: vLap, pantau: vPantau, lpp: vLpp, notes: vNotes}[v];
+  const f = {dash: S.user.Role === 'siswa' ? vStudentDash : vStaffDash, users: vUsers, progress: vProgress, results: vResults, exam: vExam, paket: vPaket, keuangan: vKeuangan, aktif: vAktif, report: vReport, cert: vCertificates, settings: vSettings, asesmen: vAsesmen, catprog: vCatProg, kelas: vKelas, lap: vLap, pantau: vPantau, lpp: vLpp, notes: vNotes}[v];
   f().catch(e => { if (e.staleNavigation || S.view !== v) return; $('#main').innerHTML = `<div class="empty">${esc(e.message)}</div>`; });
 }
 const head = (t, sub, btn, isDash) => `<div class="top${isDash ? ' dash-head' : ''}">${isDash ? `<div class="dash-title">${t}</div>` : `<div><h2>${t}</h2><p>${sub || ''}</p></div>`}${btn || ''}</div>`;
@@ -1692,19 +1699,14 @@ function applyTheme(s) {
   const lg = s.Logo || '';
   document.querySelectorAll('img.lgi').forEach(i => { if (lg) { i.src = lg; i.classList.remove('hide'); } else { i.removeAttribute('src'); i.classList.add('hide'); } });
   document.querySelectorAll('.lgf').forEach(e => e.classList.toggle('hide', !!lg));
-  // Preload logo untuk performa
-  if (s.LogoCenter) { const i1 = new Image(); i1.src = s.LogoCenter; }
-  if (s.LogoRect) { const i2 = new Image(); i2.src = s.LogoRect; }
-  if (s.LogoSlogan) { const i3 = new Image(); i3.src = s.LogoSlogan; }
-  // Apply logo dengan lazy loading
-  requestIdleCallback(() => {
-    document.querySelectorAll('.logo4').forEach(e => e.style.backgroundImage = `url("${s.LogoCenter || 'assets/castle-academy-login-logo.png'}")`);
-    document.querySelectorAll('.lside .quote').forEach(e => e.style.backgroundImage = `url("${s.LogoSlogan || 'assets/castle-academy-slogan.png'}")`);
-    document.querySelectorAll('.dash-logo').forEach(e => e.src = (matchMedia('(max-width:640px)').matches ? s.LogoCenter : s.LogoRect) || (matchMedia('(max-width:640px)').matches ? 'assets/castle-academy-login-logo.png' : 'assets/castle-academy-logo.png'));
-  }, { timeout: 1000 });
+  document.querySelectorAll('.logo4').forEach(e => e.style.backgroundImage = `url("${s.LogoCenter || 'assets/castle-academy-login-logo.webp'}")`);
+  document.querySelectorAll('.lside .quote').forEach(e => e.style.backgroundImage = `url("${s.LogoSlogan || 'assets/castle-academy-slogan.webp'}")`);
+  document.querySelectorAll('.dash-logo').forEach(e => e.src = (matchMedia('(max-width:640px)').matches ? s.LogoCenter : s.LogoRect) || (matchMedia('(max-width:640px)').matches ? 'assets/castle-academy-login-logo.webp' : 'assets/castle-academy-logo.png'));
   let ic = document.querySelector('link[rel=icon]');
   if (lg) { if (!ic) { ic = document.createElement('link'); ic.rel = 'icon'; document.head.appendChild(ic); } ic.href = lg; } else if (ic) ic.remove();
+  try { localStorage.setItem('ca_public_theme', JSON.stringify(s)); } catch (e) {}
 }
+try { const cachedTheme = JSON.parse(localStorage.getItem('ca_public_theme') || 'null'); if (cachedTheme) applyTheme(cachedTheme); } catch (e) {}
 // Logo: dikecilkan di browser (maks. 200px untuk performa optimal) agar muat di satu sel Spreadsheet.
 async function shrinkLogo(file) {
   if (!/^image\/(png|jpeg|webp)$/.test(file.type)) throw new Error('Format logo harus PNG, JPG, atau WebP.');
@@ -1979,6 +1981,7 @@ function pdfInvoice(p) {
 
 /* ---------- Paket Aktif ---------- */
 async function vAktif() {
+  if (S.user.Role === 'siswa') return vStudentPackages();
   const ls = await api('langganan'), f = S.af || 'aktif', G = {aktif: x => x.Status === 'Aktif' || x.Status === 'Menunggu termin', selesai: x => x.Status === 'Selesai', nonaktif: x => x.Status === 'Nonaktif', semua: () => true}, R = ls.filter(G[f]);
   $('#main').innerHTML = head('Paket aktif', 'Paket belajar yang sudah dibayar dan sedang diikuti siswa.') + `<div class="tabs">${['aktif', 'selesai', 'nonaktif', 'semua'].map(t => `<button data-t="${t}" class="${t === f ? 'on' : ''}">${t[0].toUpperCase() + t.slice(1)}</button>`).join('')}</div>
     <div class="panel tw"><table><tr><th>Siswa</th><th>Program</th><th>Paket belajar</th><th>Mulai</th><th>Termin</th><th>Pertemuan</th><th>Status</th><th></th></tr>${R.map((l, i) => `<tr><td><b>${esc(l.Nama)}</b><br><small>${esc(l.Kelompok)}</small></td><td>${esc(l.Program)}</td><td>${esc(l.PaketNama)}</td><td>${esc(l.Mulai)}</td><td>${l.Dibayar}/${l.Termin}<br><small>${rp(l.Terbayar)} dari ${rp(l.Harga)}</small></td>
@@ -1987,6 +1990,18 @@ async function vAktif() {
   document.querySelectorAll('[data-t]').forEach(b => b.onclick = () => { S.af = b.dataset.t; vAktif(); });
   document.querySelectorAll('[data-b]').forEach(b => b.onclick = () => openPay({Username: R[b.dataset.b].Username, PaketID: R[b.dataset.b].PaketID}));
   document.querySelectorAll('[data-s]').forEach(b => b.onclick = async () => { const l = R[b.dataset.s]; try { await api('setLangganan', {ID: l.ID, Status: l.Status === 'Nonaktif' ? 'Aktif' : 'Nonaktif'}); toast('Status diperbarui'); vAktif(); } catch (e) { fail(e); } });
+}
+async function vStudentPackages() {
+  const d = await api('dashboard'), active = d.pakets.filter(l => l.Status === 'Aktif' || l.Status === 'Menunggu termin');
+  let id = S.myPackage && active.some(l => l.ID === S.myPackage) ? S.myPackage : (active[0] || {}).ID;
+  const draw = () => {
+    const l = active.find(x => x.ID === id); S.myPackage = id;
+    document.querySelectorAll('#pkg-tabs button').forEach(b => b.classList.toggle('on', b.dataset.p === id));
+    $('#pkg-detail').innerHTML = l ? `<div class="panel"><div class="top"><div><h3>${esc(l.Program)} – ${esc(l.PaketNama)}</h3><p>Mulai ${esc(l.Mulai)} • ${esc(l.Kelompok || l.Jenjang || '-')}</p></div>${stTag(l.Status)}</div><div class="stats"><div class="stat"><b>${l.Tercatat}/${l.Total}</b><span>Pertemuan tercatat</span></div><div class="stat"><b>${l.Dibayar}/${l.Termin}</b><span>Termin dibayar</span></div><div class="stat"><b>${rp(l.Terbayar)}</b><span>Total pembayaran</span></div></div><div class="bar" style="height:12px"><i style="width:${l.Total ? Math.min(100, l.Tercatat / l.Total * 100) : 0}%"></i></div><p class="mut">Perkembangan ${l.Total ? Math.round(l.Tercatat / l.Total * 100) : 0}% • ${l.PerBulan} pertemuan per bulan</p><div class="act"><button class="btn ghost" id="pkg-report">Buka laporan paket</button><button class="btn ghost" id="pkg-progress">Buka catatan progres</button></div></div>` : '<div class="panel empty">Belum ada paket aktif. Hubungi pengelola untuk informasi pendaftaran.</div>';
+    if (l) { $('#pkg-report').onclick = () => { S.sl = l.ID; go('report'); }; $('#pkg-progress').onclick = () => go('catprog'); }
+  };
+  $('#main').innerHTML = head('Paket aktif', 'Pilih tab untuk melihat setiap program yang sedang kamu ikuti.') + (active.length ? `<div class="tabs" id="pkg-tabs">${active.map(l => `<button data-p="${esc(l.ID)}">${esc(l.Program)}<br><small>${esc(l.PaketNama)}</small></button>`).join('')}</div><div id="pkg-detail"></div>` : '<div id="pkg-detail"></div>');
+  document.querySelectorAll('#pkg-tabs [data-p]').forEach(b => b.onclick = () => { id = b.dataset.p; draw(); }); draw();
 }
 
 /* ---------- Laporan individual ---------- */
@@ -2000,13 +2015,66 @@ async function vReport() {
   const show = async keep => {
     const d = await api('report', {Username: staff ? val('rs') : '', LID: keep ? val('rl') : (S.sl || '')}); S.sl = ''; CUR = d;
     $('#rl').innerHTML = d.ls.map(x => `<option value="${x.ID}" ${x.ID === d.l.ID ? 'selected' : ''}>${esc(x.Program + ' – ' + x.PaketNama)}</option>`).join('');
-    $('#rp').innerHTML = `<div class="paper rpt">${repBody(d)}${sigHtml(d).replace('class="sig"', 'class="sig rbd"')}</div>`;
+  $('#rp').innerHTML = `<div class="paper rpt report-wide">${repBody(d)}${sigHtml(d).replace('class="sig"', 'class="sig rbd"')}</div>`;
   };
   if (staff && S.su) { $('#rs').value = S.su; S.su = ''; }
   $('#rl').onchange = () => show(true).catch(fail); if (staff) $('#rs').onchange = () => show().catch(fail);
   show().catch(e => { $('#rp').innerHTML = `<div class="panel empty">${esc(e.message)}</div>`; });
 }
 
+/* ---------- Sertifikat ---------- */
+const CERT_DESIGNS = ['Klasik Biru', 'Royal Modern', 'Geometris', 'Minimalis', 'Elegan', 'Prestasi'];
+const certLogo = c => { const key = c.Logo || 'Logo'; return key ? (S.cfg && S.cfg[key]) || ({Logo: 'assets/castle-academy-logo.png', LogoCenter: 'assets/castle-academy-login-logo.webp', LogoRect: 'assets/castle-academy-logo.png'}[key]) : ''; };
+function certHtml(c) {
+  const logo = certLogo(c), name = c.NamaSiswa || 'Nama Siswa', title = c.Judul || 'Sertifikat Penyelesaian Program';
+  return `<div class="cert d${Math.max(1, Math.min(6, Number(c.Desain) || 1))}" style="--cp:${esc(c.WarnaUtama || '#12315c')};--ca:${esc(c.WarnaAksen || '#d6a638')}"><div class="cert-frame"></div><div class="cert-inner">${logo ? `<img class="cert-logo" src="${esc(logo)}" alt="Castle Academy">` : ''}<div class="cert-kicker">Castle Academy</div><h1>${esc(title)}</h1><div class="cert-given">Diberikan dengan bangga kepada</div><div class="cert-name">${esc(name)}</div><p class="cert-desc">atas partisipasi dan keberhasilannya dalam program <b>${esc(c.Program || 'Program Pembelajaran')}</b>${c.Paket ? ` paket <b>${esc(c.Paket)}</b>` : ''}. Semoga pencapaian ini menjadi langkah awal untuk terus belajar dan berkembang.</p><div class="cert-meta">${[c.Jenjang, c.Kelas, c.Kelompok].filter(Boolean).map(x => `<span>${esc(x)}</span>`).join('')}</div><div class="cert-foot"><div><b>${esc(c.Tanggal || today())}</b><br>Tanggal penerbitan</div><div class="cert-seal">★</div><div class="cert-sign"><b>${esc(c.PenandaTangan || 'Nama Penanda Tangan')}</b>${esc(c.Jabatan || 'Pengelola Castle Academy')}</div></div></div><div class="cert-no">No. ${esc(c.Nomor || 'PRATINJAU')}</div></div>`;
+}
+function fitCert(stage) {
+  const cert = stage && stage.querySelector('.cert'); if (!cert) return;
+  const w = Math.max(240, stage.clientWidth - 4), scale = Math.min(1, w / 1123), wrap = cert.parentElement;
+  cert.style.transform = `scale(${scale})`; wrap.style.width = (1123 * scale) + 'px'; wrap.style.height = (794 * scale) + 'px';
+}
+function certActions(c, i, editable) {
+  return `<div class="act" style="margin-top:12px"><button class="btn sm" data-cp="${i}">PDF</button><button class="btn ghost sm" data-cj="${i}">JPG</button>${editable ? `<button class="btn ghost sm" data-ce="${i}">Ubah</button><button class="btn del sm" data-cd="${i}">Hapus</button>` : ''}</div>`;
+}
+async function vCertificates() {
+  const staff = S.user.Role !== 'siswa';
+  const [list, users, pks] = await Promise.all([api('certificates'), staff ? api('users') : [], staff ? api('pakets') : []]);
+  const students = users.filter(u => u.Role === 'siswa');
+  $('#main').innerHTML = head(staff ? 'Sertifikat' : 'Sertifikat saya', staff ? 'Buat sertifikat individual atau seluruh siswa dalam satu kelompok dengan enam pilihan desain.' : 'Sertifikat yang telah diterbitkan oleh guru untukmu.', staff ? '<button class="btn" id="ca">+ Buat sertifikat</button>' : '') +
+    (list.length ? `<div class="cert-list">${list.map((c, i) => `<article class="cert-card"><div class="cert-mini" style="--cp:${esc(c.WarnaUtama)};--ca:${esc(c.WarnaAksen)}"><div>🏅<br>${esc(c.Judul)}</div></div><h3>${esc(c.NamaSiswa)}</h3><p class="mut">${esc(c.Program)}${c.Paket ? ' • ' + esc(c.Paket) : ''}<br>${esc(c.Kelompok || '-')} • ${esc(c.Tanggal)}</p><small>Desain ${c.Desain} • ${esc(c.Nomor)}</small>${certActions(c, i, staff)}</article>`).join('')}</div>` : `<div class="panel empty">${staff ? 'Belum ada sertifikat. Klik Buat sertifikat untuk membuat yang pertama.' : 'Belum ada sertifikat untukmu. Sertifikat akan muncul setelah diterbitkan oleh guru.'}</div>`);
+  const exportCert = (c, kind) => exportSheets([certHtml(c)], {orient: 'l', kind, name: fname('Sertifikat', c.NamaSiswa)});
+  document.querySelectorAll('[data-cp]').forEach(b => b.onclick = () => exportCert(list[b.dataset.cp], 'pdf'));
+  document.querySelectorAll('[data-cj]').forEach(b => b.onclick = () => exportCert(list[b.dataset.cj], 'jpg'));
+  if (staff) {
+    $('#ca').onclick = () => certForm({}, students, pks);
+    document.querySelectorAll('[data-ce]').forEach(b => b.onclick = () => certForm(list[b.dataset.ce], students, pks));
+    document.querySelectorAll('[data-cd]').forEach(b => b.onclick = async () => { if (!await askConfirm('Hapus sertifikat ini dari akun siswa?')) return; try { await api('delCertificate', {ID: list[b.dataset.cd].ID}); toast('Sertifikat dihapus'); vCertificates(); } catch (e) { fail(e); } });
+  }
+}
+function certForm(c, students, pks) {
+  const groups = [...new Set(students.map(s => s.Kelompok).filter(Boolean))].sort(), editing = !!c.ID;
+  const initial = Object.assign({Judul: 'Sertifikat Penyelesaian Program', Program: '', Jenjang: '', Kelas: '', Paket: '', Kelompok: '', Username: '', Tanggal: today(), PenandaTangan: S.user.Nama, Jabatan: 'Pengelola Castle Academy', Desain: 1, WarnaUtama: '#12315c', WarnaAksen: '#d6a638', Logo: 'Logo', PaketID: ''}, c);
+  let currentDesign = Number(initial.Desain) || 1;
+  const body = `<div class="cert-toolbar"><div class="cert-form"><h3>Data penerima</h3>${editing ? `<input type="hidden" id="cfid" value="${esc(c.ID)}">` : `<div class="row">${sel('cfmode', 'Penerima', '<option value="one">Satu siswa</option><option value="group">Satu kelompok</option>')}${sel('cfgroup', 'Kelompok', '<option value="">Pilih kelompok</option>' + groups.map(x => `<option value="${esc(x)}">${esc(x)}</option>`).join(''))}</div>`}<div id="cfstudent">${sel('cfuser', 'Nama siswa', '<option value="">Pilih siswa</option>' + students.map(s => `<option value="${esc(s.Username)}" data-name="${esc(s.Nama)}" data-group="${esc(s.Kelompok)}" data-level="${esc(s.Jenjang)}">${esc(s.Nama)} • ${esc(s.Kelompok || '-')}</option>`).join(''))}</div><h3>Isi sertifikat</h3>${fld('cftitle', 'Nama / judul sertifikat', initial.Judul)}<div class="row">${sel('cfpackage', 'Ambil program & paket', '<option value="">Isi manual</option>' + pks.map(p => `<option value="${p.ID}">${esc(p.Program + ' – ' + p.Nama)}</option>`).join(''))}${fld('cfprogram', 'Program', initial.Program)}</div><div class="row">${fld('cfpackageName', 'Nama paket', initial.Paket)}${sel('cflevel', 'Jenjang', '<option value="">Pilih jenjang</option>' + opts(JENJANG, initial.Jenjang))}</div><div class="row">${fld('cfclass', 'Kelas', initial.Kelas)}${fld('cfdate', 'Tanggal', initial.Tanggal, 'date')}</div><div class="row">${fld('cfsigner', 'Nama penanda tangan', initial.PenandaTangan)}${fld('cfrole', 'Jabatan', initial.Jabatan)}</div><h3>Logo dan warna</h3><div class="row">${sel('cflogo', 'Logo Castle Academy', [['Logo', 'Logo utama'], ['LogoCenter', 'Logo Deskripsi Center'], ['LogoRect', 'Logo Deskripsi Segi Panjang'], ['', 'Tanpa logo']].map(x => `<option value="${x[0]}" ${initial.Logo === x[0] ? 'selected' : ''}>${x[1]}</option>`).join(''))}${fld('cfprimary', 'Warna utama', initial.WarnaUtama, 'color')}${fld('cfaccent', 'Warna aksen', initial.WarnaAksen, 'color')}</div><h3>Pilih desain</h3><div class="design-grid">${CERT_DESIGNS.map((n, i) => `<button type="button" class="design-choice ${Number(initial.Desain) === i + 1 ? 'on' : ''}" data-design="${i + 1}" style="--cp:${initial.WarnaUtama};--ca:${initial.WarnaAksen}"><i></i>${i + 1}. ${n}</button>`).join('')}</div></div><div><div class="cert-stage" id="cfstage"><div style="transform-origin:top left">${certHtml(initial)}</div></div><p class="mut">Pratinjau F4 landscape. Hasil unduhan akan menyesuaikan ukuran halaman F4.</p></div></div>`;
+  const ov = modal(editing ? 'Ubah sertifikat' : 'Buat sertifikat', body, async () => {
+    const group = editing ? initial.Kelompok : val('cfmode') === 'group' ? val('cfgroup') : '';
+    const pk = pks.find(p => p.ID === val('cfpackage')) || {};
+    const payload = {ID: editing ? c.ID : '', Username: editing ? c.Username : group ? '' : val('cfuser'), Kelompok: group || (editing ? c.Kelompok : ($('#cfuser').selectedOptions[0] || {}).dataset.group || ''), Judul: val('cftitle'), Program: val('cfprogram') || pk.Program, Paket: val('cfpackageName') || pk.Nama, PaketID: val('cfpackage'), Jenjang: val('cflevel'), Kelas: val('cfclass'), Tanggal: val('cfdate'), PenandaTangan: val('cfsigner'), Jabatan: val('cfrole'), Desain: currentDesign, WarnaUtama: val('cfprimary'), WarnaAksen: val('cfaccent'), Logo: val('cflogo')};
+    if (!group && !payload.Username) throw new Error('Pilih siswa penerima.'); if (group && !students.some(s => s.Kelompok === group)) throw new Error('Pilih kelompok penerima.');
+    const r = await api('saveCertificate', payload); toast(`${r.count} sertifikat tersimpan dan tampil pada akun siswa.`); vCertificates();
+  }, editing ? 'Simpan perubahan' : 'Terbitkan sertifikat');
+  ov.querySelector('.modal').classList.add('cert-modal');
+  const collect = () => { const u = $('#cfuser') && $('#cfuser').selectedOptions[0], group = editing ? initial.Kelompok : ($('#cfmode').value === 'group' ? val('cfgroup') : (u || {}).dataset.group || ''), pk = pks.find(p => p.ID === val('cfpackage')) || {}; return {NamaSiswa: editing ? initial.NamaSiswa : group ? 'Nama Siswa' : (u || {}).dataset.name || 'Nama Siswa', Kelompok: group, Judul: val('cftitle'), Program: val('cfprogram') || pk.Program, Paket: val('cfpackageName') || pk.Nama, Jenjang: val('cflevel'), Kelas: val('cfclass'), Tanggal: val('cfdate'), PenandaTangan: val('cfsigner'), Jabatan: val('cfrole'), Desain: currentDesign, WarnaUtama: val('cfprimary'), WarnaAksen: val('cfaccent'), Logo: val('cflogo'), Nomor: initial.Nomor}; };
+  const preview = () => { const wrap = $('#cfstage>div'); wrap.innerHTML = certHtml(collect()); fitCert($('#cfstage')); document.querySelectorAll('.design-choice').forEach(b => { b.classList.toggle('on', Number(b.dataset.design) === currentDesign); b.style.setProperty('--cp', val('cfprimary')); b.style.setProperty('--ca', val('cfaccent')); }); };
+  const mode = () => { if (editing) return; const group = val('cfmode') === 'group'; $('#cfstudent').classList.toggle('hide', group); $('#cfgroup').parentElement.classList.toggle('hide', !group); preview(); };
+  ov.querySelectorAll('input,select').forEach(e => { e.addEventListener('input', preview); e.addEventListener('change', preview); });
+  $('#cfmode') && ($('#cfmode').onchange = mode); $('#cfuser') && ($('#cfuser').onchange = () => { const u = $('#cfuser').selectedOptions[0]; if (u && u.dataset.level && !val('cflevel')) $('#cflevel').value = u.dataset.level; preview(); });
+  $('#cfpackage').onchange = () => { const pk = pks.find(p => p.ID === val('cfpackage')); if (pk) { $('#cfprogram').value = pk.Program; $('#cfpackageName').value = pk.Nama; $('#cflevel').value = pk.Jenjang; } preview(); };
+  document.querySelectorAll('[data-design]').forEach(b => b.onclick = () => { currentDesign = Number(b.dataset.design); preview(); });
+  if (editing) { $('#cfuser') && ($('#cfuser').value = c.Username); } else { $('#cfuser').value = initial.Username || ''; $('#cfgroup').value = initial.Kelompok || ''; }
+  mode(); preview();
+}
 /* ---------- Pengaturan ---------- */
 const SK = ['AkunGoogle', 'SpreadsheetID', 'FolderID', 'Nama', 'WarnaUtama', 'WarnaAksen', 'WarnaLatar', 'PertemuanUjian', 'KKM', 'GithubURL', 'TurnURL', 'TurnUser', 'TurnPass', 'Logo', 'LogoCenter', 'LogoRect', 'LogoSlogan'];
 async function vSettings() {
@@ -2021,7 +2089,6 @@ async function vSettings() {
     <p style="color:var(--mute);font-size:13px">Spreadsheet utama menyimpan pengaturan, pegawai, siswa, pembayaran, dan seluruh data lain. Akun script harus punya akses edit ke spreadsheet dan folder. Jika spreadsheet diganti, sheet baru dibuat otomatis dan akun Admin awal (Admin / 123456) dibuat jika kosong.</p>
     <div class="act"><button class="btn ghost" id="tc">Uji koneksi</button><button class="btn ghost" id="bk">Backup ke Drive</button><button class="btn ghost" id="tlms">Uji penyimpanan LMS</button></div><p id="tr" style="font-weight:600"></p></div>
     <div class="panel"><h3>Tampilan</h3><div class="row">${f('WarnaUtama', 'Warna utama', 'color')}${f('WarnaAksen', 'Warna aksen', 'color')}${f('WarnaLatar', 'Warna latar', 'color')}</div></div>
-    <div class="panel"><h3>Aturan program</h3><div class="row">${f('PertemuanUjian', 'Final tanpa periode paket dibuka setelah pertemuan ke', 'number')}${f('KKM', 'Nilai minimal (KKM)', 'number')}</div></div>
     <div class="panel"><h3>Halaman GitHub (alamat aplikasi siswa)</h3><div class="row">${f('GithubURL', 'Alamat GitHub Pages, mis. https://akun.github.io/castle-academy/')}</div>
     <label>Alamat API Apps Script (terisi otomatis)</label><input id="s_api" value="${esc(s.ApiURL)}" readonly>
     <label>Tautan siap bagikan ke pegawai dan siswa</label><input id="s_link" readonly>
@@ -2181,8 +2248,8 @@ async function vLpp() {
   };
   const draw = () => {
     const R = rows(), pk = D.pk, st = stats(R);
-    $('#lr').innerHTML = `<div class="stats">${st.list.map(s => `<div class="stat"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('')}</div>
-      <div class="panel"><h3>${esc(pk.Program)} – ${esc(pk.Nama)} • ${D.n ? 'Bulan ' + D.n : 'Seluruh paket'} <small style="color:var(--mute);font-weight:500">(pertemuan ${D.lo}–${D.hi})</small></h3>${table(R.map((r, i) => rowHtml(r, i, 0)).join('') || empty, R, 0, true)}<p style="color:var(--mute);font-size:13px">${NOTE}</p></div>`;
+    $('#lr').innerHTML = `<div class="stats report-stats-wide">${st.list.map(s => `<div class="stat"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('')}</div>
+      <div class="panel report-wide"><h3>${esc(pk.Program)} – ${esc(pk.Nama)} • ${D.n ? 'Bulan ' + D.n : 'Seluruh paket'} <small style="color:var(--mute);font-weight:500">(pertemuan ${D.lo}–${D.hi})</small></h3>${table(R.map((r, i) => rowHtml(r, i, 0)).join('') || empty, R, 0, true)}<p style="color:var(--mute);font-size:13px">${NOTE}</p></div>`;
     document.querySelectorAll('[data-u]').forEach(b => b.onclick = () => { const r = R[b.dataset.u]; S.su = r.Username; S.sl = r.LID; go('report'); });
   };
   $('#pr').onclick = () => D && exportSheets(lppSheets(), {orient: 'l', cls: 'f4l', kind: 'pdf', name: fname('Laporan-Periode', D.pk.Nama)});
