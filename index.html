@@ -7,7 +7,7 @@
 <title>Castle Academy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="assets/castle-academy-login-logo.webp"><link rel="preload" as="image" href="assets/castle-academy-slogan.webp"><link rel="preload" as="image" href="assets/castle-academy-login-web.webp" media="(min-width:901px)">
+<link rel="preload" as="image" href="assets/castle-academy-login-logo.webp" fetchpriority="high"><link rel="preload" as="image" href="assets/castle-academy-slogan.webp" fetchpriority="high"><link rel="preload" as="image" href="assets/castle-academy-login-web.webp" media="(min-width:901px)" fetchpriority="high">
 <style>
 :root{--ink:#12315c;--royal:#2a7de1;--brass:#f4b740;--mist:#f0f6fd;--line:color-mix(in srgb,var(--royal) 16%,#fff);--ok:#1f9d78;--bad:#d64545;--mute:#5d7394;--r:14px}
 *{box-sizing:border-box}
@@ -17,35 +17,55 @@ button,input,select,textarea{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--brass);outline-offset:2px}
 .hide{display:none!important}
 /* login */
-#login{min-height:100vh;display:grid;grid-template-columns:1.05fr 1fr;background:#fff}
-#login{background:#f7fbff url('assets/castle-academy-login-web.webp') center/100% 100% no-repeat;position:relative;overflow:hidden}
-@media(max-width:900px){#login{background:#f7fbff;position:relative;overflow:hidden}#login .lside .logo4{display:block;width:min(280px,70%);height:220px;margin:0 auto 10px;background:url('assets/castle-academy-login-logo.webp') center/contain no-repeat}#login .lside .quote{display:block;background:url('assets/castle-academy-slogan.webp') center/contain no-repeat;width:min(330px,90%);height:auto;aspect-ratio:406/156;margin:8px auto 0;color:transparent;user-select:none}#login .lside::after{display:none}}
-#login .lside{background:transparent;color:var(--ink);padding:40px 30px;align-items:center;text-align:center;justify-content:center;position:relative;z-index:1}
-#login .lside::before{display:none}
-#login .lside .crest,#login .lside h1,#login .lside .sub,#login .lside .rule{display:none}
-#login .lside .logo4{display:block;width:min(300px,70%);height:250px;margin:0 auto 12px;background:url('assets/castle-academy-login-logo.webp') center/contain no-repeat}
-#login .lside .quote{display:block;background:url('assets/castle-academy-slogan.webp') center/contain no-repeat;width:min(360px,90%);height:auto;aspect-ratio:406/156;margin:8px auto 0;color:transparent;user-select:none}
-#login .rside{background:transparent;justify-items:center;position:relative;z-index:1}
-#login .rside .lcard{background:rgba(255,255,255,.94);border:1px solid rgba(42,125,225,.12);border-radius:24px;padding:38px 42px;max-width:470px;box-shadow:0 18px 55px rgba(18,49,92,.12)}
-#login .lcard h2{font-family:'Bricolage Grotesque',Figtree,sans-serif;font-size:34px;color:var(--ink);text-align:center}
+#login{position:relative;overflow:hidden;isolation:isolate;min-height:100vh;display:grid;grid-template-columns:1.05fr 1fr;background:#f7fbff}
+/* Background desktop: gambar dari GitHub dibentangkan 100% x 100% dan sedikit melebihi tepi (inset negatif) agar tidak ada garis pinggir. */
+#login::before{content:'';position:absolute;inset:-2px;z-index:-1;background:url('assets/castle-academy-login-web.webp') center/100% 100% no-repeat}
+#login .lside{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 30px;position:relative;z-index:1;background:none;color:var(--ink)}
+#login .lside .logo4{display:block;width:min(300px,70%);height:auto;margin:0 auto 12px;user-select:none;-webkit-user-drag:none}
+#login .lside .quote{display:block;width:min(360px,90%);height:auto;margin:8px auto 0;user-select:none;-webkit-user-drag:none}
+#login .rside{display:grid;place-items:center;padding:40px 28px;position:relative;z-index:1;background:none}
+#login .lcard{width:100%;max-width:470px;background:rgba(255,255,255,.94);border:1px solid rgba(42,125,225,.12);border-radius:24px;padding:38px 42px;box-shadow:0 18px 55px rgba(18,49,92,.12)}
+#login .lcard h2{font:600 36px 'Cormorant Garamond',Georgia,serif;color:var(--ink);text-align:center;margin-bottom:4px}
 #login .lcard>p:first-of-type{text-align:center;font-size:15px}
 #login .btn.full{border-radius:999px;background:linear-gradient(135deg,#1475d1,#1262b4);box-shadow:0 8px 18px rgba(42,125,225,.24)}
-#login .lcard:before{content:'';display:block;width:120px;height:78px;margin:-10px auto 12px;background:url('assets/castle-academy-login-logo.webp') center/contain no-repeat}
-#login .lcard:before{display:none}
-@media(max-width:860px){#login{background-position:35% center;grid-template-columns:1fr}#login .lside{min-height:0;padding:28px 18px 20px}#login .lside .logo4{width:180px;height:145px;margin-bottom:6px}#login .lside .quote{width:240px;height:auto;aspect-ratio:406/156}.rside{padding:20px 16px 42px;align-items:start}#login .rside .lcard{padding:30px 24px}}
-.lside{background:linear-gradient(160deg,var(--ink),color-mix(in srgb,var(--ink) 55%,var(--royal)));color:#fff;padding:64px 56px;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
-.lside::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 1px,transparent 1px 64px)}
-.lside>*{position:relative}
-.crest{width:64px;height:64px;margin-bottom:28px}.crest svg{width:100%;height:100%;fill:none;stroke:var(--brass);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.lside h1{font:600 clamp(38px,4.6vw,56px)/1.05 'Cormorant Garamond',Georgia,serif;letter-spacing:.01em}
-.lside .sub{margin:10px 0 0;color:#cfe0f7;letter-spacing:.04em;font-size:14px;font-weight:500}
-.rule{width:64px;height:2px;background:var(--brass);margin:28px 0 18px}
-.lside .quote{font:italic 500 22px 'Cormorant Garamond',Georgia,serif;color:#e8f1fc;margin:0}
-.rside{display:grid;place-items:center;padding:40px 28px;background:#fff}
-#login .lcard{max-width:360px;width:100%}
-#login .lcard h2{font:600 36px 'Cormorant Garamond',Georgia,serif;margin-bottom:4px}
-@media(max-width:860px){#login{grid-template-columns:1fr}.lside{padding:40px 24px}.crest{width:48px;height:48px;margin-bottom:16px}.lside h1{font-size:36px}.rule{margin:18px 0 12px}.lside .quote{font-size:18px}.rside{padding:32px 22px 48px;align-items:start}}
-/* login: aturan spesifik di atas mengutamakan background gambar dan elemen aktif. */
+.sr{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;padding:0}
+/* Hiasan tablet & mobile (memakai warna palet aplikasi: --royal, --brass, --ink) */
+#login .ldeco{display:none;position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;color:var(--royal)}
+#login .ldeco>*{position:absolute}
+.ldeco .c1{top:-16vw;right:-14vw;width:min(58vw,440px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 30% 30%,color-mix(in srgb,var(--royal) 34%,#fff),color-mix(in srgb,var(--royal) 12%,#fff) 72%);opacity:.8}
+.ldeco .c2{top:7vh;left:-9vw;width:min(30vw,210px);aspect-ratio:1;border-radius:50%;border:3px solid var(--brass);opacity:.55}
+.ldeco .c3{top:26vh;right:7vw;width:min(11vw,64px);aspect-ratio:1;border-radius:50%;background:linear-gradient(135deg,var(--brass),color-mix(in srgb,var(--brass) 60%,#fff));opacity:.85}
+.ldeco .c4{bottom:30vh;left:-12vw;width:min(36vw,260px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--brass) 30%,#fff),transparent 70%);opacity:.7}
+.ldeco .dots{top:3vh;left:5vw;width:min(34vw,210px);height:min(22vw,130px);background-image:radial-gradient(var(--royal) 1.6px,transparent 1.9px);background-size:14px 14px;opacity:.28}
+.ldeco .dots.b{top:auto;left:auto;bottom:24vh;right:4vw;background-image:radial-gradient(var(--brass) 1.6px,transparent 1.9px);opacity:.6}
+.ldeco .st{width:18px;height:18px;background:var(--brass);clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%)}
+.ldeco .st.s1{top:15vh;left:24vw}.ldeco .st.s2{top:21vh;right:27vw;width:12px;height:12px}.ldeco .st.s3{top:38vh;left:6vw;width:14px;height:14px}.ldeco .st.s4{top:33vh;right:5vw;width:16px;height:16px}
+.ldeco .sky{left:0;right:0;bottom:0;width:100%;height:clamp(110px,22vh,230px);display:block}
+@keyframes ldf{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes ldt{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.75)}}
+.ldeco .c2,.ldeco .c3{animation:ldf 7s ease-in-out infinite}.ldeco .c3{animation-delay:-3s}
+.ldeco .st{animation:ldt 3.2s ease-in-out infinite}.ldeco .st.s2{animation-delay:-1s}.ldeco .st.s3{animation-delay:-2s}.ldeco .st.s4{animation-delay:-.5s}
+@media(prefers-reduced-motion:reduce){.ldeco *{animation:none!important}}
+@media(max-width:900px){
+ #login{grid-template-columns:1fr;grid-template-rows:auto 1fr;align-content:start;min-height:100vh;min-height:100dvh;background:linear-gradient(180deg,color-mix(in srgb,var(--royal) 10%,#fff) 0%,#f7fbff 44%,color-mix(in srgb,var(--brass) 12%,#fff) 100%)}
+ #login::before{display:none}
+ #login .ldeco{display:block}
+ #login .lside{padding:max(30px,env(safe-area-inset-top)) 20px 6px}
+ #login .lside .logo4{width:min(250px,62vw);margin-bottom:6px}
+ #login .lside .quote{width:min(310px,78vw);margin-top:4px}
+ #login .rside{place-items:start center;padding:14px 18px max(44px,env(safe-area-inset-bottom))}
+ #login .lcard{max-width:460px;padding:30px 24px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-top:4px solid var(--brass)}
+ #login .lcard h2{font-size:32px}
+}
+@media(min-width:601px) and (max-width:900px){
+ #login .lside{padding-top:max(44px,env(safe-area-inset-top))}
+ #login .lside .logo4{width:min(330px,46vw)}
+ #login .lside .quote{width:min(400px,58vw)}
+ #login .lcard{max-width:500px;padding:36px 38px}
+ #login .lcard h2{font-size:36px}
+ .ldeco .st{width:22px;height:22px}
+}
+@media(max-width:380px){#login .lcard{padding:26px 18px}#login .lcard h2{font-size:29px}}
 .brand{background:linear-gradient(160deg,var(--royal),color-mix(in srgb,var(--royal) 55%,#8fd0ff));color:#fff;padding:56px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden}
 .brand>*{position:relative;z-index:1}
 .brand::before{content:"";position:absolute;left:0;right:0;top:0;height:24px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.7) 0 2px,transparent 2px 14px)}
@@ -585,13 +605,22 @@ a.btn{display:inline-block;text-align:center;text-decoration:none}
 <body>
 
 <section id="login">
+  <div class="ldeco" aria-hidden="true">
+    <i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i><i class="dots"></i><i class="dots b"></i>
+    <i class="st s1"></i><i class="st s2"></i><i class="st s3"></i><i class="st s4"></i>
+    <svg class="sky" viewBox="0 0 800 200" preserveAspectRatio="xMidYMax slice" focusable="false">
+      <path d="M0 118C90 92 170 140 270 120S450 84 540 112 700 140 800 104V200H0Z" fill="currentColor" opacity=".10"/>
+      <path d="M10 200V130V130H19.2V139H28.4V130H37.6V139H46.8V130H56.0V200ZM70 200V100V100H78.6V109H87.1V100H95.7V109H104.3V100H112.9V109H121.4V100H130.0V200ZM145 200V122V122H153.0V131H161.0V122H169.0V131H177.0V122H185.0V200ZM205 200V80V80H215.0V89H225.0V80H235.0V89H245.0V80H255.0V89H265.0V80H275.0V200ZM300 200V114V114H308.8V123H317.6V114H326.4V123H335.2V114H344.0V200ZM360 200V88V88H368.6V97H377.1V88H385.7V97H394.3V88H402.9V97H411.4V88H420.0V200ZM470 200V116V116H478.8V125H487.6V116H496.4V125H505.2V116H514.0V200ZM530 200V92V92H539.4V101H548.9V92H558.3V101H567.7V92H577.1V101H586.6V92H596.0V200ZM620 200V120V120H628.8V129H637.6V120H646.4V129H655.2V120H664.0V200ZM685 200V96V96H696.2V105H707.4V96H718.6V105H729.8V96H741.0V200ZM750 200V128V128H759.2V137H768.4V128H777.6V137H786.8V128H796.0V200Z" fill="currentColor" opacity=".16"/>
+      <path d="M380 200V50V50H388.8V59H397.6V50H406.4V59H415.2V50H424.0V200Z" fill="currentColor" opacity=".22"/>
+      <path d="M372 50L402 14L432 50Z" fill="var(--brass)" opacity=".9"/>
+      <path d="M402 14V2L416 8L402 12Z" fill="var(--brass)"/>
+      <rect x="0" y="194" width="800" height="6" fill="var(--brass)" opacity=".85"/>
+    </svg>
+  </div>
   <div class="lside">
-    <div class="crest"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 22L32 8L56 22Z"/><path d="M12 26H52M17 26V48M27 26V48M37 26V48M47 26V48M10 48H54M6 54H58"/></svg></div>
-    <h1 class="bn">Castle Academy</h1>
-    <p class="sub">English &amp; Mathematics Learning Center</p>
-    <div class="rule"></div>
-    <div class="logo4" role="img" aria-label="Castle Academy - Group Learning Center"></div>
-    <p class="quote">Learn Together, Grow Further.</p>
+    <h1 class="bn sr">Castle Academy</h1>
+    <img class="logo4" src="assets/castle-academy-login-logo.webp" alt="Castle Academy - Group Learning Center" fetchpriority="high" decoding="async">
+    <img class="quote" src="assets/castle-academy-slogan.webp" alt="Learn Together, Grow Further." decoding="async">
   </div>
   <div class="rside">
     <div class="lcard">
@@ -1761,8 +1790,8 @@ function applyTheme(s) {
   const lg = s.Logo || '';
   document.querySelectorAll('img.lgi').forEach(i => { if (lg) { i.src = lg; i.classList.remove('hide'); } else { i.removeAttribute('src'); i.classList.add('hide'); } });
   document.querySelectorAll('.lgf').forEach(e => e.classList.toggle('hide', !!lg));
-  document.querySelectorAll('.logo4').forEach(e => e.style.backgroundImage = `url("${s.LogoCenter || 'assets/castle-academy-login-logo.webp'}")`);
-  document.querySelectorAll('.lside .quote').forEach(e => e.style.backgroundImage = `url("${s.LogoSlogan || 'assets/castle-academy-slogan.webp'}")`);
+  document.querySelectorAll('#login .logo4').forEach(e => { const u = s.LogoCenter || 'assets/castle-academy-login-logo.webp'; if (e.getAttribute('src') !== u) e.src = u; });
+  document.querySelectorAll('#login .lside .quote').forEach(e => { const u = s.LogoSlogan || 'assets/castle-academy-slogan.webp'; if (e.getAttribute('src') !== u) e.src = u; });
   document.querySelectorAll('.dash-logo').forEach(e => e.src = (matchMedia('(max-width:640px)').matches ? s.LogoCenter : s.LogoRect) || (matchMedia('(max-width:640px)').matches ? 'assets/castle-academy-login-logo.webp' : 'assets/castle-academy-logo.png'));
   let ic = document.querySelector('link[rel=icon]');
   if (lg) { if (!ic) { ic = document.createElement('link'); ic.rel = 'icon'; document.head.appendChild(ic); } ic.href = lg; } else if (ic) ic.remove();
@@ -2001,6 +2030,7 @@ async function kPOS(D) {
       cart.length = 0;
       vKantin();
     } catch (e) { fail(e); if (btn) btn.disabled = false; }
+    } finally { checking = false; const b2 = $('#kcek'); if (b2) b2.disabled = false; }
   };
   
   render();
