@@ -1945,12 +1945,15 @@ function kRcLines(p, W) {
 }
 
 /* POS Kasir */
+function cashShortcuts() {
+  return `<div class="act" style="margin-top:6px"><button type="button" class="btn ghost sm" data-cash="exact">Pas</button>${[2000, 5000, 10000, 20000, 50000].map(n => `<button type="button" class="btn ghost sm" data-cash="${n}">${rp(n)}</button>`).join('')}</div>`;
+}
 async function kPOS(D) {
   const cart = [], produk = D.KantinProduk || [];
   let checking = false, pendingSale = null;
   const render = () => {
     const subtotal = cart.reduce((s, c) => s + c.qty * c.harga, 0);
-    $('#kbody').innerHTML = `<div class="kpos"><div class="panel" style="padding:16px"><div class="act" style="margin-bottom:12px"><input id="ksearch" placeholder="Cari produk, atau scan barcode lalu Enter" style="margin:0;flex:1"><button class="btn ghost" id="kcamscan" type="button" title="Scan kamera">📷</button></div><div class="kprod-grid">${produk.filter(p => String(p.Aktif) === '1').map(p => { const low = Number(p.Stok) <= Number(p.StokMin); return `<div class="kprod" data-pid="${esc(p.ID)}"><div class="${p.Foto ? '' : 'kph'}">${p.Foto ? `<img src="${esc(p.Foto)}" alt="${esc(p.Nama)}">` : '📦'}</div><b title="${esc(p.Nama)}">${esc(p.Nama.length > 24 ? p.Nama.slice(0, 23) + '…' : p.Nama)}</b><div class="kp">${rp(p.HargaJual)}</div><div class="ks${low ? ' low' : ''}">Stok ${p.Stok}</div></div>`; }).join('') || '<div class="empty" style="grid-column:1/-1">Belum ada produk aktif. Tambahkan di tab Produk.</div>'}</div></div><div class="kcart"><h3>Keranjang</h3><div id="kcart">${cart.length ? cart.map((c, i) => `<div class="kc-row"><div><b>${esc(c.nama)}</b><small>${rp(c.harga)} × ${c.qty} = ${rp(c.harga * c.qty)}</small></div><div class="kc-qty"><button data-ci="${i}" data-a="-">−</button><span>${c.qty}</span><button data-ci="${i}" data-a="+">+</button></div><button class="kc-del" data-cd="${i}">×</button></div>`).join('') : '<small class="mut">Belum ada item. Klik produk untuk menambah.</small>'}</div>${cart.length ? `<hr style="border:0;border-top:1px solid var(--line);margin:8px 0"><div class="kc-row" style="border:0;font-size:15px"><b>Subtotal</b><b>${rp(subtotal)}</b></div>${sel('kdiskon', 'Diskon', [0, 5, 10, 15, 20].map(x => `<option value="${x * subtotal / 100}">${x}% (${rp(x * subtotal / 100)})</option>`).join('') + '<option value="custom">Lainnya...</option>')}${fld('ktgl', 'Tanggal transaksi', today(), 'date')}${sel('kpembeli', 'Pembeli', '<option value="">Pembeli Umum</option>' + (D.KantinPembeli || []).map(c => `<option value="${esc(c.ID)}">${esc(c.Nama)} (${esc(c.Tipe)})</option>`).join(''))}${sel('kmetode', 'Metode', ['Tunai', 'Transfer', 'QRIS', 'Belum Bayar'].map(m => `<option>${m}</option>`).join(''))}${fld('kbayar', 'Bayar (Rp)', '', 'number')}<p id="kinfo" style="font-weight:600;color:var(--royal);margin:6px 0 0;min-height:18px"></p><div class="act" style="margin-top:8px"><button class="btn" id="kcek" style="flex:1">Checkout</button></div>` : ''}</div></div>`;
+    $('#kbody').innerHTML = `<div class="kpos"><div class="panel" style="padding:16px"><div class="act" style="margin-bottom:12px"><input id="ksearch" placeholder="Cari produk, atau scan barcode lalu Enter" style="margin:0;flex:1"><button class="btn ghost" id="kcamscan" type="button" title="Scan kamera">📷</button></div><div class="kprod-grid">${produk.filter(p => String(p.Aktif) === '1').map(p => { const low = Number(p.Stok) <= Number(p.StokMin); return `<div class="kprod" data-pid="${esc(p.ID)}"><div class="${p.Foto ? '' : 'kph'}">${p.Foto ? `<img src="${esc(p.Foto)}" alt="${esc(p.Nama)}">` : '📦'}</div><b title="${esc(p.Nama)}">${esc(p.Nama.length > 24 ? p.Nama.slice(0, 23) + '…' : p.Nama)}</b><div class="kp">${rp(p.HargaJual)}</div><div class="ks${low ? ' low' : ''}">Stok ${p.Stok}</div></div>`; }).join('') || '<div class="empty" style="grid-column:1/-1">Belum ada produk aktif. Tambahkan di tab Produk.</div>'}</div></div><div class="kcart"><h3>Keranjang</h3><div id="kcart">${cart.length ? cart.map((c, i) => `<div class="kc-row"><div><b>${esc(c.nama)}</b><small>${rp(c.harga)} × ${c.qty} = ${rp(c.harga * c.qty)}</small></div><div class="kc-qty"><button data-ci="${i}" data-a="-">−</button><span>${c.qty}</span><button data-ci="${i}" data-a="+">+</button></div><button class="kc-del" data-cd="${i}">×</button></div>`).join('') : '<small class="mut">Belum ada item. Klik produk untuk menambah.</small>'}</div>${cart.length ? `<hr style="border:0;border-top:1px solid var(--line);margin:8px 0"><div class="kc-row" style="border:0;font-size:15px"><b>Subtotal</b><b>${rp(subtotal)}</b></div>${sel('kdiskon', 'Diskon', [0, 5, 10, 15, 20].map(x => `<option value="${x * subtotal / 100}">${x}% (${rp(x * subtotal / 100)})</option>`).join('') + '<option value="custom">Lainnya...</option>')}${fld('ktgl', 'Tanggal transaksi', today(), 'date')}${S.user.Role === 'admin' ? fld('kwaktu', 'Waktu transaksi (kosong = sekarang)', '', 'time') : ''}${sel('kpembeli', 'Pembeli', '<option value="">Pembeli Umum</option>' + (D.KantinPembeli || []).map(c => `<option value="${esc(c.ID)}">${esc(c.Nama)} (${esc(c.Tipe)})</option>`).join(''))}${sel('kmetode', 'Metode', ['Tunai', 'Transfer', 'QRIS', 'Belum Bayar'].map(m => `<option>${m}</option>`).join(''))}${fld('kbayar', 'Bayar (Rp)', '', 'number')}${cashShortcuts('kbayar')}<p id="kinfo" style="font-weight:600;color:var(--royal);margin:6px 0 0;min-height:18px"></p><div class="act" style="margin-top:8px"><button class="btn" id="kcek" style="flex:1">Checkout</button></div>` : ''}</div></div>`;
     
     $('#ksearch').oninput = () => filterProd();
     $('#ksearch').onkeydown = e => {
@@ -1958,9 +1961,10 @@ async function kPOS(D) {
       e.preventDefault();
       const q = val('ksearch').trim();
       if (!q) return;
-      const p = produk.find(x => String(x.BarcodePabrik) === q || String(x.BarcodeApp) === q);
+      const matches = produk.filter(x => String(x.Aktif) === '1' && String(x.Nama || '').toLowerCase().includes(q.toLowerCase()));
+      const p = produk.find(x => String(x.BarcodePabrik) === q || String(x.BarcodeApp) === q) || (matches.length === 1 ? matches[0] : null);
       if (p) { addCart(p.ID); $('#ksearch').value = ''; filterProd(); }
-      else toast('Barcode tidak dikenali.', true);
+      else toast(matches.length > 1 ? 'Pilih salah satu produk yang cocok.' : 'Produk atau barcode tidak dikenali.', true);
     };
     $('#kcamscan').onclick = () => scanCode(code => {
       const p = produk.find(x => String(x.BarcodePabrik) === code || String(x.BarcodeApp) === code);
@@ -1974,6 +1978,10 @@ async function kPOS(D) {
     if ($('#kmetode')) $('#kmetode').onchange = () => metodChange();
     if ($('#kpembeli')) $('#kpembeli').onchange = () => updateKembalian();
     if ($('#kbayar')) $('#kbayar').oninput = () => updateKembalian();
+    document.querySelectorAll('#kbody [data-cash]').forEach(b => b.onclick = () => {
+      $('#kbayar').value = b.dataset.cash === 'exact' ? Math.max(0, subtotal - (Number(val('kdiskon')) || 0)) : Number(b.dataset.cash);
+      updateKembalian();
+    });
   };
   
   const filterProd = () => {
@@ -2057,7 +2065,7 @@ async function kPOS(D) {
     }
     const tanggal = val('ktgl');
     if (!await askConfirm(`Proses penjualan total ${rp(tot)} dengan ${m}?`)) return;
-    const payload = { PembeliID: pid, Items: cart.map(c => ({ ProdukID: c.pid, Jumlah: c.qty })), Diskon: dis, Bayar: m === 'Belum Bayar' ? 0 : byr, MetodeBayar: m, Tanggal: tanggal, JatuhTempo: jatuhTempo, Keterangan: '' };
+    const payload = { PembeliID: pid, Items: cart.map(c => ({ ProdukID: c.pid, Jumlah: c.qty })), Diskon: dis, Bayar: m === 'Belum Bayar' ? 0 : byr, MetodeBayar: m, Tanggal: tanggal, Waktu: $('#kwaktu') ? val('kwaktu') : '', JatuhTempo: jatuhTempo, Keterangan: '' };
     const fingerprint = JSON.stringify(payload);
     if (pendingSale && pendingSale.fingerprint !== fingerprint) return toast('Status transaksi sebelumnya belum pasti. Periksa riwayat sebelum mengubah transaksi.', true);
     if (!pendingSale) pendingSale = {fingerprint, RequestID: 'POS' + Date.now() + Math.random().toString(36).slice(2, 12)};
@@ -2087,28 +2095,56 @@ async function kProduk(D) {
   document.querySelectorAll('[data-e]').forEach(b => b.onclick = () => prodForm(list[+b.dataset.e], list));
 }
 
+async function productScan(cb) {
+  const o = document.createElement('div'); o.className = 'ov';
+  o.innerHTML = '<div class="modal" role="dialog" aria-label="Scan barcode"><h3>Scan barcode</h3><video autoplay playsinline muted style="width:100%;border-radius:12px;background:#000"></video><p class="mut">Arahkan barcode ke kamera.</p><div class="foot"><button type="button" class="btn ghost">Batal</button></div></div>';
+  document.body.appendChild(o);
+  const v = o.querySelector('video'), msg = o.querySelector('p');
+  let stream = null, closed = false, reader = null;
+  const close = () => { closed = true; if (reader) reader.reset(); if (stream) stream.getTracks().forEach(t => t.stop()); o.remove(); };
+  o.querySelector('button').onclick = close;
+  try {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) throw new Error('Kamera memerlukan HTTPS dan izin browser.');
+    stream = await navigator.mediaDevices.getUserMedia({video: {facingMode: 'environment'}, audio: false});
+    if (closed) { stream.getTracks().forEach(t => t.stop()); return; }
+    v.srcObject = stream; await v.play();
+    if (!window.ZXing) await loadScript('https://cdn.jsdelivr.net/npm/@zxing/library@0.21.3/umd/index.min.js');
+    if (closed) return;
+    if (!window.ZXing) throw new Error('Pustaka pemindai gagal dimuat. Periksa koneksi internet.');
+    reader = new ZXing.BrowserMultiFormatReader();
+    reader.decodeFromVideoElement(v, (result) => {
+      if (!closed && result) { const code = result.getText().trim(); if (code) { close(); cb(code); } }
+    });
+  } catch (e) { if (!closed) msg.textContent = 'Tidak dapat memindai: ' + (e.message || 'izinkan akses kamera dan gunakan HTTPS.'); }
+}
+
 function prodForm(p, list) {
   const PH = {del: false}, edit = !!p.ID;
-  modal(edit ? 'Ubah produk' : 'Tambah produk',
+  const categories = [...new Set(['Makanan', 'Minuman', ...list.map(x => String(x.Kategori || '').trim()), String(p.Kategori || '').trim()].filter(Boolean))].sort((a, b) => a.localeCompare(b));
+  const form = modal(edit ? 'Ubah produk' : 'Tambah produk',
     `${fld('pnama', 'Nama produk', p.Nama || '')}
      <div class="row">${fld('phj', 'Harga jual (Rp)', p.HargaJual || '', 'number')}${fld('phb', 'Harga beli (Rp)', p.HargaBeli || '', 'number')}</div>
-     <div class="row">${fld('pmin', 'Stok minimum', p.StokMin || 0, 'number')}${fld('pkat', 'Kategori', p.Kategori || '')}</div>
+     <div class="row">${fld('pmin', 'Stok minimum', p.StokMin || 0, 'number')}<div>${sel('pkat', 'Kategori', '<option value="">Tanpa kategori</option>' + categories.map(c => `<option value="${esc(c)}" ${c === p.Kategori ? 'selected' : ''}>${esc(c)}</option>`).join('') + '<option value="__new__">+ Kategori baru…</option>')}<div id="pnewwrap" class="hide">${fld('pnewkat', 'Nama kategori baru', '')}</div></div></div>
      <label><input type="checkbox" id="paktif" ${String(p.Aktif) !== '0' ? 'checked' : ''}> Aktif</label>
      ${fld('pbcp', 'Barcode pabrik', p.BarcodePabrik || '')}<div class="act" style="margin-top:6px"><button class="btn ghost sm" id="pbscan" type="button">Scan barcode</button></div>
      ${fld('pbca', 'Barcode aplikasi (kosong = ID otomatis)', p.BarcodeApp || '')}
      <label for="pdesc">Deskripsi</label><textarea id="pdesc" rows="2">${esc(p.Deskripsi || '')}</textarea>
-     <label>Foto produk (opsional, dikecilkan otomatis)</label><div class="act" style="align-items:center"><img id="pprev" alt="" style="width:64px;height:64px;border-radius:10px;object-fit:cover;background:var(--mist);border:1px solid var(--line)"><input type="file" id="pf" accept="image/*"><button class="btn del sm" id="pdel" type="button">Hapus foto</button></div>`,
+     <label>Foto produk (opsional, dikecilkan otomatis)</label><div class="act" style="align-items:center"><img id="pprev" alt="" style="width:64px;height:64px;border-radius:10px;object-fit:cover;background:var(--mist);border:1px solid var(--line)"><input type="file" id="pf" accept="image/*"><label class="btn ghost sm" for="pcam">Ambil foto kamera</label><input type="file" id="pcam" accept="image/*" capture="environment" style="display:none"><button class="btn del sm" id="pdel" type="button">Hapus foto</button></div>`,
     async () => {
-      const payload = { ID: edit ? p.ID : '', Nama: val('pnama'), HargaJual: val('phj'), HargaBeli: val('phb'), StokMin: val('pmin'), Kategori: val('pkat'), Aktif: $('#paktif').checked, BarcodePabrik: val('pbcp'), BarcodeApp: val('pbca'), Deskripsi: val('pdesc'), Foto: PH.del ? '' : (PH.foto || p.Foto || '') };
+      const kategori = val('pkat') === '__new__' ? val('pnewkat').trim() : val('pkat');
+      if (val('pkat') === '__new__' && !kategori) throw new Error('Isi nama kategori baru.');
+      const payload = { ID: edit ? p.ID : '', Nama: val('pnama'), HargaJual: val('phj'), HargaBeli: val('phb'), StokMin: val('pmin'), Kategori: kategori, Aktif: $('#paktif').checked, BarcodePabrik: val('pbcp'), BarcodeApp: val('pbca'), Deskripsi: val('pdesc'), Foto: PH.del ? '' : (PH.foto || p.Foto || '') };
       await api('kantinSaveProduct', payload);
       toast('Produk tersimpan');
       vKantin();
     });
   
-  $('#pf').onchange = async e => { const f = e.target.files[0]; if (!f) return; try { PH.foto = await fotoResize(f); PH.del = false; $('#pprev').src = PH.foto; } catch (er) { fail(er); } };
-  $('#pdel').onclick = () => { PH.foto = ''; PH.del = true; $('#pprev').removeAttribute('src'); };
-  $('#pbscan').onclick = () => scanCode(code => { $('#pbcp').value = code; });
-  if (edit && p.Foto) $('#pprev').src = p.Foto;
+  form.querySelector('#pkat').onchange = e => form.querySelector('#pnewwrap').classList.toggle('hide', e.target.value !== '__new__');
+  const photo = async e => { const f = e.target.files[0]; if (!f) return; try { PH.foto = await fotoResize(f); PH.del = false; form.querySelector('#pprev').src = PH.foto; } catch (er) { fail(er); } e.target.value = ''; };
+  form.querySelector('#pf').onchange = photo; form.querySelector('#pcam').onchange = photo;
+  form.querySelector('#pdel').onclick = () => { PH.foto = ''; PH.del = true; form.querySelector('#pprev').removeAttribute('src'); };
+  form.querySelector('#pbscan').onclick = () => productScan(code => { if (form.isConnected) form.querySelector('#pbcp').value = code; });
+  if (edit && p.Foto) form.querySelector('#pprev').src = p.Foto;
 }
 
 async function printLabels(list) {
@@ -2154,18 +2190,28 @@ async function kStok(D) {
 }
 
 function stockForm(tipe, produk) {
-  modal(`Stok ${tipe}`,
-    `${sel('spid', 'Produk', produk.map(p => `<option value="${esc(p.ID)}">${esc(p.Nama)} (stok: ${p.Stok})</option>`).join(''))}
-     ${fld('sjml', 'Jumlah', '', 'number')}
-     ${tipe === 'Masuk' ? fld('sharga', 'Harga per unit (Rp)', '', 'number') : ''}
-     ${tipe === 'Masuk' ? sel('smetode', 'Metode bayar', ['Tunai', 'Transfer', 'QRIS'].map(m => `<option>${m}</option>`).join('')) : ''}
+  const requestID = 'PUR' + Date.now() + Math.random().toString(36).slice(2, 12);
+  const form = modal(`Stok ${tipe}`,
+    `<label for="spsearch">Cari nama / scan barcode</label><div class="act"><input id="spsearch" placeholder="Cari produk atau scan barcode"><button type="button" class="btn ghost" id="spscan">📷</button></div><datalist id="spchoices">${produk.map(p => `<option value="${esc(p.Nama)}">`).join('')}</datalist>
+     ${sel('spid', 'Produk', '<option value="">Pilih produk</option>' + produk.map(p => `<option value="${esc(p.ID)}">${esc(p.Nama)} (stok: ${p.Stok})</option>`).join(''))}
+     ${fld('sjml', 'Jumlah unit', '', 'number')}
+     ${tipe === 'Masuk' ? `<label><input type="checkbox" id="spurchase"> Catat sebagai pembelanjaan</label><div id="spurchasefields" class="hide">${fld('ssupplier', 'Supplier', '')}${fld('sharga', 'Harga per unit (Rp)', '', 'number')}${fld('sbayar', 'Bayar (Rp)', '', 'number')}${cashShortcuts('sbayar')}${sel('smetode', 'Metode bayar', ['Tunai', 'Transfer', 'QRIS'].map(m => `<option>${m}</option>`).join(''))}${fld('sjatuh', 'Jatuh tempo hutang', '', 'date')}</div>` : ''}
      ${fld('sket', 'Keterangan', '')}
      ${fld('stgl', 'Tanggal', today(), 'date')}`,
     async () => {
-      await api('kantinStock', { ProdukID: val('spid'), Tipe: tipe, Jumlah: val('sjml'), Harga: tipe === 'Masuk' ? val('sharga') : 0, MetodeBayar: tipe === 'Masuk' ? val('smetode') : 'Tunai', Keterangan: val('sket'), Tanggal: val('stgl') });
+      if ($('#spurchase') && $('#spurchase').checked) {
+        await api('kantinPurchase', {RequestID: requestID, Supplier: val('ssupplier'), Tanggal: val('stgl'), Items: [{ProdukID: val('spid'), Jumlah: val('sjml'), Harga: val('sharga')}], Bayar: val('sbayar'), MetodeBayar: val('smetode'), JatuhTempo: val('sjatuh'), Keterangan: val('sket')});
+      } else await api('kantinStock', { ProdukID: val('spid'), Tipe: tipe, Jumlah: val('sjml'), Harga: 0, MetodeBayar: 'Tunai', Keterangan: val('sket'), Tanggal: val('stgl') });
       toast('Stok tercatat');
       vKantin();
     });
+  const search = $('#spsearch');
+  const pick = q => { const p = produk.find(x => [x.BarcodePabrik, x.BarcodeApp, x.Nama].some(v => String(v || '').toLowerCase() === q.toLowerCase())); if (p) $('#spid').value = p.ID; return p; };
+  search.oninput = () => { const q = search.value.trim().toLowerCase(); $('#spid').value = ''; Array.from($('#spid').options).forEach(o => { const p = produk.find(x => x.ID === o.value); if (p) o.hidden = !!q && ![p.Nama, p.BarcodePabrik, p.BarcodeApp].some(v => String(v || '').toLowerCase().includes(q)); }); };
+  search.onkeydown = e => { if (e.key === 'Enter') { e.preventDefault(); if (!pick(search.value.trim())) toast('Produk tidak ditemukan.', true); } };
+  $('#spscan').onclick = () => productScan(code => { search.value = code; if (!pick(code)) toast('Barcode tidak ditemukan.', true); });
+  if ($('#spurchase')) $('#spurchase').onchange = () => $('#spurchasefields').classList.toggle('hide', !$('#spurchase').checked);
+  form.querySelectorAll('[data-cash]').forEach(b => b.onclick = () => { $('#sbayar').value = b.dataset.cash === 'exact' ? (Number(val('sjml')) || 0) * (Number(val('sharga')) || 0) : Number(b.dataset.cash); });
 }
 
 /* Filter bulan + CSV export (dipakai beberapa tab riwayat kantin) */
@@ -2249,43 +2295,55 @@ async function kPurchase(D) {
 
 function purchForm(produk) {
   const items = [{ pid: '', nama: '', qty: 1, harga: 0 }];
+  const reqID = 'PUR' + Date.now() + Math.random().toString(36).slice(2, 12);
   const render = () => {
-    $('#pitems').innerHTML = items.map((it, i) => `<div class="qo" style="grid-template-columns:1fr 100px 100px auto;gap:6px;margin-bottom:6px">${sel('pi' + i, '', '<option value="">Item non-stok</option>' + produk.map(p => `<option value="${esc(p.ID)}">${esc(p.Nama)}</option>`).join('') + (it.pid ? '' : `<option value="custom" selected>Lainnya</option>`))}${it.pid ? '' : `<input id="pn${i}" placeholder="Nama item" value="${esc(it.nama)}">`}<input id="pq${i}" type="number" placeholder="Qty" value="${it.qty}" style="width:100px"><input id="ph${i}" type="number" placeholder="Harga" value="${it.harga}" style="width:100px"><button class="btn del sm" data-x="${i}">×</button></div>`).join('') + '<button class="btn ghost sm" id="padd" type="button">+ Tambah item</button>';
+    $('#pitems').innerHTML = items.map((it, i) => `<div style="border-bottom:1px solid var(--line);padding:8px 0"><div class="act"><input id="ps${i}" placeholder="Cari nama / scan barcode"><button type="button" class="btn ghost sm" data-scan="${i}">📷</button></div>${sel('pi' + i, 'Produk', '<option value="">Item non-stok</option>' + produk.map(p => `<option value="${esc(p.ID)}" ${it.pid === p.ID ? 'selected' : ''}>${esc(p.Nama)}</option>`).join(''))}${it.pid ? `<label>Jumlah unit</label><input id="pq${i}" type="number" min="1" value="${it.qty}">` : `<input id="pn${i}" placeholder="Nama item" value="${esc(it.nama)}">`}<label>${it.pid ? 'Harga per unit' : 'Harga total'}</label><input id="ph${i}" type="number" min="0" value="${it.harga}"><button type="button" class="btn del sm" data-x="${i}">Hapus item</button></div>`).join('') + '<button class="btn ghost sm" id="padd" type="button">+ Tambah item</button>';
     items.forEach((it, i) => {
-      const spid = $('#pi' + i); if (spid) spid.onchange = () => { const p = produk.find(x => x.ID === spid.value); if (p) { items[i].pid = p.ID; items[i].nama = p.Nama; items[i].harga = Number(p.HargaBeli); render(); } };
-      const qin = $('#pq' + i); if (qin) qin.oninput = () => items[i].qty = Number(qin.value) || 1;
-      const hin = $('#ph' + i); if (hin) hin.oninput = () => items[i].harga = Number(hin.value) || 0;
+      const pickProd = p => { if (!p) return; items[i].pid = p.ID; items[i].nama = p.Nama; items[i].harga = Number(p.HargaBeli); render(); };
+      const spid = $('#pi' + i); if (spid) spid.onchange = () => { if (!spid.value) { items[i].pid = ''; render(); } else pickProd(produk.find(x => x.ID === spid.value)); };
+      const search = $('#ps' + i);
+      if (search) {
+        search.oninput = () => { const q = search.value.trim().toLowerCase(); Array.from(spid.options).forEach(o => { const p = produk.find(x => x.ID === o.value); if (p) o.hidden = !!q && ![p.Nama, p.BarcodePabrik, p.BarcodeApp].some(v => String(v || '').toLowerCase().includes(q)); }); };
+        search.onkeydown = e => { if (e.key !== 'Enter') return; e.preventDefault(); const q = search.value.trim().toLowerCase(); const p = produk.find(x => [x.Nama, x.BarcodePabrik, x.BarcodeApp].some(v => String(v || '').toLowerCase() === q)); if (p) pickProd(p); else toast('Produk tidak ditemukan.', true); };
+      }
+      const updateTotal = () => { $('#ptotal').textContent = 'Total: ' + rp(items.reduce((s, x) => s + (x.pid ? x.qty * x.harga : x.harga), 0)); };
+      const qin = $('#pq' + i); if (qin) qin.oninput = () => { items[i].qty = Number(qin.value) || 0; updateTotal(); };
+      const hin = $('#ph' + i); if (hin) hin.oninput = () => { items[i].harga = Number(hin.value) || 0; updateTotal(); };
       const nin = $('#pn' + i); if (nin) nin.oninput = () => items[i].nama = nin.value;
     });
     document.querySelectorAll('#pitems [data-x]').forEach(b => b.onclick = () => { items.splice(+b.dataset.x, 1); render(); });
+    document.querySelectorAll('#pitems [data-scan]').forEach(b => b.onclick = () => productScan(code => { const p = produk.find(x => String(x.BarcodePabrik) === code || String(x.BarcodeApp) === code); if (p) { items[+b.dataset.scan].pid = p.ID; items[+b.dataset.scan].nama = p.Nama; items[+b.dataset.scan].harga = Number(p.HargaBeli); render(); } else toast('Barcode tidak ditemukan: ' + code, true); }));
     if ($('#padd')) $('#padd').onclick = () => { items.push({ pid: '', nama: '', qty: 1, harga: 0 }); render(); };
-    const tot = items.reduce((s, it) => s + it.qty * it.harga, 0);
+    const tot = items.reduce((s, it) => s + (it.pid ? it.qty * it.harga : it.harga), 0);
     $('#ptotal').textContent = 'Total: ' + rp(tot);
   };
   
-  modal('Tambah pembelanjaan',
+  const purchaseModal = modal('Tambah pembelanjaan',
     `${fld('psupplier', 'Supplier', '')}
      ${fld('ptgl', 'Tanggal', today(), 'date')}
      <label>Item pembelanjaan</label><div id="pitems"></div><div id="ptotal" style="font-weight:700;margin-top:6px"></div>
-     ${fld('pbayar', 'Bayar (Rp)', '', 'number')}
+     ${fld('pbayar', 'Bayar (Rp)', '', 'number')}${cashShortcuts('pbayar')}
      ${sel('pmetode', 'Metode', ['Tunai', 'Transfer', 'QRIS'].map(m => `<option>${m}</option>`).join(''))}
-     ${fld('pjatuh', 'Jatuh tempo hutang (opsional)', '', 'date')}
+     ${fld('pjatuh', 'Jatuh tempo hutang (opsional, jika Bayar < Total)', '', 'date')}
      ${fld('pket', 'Keterangan', '')}`,
     async () => {
-      const reqID = 'PUR' + Date.now() + Math.random().toString(36).slice(2, 8);
-      const payload = { RequestID: reqID, Supplier: val('psupplier'), Tanggal: val('ptgl'), Items: items.map(it => ({ ProdukID: it.pid || '', Nama: it.nama, Jumlah: it.qty, Harga: it.harga })), Bayar: val('pbayar'), MetodeBayar: val('pmetode'), JatuhTempo: val('pjatuh'), Keterangan: val('pket') };
+      const payload = { RequestID: reqID, Supplier: val('psupplier'), Tanggal: val('ptgl'), Items: items.map(it => ({ ProdukID: it.pid || '', Nama: it.nama, Jumlah: it.pid ? it.qty : 1, Harga: it.harga })), Bayar: val('pbayar'), MetodeBayar: val('pmetode'), JatuhTempo: val('pjatuh'), Keterangan: val('pket') };
       await api('kantinPurchase', payload);
       toast('Pembelanjaan tercatat');
       vKantin();
     });
   
   render();
+  purchaseModal.querySelectorAll('[data-cash]').forEach(b => b.onclick = () => {
+    const tot = items.reduce((s, it) => s + (it.pid ? it.qty * it.harga : it.harga), 0);
+    $('#pbayar').value = b.dataset.cash === 'exact' ? tot : Number(b.dataset.cash);
+  });
 }
 
 /* Pembeli */
 async function kPembeli(D) {
   const list = D.KantinPembeli || [], users = D.Users || [];
-  $('#kbody').innerHTML = `<div class="panel"><button class="btn" id="kadd" style="margin-bottom:14px">+ Tambah pembeli</button><div class="tw"><table><tr><th>Nama</th><th>Tipe</th><th>Username</th><th>Telepon</th><th>Alamat</th><th>Catatan</th><th></th></tr>${list.map((c, i) => `<tr><td><b>${esc(c.Nama)}</b></td><td><span class="tag">${esc(c.Tipe)}</span></td><td>${esc(c.Username || '-')}</td><td>${esc(c.Telepon || '-')}</td><td><small>${esc(c.Alamat || '-')}</small></td><td><small>${esc(c.Catatan || '-')}</small></td><td class="act"><button class="btn ghost sm" data-e="${i}">Ubah</button></td></tr>`).join('') || '<tr><td colspan="7" class="empty">Belum ada pembeli.</td></tr>'}</table></div></div>`;
+  $('#kbody').innerHTML = `<div class="panel"><button class="btn" id="kadd" style="margin-bottom:14px">+ Tambah pembeli eksternal</button><small class="mut" style="display:block;margin-bottom:10px">Siswa dan pegawai terdaftar otomatis muncul sebagai pembeli (tag "Otomatis") - tidak perlu didaftarkan manual. Form di sini khusus pembeli eksternal (bukan siswa/pegawai).</small><div class="tw"><table><tr><th>Nama</th><th>Tipe</th><th>Username</th><th>Telepon</th><th>Alamat</th><th>Catatan</th><th></th></tr>${list.map((c, i) => `<tr><td><b>${esc(c.Nama)}</b>${c.Otomatis ? ' <span class="tag">Otomatis</span>' : ''}</td><td><span class="tag">${esc(c.Tipe)}</span></td><td>${esc(c.Username || '-')}</td><td>${esc(c.Telepon || '-')}</td><td><small>${esc(c.Alamat || '-')}</small></td><td><small>${esc(c.Catatan || '-')}</small></td><td class="act">${c.Otomatis ? '' : `<button class="btn ghost sm" data-e="${i}">Ubah</button>`}</td></tr>`).join('') || '<tr><td colspan="7" class="empty">Belum ada pembeli.</td></tr>'}</table></div></div>`;
   $('#kadd').onclick = () => custForm({}, users);
   document.querySelectorAll('[data-e]').forEach(b => b.onclick = () => custForm(list[+b.dataset.e], users));
 }
@@ -2294,8 +2352,8 @@ function custForm(c, users) {
   const edit = !!c.ID;
   modal(edit ? 'Ubah pembeli' : 'Tambah pembeli',
     `${fld('cnama', 'Nama pembeli', c.Nama || '')}
-     ${sel('ctipe', 'Tipe', ['Umum', 'Siswa', 'Pegawai'].map(t => `<option ${t === c.Tipe ? 'selected' : ''}>${t}</option>`).join(''))}
-     ${sel('cun', 'Link ke user (opsional)', '<option value="">-</option>' + users.map(u => `<option value="${esc(u.Username)}" ${u.Username === c.Username ? 'selected' : ''}>${esc(u.Nama)} (${esc(u.Role)})</option>`).join(''))}
+     ${sel('ctipe', 'Tipe', (edit ? ['Umum', 'Siswa', 'Pegawai'] : ['Umum']).map(t => `<option ${t === c.Tipe ? 'selected' : ''}>${t}</option>`).join(''))}
+     ${sel('cun', 'Link ke user (data lama)', '<option value="">-</option>' + (edit ? users : []).map(u => `<option value="${esc(u.Username)}" ${u.Username === c.Username ? 'selected' : ''}>${esc(u.Nama)} (${esc(u.Role)})</option>`).join(''))}
      ${fld('ctel', 'Telepon', c.Telepon || '', 'tel')}
      <label for="calam">Alamat</label><textarea id="calam" rows="2">${esc(c.Alamat || '')}</textarea>
      <label for="ccat">Catatan</label><textarea id="ccat" rows="2">${esc(c.Catatan || '')}</textarea>`,
