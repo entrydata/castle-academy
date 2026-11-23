@@ -7,7 +7,7 @@
 <title>Castle Academy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="assets/castle-academy-login-logo.webp" fetchpriority="high"><link rel="preload" as="image" href="assets/castle-academy-slogan.webp" fetchpriority="high"><link rel="preload" as="image" href="assets/castle-academy-login-web.webp" media="(min-width:901px)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/castle-academy-login-web.webp" media="(min-width:901px)" fetchpriority="high">
 <style>
 :root{--ink:#12315c;--royal:#2a7de1;--brass:#f4b740;--mist:#f0f6fd;--line:color-mix(in srgb,var(--royal) 16%,#fff);--ok:#1f9d78;--bad:#d64545;--mute:#5d7394;--r:14px}
 *{box-sizing:border-box}
@@ -19,10 +19,14 @@ button,input,select,textarea{font:inherit;color:inherit}
 /* login */
 #login{position:relative;overflow:hidden;isolation:isolate;min-height:100vh;display:grid;grid-template-columns:1.05fr 1fr;background:#f7fbff}
 /* Background desktop: gambar dari GitHub dibentangkan 100% x 100% dan sedikit melebihi tepi (inset negatif) agar tidak ada garis pinggir. */
-#login::before{content:'';position:absolute;inset:-2px;z-index:-1;background:url('assets/castle-academy-login-web.webp') center/100% 100% no-repeat}
+#login .lbgp{position:absolute;inset:-2px;z-index:-1;display:block;overflow:hidden;background:linear-gradient(135deg,#dcebfb,#cfe4fb 55%,#e8f2fd)}
+#login .lbg{display:block;width:100%;height:100%;object-fit:fill;opacity:0;transition:opacity .6s ease}
+#login .lbg.ld{opacity:1;animation:lbgz 26s ease-in-out infinite alternate}
+@keyframes lbgz{from{transform:scale(1)}to{transform:scale(1.045)}}
 #login .lside{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 30px;position:relative;z-index:1;background:none;color:var(--ink)}
-#login .lside .logo4{display:block;width:min(300px,70%);height:auto;margin:0 auto 12px;user-select:none;-webkit-user-drag:none}
-#login .lside .quote{display:block;width:min(360px,90%);height:auto;margin:8px auto 0;user-select:none;-webkit-user-drag:none}
+#login .lside .logo4{display:block;width:min(300px,70%);aspect-ratio:6/5;object-fit:contain;margin:0 auto 12px;user-select:none;-webkit-user-drag:none;opacity:0;transition:opacity .45s ease}
+#login .lside .quote{display:block;width:min(360px,90%);aspect-ratio:406/156;object-fit:contain;margin:8px auto 0;user-select:none;-webkit-user-drag:none;opacity:0;transition:opacity .45s ease .1s}
+#login .lside img.ld{opacity:1}
 #login .rside{display:grid;place-items:center;padding:40px 28px;position:relative;z-index:1;background:none}
 #login .lcard{width:100%;max-width:470px;background:rgba(255,255,255,.94);border:1px solid rgba(42,125,225,.12);border-radius:24px;padding:38px 42px;box-shadow:0 18px 55px rgba(18,49,92,.12)}
 #login .lcard h2{font:600 36px 'Cormorant Garamond',Georgia,serif;color:var(--ink);text-align:center;margin-bottom:4px}
@@ -30,7 +34,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 #login .btn.full{border-radius:999px;background:linear-gradient(135deg,#1475d1,#1262b4);box-shadow:0 8px 18px rgba(42,125,225,.24)}
 .sr{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;padding:0}
 /* Hiasan tablet & mobile (memakai warna palet aplikasi: --royal, --brass, --ink) */
-#login .ldeco{display:none;position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;color:var(--royal)}
+#login .ldeco{display:block;position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;color:var(--royal)}
 #login .ldeco>*{position:absolute}
 .ldeco .c1{top:-16vw;right:-14vw;width:min(58vw,440px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 30% 30%,color-mix(in srgb,var(--royal) 34%,#fff),color-mix(in srgb,var(--royal) 12%,#fff) 72%);opacity:.8}
 .ldeco .c2{top:7vh;left:-9vw;width:min(30vw,210px);aspect-ratio:1;border-radius:50%;border:3px solid var(--brass);opacity:.55}
@@ -40,16 +44,28 @@ button,input,select,textarea{font:inherit;color:inherit}
 .ldeco .dots.b{top:auto;left:auto;bottom:24vh;right:4vw;background-image:radial-gradient(var(--brass) 1.6px,transparent 1.9px);opacity:.6}
 .ldeco .st{width:18px;height:18px;background:var(--brass);clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%)}
 .ldeco .st.s1{top:15vh;left:24vw}.ldeco .st.s2{top:21vh;right:27vw;width:12px;height:12px}.ldeco .st.s3{top:38vh;left:6vw;width:14px;height:14px}.ldeco .st.s4{top:33vh;right:5vw;width:16px;height:16px}
-.ldeco .sky{left:0;right:0;bottom:0;width:100%;height:clamp(110px,22vh,230px);display:block}
+.ldeco .sky{left:0;right:0;bottom:0;width:100%;height:clamp(110px,22vh,230px)}
+/* hiasan khusus desktop: hanya elemen ringan agar gambar background tetap terlihat; sisanya tampil di tablet & mobile */
+.ldeco .c1,.ldeco .c4,.ldeco .sky,.ldeco .dots.b{display:none}
+.ldeco .o1{top:6vh;left:30vw;width:30vw;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.5),transparent 68%);animation:ldd 16s ease-in-out infinite alternate}
+.ldeco .o2{bottom:-8vh;right:6vw;width:32vw;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--brass) 38%,transparent),transparent 68%);animation:ldd 19s ease-in-out -6s infinite alternate-reverse}
+@keyframes ldd{from{transform:translate(0,0) scale(1)}to{transform:translate(3vw,2.5vh) scale(1.15)}}
+@media(min-width:901px){
+ .ldeco .c2{top:9vh;left:2vw;width:min(14vw,190px)}
+ .ldeco .c3{top:16vh;right:5vw;width:min(5vw,70px)}
+ .ldeco .dots{top:auto;bottom:6vh;left:3vw;width:min(16vw,230px);height:min(8vw,110px)}
+ .ldeco .st.s1{top:12vh;left:44vw}.ldeco .st.s2{top:70vh;right:40vw}.ldeco .st.s3{top:80vh;left:46vw}.ldeco .st.s4{top:30vh;right:3vw}
+}
 @keyframes ldf{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
 @keyframes ldt{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.75)}}
 .ldeco .c2,.ldeco .c3{animation:ldf 7s ease-in-out infinite}.ldeco .c3{animation-delay:-3s}
 .ldeco .st{animation:ldt 3.2s ease-in-out infinite}.ldeco .st.s2{animation-delay:-1s}.ldeco .st.s3{animation-delay:-2s}.ldeco .st.s4{animation-delay:-.5s}
-@media(prefers-reduced-motion:reduce){.ldeco *{animation:none!important}}
+@media(prefers-reduced-motion:reduce){.ldeco *,#login .lbg{animation:none!important}}
 @media(max-width:900px){
  #login{grid-template-columns:1fr;grid-template-rows:auto 1fr;align-content:start;min-height:100vh;min-height:100dvh;background:linear-gradient(180deg,color-mix(in srgb,var(--royal) 10%,#fff) 0%,#f7fbff 44%,color-mix(in srgb,var(--brass) 12%,#fff) 100%)}
- #login::before{display:none}
- #login .ldeco{display:block}
+ #login .lbgp{display:none}
+ #login .ldeco .c1,#login .ldeco .c4,#login .ldeco .dots.b{display:block}
+ #login .ldeco .sky{display:block}
  #login .lside{padding:max(30px,env(safe-area-inset-top)) 20px 6px}
  #login .lside .logo4{width:min(250px,62vw);margin-bottom:6px}
  #login .lside .quote{width:min(310px,78vw);margin-top:4px}
@@ -605,8 +621,9 @@ a.btn{display:inline-block;text-align:center;text-decoration:none}
 <body>
 
 <section id="login">
+  <picture class="lbgp" aria-hidden="true"><source media="(min-width:901px)" srcset="assets/castle-academy-login-web.webp"><img class="lbg" alt="" fetchpriority="high" decoding="async" onload="this.classList.add('ld')"></picture>
   <div class="ldeco" aria-hidden="true">
-    <i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i><i class="dots"></i><i class="dots b"></i>
+    <i class="o1"></i><i class="o2"></i><i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i><i class="dots"></i><i class="dots b"></i>
     <i class="st s1"></i><i class="st s2"></i><i class="st s3"></i><i class="st s4"></i>
     <svg class="sky" viewBox="0 0 800 200" preserveAspectRatio="xMidYMax slice" focusable="false">
       <path d="M0 118C90 92 170 140 270 120S450 84 540 112 700 140 800 104V200H0Z" fill="currentColor" opacity=".10"/>
@@ -619,15 +636,15 @@ a.btn{display:inline-block;text-align:center;text-decoration:none}
   </div>
   <div class="lside">
     <h1 class="bn sr">Castle Academy</h1>
-    <img class="logo4" src="assets/castle-academy-login-logo.webp" alt="Castle Academy - Group Learning Center" fetchpriority="high" decoding="async">
-    <img class="quote" src="assets/castle-academy-slogan.webp" alt="Learn Together, Grow Further." decoding="async">
+    <img class="logo4" alt="Castle Academy - Group Learning Center" decoding="async" onload="this.classList.add('ld')">
+    <img class="quote" alt="Learn Together, Grow Further." decoding="async" onload="this.classList.add('ld')">
   </div>
   <div class="rside">
     <div class="lcard">
-      <h2>Masuk</h2>
-      <p>Gunakan akun admin, pegawai, atau siswa.</p>
-      <label for="lu">Username</label><input id="lu" autocomplete="username">
-      <label for="lp">Password</label><input id="lp" type="password" autocomplete="current-password">
+      <h2>Selamat Datang!</h2>
+      <p>Satu langkah lagi untuk melanjutkan perjalanan belajarmu hari ini.</p>
+      <label for="lu">Username</label><input id="lu" autocomplete="username" placeholder="Masukkan username">
+      <label for="lp">Password</label><input id="lp" type="password" autocomplete="current-password" placeholder="Masukkan password">
       <div class="err" id="lerr"></div>
       <button class="btn full" id="lbtn">Masuk</button>
       <div id="setup" class="hide"><p style="color:var(--mute);font-size:13px;margin-top:16px">Alamat server belum diatur. Tempel URL Web App Apps Script (berakhiran /exec) sekali di perangkat ini, atau isi file config.json di repositori GitHub agar tidak perlu menempel lagi.</p><input id="apiu" placeholder="https://script.google.com/macros/s/.../exec"><button class="btn ghost full" id="apis" type="button" style="margin-top:10px">Simpan alamat server</button></div>
@@ -1783,6 +1800,15 @@ const C = () => S.cfg || {Nama: 'Castle Academy', HargaPaket: 100000};
 const rec = n => n == null ? '-' : n >= 90 ? 'Enrichment' : n >= 70 ? 'Continue' : 'Reinforcement';
 const REC = {Continue: 'melanjutkan ke materi berikutnya', Reinforcement: 'memperkuat konsep yang belum dikuasai', Enrichment: 'mengikuti materi pengayaan'};
 const today = () => new Date().toISOString().slice(0, 10);
+// Logo & slogan halaman login diambil dari yang diunggah di Pengaturan; bila kosong memakai gambar bawaan di folder assets.
+let loginImgDone = false;
+function loginImgs(center, slogan) {
+  const set = (sel, u) => document.querySelectorAll(sel).forEach(e => { if (e.getAttribute('src') !== u) e.src = u; });
+  set('#login .logo4', center || 'assets/castle-academy-login-logo.webp');
+  set('#login .lside .quote', slogan || 'assets/castle-academy-slogan.webp');
+}
+// Bila server belum menjawab (kunjungan pertama / server lambat), tampilkan gambar bawaan agar halaman tidak kosong.
+setTimeout(() => { if (!loginImgDone) loginImgs('', ''); }, 1500);
 function applyTheme(s) {
   const r = document.documentElement.style; S.cfg = s;
   r.setProperty('--royal', s.WarnaUtama); r.setProperty('--brass', s.WarnaAksen); r.setProperty('--mist', s.WarnaLatar);
@@ -1790,8 +1816,7 @@ function applyTheme(s) {
   const lg = s.Logo || '';
   document.querySelectorAll('img.lgi').forEach(i => { if (lg) { i.src = lg; i.classList.remove('hide'); } else { i.removeAttribute('src'); i.classList.add('hide'); } });
   document.querySelectorAll('.lgf').forEach(e => e.classList.toggle('hide', !!lg));
-  document.querySelectorAll('#login .logo4').forEach(e => { const u = s.LogoCenter || 'assets/castle-academy-login-logo.webp'; if (e.getAttribute('src') !== u) e.src = u; });
-  document.querySelectorAll('#login .lside .quote').forEach(e => { const u = s.LogoSlogan || 'assets/castle-academy-slogan.webp'; if (e.getAttribute('src') !== u) e.src = u; });
+  loginImgs(s.LogoCenter, s.LogoSlogan); loginImgDone = true;
   document.querySelectorAll('.dash-logo').forEach(e => e.src = (matchMedia('(max-width:640px)').matches ? s.LogoCenter : s.LogoRect) || (matchMedia('(max-width:640px)').matches ? 'assets/castle-academy-login-logo.webp' : 'assets/castle-academy-logo.png'));
   let ic = document.querySelector('link[rel=icon]');
   if (lg) { if (!ic) { ic = document.createElement('link'); ic.rel = 'icon'; document.head.appendChild(ic); } ic.href = lg; } else if (ic) ic.remove();
@@ -1799,19 +1824,36 @@ function applyTheme(s) {
 }
 try { const cachedTheme = JSON.parse(localStorage.getItem('ca_public_theme') || 'null'); if (cachedTheme) applyTheme(cachedTheme); } catch (e) {}
 // Logo: dikecilkan di browser (maks. 200px untuk performa optimal) agar muat di satu sel Spreadsheet.
-async function shrinkLogo(file) {
+// Logo dikompres ke WebP: ukuran terbesar dengan kualitas tertinggi yang masih muat di satu sel Spreadsheet (batas server 46.000 karakter).
+// Urutan: lossless (kualitas 1) -> 0,92 -> 0,85 -> 0,8, lalu turun ke ukuran piksel berikutnya. 'max' = sisi terpanjang maksimum (piksel).
+async function shrinkLogo(file, max) {
+  max = max || 256;
   if (!/^image\/(png|jpeg|webp)$/.test(file.type)) throw new Error('Format logo harus PNG, JPG, atau WebP.');
-  const url = URL.createObjectURL(file);
+  const BUD = 45000, url = URL.createObjectURL(file), info = (d, w, h) => { shrinkLogo.last = {fmt: /^data:image\/webp/.test(d) ? 'WebP' : 'PNG', w, h, kb: Math.round(d.length * .75 / 1024)}; return d; };
   try {
     const img = await new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => no(new Error('Gambar tidak dapat dibaca. Pilih file lain.')); i.src = url; });
-    for (const m of [200, 160, 128, 96]) {
-      const k = Math.min(1, m / Math.max(img.naturalWidth, img.naturalHeight)), w = Math.max(1, Math.round(img.naturalWidth * k)), h = Math.max(1, Math.round(img.naturalHeight * k));
-      const cv = document.createElement('canvas'); cv.width = w; cv.height = h; cv.getContext('2d').drawImage(img, 0, 0, w, h);
-      for (const q of [.85, .7, .55]) { const d = cv.toDataURL('image/webp', q); if (/^data:image\/(webp|png);base64,/.test(d) && d.length <= 38000) return d; }
+    const W = img.naturalWidth, H = img.naturalHeight, big = Math.max(W, H);
+    if (file.type === 'image/webp' && big <= max && file.size <= 33000) {
+      const d = await new Promise((ok, no) => { const r = new FileReader(); r.onload = () => ok(String(r.result)); r.onerror = () => no(new Error('Gambar tidak dapat dibaca. Pilih file lain.')); r.readAsDataURL(file); });
+      if (d.length <= BUD && /^data:image\/webp;base64,/.test(d)) return info(d, W, H);
     }
-    throw new Error('Logo terlalu besar. Gunakan gambar yang lebih sederhana.');
+    const cv = document.createElement('canvas'), cx = cv.getContext('2d');
+    let lw = 0, lh = 0;
+    for (const f of [1, .87, .73, .62, .5, .4]) {
+      const k = Math.min(1, max * f / big), w = Math.max(1, Math.round(W * k)), h = Math.max(1, Math.round(H * k));
+      if (w === lw && h === lh) continue;
+      lw = w; lh = h; cv.width = w; cv.height = h; cx.clearRect(0, 0, w, h); cx.imageSmoothingEnabled = true; cx.imageSmoothingQuality = 'high'; cx.drawImage(img, 0, 0, w, h);
+      for (const q of [1, .92, .85, .8]) {
+        const d = cv.toDataURL('image/webp', q);
+        if (!/^data:image\/(webp|png);base64,/.test(d)) continue;
+        if (d.length <= BUD) return info(d, w, h);
+        if (!/^data:image\/webp/.test(d)) break;   // peramban tanpa dukungan WebP menghasilkan PNG: kualitas tidak berpengaruh
+      }
+    }
+    throw new Error('Logo terlalu rumit untuk dimuat di satu sel. Gunakan gambar yang lebih sederhana atau lebih sedikit warna.');
   } finally { URL.revokeObjectURL(url); }
 }
+const logoInfo = () => { const l = shrinkLogo.last; return l ? ` (${l.fmt} ${l.w}×${l.h} px, ${l.kb} KB)` : ''; };
 call('publicSettings').then(s => { applyTheme(s); if (!GAS) diagSet('Server terhubung.', true); }).catch(e => diagSet(e.message, false));
 
 /* ---------- Daftar Program Paket ---------- */
@@ -2935,7 +2977,7 @@ async function vSettings() {
     <label for="s_logo_f">Logo (PNG, JPG, atau WebP)</label><input type="file" id="s_logo_f" accept="image/png,image/jpeg,image/webp"><input type="hidden" id="s_Logo" value="${esc(s.Logo || '')}">
     <div class="act" style="margin-top:8px"><button class="btn ghost sm" id="lgx" type="button">Hapus logo</button></div>
     <small class="mut" style="display:block;margin-top:6px">Gambar dikecilkan otomatis. Logo tampil di bagian atas menu samping; saat menu disembunyikan, logo menjadi tombol di pojok kiri atas. Klik Simpan pengaturan untuk menerapkan.</small></div></div></div>
-    <div class="panel"><h3>Variasi logo aplikasi</h3><p class="mut" style="margin-top:0">Setelah disimpan, logo berikut dipakai oleh aplikasi dan tidak lagi memerlukan unggahan ke folder Assets. Kosongkan untuk memakai gambar bawaan.</p><div class="row">${[['LogoCenter', 'Logo Deskripsi Center', 'Logo pada halaman login.'], ['LogoRect', 'Logo Deskripsi segi panjang', 'Logo pada dashboard dan header laporan.'], ['LogoSlogan', 'Slogan Logo', 'Slogan pada halaman login.']].map(x => `<div class="idf"><label for="s_${x[0]}_f">${x[1]}</label><input type="file" id="s_${x[0]}_f" accept="image/png,image/jpeg,image/webp"><input type="hidden" id="s_${x[0]}" value="${esc(s[x[0]] || '')}"><div class="lgpv" id="pv_${x[0]}" style="margin-top:8px"></div><div class="act" style="margin-top:8px"><button class="btn ghost sm" type="button" data-lgx="${x[0]}">Hapus logo</button></div><small class="mut">${x[2]}</small></div>`).join('')}</div></div>
+    <div class="panel"><h3>Variasi logo aplikasi</h3><p class="mut" style="margin-top:0">Gambar otomatis dikompres ke WebP yang tetap tajam (ukuran dan kualitas dipilih otomatis sampai batas penyimpanan), lalu dipakai aplikasi tanpa unggahan ke folder Assets. Logo Deskripsi Center dan Slogan Logo tampil di halaman login. Kosongkan untuk memakai gambar bawaan.</p><div class="row">${[['LogoCenter', 'Logo Deskripsi Center', 'Logo pada halaman login.'], ['LogoRect', 'Logo Deskripsi segi panjang', 'Logo pada dashboard dan header laporan.'], ['LogoSlogan', 'Slogan Logo', 'Slogan pada halaman login.']].map(x => `<div class="idf"><label for="s_${x[0]}_f">${x[1]}</label><input type="file" id="s_${x[0]}_f" accept="image/png,image/jpeg,image/webp"><input type="hidden" id="s_${x[0]}" value="${esc(s[x[0]] || '')}"><div class="lgpv" id="pv_${x[0]}" style="margin-top:8px"></div><div class="act" style="margin-top:8px"><button class="btn ghost sm" type="button" data-lgx="${x[0]}">Hapus logo</button></div><small class="mut">${x[2]}</small></div>`).join('')}</div></div>
     <div class="panel"><h3>Pembayaran & struk kantin</h3><div class="row">${sel('s_StrukKertas', 'Ukuran kertas struk (semua kasir)', '<option value="58" ' + (s.StrukKertas !== '80' ? 'selected' : '') + '>58 mm</option><option value="80" ' + (s.StrukKertas === '80' ? 'selected' : '') + '>80 mm</option>')}<div class="idf"><label for="s_QRISImage_f">Gambar QRIS</label><input type="file" id="s_QRISImage_f" accept="image/png,image/jpeg,image/webp"><input type="hidden" id="s_QRISImage" value="${esc(s.QRISImage || '')}"><div class="lgpv" id="pv_QRISImage" style="margin-top:8px"></div><div class="act" style="margin-top:8px"><button class="btn ghost sm" type="button" id="qrx">Hapus QRIS</button></div><small class="mut">Ditampilkan saat kasir memilih pembayaran QRIS. Gambar dikecilkan otomatis; klik Simpan pengaturan untuk menerapkan.</small></div></div></div>
     <div class="panel"><h3>Sumber data</h3><div class="row">${f('AkunGoogle', 'Akun Google pengelola', 'email')}${f('SpreadsheetID', 'Spreadsheet utama (URL atau ID)')}${f('FolderID', 'Folder utama Drive (URL atau ID)')}</div>
     <p style="color:var(--mute);font-size:13px">Spreadsheet utama menyimpan pengaturan, pegawai, siswa, pembayaran, dan seluruh data lain. Akun script harus punya akses edit ke spreadsheet dan folder. Jika spreadsheet diganti, sheet baru dibuat otomatis dan akun Admin awal (Admin / 123456) dibuat jika kosong.</p>
@@ -2960,11 +3002,11 @@ async function vSettings() {
   const mk = () => { const g = val('s_GithubURL'); $('#s_link').value = g ? g + (g.includes('?') ? '&' : '?') + 'api=' + encodeURIComponent(s.ApiURL) : ''; };
   $('#s_GithubURL').oninput = mk; mk();
   const pv = () => { const v = $('#s_Logo').value; $('#lgpv').innerHTML = v ? `<img src="${esc(v)}" alt="Pratinjau logo">` : 'Belum ada logo'; $('#lgx').disabled = !v; };
-  $('#s_logo_f').onchange = async e => { const fl = e.target.files[0]; if (!fl) return; try { $('#s_Logo').value = await shrinkLogo(fl); pv(); toast('Logo siap. Klik Simpan pengaturan untuk menerapkan.'); } catch (er) { fail(er); } e.target.value = ''; };
+  $('#s_logo_f').onchange = async e => { const fl = e.target.files[0]; if (!fl) return; try { $('#s_Logo').value = await shrinkLogo(fl, 256); pv(); toast('Logo siap' + logoInfo() + '. Klik Simpan pengaturan untuk menerapkan.'); } catch (er) { fail(er); } e.target.value = ''; };
   $('#lgx').onclick = () => { $('#s_Logo').value = ''; pv(); };
   ['LogoCenter', 'LogoRect', 'LogoSlogan'].forEach(k => {
     const pvx = () => { const v = $('#s_' + k).value; $('#pv_' + k).innerHTML = v ? `<img src="${esc(v)}" alt="Pratinjau ${k}">` : 'Gambar bawaan'; document.querySelector(`[data-lgx="${k}"]`).disabled = !v; };
-    $('#s_' + k + '_f').onchange = async e => { const fl = e.target.files[0]; if (!fl) return; try { $('#s_' + k).value = await shrinkLogo(fl); pvx(); toast('Logo siap. Klik Simpan pengaturan untuk menerapkan.'); } catch (er) { fail(er); } e.target.value = ''; };
+    $('#s_' + k + '_f').onchange = async e => { const fl = e.target.files[0]; if (!fl) return; try { $('#s_' + k).value = await shrinkLogo(fl, {LogoCenter: 600, LogoRect: 640, LogoSlogan: 640}[k]); pvx(); toast('Logo siap' + logoInfo() + '. Klik Simpan pengaturan untuk menerapkan.'); } catch (er) { fail(er); } e.target.value = ''; };
     document.querySelector(`[data-lgx="${k}"]`).onclick = () => { $('#s_' + k).value = ''; pvx(); }; pvx();
   });
   const pvq = () => { const v = $('#s_QRISImage').value; $('#pv_QRISImage').innerHTML = v ? `<img src="${esc(v)}" alt="Pratinjau QRIS">` : 'Belum ada gambar QRIS'; $('#qrx').disabled = !v; };
