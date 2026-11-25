@@ -206,6 +206,90 @@ input[type=radio],input[type=checkbox]{width:auto}
 .kfoto{width:46px;height:46px;object-fit:cover;border-radius:9px;background:var(--mist)}
 .kbc{max-width:170px}
 @media(max-width:960px){.kpos{grid-template-columns:1fr}.kcart{position:static;max-height:none}}
+/* Kantin v2: pemindai, pemilih, POS, keuangan */
+.scanbox{position:relative;border-radius:14px;overflow:hidden;background:#000;min-height:180px}
+.scanbox video{display:block;width:100%;max-height:52vh;object-fit:cover}
+.scanframe{position:absolute;inset:20% 7%;border:2px solid rgba(255,255,255,.9);border-radius:12px;box-shadow:0 0 0 999px rgba(0,0,0,.3);pointer-events:none}
+.scanframe::after{content:'';position:absolute;left:6%;right:6%;top:50%;height:2px;background:#ff4d4d;box-shadow:0 0 8px #ff4d4d;animation:scanln 1.8s ease-in-out infinite alternate}
+@keyframes scanln{from{top:12%}to{top:88%}}
+.kpk-in{display:flex;gap:8px}.kpk-in input{margin:0;flex:1;min-width:0}
+.kpk-list{border:1.5px solid var(--line);border-radius:10px;margin-top:6px;max-height:240px;overflow:auto;background:#fff}
+.kpk-i{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:9px 12px;cursor:pointer;border-bottom:1px solid var(--line)}
+.kpk-i:last-child{border-bottom:0}.kpk-i.on,.kpk-i:hover{background:var(--mist)}
+.kpk-i b{font-size:14px}.kpk-i small{display:block;color:var(--mute);font-size:12px}
+.kpk-i span{font-weight:700;color:var(--royal);font-size:13px;white-space:nowrap}
+.kpk-none{padding:12px;color:var(--mute);font-size:13px}
+.kselprod{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:8px;padding:10px 14px;border-radius:12px;background:var(--mist);border:1.5px solid var(--line)}
+.kselprod b{display:block}.kselprod small{color:var(--mute)}.kselprod .kn{font:800 20px 'Bricolage Grotesque',Figtree,sans-serif;text-align:right;line-height:1.1}
+.kseg{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:6px}
+.kseg button{border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:9px 6px;font-weight:700;font-size:13px;cursor:pointer;color:var(--mute);line-height:1.2}
+.kseg button.on{background:var(--royal);border-color:var(--royal);color:#fff}
+.kswitch{position:relative;display:flex;gap:12px;align-items:flex-start;padding:14px;border:1.5px solid var(--line);border-radius:14px;background:linear-gradient(135deg,#fff,var(--mist));cursor:pointer;margin:14px 0 0;font-weight:inherit;font-size:inherit;transition:border-color .15s,box-shadow .15s}
+.kswitch input{position:absolute;opacity:0;width:0;height:0}
+.ksw-ui{flex:none;width:46px;height:26px;border-radius:99px;background:#cbd5e1;position:relative;transition:background .2s;margin-top:2px}
+.ksw-ui::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.3);transition:transform .2s}
+.kswitch input:checked~.ksw-ui{background:var(--ok)}.kswitch input:checked~.ksw-ui::after{transform:translateX(20px)}
+.kswitch:has(input:checked){border-color:var(--ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--ok) 18%,transparent)}
+.kswitch input:focus-visible~.ksw-ui{outline:3px solid var(--brass);outline-offset:2px}
+.ksw-tx b{display:block;font-size:15px}.ksw-tx small{display:block;color:var(--mute);font-weight:500;line-height:1.4;margin-top:2px}
+.kbuy{margin-top:12px;padding:14px;border-radius:14px;background:#f4fbf8;border:1.5px dashed color-mix(in srgb,var(--ok) 45%,#fff)}
+.ktot{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-radius:10px;background:#fff;border:1px solid var(--line);margin-top:10px}
+.ktot b{font:800 20px 'Bricolage Grotesque',Figtree,sans-serif}
+.kbuy-row{display:grid;grid-template-columns:minmax(0,1fr) 130px auto;gap:8px;align-items:start;margin-bottom:10px}
+.kbuy-row>input{margin:0}
+@media(max-width:560px){.kbuy-row{grid-template-columns:minmax(0,1fr) 100px auto}}
+.kpos-search{display:flex;gap:8px;margin-bottom:10px}.kpos-search input{margin:0;flex:1;min-width:0}
+.kchips{display:flex;gap:6px;overflow-x:auto;padding-bottom:8px;margin-bottom:4px}
+.kchips button{flex:none;border:1px solid var(--line);background:#fff;border-radius:99px;padding:5px 13px;font-weight:600;font-size:13px;cursor:pointer;color:var(--mute)}
+.kchips button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.kprod.out{opacity:.45;cursor:not-allowed}
+.kc-sub{border:0!important;font-size:15px}
+.kc-row small{display:block}
+.kcart .kseg{grid-template-columns:repeat(2,1fr)}
+.kfoot{position:sticky;bottom:-16px;background:#fff;padding:8px 0 4px;margin-top:6px;border-top:1px solid var(--line);z-index:1}.kfoot .kinfo{margin:0 0 8px}
+.ktotal-box{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--ink),#1d4f9c);color:#fff;border-radius:12px;padding:10px 14px;margin:6px 0}
+.ktotal-box span{font-weight:700;font-size:12px;letter-spacing:.1em;opacity:.85}.ktotal-box .ktotal{font-size:26px}
+.ktime{display:grid;grid-template-columns:minmax(0,1fr) 136px;gap:8px}.ktime input{margin:0}
+.klink{border:0;background:none;color:var(--royal);font-weight:700;font-size:12px;cursor:pointer;padding:0;text-decoration:underline}
+.kcart .kcart-f label{margin:10px 0 5px}
+.kquick{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.kquick button{border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:8px 10px;font-weight:700;font-size:13px;cursor:pointer;color:var(--ink);flex:1 1 30%;min-width:84px}
+.kquick button:hover{border-color:var(--royal)}
+.kquick button.on{background:var(--royal);border-color:var(--royal);color:#fff}
+.kquick .exact{flex:1 1 100%;background:#e9f7f1;border-color:#bfe6d6;color:var(--ok);display:flex;justify-content:space-between}
+.kquick .exact.on{background:var(--ok);border-color:var(--ok);color:#fff}
+.kinfo{margin-top:8px;padding:9px 12px;border-radius:10px;background:var(--mist);font-weight:600;font-size:13px;min-height:38px}
+.kinfo.ok{background:#e9f7f1;color:var(--ok)}.kinfo.bad{background:#fdeeee;color:var(--bad)}
+.kinfo big{display:block;font:800 22px 'Bricolage Grotesque',Figtree,sans-serif}
+.kfilt{padding:14px 18px}
+.kfilt-row{display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap}
+.kfilt-row>div{min-width:170px;flex:1;max-width:260px}.kfilt-row label{margin-top:0}
+.kfilt small{display:block;margin-top:10px}
+.kfin{display:grid;gap:14px;margin-bottom:20px}
+.kfin-hero{position:relative;overflow:hidden;border-radius:18px;padding:22px 24px;color:#fff;background:linear-gradient(135deg,#12315c 0%,#2a7de1 72%,#4aa3ff 100%);display:grid;gap:14px}
+.kfin-hero::after{content:'';position:absolute;right:-50px;top:-70px;width:230px;height:230px;border-radius:50%;background:rgba(255,255,255,.1)}
+.kfin-lb{font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.8;font-weight:700}
+.kfin-big{display:block;font:800 clamp(28px,6vw,44px)/1.1 'Bricolage Grotesque',Figtree,sans-serif;margin:4px 0}
+.kfin-hero small{opacity:.85}
+.kfin-bar{display:flex;height:10px;border-radius:99px;overflow:hidden;background:rgba(255,255,255,.22);position:relative;z-index:1}
+.kfin-bar i{display:block;height:100%}
+.kfin-methods{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.kfin-m{background:#fff;border:1px solid var(--line);border-top:4px solid var(--c);border-radius:16px;padding:16px;display:grid;gap:4px}
+.kfin-m .ic{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-size:19px;background:color-mix(in srgb,var(--c) 14%,#fff)}
+.kfin-m span{color:var(--mute);font-size:13px;font-weight:600}
+.kfin-m b{font:800 24px 'Bricolage Grotesque',Figtree,sans-serif;line-height:1.15}
+.kfin-m .pbar{height:6px;border-radius:99px;background:var(--mist);overflow:hidden;margin-top:4px}.kfin-m .pbar i{display:block;height:100%;background:var(--c);border-radius:99px}
+.kfin-m small{color:var(--mute)}
+.kfin-flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.kfin-f{border-radius:16px;padding:16px;display:grid;gap:2px;border:1px solid var(--line);background:#fff}
+.kfin-f span{font-size:13px;font-weight:700}.kfin-f b{font:800 24px 'Bricolage Grotesque',Figtree,sans-serif}.kfin-f small{color:var(--mute)}
+.kfin-f.in{background:linear-gradient(135deg,#effaf5,#fff);border-color:#bfe6d6}.kfin-f.in span{color:var(--ok)}
+.kfin-f.out{background:linear-gradient(135deg,#fff1f1,#fff);border-color:#f3c9c9}.kfin-f.out span{color:var(--bad)}
+.kfin-f.net span{color:var(--royal)}
+.neg{color:var(--bad)}.pos{color:var(--ok)}
+.kfin-hero .neg{color:#ffd0d0}
+@media(max-width:560px){.kfin-hero{padding:18px}}
+.kbtn-row{display:flex;gap:8px;flex-wrap:wrap}
 /* Label barcode: cetak satu halaman berisi label-label 40 mm */
 .lbls{display:flex;flex-wrap:wrap;gap:2mm;width:196mm;padding:2mm}
 .lbl{width:40mm;height:39mm;border:1px dashed #bbb;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1mm;padding:2mm;overflow:hidden;page-break-inside:avoid;background:#fff;color:#000;text-align:center}
@@ -742,10 +826,12 @@ function modal(title, body, onSave, label) {
   o.innerHTML = `<div class="modal" role="dialog" aria-label="${esc(title)}"><h3>${esc(title)}</h3>${body}
     <div class="foot"><button class="btn ghost" id="mc">Batal</button><button class="btn" id="ms">${label || 'Simpan'}</button></div></div>`;
   document.body.appendChild(o);
-  $('#mc').onclick = () => o.remove();
-  $('#ms').onclick = async e => {
-    e.target.disabled = true;
-    try { await onSave(); o.remove(); } catch (er) { fail(er); e.target.disabled = false; }
+  // Penting: cari tombol di dalam modal ini saja. Selector global ($('#mc')) mengenai modal lain yang sedang terbuka
+  // (mis. modal scan di atas form produk) sehingga tombol Batal/Simpan form di bawahnya tertimpa dan tidak bisa ditekan.
+  o.querySelector('#mc').onclick = () => o.remove();
+  o.querySelector('#ms').onclick = async e => {
+    const b = e.currentTarget; b.disabled = true;
+    try { await onSave(); o.remove(); } catch (er) { fail(er); b.disabled = false; }
   };
   return o;
 }
@@ -1890,18 +1976,95 @@ function paketForm(k, pks) {
 }
 
 /* ---------- Kantin POS ---------- */
+const K_DENOM = [2000, 5000, 10000, 20000, 50000, 100000];
+const K_KAT = ['Makanan', 'Minuman', 'Snack', 'Alat Tulis', 'Lainnya'];
+const K_ICO = {Tunai: '💵', Transfer: '🏦', QRIS: '📱', 'Belum Bayar': '🧾', 'Hutang Belanja': '🧾'};
+const kNum = v => Math.max(0, Math.round(Number(v) || 0));
+const kRid = p => p + Date.now() + Math.random().toString(36).slice(2, 10);
+const kTs = t => String(t || '').slice(0, 16);   // 'yyyy-MM-dd HH:mm'
+// Tanggal/jam lokal perangkat (today() global memakai UTC sehingga salah hari pada dini hari WIB).
+const kNow = () => { const d = new Date(), p = n => String(n).padStart(2, '0'); return {tgl: d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()), jam: p(d.getHours()) + ':' + p(d.getMinutes())}; };
+const kHay = p => (p.Nama + ' ' + (p.Kategori || '') + ' ' + (p.BarcodePabrik || '') + ' ' + (p.BarcodeApp || '') + ' ' + p.ID).toLowerCase();
+const kFind = (list, q) => { const t = String(q || '').trim().toLowerCase().split(/\s+/).filter(Boolean); return t.length ? list.filter(p => { const h = kHay(p); return t.every(w => h.includes(w)); }) : list; };
+// Barcode dibandingkan sebagai teks; angka nol di depan diabaikan (UPC-A 12 digit = EAN-13 berawalan 0).
+const kCodeEq = (a, b) => { a = String(a == null ? '' : a).trim(); b = String(b == null ? '' : b).trim(); return !!a && !!b && (a === b || (/^\d+$/.test(a) && /^\d+$/.test(b) && a.replace(/^0+/, '') === b.replace(/^0+/, ''))); };
+const kByCode = (list, code) => list.find(p => kCodeEq(p.BarcodePabrik, code) || kCodeEq(p.BarcodeApp, code) || kCodeEq(p.ID, code)) || null;
+const kKats = list => [...new Set(K_KAT.concat(list.map(p => String(p.Kategori || '').trim()).filter(Boolean)))].sort((a, b) => a.localeCompare(b, 'id'));
+const kProdItems = (produk, right) => produk.map(p => ({key: p.ID, title: p.Nama, sub: [p.Kategori, 'Stok ' + p.Stok].filter(Boolean).join(' • '), right: right ? right(p) : rp(p.HargaJual), hay: kHay(p), raw: p}));
+const kSeg = (id, list, cur) => `<div class="kseg" id="${id}" role="group">${list.map(m => `<button type="button" class="${m === cur ? 'on' : ''}" data-v="${esc(m)}">${K_ICO[m] || ''} ${esc(m)}</button>`).join('')}</div>`;
+const kSegBind = (id, fn) => document.querySelectorAll('#' + id + ' button').forEach(b => b.onclick = () => { document.querySelectorAll('#' + id + ' button').forEach(x => x.classList.toggle('on', x === b)); fn(b.dataset.v); });
+
+/* Pemilih serbaguna: ketik untuk mencari, pilih dari daftar, atau scan barcode (kamera / alat scan USB + Enter).
+   o: {items(), onPick(item), placeholder, scan:boolean, byCode(code)->item, keep:boolean (tampilkan pilihan di kolom), onText(text), max} */
+function kPick(host, o) {
+  host.innerHTML = `<div class="kpk"><div class="kpk-in"><input class="kpk-q" type="search" autocomplete="off" placeholder="${esc(o.placeholder || 'Ketik untuk mencari…')}" aria-label="${esc(o.placeholder || 'Cari')}">${o.scan ? '<button type="button" class="btn ghost kpk-scan" title="Scan barcode dengan kamera">📷</button>' : ''}</div><div class="kpk-list hide" role="listbox"></div></div>`;
+  const q = host.querySelector('.kpk-q'), list = host.querySelector('.kpk-list'), scanBtn = host.querySelector('.kpk-scan');
+  let shown = [], hi = -1, selTitle = null;
+  const hl = () => { list.querySelectorAll('.kpk-i').forEach((e, i) => { e.classList.toggle('on', i === hi); if (i === hi) e.scrollIntoView({block: 'nearest'}); }); };
+  const draw = () => {
+    const all = o.items(), t = (q.value === selTitle ? '' : q.value).trim().toLowerCase().split(/\s+/).filter(Boolean);
+    shown = (t.length ? all.filter(x => t.every(w => x.hay.includes(w))) : all).slice(0, o.max || 8);
+    hi = shown.length ? 0 : -1;
+    list.innerHTML = shown.map((x, i) => `<div class="kpk-i" role="option" data-i="${i}"><div><b>${esc(x.title)}</b>${x.sub ? `<small>${esc(x.sub)}</small>` : ''}</div>${x.right ? `<span>${esc(x.right)}</span>` : ''}</div>`).join('') || '<div class="kpk-none">Tidak ada yang cocok.</div>';
+    list.classList.toggle('hide', !!o.onText && !shown.length);   // mode ketik bebas: jangan tampilkan "tidak cocok"
+    hl();
+  };
+  const close = () => list.classList.add('hide');
+  const pick = x => { close(); if (o.keep) { selTitle = x.title; q.value = x.title; } else q.value = ''; o.onPick(x); };
+  q.addEventListener('input', () => { if (o.onText) o.onText(q.value); draw(); });
+  q.addEventListener('focus', () => { if (o.keep) q.select(); draw(); });
+  q.addEventListener('blur', () => setTimeout(close, 180));
+  q.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown') { e.preventDefault(); if (list.classList.contains('hide')) draw(); else { hi = Math.min(shown.length - 1, hi + 1); hl(); } }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); hi = Math.max(0, hi - 1); hl(); }
+    else if (e.key === 'Escape') close();
+    else if (e.key === 'Enter') {
+      e.preventDefault();
+      const code = q.value.trim(); if (!code) return;
+      const exact = o.byCode && o.byCode(code);
+      if (exact) return pick(exact);
+      if (o.byCode && /^\d{6,}$/.test(code)) return toast('Barcode tidak dikenali: ' + code, true);   // jangan menebak produk dari angka barcode yang tidak dikenal
+      if (shown[hi]) pick(shown[hi]); else if (!o.onText) toast('Tidak ditemukan.', true);
+    }
+  });
+  list.addEventListener('pointerdown', e => { const el = e.target.closest('.kpk-i'); if (!el) return; e.preventDefault(); pick(shown[+el.dataset.i]); });
+  if (scanBtn) scanBtn.onclick = () => scanCode(code => { const x = o.byCode && o.byCode(code); if (x) pick(x); else toast('Barcode tidak dikenali: ' + code, true); }, {title: 'Scan barcode produk'});
+  return {input: q, focus: () => q.focus(), clear: () => { q.value = ''; selTitle = null; close(); }, setText: t => { q.value = t; }, setSelected: x => { selTitle = x.title; q.value = x.title; }};
+}
+
+/* Filter Bulan + Tanggal (dipakai semua tab riwayat). Tanggal tunggal mengalahkan bulan. */
+const kMonths = (list, field) => [...new Set(list.map(x => String(x[field] || '').slice(0, 7)).filter(Boolean))].sort().reverse();
+function kFilt(key, all, field) {
+  const month = S['kanMonth_' + key] || '', day = S['kanDay_' + key] || '';
+  const pre = day || month, list = pre ? all.filter(x => String(x[field] || '').startsWith(pre)) : all;
+  const label = day ? new Date(day + 'T00:00:00').toLocaleDateString('id-ID', {weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'}) : month ? bln(month) : 'Semua data';
+  const html = `<div class="panel noprint kfilt"><div class="kfilt-row"><div><label for="kmon">Bulan</label><select id="kmon"><option value="">Semua bulan</option>${kMonths(all, field).map(m => `<option value="${m}" ${m === month && !day ? 'selected' : ''}>${bln(m)}</option>`).join('')}</select></div><div><label for="kday">Tanggal</label><input type="date" id="kday" value="${esc(day)}"></div><button class="btn ghost sm" id="kreset" type="button" ${pre ? '' : 'disabled'}>Reset</button></div><small class="mut">Menampilkan: <b>${esc(label)}</b> • ${list.length} dari ${all.length} data</small></div>`;
+  return {list, html, label, pre};
+}
+function kFiltBind(key, redraw) {
+  $('#kmon').onchange = () => { S['kanMonth_' + key] = val('kmon'); S['kanDay_' + key] = ''; redraw(); };
+  $('#kday').onchange = () => { const d = val('kday'); S['kanDay_' + key] = d; if (d) S['kanMonth_' + key] = ''; redraw(); };
+  $('#kreset').onclick = () => { S['kanMonth_' + key] = ''; S['kanDay_' + key] = ''; redraw(); };
+}
+function kCsvExport(rows, cols, name) {
+  if (!rows.length) return toast('Tidak ada data untuk diekspor.', true);
+  const esc2 = v => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
+  const csv = [cols.map(c => esc2(c[0])).join(',')].concat(rows.map(r => cols.map(c => esc2(typeof c[1] === 'function' ? c[1](r) : r[c[1]])).join(','))).join('\r\n');
+  saveBlob(new Blob(['﻿' + csv], {type: 'text/csv;charset=utf-8'}), name + '.csv');
+}
+
 async function vKantin() {
   const tab = S.kanTab || 'pos', staff = S.user.Role !== 'siswa';
   if (!staff) { $('#main').innerHTML = head('Kantin', 'Akses kantin hanya tersedia untuk staf dan admin.'); return; }
-  
+
   $('#main').innerHTML = head('Kantin Siswa', 'Point of Sale kasir, registrasi produk, stok, pembelanjaan, keuangan, piutang/hutang.', '') +
     `<div class="tabs">${[['pos', 'POS Kasir'], ['produk', 'Produk'], ['stok', 'Stok'], ['penjualan', 'Penjualan'], ['purchase', 'Pembelanjaan'], ['pembeli', 'Pembeli'], ['keuangan', 'Keuangan'], ['piutang', 'Piutang'], ['hutang', 'Hutang']].map(t => `<button class="${t[0] === tab ? 'on' : ''}" data-kt="${t[0]}">${t[1]}</button>`).join('')}</div><div id="kbody"></div>`;
-  
+
   document.querySelectorAll('[data-kt]').forEach(b => b.onclick = () => { S.kanTab = b.dataset.kt; vKantin(); });
-  
+
   const currentNav = navVersion;
   try {
-    const D = tab === 'pos' ? await Promise.all([api('kantinData', {Tab: 'produk'}), api('kantinData', {Tab: 'pembeli'})]).then(([p, c]) => Object.assign({}, p, c)) : tab === 'penjualan' ? await Promise.all([api('kantinData', {Tab: 'penjualan'}), api('kantinData', {Tab: 'pembeli'})]).then(([a, b]) => Object.assign({}, a, b)) : await api('kantinData', {Tab: tab === 'purchase' ? 'pembelanjaan' : tab});
+    const D = await api('kantinData', {Tab: tab === 'purchase' ? 'pembelanjaan' : tab});
     if (S.view !== 'kantin' || (S.kanTab || 'pos') !== tab || navVersion !== currentNav) return;
     if (tab === 'pos') await kPOS(D);
     else if (tab === 'produk') await kProduk(D);
@@ -1912,7 +2075,7 @@ async function vKantin() {
     else if (tab === 'keuangan') await kKeuangan(D);
     else if (tab === 'piutang') await kPiutang(D);
     else if (tab === 'hutang') await kHutang(D);
-  } catch (e) { fail(e); $('#kbody').innerHTML = `<div class="panel empty">${esc(e.message)}</div>`; }
+  } catch (e) { fail(e); if (!e.staleNavigation) $('#kbody').innerHTML = `<div class="panel empty">${esc(e.message)}</div>`; }
 }
 
 /* Struk kantin (itemized) */
@@ -1921,7 +2084,7 @@ function kRcLines(p, W) {
   const no = p.Nomor || p.ID || '-', L = [];
   wrapTxt(ascii(C().Nama), Math.floor(W / 2)).forEach(t => L.push({t, c: 1, b: 1, big: 1}));
   L.push({t: 'STRUK KANTIN', c: 1}, {t: '-'.repeat(W)});
-  [['No', no], ['Tanggal', p.Tanggal], ['Pembeli', p.Pembeli], ['Tipe', p.TipePembeli || 'Umum'], ['Metode', p.Metode]].forEach(r => {
+  [['No', no], ['Tanggal', kTs(p.Tanggal)], ['Pembeli', p.Pembeli], ['Tipe', p.TipePembeli || 'Umum'], ['Metode', p.Metode]].forEach(r => {
     const pre = ascii(r[0]).padEnd(8) + ': ';
     wrapTxt(ascii(r[1]), W - pre.length).forEach((t, i) => L.push({t: (i ? ' '.repeat(pre.length) : pre) + t}));
   });
@@ -1945,206 +2108,213 @@ function kRcLines(p, W) {
 }
 
 /* POS Kasir */
-function cashShortcuts() {
-  return `<div class="act" style="margin-top:6px"><button type="button" class="btn ghost sm" data-cash="exact">Pas</button>${[2000, 5000, 10000, 20000, 50000].map(n => `<button type="button" class="btn ghost sm" data-cash="${n}">${rp(n)}</button>`).join('')}</div>`;
-}
 async function kPOS(D) {
-  const cart = [], produk = D.KantinProduk || [];
-  let checking = false, pendingSale = null;
-  const render = () => {
-    const subtotal = cart.reduce((s, c) => s + c.qty * c.harga, 0);
-    $('#kbody').innerHTML = `<div class="kpos"><div class="panel" style="padding:16px"><div class="act" style="margin-bottom:12px"><input id="ksearch" placeholder="Cari produk, atau scan barcode lalu Enter" style="margin:0;flex:1"><button class="btn ghost" id="kcamscan" type="button" title="Scan kamera">📷</button></div><div class="kprod-grid">${produk.filter(p => String(p.Aktif) === '1').map(p => { const low = Number(p.Stok) <= Number(p.StokMin); return `<div class="kprod" data-pid="${esc(p.ID)}"><div class="${p.Foto ? '' : 'kph'}">${p.Foto ? `<img src="${esc(p.Foto)}" alt="${esc(p.Nama)}">` : '📦'}</div><b title="${esc(p.Nama)}">${esc(p.Nama.length > 24 ? p.Nama.slice(0, 23) + '…' : p.Nama)}</b><div class="kp">${rp(p.HargaJual)}</div><div class="ks${low ? ' low' : ''}">Stok ${p.Stok}</div></div>`; }).join('') || '<div class="empty" style="grid-column:1/-1">Belum ada produk aktif. Tambahkan di tab Produk.</div>'}</div></div><div class="kcart"><h3>Keranjang</h3><div id="kcart">${cart.length ? cart.map((c, i) => `<div class="kc-row"><div><b>${esc(c.nama)}</b><small>${rp(c.harga)} × ${c.qty} = ${rp(c.harga * c.qty)}</small></div><div class="kc-qty"><button data-ci="${i}" data-a="-">−</button><span>${c.qty}</span><button data-ci="${i}" data-a="+">+</button></div><button class="kc-del" data-cd="${i}">×</button></div>`).join('') : '<small class="mut">Belum ada item. Klik produk untuk menambah.</small>'}</div>${cart.length ? `<hr style="border:0;border-top:1px solid var(--line);margin:8px 0"><div class="kc-row" style="border:0;font-size:15px"><b>Subtotal</b><b>${rp(subtotal)}</b></div>${sel('kdiskon', 'Diskon', [0, 5, 10, 15, 20].map(x => `<option value="${x * subtotal / 100}">${x}% (${rp(x * subtotal / 100)})</option>`).join('') + '<option value="custom">Lainnya...</option>')}${fld('ktgl', 'Tanggal transaksi', today(), 'date')}${S.user.Role === 'admin' ? fld('kwaktu', 'Waktu transaksi (kosong = sekarang)', '', 'time') : ''}${sel('kpembeli', 'Pembeli', '<option value="">Pembeli Umum</option>' + (D.KantinPembeli || []).map(c => `<option value="${esc(c.ID)}">${esc(c.Nama)} (${esc(c.Tipe)})</option>`).join(''))}${sel('kmetode', 'Metode', ['Tunai', 'Transfer', 'QRIS', 'Belum Bayar'].map(m => `<option>${m}</option>`).join(''))}${fld('kbayar', 'Bayar (Rp)', '', 'number')}${cashShortcuts('kbayar')}<p id="kinfo" style="font-weight:600;color:var(--royal);margin:6px 0 0;min-height:18px"></p><div class="act" style="margin-top:8px"><button class="btn" id="kcek" style="flex:1">Checkout</button></div>` : ''}</div></div>`;
-    
-    $('#ksearch').oninput = () => filterProd();
-    $('#ksearch').onkeydown = e => {
-      if (e.key !== 'Enter') return;
-      e.preventDefault();
-      const q = val('ksearch').trim();
-      if (!q) return;
-      const matches = produk.filter(x => String(x.Aktif) === '1' && String(x.Nama || '').toLowerCase().includes(q.toLowerCase()));
-      const p = produk.find(x => String(x.BarcodePabrik) === q || String(x.BarcodeApp) === q) || (matches.length === 1 ? matches[0] : null);
-      if (p) { addCart(p.ID); $('#ksearch').value = ''; filterProd(); }
-      else toast(matches.length > 1 ? 'Pilih salah satu produk yang cocok.' : 'Produk atau barcode tidak dikenali.', true);
-    };
-    $('#kcamscan').onclick = () => scanCode(code => {
-      const p = produk.find(x => String(x.BarcodePabrik) === code || String(x.BarcodeApp) === code);
-      if (p) addCart(p.ID); else toast('Barcode tidak ditemukan: ' + code, true);
-    });
-    document.querySelectorAll('.kprod').forEach(e => e.onclick = () => addCart(e.dataset.pid));
-    document.querySelectorAll('[data-ci]').forEach(b => b.onclick = () => adjCart(+b.dataset.ci, b.dataset.a));
-    document.querySelectorAll('[data-cd]').forEach(b => b.onclick = () => { cart.splice(+b.dataset.cd, 1); render(); });
-    if ($('#kcek')) $('#kcek').onclick = () => checkout();
-    if ($('#kdiskon')) $('#kdiskon').onchange = () => { if (val('kdiskon') === 'custom') custDiskon(); };
-    if ($('#kmetode')) $('#kmetode').onchange = () => metodChange();
-    if ($('#kpembeli')) $('#kpembeli').onchange = () => updateKembalian();
-    if ($('#kbayar')) $('#kbayar').oninput = () => updateKembalian();
-    document.querySelectorAll('#kbody [data-cash]').forEach(b => b.onclick = () => {
-      $('#kbayar').value = b.dataset.cash === 'exact' ? Math.max(0, subtotal - (Number(val('kdiskon')) || 0)) : Number(b.dataset.cash);
-      updateKembalian();
-    });
+  const produk = (D.KantinProduk || []).filter(p => String(p.Aktif) === '1'), pembeli = D.KantinPembeli || [], users = D.Users || [], adm = S.user.Role === 'admin';
+  const userSet = new Set(users.map(u => String(u.Username))), cart = [];
+  let checking = false, pendingSale = null, metode = 'Tunai', pay = {mode: 'none', amt: 0}, disc = {mode: 'pct', v: 0}, kat = '', edited = false, buyer = {id: '', nama: 'Pembeli Umum', tipe: 'Umum'}, pk = null;
+
+  // Siswa & pegawai otomatis tersedia sebagai pembeli (ID 'U:username'); pembeli baru tersimpan terpisah di KantinPembeli.
+  const buyerItems = () => {
+    const out = [{id: '', nama: 'Pembeli Umum', tipe: 'Umum', sub: 'Tanpa pencatatan'}];
+    users.forEach(u => out.push({id: 'U:' + u.Username, nama: u.Nama, tipe: u.Role === 'siswa' ? 'Siswa' : 'Pegawai', sub: u.Kelompok || u.Jenjang || '', un: u.Username}));
+    pembeli.forEach(c => { if (c.Username && userSet.has(String(c.Username))) return; out.push({id: c.ID, nama: c.Nama, tipe: c.Tipe || 'Umum', sub: c.Telepon || 'Pembeli baru'}); });
+    return out.map(b => ({key: b.id, title: b.nama, sub: [b.tipe, b.sub].filter(Boolean).join(' • '), right: b.tipe, hay: (b.nama + ' ' + b.tipe + ' ' + (b.sub || '') + ' ' + (b.un || '')).toLowerCase(), raw: b}));
   };
-  
-  const filterProd = () => {
-    const q = val('ksearch').toLowerCase();
-    document.querySelectorAll('.kprod').forEach(p => {
-      const pid = p.dataset.pid, pr = produk.find(x => x.ID === pid);
-      if (!pr) return;
-      const match = !q || pr.Nama.toLowerCase().includes(q) || (pr.BarcodePabrik && pr.BarcodePabrik.toLowerCase().includes(q)) || (pr.BarcodeApp && pr.BarcodeApp.toLowerCase().includes(q));
-      p.style.display = match ? '' : 'none';
-    });
+  const subtotal = () => cart.reduce((s, c) => s + c.qty * c.harga, 0);
+  const discRp = sub => disc.mode === 'pct' ? Math.round(sub * disc.v / 100) : Math.min(kNum(disc.v), sub);
+  const totals = () => { const sub = subtotal(), dis = discRp(sub); return {sub, dis, tot: sub - dis}; };
+  const payAmt = tot => metode === 'Belum Bayar' ? 0 : metode !== 'Tunai' ? tot : pay.mode === 'exact' ? tot : pay.mode === 'amt' ? pay.amt : 0;
+  const inCart = pid => (cart.find(c => c.pid === pid) || {qty: 0}).qty;
+
+  $('#kbody').innerHTML = `<div class="kpos"><div class="panel" style="padding:16px"><div class="kpos-search"><input id="ksearch" type="search" placeholder="Cari produk, atau scan barcode lalu Enter" autocomplete="off"><button class="btn ghost" id="kcamscan" type="button" title="Scan dengan kamera (terus aktif)">📷 Scan</button></div><div class="kchips" id="kchips"></div><div class="kprod-grid" id="kgrid"></div></div>
+  <div class="kcart"><h3>Keranjang <span class="tag" id="kcount">0</span></h3><div id="kcart"></div>
+  <div id="kpay" class="kcart-f hide"><hr style="border:0;border-top:1px solid var(--line);margin:6px 0">
+    <div class="kc-row kc-sub"><b>Subtotal</b><b id="ksub"></b></div>
+    <label for="kdiskon">Diskon</label><select id="kdiskon"></select>
+    <div class="ktotal-box"><span>TOTAL</span><div class="ktotal" id="ktotal">Rp0</div></div>
+    <label>Waktu transaksi ${adm ? '<button class="klink" id="know" type="button">Pakai waktu sekarang</button>' : '<small class="mut">(otomatis)</small>'}</label>
+    <div class="ktime"><input type="date" id="ktgl" aria-label="Tanggal transaksi" ${adm ? '' : 'disabled'}><input type="time" id="kjam" aria-label="Jam transaksi" ${adm ? '' : 'disabled'}></div>
+    <label>Pembeli <button class="klink" id="kbnew" type="button">+ Pembeli baru</button></label><div id="kbuyer"></div>
+    <label>Metode bayar</label>${kSeg('kmetode', ['Tunai', 'Transfer', 'QRIS', 'Belum Bayar'], 'Tunai')}
+    <div id="kjtbox" class="hide"><label for="kjt">Jatuh tempo piutang (opsional)</label><input type="date" id="kjt"></div>
+    <label for="kbayar">Bayar (Rp)</label><input id="kbayar" type="number" inputmode="numeric" min="0" placeholder="Ketik nominal atau pilih di bawah">
+    <div class="kquick" id="kquick"></div>
+    <div class="kfoot"><div class="kinfo" id="kinfo"></div><div class="act"><button class="btn" id="kcek" style="flex:1">Checkout</button></div></div>
+  </div></div></div>`;
+
+  /* --- grid produk (hanya digambar ulang saat cari / kategori berubah, bukan tiap perubahan keranjang) --- */
+  const drawChips = () => { const ks = kKats(produk).filter(k => produk.some(p => p.Kategori === k)); $('#kchips').innerHTML = ks.length ? ['', ...ks].map(k => `<button type="button" class="${k === kat ? 'on' : ''}" data-k="${esc(k)}">${k ? esc(k) : 'Semua'}</button>`).join('') : ''; document.querySelectorAll('#kchips button').forEach(b => b.onclick = () => { kat = b.dataset.k; drawChips(); drawGrid(); }); };
+  const visible = () => kFind(kat ? produk.filter(p => p.Kategori === kat) : produk, val('ksearch'));
+  const drawGrid = () => {
+    const list = visible();
+    $('#kgrid').innerHTML = list.map(p => { const low = Number(p.Stok) <= Number(p.StokMin), out = Number(p.Stok) <= 0; return `<div class="kprod${out ? ' out' : ''}" data-pid="${esc(p.ID)}"><div class="${p.Foto ? '' : 'kph'}">${p.Foto ? `<img src="${esc(p.Foto)}" alt="${esc(p.Nama)}" loading="lazy">` : '📦'}</div><b title="${esc(p.Nama)}">${esc(p.Nama.length > 24 ? p.Nama.slice(0, 23) + '…' : p.Nama)}</b><div class="kp">${rp(p.HargaJual)}</div><div class="ks${low ? ' low' : ''}">Stok ${p.Stok}</div></div>`; }).join('') || `<div class="empty" style="grid-column:1/-1">${produk.length ? 'Produk tidak ditemukan.' : 'Belum ada produk aktif. Tambahkan di tab Produk.'}</div>`;
   };
-  
+  $('#kgrid').onclick = e => { const t = e.target.closest('.kprod'); if (t) addCart(t.dataset.pid); };
+
   const addCart = pid => {
     const p = produk.find(x => x.ID === pid);
-    if (!p || String(p.Aktif) !== '1') return toast('Produk tidak aktif.', true);
-    const ex = cart.find(c => c.pid === pid), qty = (ex ? ex.qty : 0) + 1;
+    if (!p) return toast('Produk tidak ditemukan.', true);
+    const qty = inCart(pid) + 1;
     if (qty > Number(p.Stok)) return toast('Stok ' + p.Nama + ' hanya tersisa ' + p.Stok + '.', true);
-    if (ex) ex.qty = qty;
-    else cart.push({ pid: p.ID, nama: p.Nama, harga: Number(p.HargaJual), qty: 1 });
-    render();
+    const ex = cart.find(c => c.pid === pid);
+    if (ex) ex.qty = qty; else cart.push({pid: p.ID, nama: p.Nama, harga: Number(p.HargaJual), qty: 1});
+    drawCart();
+    return true;
   };
-  
   const adjCart = (i, a) => {
-    if (a === '+') {
-      const p = produk.find(x => x.ID === cart[i].pid);
-      if (p && cart[i].qty + 1 > Number(p.Stok)) return toast('Stok ' + p.Nama + ' hanya tersisa ' + p.Stok + '.', true);
-      cart[i].qty++;
-    } else if (cart[i].qty > 1) cart[i].qty--;
-    render();
+    if (a === '+') { const p = produk.find(x => x.ID === cart[i].pid); if (p && cart[i].qty + 1 > Number(p.Stok)) return toast('Stok ' + p.Nama + ' hanya tersisa ' + p.Stok + '.', true); cart[i].qty++; }
+    else if (cart[i].qty > 1) cart[i].qty--;
+    drawCart();
   };
-  
-  const custDiskon = async () => {
-    const v = await askInput('Diskon (Rp)', '0');
-    if (v === null) return;
-    const n = Number(v);
-    if (isNaN(n) || n < 0) return toast('Diskon tidak valid.', true);
-    $('#kdiskon').innerHTML += `<option value="${n}" selected>Diskon ${rp(n)}</option>`;
+
+  /* --- keranjang + ringkasan (di-update parsial, form pembayaran tidak dibuat ulang) --- */
+  const drawCart = () => {
+    $('#kcount').textContent = cart.reduce((s, c) => s + c.qty, 0);
+    $('#kcart').innerHTML = cart.length ? cart.map((c, i) => `<div class="kc-row"><div><b>${esc(c.nama)}</b><small>${rp(c.harga)} × ${c.qty} = ${rp(c.harga * c.qty)}</small></div><div class="kc-qty"><button type="button" data-ci="${i}" data-a="-" aria-label="Kurangi">−</button><span>${c.qty}</span><button type="button" data-ci="${i}" data-a="+" aria-label="Tambah">+</button><button type="button" class="kc-del" data-cd="${i}" aria-label="Hapus">×</button></div></div>`).join('') : '<small class="mut">Belum ada item. Klik produk, ketik pencarian, atau scan barcode.</small>';
+    $('#kpay').classList.toggle('hide', !cart.length);
+    refreshPay();
   };
-  
-  const metodChange = () => {
-    const m = val('kmetode');
-    if (m === 'QRIS') showQRIS();
-    updateKembalian();
+  $('#kcart').onclick = e => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.ci !== undefined) adjCart(+b.dataset.ci, b.dataset.a);
+    else if (b.dataset.cd !== undefined) { cart.splice(+b.dataset.cd, 1); drawCart(); }
   };
-  
+
+  const refreshPay = () => {
+    const {sub, dis, tot} = totals(), bayar = payAmt(tot);
+    $('#ksub').textContent = rp(sub); $('#ktotal').textContent = rp(tot);
+    const dsel = $('#kdiskon');
+    dsel.innerHTML = [0, 5, 10, 15, 20].map(x => `<option value="p${x}" ${disc.mode === 'pct' && disc.v === x ? 'selected' : ''}>${x ? x + '% (' + rp(Math.round(sub * x / 100)) + ')' : 'Tanpa diskon'}</option>`).join('') + `<option value="rp" ${disc.mode === 'rp' ? 'selected' : ''}>${disc.mode === 'rp' ? 'Nominal ' + rp(dis) : 'Nominal lain…'}</option>`;
+    const inp = $('#kbayar'), tunai = metode === 'Tunai';
+    inp.disabled = metode === 'Belum Bayar'; inp.readOnly = !tunai;
+    if (!(tunai && pay.mode === 'amt' && document.activeElement === inp)) inp.value = tunai && pay.mode === 'none' ? '' : bayar;
+    // Pilihan nominal cepat hanya untuk tunai: "Sesuai tagihan" + pecahan yang lebih besar dari tagihan (menghasilkan kembalian).
+    $('#kquick').innerHTML = tunai && tot >= 0 ? `<button type="button" class="exact ${pay.mode === 'exact' ? 'on' : ''}" data-q="exact"><span>✓ Sesuai tagihan</span><span>${rp(tot)}</span></button>` + K_DENOM.filter(d => d > tot).map(d => `<button type="button" class="${pay.mode === 'amt' && pay.amt === d ? 'on' : ''}" data-q="${d}">${rp(d)}</button>`).join('') : '';
+    const info = $('#kinfo');
+    info.className = 'kinfo';
+    if (metode === 'Tunai') {
+      if (pay.mode === 'none') info.textContent = 'Pilih "Sesuai tagihan", pecahan uang, atau ketik nominal bayar.';
+      else if (bayar >= tot) { info.classList.add('ok'); info.innerHTML = `Kembalian<big>${rp(bayar - tot)}</big>`; }
+      else { info.classList.add('bad'); info.textContent = 'Kurang ' + rp(tot - bayar); }
+    } else if (metode === 'Belum Bayar') info.textContent = buyer.id ? `Dicatat sebagai piutang ${buyer.nama} sebesar ${rp(tot)}.` : 'Pilih pembeli terdaftar (siswa/pegawai/pembeli baru) untuk Belum Bayar.';
+    else info.textContent = `Pembayaran ${metode} harus pas ${rp(tot)}.`;
+    $('#kjtbox').classList.toggle('hide', metode !== 'Belum Bayar');
+  };
+  $('#kquick').onclick = e => { const b = e.target.closest('button'); if (!b) return; pay = b.dataset.q === 'exact' ? {mode: 'exact', amt: 0} : {mode: 'amt', amt: Number(b.dataset.q)}; refreshPay(); };
+  $('#kbayar').oninput = e => { pay = e.target.value === '' ? {mode: 'none', amt: 0} : {mode: 'amt', amt: kNum(e.target.value)}; refreshPay(); };
+  $('#kdiskon').onchange = async () => {
+    const v = val('kdiskon');
+    if (v === 'rp') { const x = await askInput('Diskon (Rp)', String(disc.mode === 'rp' ? disc.v : 0)); if (x !== null) { const n = Number(x); if (!Number.isFinite(n) || n < 0) toast('Diskon tidak valid.', true); else disc = {mode: 'rp', v: Math.round(n)}; } }
+    else disc = {mode: 'pct', v: Number(v.slice(1))};
+    refreshPay();
+  };
+  kSegBind('kmetode', m => { metode = m; if (m === 'QRIS') showQRIS(); refreshPay(); });
+
   const showQRIS = () => {
     const img = S.cfg && S.cfg.QRISImage;
     if (!img) return toast('Gambar QRIS belum diatur. Lihat menu Pengaturan.', true);
-    const o = modal('QRIS', `<div class="kqris"><img src="${esc(img)}" alt="QRIS"></div><p style="text-align:center;color:var(--mute)">Pindai dengan aplikasi mobile banking.</p>`, () => {}, 'Tutup');
+    modal('QRIS', `<div class="kqris"><img src="${esc(img)}" alt="QRIS"></div><p style="text-align:center;color:var(--mute)">Pindai dengan aplikasi mobile banking.</p>`, async () => {}, 'Tutup');
   };
-  
-  const updateKembalian = () => {
-    const sub = cart.reduce((s, c) => s + c.qty * c.harga, 0), dis = Number($('#kdiskon') ? val('kdiskon') : 0), tot = sub - dis, byr = Number(val('kbayar') || 0), m = val('kmetode');
-    const info = $('#kinfo');
-    if (!info) return;
-    const pid = val('kpembeli'), cust = pid ? (D.KantinPembeli || []).find(c => c.ID === pid) : null;
-    const custInfo = cust ? ` • ${cust.Tipe === 'Siswa' ? '👨‍🎓 Siswa' : cust.Tipe === 'Pegawai' ? '👔 Pegawai' : '👤 Umum'}` : '';
-    if (m === 'Tunai') info.textContent = byr >= tot ? `Total: ${rp(tot)} • Bayar: ${rp(byr)} • Kembalian: ${rp(byr - tot)}${custInfo}` : `Total: ${rp(tot)} (kurang ${rp(tot - byr)})${custInfo}`;
-    else if (m === 'Belum Bayar') info.textContent = `Total tagihan: ${rp(tot)} (belum dibayar)${custInfo}`;
-    else info.textContent = `Total: ${rp(tot)} (harus pas untuk ${m})${custInfo}`;
+
+  /* --- waktu transaksi: tampil jam berjalan; hanya admin yang bisa mengubah --- */
+  const setNow = () => { const n = kNow(); $('#ktgl').value = n.tgl; $('#kjam').value = n.jam; };
+  setNow();
+  const jamEl = $('#kjam');
+  const clock = setInterval(() => { if (!jamEl.isConnected) clearInterval(clock); else if (!edited) setNow(); }, 15000);
+  if (adm) { $('#ktgl').onchange = $('#kjam').onchange = () => { edited = true; }; $('#know').onclick = () => { edited = false; setNow(); }; }
+
+  /* --- pembeli: ketik untuk mencari siswa / pegawai / pembeli baru --- */
+  pk = kPick($('#kbuyer'), {items: buyerItems, keep: true, placeholder: 'Pembeli Umum — ketik nama siswa/pegawai untuk mencari', max: 8, onPick: x => { buyer = x.raw; refreshPay(); }});
+  pk.setSelected({title: 'Pembeli Umum'});
+  $('#kbnew').onclick = () => custForm({}, {onSaved: c => { pembeli.push(c); buyer = {id: c.ID, nama: c.Nama, tipe: c.Tipe || 'Umum'}; pk.setSelected({title: c.Nama}); refreshPay(); }});
+
+  /* --- pencarian produk: ketik / scan alat USB + Enter / kamera (terus aktif) --- */
+  $('#ksearch').oninput = drawGrid;
+  $('#ksearch').onkeydown = e => {
+    if (e.key !== 'Enter') return;
+    e.preventDefault();
+    const q = val('ksearch'); if (!q) return;
+    const p = kByCode(produk, q) || (visible().length === 1 ? visible()[0] : null);
+    if (p) { if (addCart(p.ID)) { $('#ksearch').value = ''; drawGrid(); } }
+    else toast(/^\d{6,}$/.test(q) ? 'Barcode tidak dikenali: ' + q : 'Pilih produk dari daftar.', true);
   };
-  
+  $('#kcamscan').onclick = () => scanCode(code => { const p = kByCode(produk, code); if (p) { if (addCart(p.ID)) toast('✓ ' + p.Nama); } else toast('Barcode tidak ditemukan: ' + code, true); }, {keepOpen: true, title: 'Scan barang'});
+
   const checkout = async () => {
     if (checking) return;
     checking = true;
-    const btn = $('#kcek'); if (btn) btn.disabled = true;
+    const btn = $('#kcek'); btn.disabled = true;
     try {
-    if (!cart.length) return toast('Keranjang kosong.', true);
-    const sub = cart.reduce((s, c) => s + c.qty * c.harga, 0), dis = Number(val('kdiskon') || 0), tot = sub - dis, byr = Number(val('kbayar') || 0), m = val('kmetode'), pid = val('kpembeli');
-    if (m === 'Belum Bayar' && !pid) return toast('Pilih pembeli terdaftar untuk Belum Bayar.', true);
-    if (m === 'Belum Bayar' && byr !== 0) return toast('Belum Bayar harus bayar 0.', true);
-    if (m === 'Tunai' && byr < tot) return toast('Pembayaran tunai kurang.', true);
-    if ((m === 'Transfer' || m === 'QRIS') && byr !== tot) return toast(`Pembayaran ${m} harus pas (${rp(tot)}).`, true);
-    
-    let jatuhTempo = '';
-    if (m === 'Belum Bayar') {
-      const jt = await askInput('Jatuh tempo piutang (YYYY-MM-DD, opsional)', '');
-      if (jt === null) return;
-      jatuhTempo = (jt || '').trim();
-      if (jatuhTempo && !/^\d{4}-\d{2}-\d{2}$/.test(jatuhTempo)) return toast('Format tanggal jatuh tempo tidak valid.', true);
-    }
-    const tanggal = val('ktgl');
-    if (!await askConfirm(`Proses penjualan total ${rp(tot)} dengan ${m}?`)) return;
-    const payload = { PembeliID: pid, Items: cart.map(c => ({ ProdukID: c.pid, Jumlah: c.qty })), Diskon: dis, Bayar: m === 'Belum Bayar' ? 0 : byr, MetodeBayar: m, Tanggal: tanggal, Waktu: $('#kwaktu') ? val('kwaktu') : '', JatuhTempo: jatuhTempo, Keterangan: '' };
-    const fingerprint = JSON.stringify(payload);
-    if (pendingSale && pendingSale.fingerprint !== fingerprint) return toast('Status transaksi sebelumnya belum pasti. Periksa riwayat sebelum mengubah transaksi.', true);
-    if (!pendingSale) pendingSale = {fingerprint, RequestID: 'POS' + Date.now() + Math.random().toString(36).slice(2, 12)};
-    try {
-      const r = await api('kantinSale', Object.assign({RequestID: pendingSale.RequestID}, payload));
-      if (!r || typeof r !== 'object' || !r.Nomor || !r.ID) throw new Error('Respons transaksi tidak lengkap. Periksa riwayat penjualan sebelum mencoba lagi.');
-      const cust = pid ? ((D.KantinPembeli || []).find(c => c.ID === pid) || {}) : null;
-      const saleRec = { ID: r.ID, Nomor: r.Nomor, Tanggal: r.Tanggal, NamaPembeli: cust ? cust.Nama : 'Pembeli Umum', TipePembeli: cust ? cust.Tipe : 'Umum', MetodeBayar: r.MetodeBayar, Subtotal: r.Subtotal, Diskon: r.Diskon, Total: r.Total, Bayar: r.Bayar, Kembalian: r.Kembalian, Items: r.Items, Status: r.Status, Pengguna: S.user.Nama };
-      const action = await askChoice('Penjualan berhasil! Cetak struk?', [['thermal', '🖨️ Struk thermal'], ['pdf', '📄 Invoice PDF'], ['no', 'Lewati']]);
-      if (action === 'thermal') await tpPrint(kSaleLines(saleRec));
-      else if (action === 'pdf') kInvoicePdf(saleRec, cust);
-      cart.length = 0;
-      vKantin();
-    } catch (e) { fail(e); if (btn) btn.disabled = false; }
+      if (!cart.length) return toast('Keranjang kosong.', true);
+      const {tot, dis} = totals(), byr = payAmt(tot), pid = buyer.id;
+      if (metode === 'Belum Bayar' && !pid) return toast('Pilih pembeli terdaftar untuk Belum Bayar.', true);
+      if (metode === 'Tunai' && pay.mode === 'none') return toast('Isi nominal bayar tunai.', true);
+      if (metode === 'Tunai' && byr < tot) return toast('Pembayaran tunai kurang ' + rp(tot - byr) + '.', true);
+      const jatuhTempo = metode === 'Belum Bayar' ? val('kjt') : '';
+      if (!await askConfirm(`Proses penjualan ${rp(tot)} (${metode}) untuk ${buyer.nama}?`)) return;
+      const payload = {PembeliID: pid, Items: cart.map(c => ({ProdukID: c.pid, Jumlah: c.qty})), Diskon: dis, Bayar: byr, MetodeBayar: metode, JatuhTempo: jatuhTempo, Keterangan: ''};
+      if (adm && edited) { payload.Tanggal = val('ktgl'); payload.Jam = val('kjam'); }   // non-admin: waktu ditentukan server
+      const fingerprint = JSON.stringify(payload);
+      if (pendingSale && pendingSale.fingerprint !== fingerprint) return toast('Status transaksi sebelumnya belum pasti. Periksa riwayat penjualan sebelum mengubah transaksi.', true);
+      if (!pendingSale) pendingSale = {fingerprint, RequestID: kRid('POS')};
+      try {
+        const r = await api('kantinSale', Object.assign({RequestID: pendingSale.RequestID}, payload));
+        if (!r || typeof r !== 'object' || !r.Nomor || !r.ID) throw new Error('Respons transaksi tidak lengkap. Periksa riwayat penjualan sebelum mencoba lagi.');
+        const saleRec = {ID: r.ID, Nomor: r.Nomor, Tanggal: r.Tanggal, NamaPembeli: buyer.nama, TipePembeli: buyer.tipe || 'Umum', MetodeBayar: r.MetodeBayar, Subtotal: r.Subtotal, Diskon: r.Diskon, Total: r.Total, Bayar: r.Bayar, Kembalian: r.Kembalian, Items: r.Items, Status: r.Status, Pengguna: S.user.Nama};
+        const action = await askChoice('Penjualan berhasil! Cetak struk?', [['thermal', '🖨️ Struk thermal'], ['pdf', '📄 Invoice PDF'], ['no', 'Lewati']]);
+        if (action === 'thermal') await tpPrint(kSaleLines(saleRec));
+        else if (action === 'pdf') kInvoicePdf(saleRec, buyer.un ? {Username: buyer.un} : null);
+        cart.length = 0; pendingSale = null;
+        vKantin();
+      } catch (e) { fail(e); }
     } finally { checking = false; const b2 = $('#kcek'); if (b2) b2.disabled = false; }
   };
-  
-  render();
+  $('#kcek').onclick = checkout;
+
+  drawChips(); drawGrid(); drawCart();
 }
 
 /* Produk */
 async function kProduk(D) {
   const list = D.KantinProduk || [];
-  $('#kbody').innerHTML = `<div class="panel"><div class="act" style="margin-bottom:14px"><button class="btn" id="kadd">+ Tambah produk</button><button class="btn ghost" id="klbl">Cetak label</button></div><div class="tw"><table><tr><th></th><th>Nama</th><th>Harga Jual</th><th>Harga Beli</th><th>Stok</th><th>Min</th><th>Barcode</th><th>Kategori</th><th>Aktif</th><th></th></tr>${list.map((p, i) => { const low = Number(p.Stok) <= Number(p.StokMin); return `<tr><td>${p.Foto ? `<img class="kfoto" src="${esc(p.Foto)}" alt="${esc(p.Nama)}">` : '<div class="kfoto" style="display:grid;place-items:center;color:var(--mute)">📦</div>'}</td><td><b>${esc(p.Nama)}</b><br><small class="mut">${esc(p.Deskripsi || '-')}</small></td><td>${rp(p.HargaJual)}</td><td>${rp(p.HargaBeli)}</td><td class="${low ? 'tag r' : ''}">${p.Stok}</td><td>${p.StokMin}</td><td><small class="kbc">${esc([p.BarcodePabrik, p.BarcodeApp].filter(Boolean).join(' / ') || '-')}</small></td><td>${esc(p.Kategori || '-')}</td><td><span class="tag ${String(p.Aktif) === '1' ? 'g' : 'y'}">${String(p.Aktif) === '1' ? 'Ya' : 'Tidak'}</span></td><td class="act"><button class="btn ghost sm" data-e="${i}">Ubah</button></td></tr>`; }).join('') || '<tr><td colspan="10" class="empty">Belum ada produk.</td></tr>'}</table></div></div>`;
+  $('#kbody').innerHTML = `<div class="panel"><div class="act" style="margin-bottom:14px;flex-wrap:wrap"><button class="btn" id="kadd">+ Tambah produk</button><button class="btn ghost" id="klbl">Cetak label</button></div><div class="tw"><table><tr><th></th><th>Nama</th><th>Harga Jual</th><th>Harga Beli</th><th>Stok</th><th>Min</th><th>Barcode</th><th>Kategori</th><th>Aktif</th><th></th></tr>${list.map((p, i) => { const low = Number(p.Stok) <= Number(p.StokMin); return `<tr><td>${p.Foto ? `<img class="kfoto" src="${esc(p.Foto)}" alt="${esc(p.Nama)}" loading="lazy">` : '<div class="kfoto" style="display:grid;place-items:center;color:var(--mute)">📦</div>'}</td><td><b>${esc(p.Nama)}</b><br><small class="mut">${esc(p.Deskripsi || '-')}</small></td><td>${rp(p.HargaJual)}</td><td>${rp(p.HargaBeli)}</td><td class="${low ? 'tag r' : ''}">${p.Stok}</td><td>${p.StokMin}</td><td><small class="kbc">${esc([p.BarcodePabrik, p.BarcodeApp].filter(Boolean).join(' / ') || '-')}</small></td><td>${esc(p.Kategori || '-')}</td><td><span class="tag ${String(p.Aktif) === '1' ? 'g' : 'y'}">${String(p.Aktif) === '1' ? 'Ya' : 'Tidak'}</span></td><td class="act"><button class="btn ghost sm" data-e="${i}">Ubah</button></td></tr>`; }).join('') || '<tr><td colspan="10" class="empty">Belum ada produk.</td></tr>'}</table></div></div>`;
   $('#kadd').onclick = () => prodForm({}, list);
   $('#klbl').onclick = () => printLabels(list);
   document.querySelectorAll('[data-e]').forEach(b => b.onclick = () => prodForm(list[+b.dataset.e], list));
 }
 
-async function productScan(cb) {
-  const o = document.createElement('div'); o.className = 'ov';
-  o.innerHTML = '<div class="modal" role="dialog" aria-label="Scan barcode"><h3>Scan barcode</h3><video autoplay playsinline muted style="width:100%;border-radius:12px;background:#000"></video><p class="mut">Arahkan barcode ke kamera.</p><div class="foot"><button type="button" class="btn ghost">Batal</button></div></div>';
-  document.body.appendChild(o);
-  const v = o.querySelector('video'), msg = o.querySelector('p');
-  let stream = null, closed = false, reader = null;
-  const close = () => { closed = true; if (reader) reader.reset(); if (stream) stream.getTracks().forEach(t => t.stop()); o.remove(); };
-  o.querySelector('button').onclick = close;
-  try {
-    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) throw new Error('Kamera memerlukan HTTPS dan izin browser.');
-    stream = await navigator.mediaDevices.getUserMedia({video: {facingMode: 'environment'}, audio: false});
-    if (closed) { stream.getTracks().forEach(t => t.stop()); return; }
-    v.srcObject = stream; await v.play();
-    if (!window.ZXing) await loadScript('https://cdn.jsdelivr.net/npm/@zxing/library@0.21.3/umd/index.min.js');
-    if (closed) return;
-    if (!window.ZXing) throw new Error('Pustaka pemindai gagal dimuat. Periksa koneksi internet.');
-    reader = new ZXing.BrowserMultiFormatReader();
-    reader.decodeFromVideoElement(v, (result) => {
-      if (!closed && result) { const code = result.getText().trim(); if (code) { close(); cb(code); } }
-    });
-  } catch (e) { if (!closed) msg.textContent = 'Tidak dapat memindai: ' + (e.message || 'izinkan akses kamera dan gunakan HTTPS.'); }
-}
-
 function prodForm(p, list) {
-  const PH = {del: false}, edit = !!p.ID;
-  const categories = [...new Set(['Makanan', 'Minuman', ...list.map(x => String(x.Kategori || '').trim()), String(p.Kategori || '').trim()].filter(Boolean))].sort((a, b) => a.localeCompare(b));
-  const form = modal(edit ? 'Ubah produk' : 'Tambah produk',
+  const PH = {del: false}, edit = !!p.ID, kats = kKats(list), cur = String(p.Kategori || '').trim();
+  modal(edit ? 'Ubah produk' : 'Tambah produk',
     `${fld('pnama', 'Nama produk', p.Nama || '')}
      <div class="row">${fld('phj', 'Harga jual (Rp)', p.HargaJual || '', 'number')}${fld('phb', 'Harga beli (Rp)', p.HargaBeli || '', 'number')}</div>
-     <div class="row">${fld('pmin', 'Stok minimum', p.StokMin || 0, 'number')}<div>${sel('pkat', 'Kategori', '<option value="">Tanpa kategori</option>' + categories.map(c => `<option value="${esc(c)}" ${c === p.Kategori ? 'selected' : ''}>${esc(c)}</option>`).join('') + '<option value="__new__">+ Kategori baru…</option>')}<div id="pnewwrap" class="hide">${fld('pnewkat', 'Nama kategori baru', '')}</div></div></div>
+     <div class="row">${fld('pmin', 'Stok minimum', p.StokMin || 0, 'number')}<div><label for="pkat">Kategori</label><select id="pkat"><option value="">(Pilih kategori)</option>${kats.map(k => `<option ${k === cur ? 'selected' : ''}>${esc(k)}</option>`).join('')}<option value="__new__">➕ Tambah kategori baru…</option></select><input id="pkatnew" class="hide" maxlength="100" placeholder="Nama kategori baru" style="margin-top:8px"></div></div>
      <label><input type="checkbox" id="paktif" ${String(p.Aktif) !== '0' ? 'checked' : ''}> Aktif</label>
-     ${fld('pbcp', 'Barcode pabrik', p.BarcodePabrik || '')}<div class="act" style="margin-top:6px"><button class="btn ghost sm" id="pbscan" type="button">Scan barcode</button></div>
+     <label for="pbcp">Barcode pabrik (scan atau ketik)</label><div class="kpk-in"><input id="pbcp" value="${esc(p.BarcodePabrik || '')}" autocomplete="off"><button class="btn ghost" id="pbscan" type="button">📷 Scan</button></div>
      ${fld('pbca', 'Barcode aplikasi (kosong = ID otomatis)', p.BarcodeApp || '')}
      <label for="pdesc">Deskripsi</label><textarea id="pdesc" rows="2">${esc(p.Deskripsi || '')}</textarea>
-     <label>Foto produk (opsional, dikecilkan otomatis)</label><div class="act" style="align-items:center"><img id="pprev" alt="" style="width:64px;height:64px;border-radius:10px;object-fit:cover;background:var(--mist);border:1px solid var(--line)"><input type="file" id="pf" accept="image/*"><label class="btn ghost sm" for="pcam">Ambil foto kamera</label><input type="file" id="pcam" accept="image/*" capture="environment" style="display:none"><button class="btn del sm" id="pdel" type="button">Hapus foto</button></div>`,
+     <label>Foto produk (opsional, dikecilkan otomatis)</label><div class="act" style="align-items:center;flex-wrap:wrap"><img id="pprev" alt="" style="width:64px;height:64px;border-radius:10px;object-fit:cover;background:var(--mist);border:1px solid var(--line)"><button class="btn ghost sm" id="pcam" type="button">📷 Ambil dari kamera</button><button class="btn ghost sm" id="pfbtn" type="button">📁 Pilih file</button><input type="file" id="pf" accept="image/*" class="hide"><button class="btn del sm" id="pdel" type="button">Hapus foto</button></div>`,
     async () => {
-      const kategori = val('pkat') === '__new__' ? val('pnewkat').trim() : val('pkat');
-      if (val('pkat') === '__new__' && !kategori) throw new Error('Isi nama kategori baru.');
+      const katSel = val('pkat'), kategori = katSel === '__new__' ? val('pkatnew') : katSel;
+      if (katSel === '__new__' && !kategori) throw new Error('Isi nama kategori baru.');
       const payload = { ID: edit ? p.ID : '', Nama: val('pnama'), HargaJual: val('phj'), HargaBeli: val('phb'), StokMin: val('pmin'), Kategori: kategori, Aktif: $('#paktif').checked, BarcodePabrik: val('pbcp'), BarcodeApp: val('pbca'), Deskripsi: val('pdesc'), Foto: PH.del ? '' : (PH.foto || p.Foto || '') };
       await api('kantinSaveProduct', payload);
       toast('Produk tersimpan');
       vKantin();
     });
-  
-  form.querySelector('#pkat').onchange = e => form.querySelector('#pnewwrap').classList.toggle('hide', e.target.value !== '__new__');
-  const photo = async e => { const f = e.target.files[0]; if (!f) return; try { PH.foto = await fotoResize(f); PH.del = false; form.querySelector('#pprev').src = PH.foto; } catch (er) { fail(er); } e.target.value = ''; };
-  form.querySelector('#pf').onchange = photo; form.querySelector('#pcam').onchange = photo;
-  form.querySelector('#pdel').onclick = () => { PH.foto = ''; PH.del = true; form.querySelector('#pprev').removeAttribute('src'); };
-  form.querySelector('#pbscan').onclick = () => productScan(code => { if (form.isConnected) form.querySelector('#pbcp').value = code; });
-  if (edit && p.Foto) form.querySelector('#pprev').src = p.Foto;
+
+  const setFoto = async f => { try { PH.foto = await fotoResize(f); PH.del = false; $('#pprev').src = PH.foto; } catch (er) { fail(er); } };
+  $('#pkat').onchange = () => { const n = val('pkat') === '__new__'; $('#pkatnew').classList.toggle('hide', !n); if (n) $('#pkatnew').focus(); };
+  $('#pfbtn').onclick = () => $('#pf').click();
+  $('#pf').onchange = e => { const f = e.target.files[0]; if (f) setFoto(f); };
+  $('#pcam').onclick = () => camCapture(setFoto);
+  $('#pdel').onclick = () => { PH.foto = ''; PH.del = true; $('#pprev').removeAttribute('src'); };
+  $('#pbscan').onclick = () => scanCode(code => {
+    $('#pbcp').value = code;
+    const dup = list.find(x => x.ID !== p.ID && (kCodeEq(x.BarcodePabrik, code) || kCodeEq(x.BarcodeApp, code)));
+    toast(dup ? `Barcode ${code} sudah dipakai produk "${dup.Nama}".` : 'Barcode terbaca: ' + code, !!dup);
+  }, {title: 'Scan barcode produk'});
+  if (edit && p.Foto) $('#pprev').src = p.Foto;
 }
 
 async function printLabels(list) {
@@ -2180,68 +2350,75 @@ async function printLabels(list) {
 
 /* Stok I/O */
 async function kStok(D) {
-  const all = D.KantinStok || [], produk = D.KantinProduk || [], month = S.kanMonth_stok || '', list = kFilterMonth(all, 'Tanggal', month), months = kMonths(all, 'Tanggal');
-  $('#kbody').innerHTML = `<div class="panel noprint" style="max-width:320px">${sel('kmon', 'Bulan', '<option value="">Semua bulan</option>' + months.map(m => `<option value="${m}" ${m === month ? 'selected' : ''}>${bln(m)}</option>`).join(''))}</div>
-    <div class="panel"><div class="act" style="margin-bottom:14px"><button class="btn" id="ksin">+ Stok Masuk</button><button class="btn ghost" id="ksout">− Stok Keluar</button><button class="btn ghost" id="kcsv">Export CSV</button></div><div class="tw"><table><tr><th>Tanggal</th><th>Produk</th><th>Tipe</th><th>Jumlah</th><th>Harga/unit</th><th>Total</th><th>Keterangan</th><th>Pengguna</th></tr>${list.map(s => `<tr><td>${esc(s.Tanggal)}</td><td>${esc(s.NamaProduk)}</td><td><span class="tag ${s.Tipe === 'Masuk' ? 'g' : 'y'}">${esc(s.Tipe)}</span></td><td>${s.Jumlah}</td><td>${rp(s.Harga)}</td><td>${rp(s.Total)}</td><td>${esc(s.Keterangan || '-')}</td><td>${esc(s.Pengguna)}</td></tr>`).join('') || '<tr><td colspan="8" class="empty">Belum ada riwayat stok.</td></tr>'}</table></div></div>`;
-  $('#kmon').onchange = () => { S.kanMonth_stok = val('kmon'); kStok(D); };
-  $('#ksin').onclick = () => stockForm('Masuk', produk);
-  $('#ksout').onclick = () => stockForm('Keluar', produk);
-  $('#kcsv').onclick = () => kCsvExport(list, [['Tanggal', 'Tanggal'], ['Produk', 'NamaProduk'], ['Tipe', 'Tipe'], ['Jumlah', 'Jumlah'], ['Harga', 'Harga'], ['Total', 'Total'], ['Keterangan', 'Keterangan'], ['Pengguna', 'Pengguna']], 'stok-kantin' + (month ? '-' + month : ''));
+  const all = D.KantinStok || [], produk = D.KantinProduk || [];
+  const draw = () => {
+    const F = kFilt('stok', all, 'Tanggal'), list = F.list;
+    $('#kbody').innerHTML = F.html + `<div class="panel"><div class="act" style="margin-bottom:14px;flex-wrap:wrap"><button class="btn" id="ksin">+ Stok Masuk</button><button class="btn ghost" id="ksout">− Stok Keluar</button><button class="btn ghost" id="kcsv">Export CSV</button></div><div class="tw"><table><tr><th>Tanggal</th><th>Produk</th><th>Tipe</th><th>Jumlah</th><th>Harga/unit</th><th>Total</th><th>Keterangan</th><th>Pengguna</th></tr>${list.map(s => `<tr><td>${esc(kTs(s.Tanggal))}</td><td>${esc(s.NamaProduk)}</td><td><span class="tag ${s.Tipe === 'Masuk' ? 'g' : 'y'}">${esc(s.Tipe)}</span></td><td>${s.Jumlah}</td><td>${Number(s.Harga) ? rp(s.Harga) : '-'}</td><td>${Number(s.Total) ? rp(s.Total) : '-'}</td><td>${esc(s.Keterangan || '-')}</td><td>${esc(s.Pengguna)}</td></tr>`).join('') || '<tr><td colspan="8" class="empty">Belum ada riwayat stok.</td></tr>'}</table></div></div>`;
+    kFiltBind('stok', draw);
+    $('#ksin').onclick = () => stockForm('Masuk', produk);
+    $('#ksout').onclick = () => stockForm('Keluar', produk);
+    $('#kcsv').onclick = () => kCsvExport(list, [['Tanggal', 'Tanggal'], ['Produk', 'NamaProduk'], ['Tipe', 'Tipe'], ['Jumlah', 'Jumlah'], ['Harga', 'Harga'], ['Total', 'Total'], ['Keterangan', 'Keterangan'], ['Pengguna', 'Pengguna']], 'stok-kantin' + (F.pre ? '-' + F.pre : ''));
+  };
+  draw();
 }
 
 function stockForm(tipe, produk) {
-  const requestID = 'PUR' + Date.now() + Math.random().toString(36).slice(2, 12);
-  const form = modal(`Stok ${tipe}`,
-    `<label for="spsearch">Cari nama / scan barcode</label><div class="act"><input id="spsearch" placeholder="Cari produk atau scan barcode"><button type="button" class="btn ghost" id="spscan">📷</button></div><datalist id="spchoices">${produk.map(p => `<option value="${esc(p.Nama)}">`).join('')}</datalist>
-     ${sel('spid', 'Produk', '<option value="">Pilih produk</option>' + produk.map(p => `<option value="${esc(p.ID)}">${esc(p.Nama)} (stok: ${p.Stok})</option>`).join(''))}
-     ${fld('sjml', 'Jumlah unit', '', 'number')}
-     ${tipe === 'Masuk' ? `<label><input type="checkbox" id="spurchase"> Catat sebagai pembelanjaan</label><div id="spurchasefields" class="hide">${fld('ssupplier', 'Supplier', '')}${fld('sharga', 'Harga per unit (Rp)', '', 'number')}${fld('sbayar', 'Bayar (Rp)', '', 'number')}${cashShortcuts('sbayar')}${sel('smetode', 'Metode bayar', ['Tunai', 'Transfer', 'QRIS'].map(m => `<option>${m}</option>`).join(''))}${fld('sjatuh', 'Jatuh tempo hutang', '', 'date')}</div>` : ''}
-     ${fld('sket', 'Keterangan', '')}
-     ${fld('stgl', 'Tanggal', today(), 'date')}`,
+  const masuk = tipe === 'Masuk', reqID = kRid('STK');
+  let sel = null, beli = false, metode = 'Tunai';
+  const upd = () => {
+    const jml = kNum($('#sjml').value), box = $('#sprod');
+    if (sel) {
+      const after = (Number(sel.Stok) || 0) + (masuk ? jml : -jml);
+      box.classList.remove('hide');
+      box.innerHTML = `<div><b>${esc(sel.Nama)}</b><small>${esc(sel.Kategori || 'Tanpa kategori')} • Stok sekarang ${sel.Stok}</small></div><div class="kn ${after < 0 ? 'neg' : ''}">${jml ? '→ ' + after : sel.Stok}<small style="display:block;font:500 11px Figtree,sans-serif">stok ${jml ? 'setelah ' + (masuk ? 'masuk' : 'keluar') : ''}</small></div>`;
+    } else box.classList.add('hide');
+    if (masuk && beli) $('#stot').textContent = rp(jml * kNum($('#sharga').value));
+  };
+  modal(`Stok ${tipe}`,
+    `<label>Produk (ketik nama, pilih dari daftar, atau scan barcode)</label><div id="spick"></div><div id="sprod" class="kselprod hide"></div>
+     <div class="row">${fld('sjml', 'Jumlah', '', 'number')}${fld('stgl', 'Tanggal', kNow().tgl, 'date')}</div>
+     ${masuk ? `<label class="kswitch" for="sbeli"><input type="checkbox" id="sbeli"><span class="ksw-ui"></span><span class="ksw-tx"><b>🧾 Ceklis Pembelanjaan</b><small>Centang bila stok ini dibeli: isi harga per unit &amp; metode bayar, otomatis tercatat di Pembelanjaan, Keuangan, dan Hutang (bila Hutang Belanja). Tidak dicentang = hanya menambah stok.</small></span></label>
+     <div id="sbuy" class="kbuy hide"><div class="row">${fld('sharga', 'Harga per unit (Rp)', '', 'number')}${fld('ssup', 'Supplier / toko', '')}</div><div class="ktot"><span>Total pembelanjaan</span><b id="stot">Rp0</b></div><label>Metode pembayaran</label>${kSeg('smet', ['Tunai', 'Transfer', 'QRIS', 'Hutang Belanja'], 'Tunai')}<div id="sjtbox" class="hide">${fld('sjt', 'Jatuh tempo hutang (opsional)', '', 'date')}<small class="mut">Supplier wajib diisi untuk Hutang Belanja.</small></div></div>` : ''}
+     ${fld('sket', 'Keterangan', '')}`,
     async () => {
-      if ($('#spurchase') && $('#spurchase').checked) {
-        await api('kantinPurchase', {RequestID: requestID, Supplier: val('ssupplier'), Tanggal: val('stgl'), Items: [{ProdukID: val('spid'), Jumlah: val('sjml'), Harga: val('sharga')}], Bayar: val('sbayar'), MetodeBayar: val('smetode'), JatuhTempo: val('sjatuh'), Keterangan: val('sket')});
-      } else await api('kantinStock', { ProdukID: val('spid'), Tipe: tipe, Jumlah: val('sjml'), Harga: 0, MetodeBayar: 'Tunai', Keterangan: val('sket'), Tanggal: val('stgl') });
-      toast('Stok tercatat');
+      if (!sel) throw new Error('Pilih produk terlebih dahulu.');
+      const jml = kNum(val('sjml')); if (jml < 1) throw new Error('Jumlah harus lebih dari 0.');
+      const payload = {ProdukID: sel.ID, Tipe: tipe, Jumlah: jml, Tanggal: val('stgl'), Keterangan: val('sket')};
+      if (masuk && beli) {
+        if (val('sharga') === '') throw new Error('Isi harga per unit.');
+        if (metode === 'Hutang Belanja' && val('ssup').length < 2) throw new Error('Supplier wajib diisi untuk Hutang Belanja.');
+        Object.assign(payload, {Pembelanjaan: true, RequestID: reqID, Harga: kNum(val('sharga')), MetodeBayar: metode, Supplier: val('ssup'), JatuhTempo: metode === 'Hutang Belanja' ? val('sjt') : ''});
+      }
+      await api('kantinStock', payload);
+      toast(masuk && beli ? 'Pembelanjaan & stok tercatat' : 'Stok tercatat');
       vKantin();
-    });
-  const search = $('#spsearch');
-  const pick = q => { const p = produk.find(x => [x.BarcodePabrik, x.BarcodeApp, x.Nama].some(v => String(v || '').toLowerCase() === q.toLowerCase())); if (p) $('#spid').value = p.ID; return p; };
-  search.oninput = () => { const q = search.value.trim().toLowerCase(); $('#spid').value = ''; Array.from($('#spid').options).forEach(o => { const p = produk.find(x => x.ID === o.value); if (p) o.hidden = !!q && ![p.Nama, p.BarcodePabrik, p.BarcodeApp].some(v => String(v || '').toLowerCase().includes(q)); }); };
-  search.onkeydown = e => { if (e.key === 'Enter') { e.preventDefault(); if (!pick(search.value.trim())) toast('Produk tidak ditemukan.', true); } };
-  $('#spscan').onclick = () => productScan(code => { search.value = code; if (!pick(code)) toast('Barcode tidak ditemukan.', true); });
-  if ($('#spurchase')) $('#spurchase').onchange = () => $('#spurchasefields').classList.toggle('hide', !$('#spurchase').checked);
-  form.querySelectorAll('[data-cash]').forEach(b => b.onclick = () => { $('#sbayar').value = b.dataset.cash === 'exact' ? (Number(val('sjml')) || 0) * (Number(val('sharga')) || 0) : Number(b.dataset.cash); });
-}
+    }, 'Simpan');
 
-/* Filter bulan + CSV export (dipakai beberapa tab riwayat kantin) */
-const kMonths = (list, field) => [...new Set(list.map(x => String(x[field] || '').slice(0, 7)).filter(Boolean))].sort().reverse();
-const kFilterMonth = (list, field, month) => month ? list.filter(x => String(x[field] || '').startsWith(month)) : list;
-function kCsvExport(rows, cols, name) {
-  if (!rows.length) return toast('Tidak ada data untuk diekspor.', true);
-  const esc2 = v => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
-  const csv = [cols.map(c => esc2(c[0])).join(',')].concat(rows.map(r => cols.map(c => esc2(typeof c[1] === 'function' ? c[1](r) : r[c[1]])).join(','))).join('\r\n');
-  saveBlob(new Blob(['\ufeff' + csv], {type: 'text/csv;charset=utf-8'}), name + '.csv');
+  const pk = kPick($('#spick'), {items: () => kProdItems(produk, p => 'Stok ' + p.Stok), scan: true, byCode: c => { const p = kByCode(produk, c); return p ? kProdItems([p], q => 'Stok ' + q.Stok)[0] : null; }, placeholder: 'Cari produk / scan barcode', max: 8, onPick: x => { sel = x.raw; if (masuk && beli && val('sharga') === '' && Number(sel.HargaBeli)) $('#sharga').value = sel.HargaBeli; upd(); $('#sjml').focus(); }});
+  $('#sjml').oninput = upd;
+  if (masuk) {
+    $('#sharga').oninput = upd;
+    $('#sbeli').onchange = e => { beli = e.target.checked; $('#sbuy').classList.toggle('hide', !beli); if (beli && sel && val('sharga') === '' && Number(sel.HargaBeli)) $('#sharga').value = sel.HargaBeli; upd(); };
+    kSegBind('smet', m => { metode = m; $('#sjtbox').classList.toggle('hide', m !== 'Hutang Belanja'); });
+  }
+  pk.focus();
 }
 
 /* Penjualan (riwayat) */
 async function kPenjualan(D) {
   const all = D.KantinPenjualan || [];
-  const month = S.kanMonth_jual || '';
-  const list = kFilterMonth(all, 'Tanggal', month);
-  const months = kMonths(all, 'Tanggal');
-  const totOmset = list.reduce((s, x) => s + Number(x.Total), 0);
-  $('#kbody').innerHTML = `<div class="panel noprint" style="max-width:320px">${sel('kmon', 'Bulan', '<option value="">Semua bulan</option>' + months.map(m => `<option value="${m}" ${m === month ? 'selected' : ''}>${bln(m)}</option>`).join(''))}</div>
-    <div class="stats"><div class="stat"><b>${rp(totOmset)}</b><span>Total omset</span></div><div class="stat"><b>${list.length}</b><span>Jumlah transaksi</span></div></div>
-    <div class="panel"><button class="btn ghost" id="kcsv" style="margin-bottom:14px">Export CSV</button><div class="tw"><table><tr><th>Tanggal</th><th>Nomor</th><th>Pembeli</th><th>Tipe</th><th>Total</th><th>Bayar</th><th>Status</th><th>Metode</th><th>Pengguna</th><th></th></tr>${list.map((r, i) => `<tr><td>${esc(r.Tanggal)}</td><td>${esc(r.Nomor)}</td><td><b>${esc(r.NamaPembeli)}</b></td><td><span class="tag ${r.TipePembeli === 'Siswa' ? 'g' : r.TipePembeli === 'Pegawai' ? '' : 'y'}">${esc(r.TipePembeli || 'Umum')}</span></td><td>${rp(r.Total)}</td><td>${rp(r.Bayar)}</td><td><span class="tag ${r.Status === 'Lunas' ? 'g' : 'y'}">${esc(r.Status)}</span></td><td>${esc(r.MetodeBayar)}</td><td>${esc(r.Pengguna)}</td><td class="act"><button class="btn ghost sm" data-r="${i}" title="Struk thermal">🖨️</button><button class="btn ghost sm" data-inv="${i}" title="Invoice PDF">📄 PDF</button></td></tr>`).join('') || '<tr><td colspan="10" class="empty">Belum ada penjualan.</td></tr>'}</table></div></div>`;
-  $('#kmon').onchange = () => { S.kanMonth_jual = val('kmon'); kPenjualan(D); };
-  $('#kcsv').onclick = () => kCsvExport(list, [['Tanggal', 'Tanggal'], ['Nomor', 'Nomor'], ['Pembeli', 'NamaPembeli'], ['Tipe', 'TipePembeli'], ['Total', 'Total'], ['Bayar', 'Bayar'], ['Status', 'Status'], ['Metode', 'MetodeBayar'], ['Pengguna', 'Pengguna']], 'penjualan-kantin' + (month ? '-' + month : ''));
-  document.querySelectorAll('[data-r]').forEach(b => b.onclick = async () => {
-    const r = list[+b.dataset.r], items = kParseItems(r.Items);
-    await tpPrint(kSaleLines(r));
-  });
-  document.querySelectorAll('[data-inv]').forEach(b => b.onclick = () => kInvoicePdf(list[+b.dataset.inv], (D.KantinPembeli || []).find(c => c.ID === list[+b.dataset.inv].PembeliID)));
+  const draw = () => {
+    const F = kFilt('jual', all, 'Tanggal'), list = F.list, totOmset = list.reduce((s, x) => s + Number(x.Total), 0);
+    $('#kbody').innerHTML = F.html + `<div class="stats"><div class="stat"><b>${rp(totOmset)}</b><span>Total omset</span></div><div class="stat"><b>${list.length}</b><span>Jumlah transaksi</span></div></div>
+    <div class="panel"><button class="btn ghost" id="kcsv" style="margin-bottom:14px">Export CSV</button><div class="tw"><table><tr><th>Tanggal</th><th>Nomor</th><th>Pembeli</th><th>Tipe</th><th>Total</th><th>Bayar</th><th>Status</th><th>Metode</th><th>Pengguna</th><th></th></tr>${list.map((r, i) => `<tr><td>${esc(kTs(r.Tanggal))}</td><td>${esc(r.Nomor)}</td><td><b>${esc(r.NamaPembeli)}</b></td><td><span class="tag ${r.TipePembeli === 'Siswa' ? 'g' : r.TipePembeli === 'Pegawai' ? '' : 'y'}">${esc(r.TipePembeli || 'Umum')}</span></td><td>${rp(r.Total)}</td><td>${rp(r.Bayar)}</td><td><span class="tag ${r.Status === 'Lunas' ? 'g' : 'y'}">${esc(r.Status)}</span></td><td>${esc(r.MetodeBayar)}</td><td>${esc(r.Pengguna)}</td><td class="act"><button class="btn ghost sm" data-r="${i}" title="Struk thermal">🖨️</button><button class="btn ghost sm" data-inv="${i}" title="Invoice PDF">📄 PDF</button></td></tr>`).join('') || '<tr><td colspan="10" class="empty">Belum ada penjualan.</td></tr>'}</table></div></div>`;
+    kFiltBind('jual', draw);
+    $('#kcsv').onclick = () => kCsvExport(list, [['Tanggal', 'Tanggal'], ['Nomor', 'Nomor'], ['Pembeli', 'NamaPembeli'], ['Tipe', 'TipePembeli'], ['Total', 'Total'], ['Bayar', 'Bayar'], ['Status', 'Status'], ['Metode', 'MetodeBayar'], ['Pengguna', 'Pengguna']], 'penjualan-kantin' + (F.pre ? '-' + F.pre : ''));
+    document.querySelectorAll('[data-r]').forEach(b => b.onclick = async () => { await tpPrint(kSaleLines(list[+b.dataset.r])); });
+    document.querySelectorAll('[data-inv]').forEach(b => b.onclick = () => kInvoicePdf(list[+b.dataset.inv], (D.KantinPembeli || []).find(c => c.ID === list[+b.dataset.inv].PembeliID)));
+  };
+  draw();
 }
+
 const kParseItems = s => { try { const a = Array.isArray(s) ? s : JSON.parse(s || '[]'); return Array.isArray(a) ? a : []; } catch (e) { return []; } };
 const kTender = r => (Number(r.Bayar) || 0) + (r.MetodeBayar === 'Tunai' ? (Number(r.Kembalian) || 0) : 0);
 const kSaleLines = r => kRcLines({ID: r.ID, Nomor: r.Nomor, Tanggal: r.Tanggal, Pembeli: r.NamaPembeli, TipePembeli: r.TipePembeli, Metode: r.MetodeBayar, Subtotal: r.Subtotal, Diskon: r.Diskon, Total: r.Total, Bayar: kTender(r), Kembalian: r.Kembalian, Items: kParseItems(r.Items), Pengguna: r.Pengguna});
@@ -2283,101 +2460,113 @@ function kInvoicePdf(r, cust) {
   try { d.save('INV-' + (r.Nomor || r.ID) + '.pdf'); } catch (e) { window.open(d.output('bloburl')); }
 }
 
-/* Pembelanjaan */
+/* Pembelanjaan: pengeluaran barang/biaya tanpa jumlah unit. Menambah stok? Pakai Stok Masuk + Ceklis Pembelanjaan. */
 async function kPurchase(D) {
-  const all = D.KantinPembelanjaan || [], produk = D.KantinProduk || [], month = S.kanMonth_beli || '', list = kFilterMonth(all, 'Tanggal', month), months = kMonths(all, 'Tanggal');
-  $('#kbody').innerHTML = `<div class="panel noprint" style="max-width:320px">${sel('kmon', 'Bulan', '<option value="">Semua bulan</option>' + months.map(m => `<option value="${m}" ${m === month ? 'selected' : ''}>${bln(m)}</option>`).join(''))}</div>
-    <div class="panel"><div class="act" style="margin-bottom:14px"><button class="btn" id="kadd">+ Tambah pembelanjaan</button><button class="btn ghost" id="kcsv">Export CSV</button></div><div class="tw"><table><tr><th>Tanggal</th><th>Nomor</th><th>Supplier</th><th>Total</th><th>Bayar</th><th>Sisa</th><th>Status</th><th>Metode</th><th>Pengguna</th></tr>${list.map(r => `<tr><td>${esc(r.Tanggal)}</td><td>${esc(r.Nomor)}</td><td>${esc(r.Supplier)}</td><td>${rp(r.Total)}</td><td>${rp(r.Bayar)}</td><td>${rp(r.Sisa)}</td><td><span class="tag ${r.Status === 'Lunas' ? 'g' : 'y'}">${esc(r.Status)}</span></td><td>${esc(r.MetodeBayar)}</td><td>${esc(r.Pengguna)}</td></tr>`).join('') || '<tr><td colspan="9" class="empty">Belum ada pembelanjaan.</td></tr>'}</table></div></div>`;
-  $('#kmon').onchange = () => { S.kanMonth_beli = val('kmon'); kPurchase(D); };
-  $('#kadd').onclick = () => purchForm(produk);
-  $('#kcsv').onclick = () => kCsvExport(list, [['Tanggal', 'Tanggal'], ['Nomor', 'Nomor'], ['Supplier', 'Supplier'], ['Total', 'Total'], ['Bayar', 'Bayar'], ['Sisa', 'Sisa'], ['Status', 'Status'], ['Metode', 'MetodeBayar'], ['Pengguna', 'Pengguna']], 'pembelanjaan-kantin' + (month ? '-' + month : ''));
+  const all = D.KantinPembelanjaan || [], produk = D.KantinProduk || [];
+  const rincian = r => kParseItems(r.Items).map(it => (it.Nama || it.nama) + (Number(it.Jumlah) > 1 ? ' ×' + it.Jumlah : '')).join(', ');
+  const draw = () => {
+    const F = kFilt('beli', all, 'Tanggal'), list = F.list, tot = list.reduce((s, x) => s + Number(x.Total || 0), 0), sisa = list.reduce((s, x) => s + Number(x.Sisa || 0), 0);
+    $('#kbody').innerHTML = F.html + `<div class="stats"><div class="stat"><b>${rp(tot)}</b><span>Total pembelanjaan</span></div><div class="stat"><b class="${sisa ? 'neg' : ''}">${rp(sisa)}</b><span>Belum dibayar (hutang)</span></div></div>
+    <div class="panel"><div class="act" style="margin-bottom:14px;flex-wrap:wrap"><button class="btn" id="kadd">+ Tambah pembelanjaan</button><button class="btn ghost" id="kcsv">Export CSV</button></div><div class="tw"><table><tr><th>Tanggal</th><th>Nomor</th><th>Supplier</th><th>Rincian</th><th>Total</th><th>Bayar</th><th>Sisa</th><th>Status</th><th>Metode</th><th>Pengguna</th></tr>${list.map(r => `<tr><td>${esc(kTs(r.Tanggal))}</td><td>${esc(r.Nomor)}</td><td>${esc(r.Supplier)}</td><td><small>${esc(rincian(r) || '-')}</small></td><td>${rp(r.Total)}</td><td>${rp(r.Bayar)}</td><td>${rp(r.Sisa)}</td><td><span class="tag ${r.Status === 'Lunas' ? 'g' : 'y'}">${esc(r.Status)}</span></td><td>${esc(r.MetodeBayar)}</td><td>${esc(r.Pengguna)}</td></tr>`).join('') || '<tr><td colspan="10" class="empty">Belum ada pembelanjaan.</td></tr>'}</table></div></div>`;
+    kFiltBind('beli', draw);
+    $('#kadd').onclick = () => purchForm(produk);
+    $('#kcsv').onclick = () => kCsvExport(list, [['Tanggal', 'Tanggal'], ['Nomor', 'Nomor'], ['Supplier', 'Supplier'], ['Rincian', rincian], ['Total', 'Total'], ['Bayar', 'Bayar'], ['Sisa', 'Sisa'], ['Status', 'Status'], ['Metode', 'MetodeBayar'], ['Pengguna', 'Pengguna']], 'pembelanjaan-kantin' + (F.pre ? '-' + F.pre : ''));
+  };
+  draw();
 }
 
 function purchForm(produk) {
-  const items = [{ pid: '', nama: '', qty: 1, harga: 0 }];
-  const reqID = 'PUR' + Date.now() + Math.random().toString(36).slice(2, 12);
+  const reqID = kRid('PUR'), items = [{nama: '', harga: ''}];
+  let metode = 'Tunai';
+  const upd = () => { $('#ptotal').textContent = rp(items.reduce((s, it) => s + (Number(it.harga) || 0), 0)); };
   const render = () => {
-    $('#pitems').innerHTML = items.map((it, i) => `<div style="border-bottom:1px solid var(--line);padding:8px 0"><div class="act"><input id="ps${i}" placeholder="Cari nama / scan barcode"><button type="button" class="btn ghost sm" data-scan="${i}">📷</button></div>${sel('pi' + i, 'Produk', '<option value="">Item non-stok</option>' + produk.map(p => `<option value="${esc(p.ID)}" ${it.pid === p.ID ? 'selected' : ''}>${esc(p.Nama)}</option>`).join(''))}${it.pid ? `<label>Jumlah unit</label><input id="pq${i}" type="number" min="1" value="${it.qty}">` : `<input id="pn${i}" placeholder="Nama item" value="${esc(it.nama)}">`}<label>${it.pid ? 'Harga per unit' : 'Harga total'}</label><input id="ph${i}" type="number" min="0" value="${it.harga}"><button type="button" class="btn del sm" data-x="${i}">Hapus item</button></div>`).join('') + '<button class="btn ghost sm" id="padd" type="button">+ Tambah item</button>';
+    $('#pitems').innerHTML = items.map((it, i) => `<div class="kbuy-row"><div id="pk${i}"></div><input id="ph${i}" type="number" inputmode="numeric" min="0" placeholder="Harga (Rp)" value="${it.harga === '' ? '' : it.harga}" aria-label="Harga barang ${i + 1}"><button class="btn del sm" type="button" data-x="${i}" ${items.length < 2 ? 'disabled' : ''} aria-label="Hapus barang">×</button></div>`).join('');
     items.forEach((it, i) => {
-      const pickProd = p => { if (!p) return; items[i].pid = p.ID; items[i].nama = p.Nama; items[i].harga = Number(p.HargaBeli); render(); };
-      const spid = $('#pi' + i); if (spid) spid.onchange = () => { if (!spid.value) { items[i].pid = ''; render(); } else pickProd(produk.find(x => x.ID === spid.value)); };
-      const search = $('#ps' + i);
-      if (search) {
-        search.oninput = () => { const q = search.value.trim().toLowerCase(); Array.from(spid.options).forEach(o => { const p = produk.find(x => x.ID === o.value); if (p) o.hidden = !!q && ![p.Nama, p.BarcodePabrik, p.BarcodeApp].some(v => String(v || '').toLowerCase().includes(q)); }); };
-        search.onkeydown = e => { if (e.key !== 'Enter') return; e.preventDefault(); const q = search.value.trim().toLowerCase(); const p = produk.find(x => [x.Nama, x.BarcodePabrik, x.BarcodeApp].some(v => String(v || '').toLowerCase() === q)); if (p) pickProd(p); else toast('Produk tidak ditemukan.', true); };
-      }
-      const updateTotal = () => { $('#ptotal').textContent = 'Total: ' + rp(items.reduce((s, x) => s + (x.pid ? x.qty * x.harga : x.harga), 0)); };
-      const qin = $('#pq' + i); if (qin) qin.oninput = () => { items[i].qty = Number(qin.value) || 0; updateTotal(); };
-      const hin = $('#ph' + i); if (hin) hin.oninput = () => { items[i].harga = Number(hin.value) || 0; updateTotal(); };
-      const nin = $('#pn' + i); if (nin) nin.oninput = () => items[i].nama = nin.value;
+      const pk = kPick($('#pk' + i), {items: () => kProdItems(produk, p => Number(p.HargaBeli) ? rp(p.HargaBeli) : ''), scan: true, placeholder: 'Nama barang — ketik, pilih, atau scan', max: 6,
+        byCode: c => { const p = kByCode(produk, c); return p ? kProdItems([p], q => Number(q.HargaBeli) ? rp(q.HargaBeli) : '')[0] : null; },
+        onText: t => { it.nama = t; },
+        onPick: x => { it.nama = x.raw.Nama; pk.setText(x.raw.Nama); if (it.harga === '' && Number(x.raw.HargaBeli)) { it.harga = Number(x.raw.HargaBeli); $('#ph' + i).value = it.harga; } upd(); $('#ph' + i).focus(); }});
+      pk.setText(it.nama);
+      $('#ph' + i).oninput = e => { it.harga = e.target.value === '' ? '' : kNum(e.target.value); upd(); };
     });
     document.querySelectorAll('#pitems [data-x]').forEach(b => b.onclick = () => { items.splice(+b.dataset.x, 1); render(); });
-    document.querySelectorAll('#pitems [data-scan]').forEach(b => b.onclick = () => productScan(code => { const p = produk.find(x => String(x.BarcodePabrik) === code || String(x.BarcodeApp) === code); if (p) { items[+b.dataset.scan].pid = p.ID; items[+b.dataset.scan].nama = p.Nama; items[+b.dataset.scan].harga = Number(p.HargaBeli); render(); } else toast('Barcode tidak ditemukan: ' + code, true); }));
-    if ($('#padd')) $('#padd').onclick = () => { items.push({ pid: '', nama: '', qty: 1, harga: 0 }); render(); };
-    const tot = items.reduce((s, it) => s + (it.pid ? it.qty * it.harga : it.harga), 0);
-    $('#ptotal').textContent = 'Total: ' + rp(tot);
+    upd();
   };
-  
-  const purchaseModal = modal('Tambah pembelanjaan',
-    `${fld('psupplier', 'Supplier', '')}
-     ${fld('ptgl', 'Tanggal', today(), 'date')}
-     <label>Item pembelanjaan</label><div id="pitems"></div><div id="ptotal" style="font-weight:700;margin-top:6px"></div>
-     ${fld('pbayar', 'Bayar (Rp)', '', 'number')}${cashShortcuts('pbayar')}
-     ${sel('pmetode', 'Metode', ['Tunai', 'Transfer', 'QRIS'].map(m => `<option>${m}</option>`).join(''))}
-     ${fld('pjatuh', 'Jatuh tempo hutang (opsional, jika Bayar < Total)', '', 'date')}
+  modal('Tambah pembelanjaan',
+    `<div class="row">${fld('psupplier', 'Supplier / toko', '')}${fld('ptgl', 'Tanggal', kNow().tgl, 'date')}</div>
+     <label>Barang / biaya yang dibeli</label><div id="pitems"></div><button class="btn ghost sm" id="padd" type="button">+ Tambah barang</button>
+     <small class="mut" style="display:block;margin-top:8px">Pembelanjaan ini hanya mencatat pengeluaran (tanpa jumlah unit). Untuk menambah stok produk, gunakan Stok → Stok Masuk lalu centang <b>Ceklis Pembelanjaan</b>.</small>
+     <div class="ktot"><span>Total</span><b id="ptotal">Rp0</b></div>
+     <label>Metode pembayaran</label>${kSeg('pmet', ['Tunai', 'Transfer', 'QRIS', 'Hutang Belanja'], 'Tunai')}
+     <div id="pjtbox" class="hide">${fld('pjatuh', 'Jatuh tempo hutang (opsional)', '', 'date')}<small class="mut">Hutang Belanja tidak mengurangi kas sekarang; otomatis masuk ke tab Hutang. Supplier wajib diisi.</small></div>
      ${fld('pket', 'Keterangan', '')}`,
     async () => {
-      const payload = { RequestID: reqID, Supplier: val('psupplier'), Tanggal: val('ptgl'), Items: items.map(it => ({ ProdukID: it.pid || '', Nama: it.nama, Jumlah: it.pid ? it.qty : 1, Harga: it.harga })), Bayar: val('pbayar'), MetodeBayar: val('pmetode'), JatuhTempo: val('pjatuh'), Keterangan: val('pket') };
-      await api('kantinPurchase', payload);
-      toast('Pembelanjaan tercatat');
+      const rows = items.filter(it => String(it.nama).trim() || it.harga !== '');
+      if (!rows.length) throw new Error('Isi minimal satu barang.');
+      rows.forEach((it, i) => { if (!String(it.nama).trim()) throw new Error('Nama barang #' + (i + 1) + ' wajib diisi.'); if (!(Number(it.harga) > 0)) throw new Error('Harga barang #' + (i + 1) + ' wajib diisi.'); });
+      if (metode === 'Hutang Belanja' && val('psupplier').length < 2) throw new Error('Supplier wajib diisi untuk Hutang Belanja.');
+      await api('kantinPurchase', {RequestID: reqID, Supplier: val('psupplier'), Tanggal: val('ptgl'), Items: rows.map(it => ({Nama: String(it.nama).trim(), Harga: kNum(it.harga)})), MetodeBayar: metode, JatuhTempo: metode === 'Hutang Belanja' ? val('pjatuh') : '', Keterangan: val('pket')});
+      toast(metode === 'Hutang Belanja' ? 'Pembelanjaan dicatat sebagai hutang' : 'Pembelanjaan tercatat');
       vKantin();
     });
-  
+  $('#padd').onclick = () => { items.push({nama: '', harga: ''}); render(); };
+  kSegBind('pmet', m => { metode = m; $('#pjtbox').classList.toggle('hide', m !== 'Hutang Belanja'); });
   render();
-  purchaseModal.querySelectorAll('[data-cash]').forEach(b => b.onclick = () => {
-    const tot = items.reduce((s, it) => s + (it.pid ? it.qty * it.harga : it.harga), 0);
-    $('#pbayar').value = b.dataset.cash === 'exact' ? tot : Number(b.dataset.cash);
-  });
 }
 
-/* Pembeli */
+/* Pembeli: siswa & pegawai otomatis dari data pengguna; tabel ini hanya untuk pembeli baru (database terpisah) */
 async function kPembeli(D) {
-  const list = D.KantinPembeli || [], users = D.Users || [];
-  $('#kbody').innerHTML = `<div class="panel"><button class="btn" id="kadd" style="margin-bottom:14px">+ Tambah pembeli eksternal</button><small class="mut" style="display:block;margin-bottom:10px">Siswa dan pegawai terdaftar otomatis muncul sebagai pembeli (tag "Otomatis") - tidak perlu didaftarkan manual. Form di sini khusus pembeli eksternal (bukan siswa/pegawai).</small><div class="tw"><table><tr><th>Nama</th><th>Tipe</th><th>Username</th><th>Telepon</th><th>Alamat</th><th>Catatan</th><th></th></tr>${list.map((c, i) => `<tr><td><b>${esc(c.Nama)}</b>${c.Otomatis ? ' <span class="tag">Otomatis</span>' : ''}</td><td><span class="tag">${esc(c.Tipe)}</span></td><td>${esc(c.Username || '-')}</td><td>${esc(c.Telepon || '-')}</td><td><small>${esc(c.Alamat || '-')}</small></td><td><small>${esc(c.Catatan || '-')}</small></td><td class="act">${c.Otomatis ? '' : `<button class="btn ghost sm" data-e="${i}">Ubah</button>`}</td></tr>`).join('') || '<tr><td colspan="7" class="empty">Belum ada pembeli.</td></tr>'}</table></div></div>`;
-  $('#kadd').onclick = () => custForm({}, users);
-  document.querySelectorAll('[data-e]').forEach(b => b.onclick = () => custForm(list[+b.dataset.e], users));
+  const list = D.KantinPembeli || [], users = (D.Users || []).map(u => ({...u, Tipe: u.Role === 'siswa' ? 'Siswa' : 'Pegawai'}));
+  const nSis = users.filter(u => u.Tipe === 'Siswa').length, nPeg = users.length - nSis;
+  $('#kbody').innerHTML = `<div class="stats"><div class="stat"><b>${nSis}</b><span>Siswa (otomatis)</span></div><div class="stat"><b>${nPeg}</b><span>Pegawai (otomatis)</span></div><div class="stat"><b>${list.length}</b><span>Pembeli baru (terpisah)</span></div></div>
+  <div class="panel"><h3>Pembeli baru</h3><p class="mut" style="margin:-6px 0 12px">Untuk pembeli yang tidak ada di data Siswa/Pegawai. Disimpan terpisah.</p><button class="btn" id="kadd" style="margin-bottom:14px">+ Pembeli baru</button><div class="tw"><table><tr><th>Nama</th><th>Tipe</th><th>Telepon</th><th>Alamat</th><th>Catatan</th><th></th></tr>${list.map((c, i) => `<tr><td><b>${esc(c.Nama)}</b></td><td><span class="tag">${esc(c.Tipe)}</span></td><td>${esc(c.Telepon || '-')}</td><td><small>${esc(c.Alamat || '-')}</small></td><td><small>${esc(c.Catatan || '-')}</small></td><td class="act"><button class="btn ghost sm" data-e="${i}">Ubah</button></td></tr>`).join('') || '<tr><td colspan="6" class="empty">Belum ada pembeli baru.</td></tr>'}</table></div></div>
+  <div class="panel"><h3>Siswa &amp; Pegawai (otomatis menjadi pembeli)</h3><p class="mut" style="margin:-6px 0 12px">Diambil dari data pengguna; tidak perlu registrasi ulang. Pilih langsung di POS Kasir.</p><div class="row"><div><input id="kuq" type="search" placeholder="Cari nama / username…" autocomplete="off"></div><div><select id="kut" aria-label="Filter tipe"><option value="">Semua tipe</option><option>Siswa</option><option>Pegawai</option></select></div></div><div class="tw" id="kulist"></div></div>`;
+  $('#kadd').onclick = () => custForm({});
+  document.querySelectorAll('[data-e]').forEach(b => b.onclick = () => custForm(list[+b.dataset.e]));
+  const drawU = () => {
+    const q = val('kuq').toLowerCase(), t = val('kut'), f = users.filter(u => (!t || u.Tipe === t) && (!q || (u.Nama + ' ' + u.Username + ' ' + (u.Kelompok || '')).toLowerCase().includes(q)));
+    $('#kulist').innerHTML = `<table><tr><th>Nama</th><th>Tipe</th><th>Username</th><th>Kelompok / jenjang</th></tr>${f.slice(0, 100).map(u => `<tr><td><b>${esc(u.Nama)}</b></td><td><span class="tag ${u.Tipe === 'Siswa' ? 'g' : ''}">${u.Tipe}</span></td><td>${esc(u.Username)}</td><td>${esc(u.Kelompok || u.Jenjang || '-')}</td></tr>`).join('') || '<tr><td colspan="4" class="empty">Tidak ada yang cocok.</td></tr>'}</table>${f.length > 100 ? `<small class="mut">Menampilkan 100 dari ${f.length}. Persempit dengan pencarian.</small>` : ''}`;
+  };
+  $('#kuq').oninput = drawU; $('#kut').onchange = drawU; drawU();
 }
 
-function custForm(c, users) {
-  const edit = !!c.ID;
-  modal(edit ? 'Ubah pembeli' : 'Tambah pembeli',
-    `${fld('cnama', 'Nama pembeli', c.Nama || '')}
-     ${sel('ctipe', 'Tipe', (edit ? ['Umum', 'Siswa', 'Pegawai'] : ['Umum']).map(t => `<option ${t === c.Tipe ? 'selected' : ''}>${t}</option>`).join(''))}
-     ${sel('cun', 'Link ke user (data lama)', '<option value="">-</option>' + (edit ? users : []).map(u => `<option value="${esc(u.Username)}" ${u.Username === c.Username ? 'selected' : ''}>${esc(u.Nama)} (${esc(u.Role)})</option>`).join(''))}
+// onSaved(rec): dipakai POS agar keranjang tidak hilang saat menambah pembeli baru.
+function custForm(c, opt) {
+  opt = opt || {}; const edit = !!c.ID;
+  modal(edit ? 'Ubah pembeli' : 'Pembeli baru',
+    `<p class="mut" style="margin:0 0 4px">Siswa &amp; pegawai sudah otomatis bisa menjadi pembeli. Form ini hanya untuk pembeli baru di luar data pengguna.</p>
+     ${fld('cnama', 'Nama pembeli', c.Nama || '')}
      ${fld('ctel', 'Telepon', c.Telepon || '', 'tel')}
      <label for="calam">Alamat</label><textarea id="calam" rows="2">${esc(c.Alamat || '')}</textarea>
      <label for="ccat">Catatan</label><textarea id="ccat" rows="2">${esc(c.Catatan || '')}</textarea>`,
     async () => {
-      await api('kantinSaveCustomer', { ID: edit ? c.ID : '', Nama: val('cnama'), Tipe: val('ctipe'), Username: val('cun'), Telepon: val('ctel'), Alamat: val('calam'), Catatan: val('ccat') });
+      const rec = {ID: edit ? c.ID : '', Nama: val('cnama'), Tipe: edit ? (c.Tipe || 'Umum') : 'Umum', Username: edit ? (c.Username || '') : '', Telepon: val('ctel'), Alamat: val('calam'), Catatan: val('ccat')};
+      const id = await api('kantinSaveCustomer', rec);
       toast('Pembeli tersimpan');
-      vKantin();
+      if (opt.onSaved) opt.onSaved(Object.assign({}, rec, {ID: id})); else vKantin();
     });
 }
 
 /* Keuangan (ledger + modal) */
 async function kKeuangan(D) {
-  const all = D.KantinKeuangan || [], month = S.kanMonth_keu || '', list = kFilterMonth(all, 'Tanggal', month), months = kMonths(all, 'Tanggal');
-  const sum = rows => rows.reduce((s, x) => s + (x.Tipe === 'Masuk' ? 1 : -1) * Number(x.Jumlah || 0), 0);
-  const totIn = list.filter(x => x.Tipe === 'Masuk').reduce((s, x) => s + Number(x.Jumlah), 0);
-  const totOut = list.filter(x => x.Tipe === 'Keluar').reduce((s, x) => s + Number(x.Jumlah), 0);
-  const saldo = totIn - totOut;
-  
-  $('#kbody').innerHTML = `<div class="panel noprint" style="max-width:320px">${sel('kmon', 'Bulan', '<option value="">Semua bulan</option>' + months.map(m => `<option value="${m}" ${m === month ? 'selected' : ''}>${bln(m)}</option>`).join(''))}</div>
-    <div class="stats">${[[rp(totIn), 'Total masuk'], [rp(totOut), 'Total keluar'], [rp(saldo), 'Saldo gabungan']].concat(['Tunai', 'Transfer', 'QRIS'].map(m => [rp(sum(all.filter(x => x.MetodeBayar === m))), 'Saldo ' + m])).map(s => `<div class="stat"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('')}</div>
-    <div class="panel"><div class="act" style="margin-bottom:14px"><button class="btn" id="kadd">+ Modal / Penarikan</button><button class="btn ghost" id="kcsv">Export CSV</button></div><div class="tw"><table><tr><th>Tanggal</th><th>Tipe</th><th>Kategori</th><th>Jumlah</th><th>Metode</th><th>Keterangan</th><th>Pengguna</th></tr>${list.map(r => `<tr><td>${esc(r.Tanggal)}</td><td><span class="tag ${r.Tipe === 'Masuk' ? 'g' : 'y'}">${esc(r.Tipe)}</span></td><td>${esc(r.Kategori)}</td><td>${rp(r.Jumlah)}</td><td>${esc(r.MetodeBayar)}</td><td><small>${esc(r.Keterangan || '-')}</small></td><td>${esc(r.Pengguna)}</td></tr>`).join('') || '<tr><td colspan="7" class="empty">Belum ada transaksi.</td></tr>'}</table></div></div>`;
-  $('#kmon').onchange = () => { S.kanMonth_keu = val('kmon'); kKeuangan(D); };
-  $('#kadd').onclick = () => capForm();
-  $('#kcsv').onclick = () => kCsvExport(list, [['Tanggal', 'Tanggal'], ['Tipe', 'Tipe'], ['Kategori', 'Kategori'], ['Jumlah', 'Jumlah'], ['Metode', 'MetodeBayar'], ['Keterangan', 'Keterangan'], ['Pengguna', 'Pengguna']], 'keuangan-kantin' + (month ? '-' + month : ''));
+  const all = D.KantinKeuangan || [], num = x => Number(x.Jumlah) || 0, signed = rows => rows.reduce((s, x) => s + (x.Tipe === 'Masuk' ? 1 : -1) * num(x), 0);
+  const M = [['Tunai', '💵', '#1f9d78'], ['Transfer', '🏦', '#2a7de1'], ['QRIS', '📱', '#e8a317']];
+  const bal = M.map(m => signed(all.filter(x => x.MetodeBayar === m[0]))), grand = signed(all), sumPos = bal.reduce((s, v) => s + Math.max(0, v), 0), other = grand - bal.reduce((s, v) => s + v, 0);
+  const draw = () => {
+    const F = kFilt('keu', all, 'Tanggal'), list = F.list;
+    const totIn = list.filter(x => x.Tipe === 'Masuk').reduce((s, x) => s + num(x), 0), totOut = list.filter(x => x.Tipe === 'Keluar').reduce((s, x) => s + num(x), 0), net = totIn - totOut;
+    const cls = v => v < 0 ? 'neg' : '';
+    $('#kbody').innerHTML = `<div class="kfin">
+      <div class="kfin-hero"><div style="position:relative;z-index:1"><span class="kfin-lb">Saldo gabungan</span><b class="kfin-big ${cls(grand)}">${rp(grand)}</b><small>Tunai + Transfer + QRIS • seluruh waktu${other ? ' • termasuk ' + rp(other) + ' metode lain' : ''}</small></div>
+        <div class="kfin-bar" aria-hidden="true">${M.map((m, i) => sumPos ? `<i style="width:${Math.max(0, bal[i]) / sumPos * 100}%;background:${m[2]}"></i>` : '').join('')}</div></div>
+      <div class="kfin-methods">${M.map((m, i) => `<div class="kfin-m" style="--c:${m[2]}"><div class="ic">${m[1]}</div><span>Saldo ${m[0]}</span><b class="${cls(bal[i])}">${rp(bal[i])}</b><div class="pbar"><i style="width:${sumPos ? Math.max(0, bal[i]) / sumPos * 100 : 0}%"></i></div><small>${sumPos ? Math.round(Math.max(0, bal[i]) / sumPos * 100) : 0}% dari total saldo</small></div>`).join('')}</div>
+      <div class="kfin-flow"><div class="kfin-f in"><span>▲ Total masuk</span><b>${rp(totIn)}</b><small>${esc(F.label)}</small></div><div class="kfin-f out"><span>▼ Total keluar</span><b>${rp(totOut)}</b><small>${esc(F.label)}</small></div><div class="kfin-f net"><span>≈ Selisih periode</span><b class="${cls(net)}">${rp(net)}</b><small>Masuk − keluar • ${esc(F.label)}</small></div></div>
+    </div>` + F.html + `<div class="panel"><div class="act" style="margin-bottom:14px;flex-wrap:wrap"><button class="btn" id="kadd">+ Modal / Penarikan</button><button class="btn ghost" id="kcsv">Export CSV</button></div><div class="tw"><table><tr><th>Tanggal</th><th>Tipe</th><th>Kategori</th><th>Jumlah</th><th>Metode</th><th>Keterangan</th><th>Pengguna</th></tr>${list.map(r => `<tr><td>${esc(kTs(r.Tanggal))}</td><td><span class="tag ${r.Tipe === 'Masuk' ? 'g' : 'y'}">${esc(r.Tipe)}</span></td><td>${esc(r.Kategori)}</td><td><b class="${r.Tipe === 'Masuk' ? 'pos' : 'neg'}">${r.Tipe === 'Masuk' ? '+' : '−'}${rp(r.Jumlah)}</b></td><td>${esc(r.MetodeBayar)}</td><td><small>${esc(r.Keterangan || '-')}</small></td><td>${esc(r.Pengguna)}</td></tr>`).join('') || '<tr><td colspan="7" class="empty">Belum ada transaksi.</td></tr>'}</table></div></div>`;
+    kFiltBind('keu', draw);
+    $('#kadd').onclick = () => capForm();
+    $('#kcsv').onclick = () => kCsvExport(list, [['Tanggal', 'Tanggal'], ['Tipe', 'Tipe'], ['Kategori', 'Kategori'], ['Jumlah', 'Jumlah'], ['Metode', 'MetodeBayar'], ['Keterangan', 'Keterangan'], ['Pengguna', 'Pengguna']], 'keuangan-kantin' + (F.pre ? '-' + F.pre : ''));
+  };
+  draw();
 }
 
 function capForm() {
@@ -2394,23 +2583,23 @@ function capForm() {
     });
 }
 
-/* Piutang */
-async function kPiutang(D) {
-  const list = D.KantinPiutang || [];
-  $('#kbody').innerHTML = `<div class="panel"><div class="tw"><table><tr><th>Tanggal</th><th>Pembeli</th><th>Total</th><th>Terbayar</th><th>Sisa</th><th>Jatuh tempo</th><th>Status</th><th></th></tr>${list.map((r, i) => `<tr><td>${esc(r.Tanggal)}</td><td>${esc(r.NamaPembeli)}</td><td>${rp(r.Total)}</td><td>${rp(r.Terbayar)}</td><td>${rp(r.Sisa)}</td><td>${esc(r.JatuhTempo || '-')}</td><td><span class="tag ${r.Status === 'Lunas' ? 'g' : 'y'}">${esc(r.Status)}</span></td><td class="act">${r.Status !== 'Lunas' ? `<button class="btn sm" data-s="${i}">Bayar</button>` : ''}</td></tr>`).join('') || '<tr><td colspan="8" class="empty">Belum ada piutang.</td></tr>'}</table></div></div>`;
-  document.querySelectorAll('[data-s]').forEach(b => b.onclick = () => settleForm('Piutang', list[+b.dataset.s]));
+/* Piutang & Hutang (filter bulan/tanggal pada tanggal pencatatan) */
+async function kDebt(D, tipe) {
+  const piut = tipe === 'Piutang', all = piut ? (D.KantinPiutang || []) : (D.KantinHutang || []), key = piut ? 'piut' : 'hut';
+  const draw = () => {
+    const F = kFilt(key, all, 'Tanggal'), list = F.list, sisa = list.reduce((s, x) => s + Number(x.Sisa || 0), 0);
+    $('#kbody').innerHTML = F.html + `<div class="stats"><div class="stat"><b class="${sisa ? 'neg' : ''}">${rp(sisa)}</b><span>Sisa ${piut ? 'piutang' : 'hutang'} (tampilan ini)</span></div><div class="stat"><b>${list.filter(x => x.Status !== 'Lunas').length}</b><span>Belum lunas</span></div></div>
+    <div class="panel"><div class="tw"><table><tr><th>Tanggal</th><th>${piut ? 'Pembeli' : 'Supplier'}</th><th>Total</th><th>Terbayar</th><th>Sisa</th><th>Jatuh tempo</th><th>Status</th><th></th></tr>${list.map((r, i) => `<tr><td>${esc(kTs(r.Tanggal))}</td><td>${esc(piut ? r.NamaPembeli : r.Supplier)}</td><td>${rp(r.Total)}</td><td>${rp(r.Terbayar)}</td><td>${rp(r.Sisa)}</td><td>${esc(r.JatuhTempo || '-')}</td><td><span class="tag ${r.Status === 'Lunas' ? 'g' : 'y'}">${esc(r.Status)}</span></td><td class="act">${r.Status !== 'Lunas' ? `<button class="btn sm" data-s="${i}">Bayar</button>` : ''}</td></tr>`).join('') || `<tr><td colspan="8" class="empty">Belum ada ${piut ? 'piutang' : 'hutang'}.</td></tr>`}</table></div></div>`;
+    kFiltBind(key, draw);
+    document.querySelectorAll('[data-s]').forEach(b => b.onclick = () => settleForm(tipe, list[+b.dataset.s]));
+  };
+  draw();
 }
-
-/* Hutang */
-async function kHutang(D) {
-  const list = D.KantinHutang || [];
-  $('#kbody').innerHTML = `<div class="panel"><div class="tw"><table><tr><th>Tanggal</th><th>Supplier</th><th>Total</th><th>Terbayar</th><th>Sisa</th><th>Jatuh tempo</th><th>Status</th><th></th></tr>${list.map((r, i) => `<tr><td>${esc(r.Tanggal)}</td><td>${esc(r.Supplier)}</td><td>${rp(r.Total)}</td><td>${rp(r.Terbayar)}</td><td>${rp(r.Sisa)}</td><td>${esc(r.JatuhTempo || '-')}</td><td><span class="tag ${r.Status === 'Lunas' ? 'g' : 'y'}">${esc(r.Status)}</span></td><td class="act">${r.Status !== 'Lunas' ? `<button class="btn sm" data-s="${i}">Bayar</button>` : ''}</td></tr>`).join('') || '<tr><td colspan="8" class="empty">Belum ada hutang.</td></tr>'}</table></div></div>`;
-  document.querySelectorAll('[data-s]').forEach(b => b.onclick = () => settleForm('Hutang', list[+b.dataset.s]));
-}
+const kPiutang = D => kDebt(D, 'Piutang'), kHutang = D => kDebt(D, 'Hutang');
 
 function settleForm(tipe, rec) {
   modal(`Bayar ${tipe}`,
-    `<p><b>${tipe}: ${tipe === 'Piutang' ? rec.NamaPembeli : rec.Supplier}</b><br>Total: ${rp(rec.Total)} • Terbayar: ${rp(rec.Terbayar)} • Sisa: ${rp(rec.Sisa)}</p>
+    `<p><b>${tipe}: ${esc(tipe === 'Piutang' ? rec.NamaPembeli : rec.Supplier)}</b><br>Total: ${rp(rec.Total)} • Terbayar: ${rp(rec.Terbayar)} • Sisa: ${rp(rec.Sisa)}</p>
      ${fld('sjml', 'Jumlah bayar (Rp)', rec.Sisa, 'number')}
      ${sel('smet', 'Metode', ['Tunai', 'Transfer', 'QRIS'].map(m => `<option>${m}</option>`).join(''))}`,
     async () => {
@@ -3252,22 +3441,119 @@ async function showQR(code, nama) {
   const q = window.qrcode(0, 'M'); q.addData(code); q.make();
   modal('QR: ' + nama, `<div style="text-align:center">${q.createSvgTag({cellSize: 6, margin: 2})}<h3 style="margin-top:8px;word-break:break-all">${esc(code)}</h3></div>`, async () => {}, 'Tutup');
 }
-async function scanCode(cb) {
-  const o = modal('Scan kode', '<video id="sv" autoplay playsinline muted style="width:100%;border-radius:12px;background:#000"></video><p id="sm" style="color:var(--mute)">Arahkan QR code atau barcode ke kamera.</p>', async () => {}, 'Tutup');
-  let st = null, stop = false; const close = () => { stop = true; if (st) st.getTracks().forEach(t => t.stop()); o.remove(); };
-  o.querySelector('#mc').onclick = close; o.querySelector('#ms').onclick = close;
-  try { st = await navigator.mediaDevices.getUserMedia({video: {facingMode: 'environment'}}); } catch (e) { $('#sm').textContent = 'Kamera tidak dapat dibuka. Buka aplikasi lewat alamat GitHub (https) dan izinkan kamera.'; return; }
-  const v = $('#sv'); v.srcObject = st; let det = null;
-  if ('BarcodeDetector' in window) { try { det = new BarcodeDetector(); } catch (e) {} }
-  if (!det && !window.jsQR) await loadJs('https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js');
+/* Pemindai barcode/QR. Urutan mesin: BarcodeDetector bawaan browser (dengan daftar format eksplisit) -> ZXing (dimuat saat dibutuhkan; membaca EAN/UPC/Code128/dll) -> jsQR (hanya QR).
+   opt.keepOpen = pemindai tetap terbuka dan callback dipanggil untuk setiap kode baru (mode kasir). */
+const SCAN_FMT = ['ean_13', 'ean_8', 'upc_a', 'upc_e', 'code_128', 'code_39', 'code_93', 'itf', 'codabar', 'qr_code'];
+const ZX_URLS = ['https://cdn.jsdelivr.net/npm/@zxing/library@0.21.3/umd/index.min.js', 'https://unpkg.com/@zxing/library@0.21.3/umd/index.min.js'];
+async function loadZXing() {
+  if (window.ZXing) return true;
+  for (const u of ZX_URLS) { try { await loadScript(u); if (window.ZXing) return true; } catch (e) {} }
+  return false;
+}
+function zxReader() {
+  const Z = window.ZXing, B = Z.BarcodeFormat, hints = new Map();
+  hints.set(Z.DecodeHintType.POSSIBLE_FORMATS, [B.EAN_13, B.EAN_8, B.UPC_A, B.UPC_E, B.CODE_128, B.CODE_39, B.CODE_93, B.ITF, B.CODABAR, B.QR_CODE]);
+  hints.set(Z.DecodeHintType.TRY_HARDER, true);
+  const r = new Z.MultiFormatReader(); r.setHints(hints);
+  return cv => {
+    try {
+      const bmp = new Z.BinaryBitmap(new Z.HybridBinarizer(new Z.HTMLCanvasElementLuminanceSource(cv)));
+      return r.decodeWithState(bmp).getText();
+    } catch (e) { return ''; }   // NotFoundException = belum ada barcode di frame ini (normal)
+  };
+}
+async function scanCode(cb, opt) {
+  opt = opt || {};
+  const o = modal(opt.title || 'Scan kode', `<div class="scanbox"><video id="sv" autoplay playsinline muted></video><i class="scanframe"></i></div>
+    <p id="sm" class="mut" style="margin:10px 0 6px;font-weight:600">Menyiapkan kamera…</p>
+    <div class="kbtn-row"><button class="btn ghost sm hide" id="storch" type="button">🔦 Senter</button></div>
+    <label for="scode">Atau ketik / tempel kode (alat scan USB juga bisa diarahkan ke sini)</label>
+    <div class="kpk-in"><input id="scode" placeholder="Ketik kode lalu Enter" autocomplete="off"><button class="btn sm" id="sgo" type="button">Pakai</button></div>`, async () => {}, opt.keepOpen ? 'Selesai' : 'Tutup');
+  o.querySelector('#mc').classList.add('hide');
+  let st = null, stop = false, last = '', lastAt = 0;
+  const say = t => { const m = o.querySelector('#sm'); if (m) m.textContent = t; };
+  const close = () => { stop = true; if (st) st.getTracks().forEach(t => t.stop()); o.remove(); };
+  o.querySelector('#ms').onclick = close;
+  const got = raw => {
+    const code = String(raw || '').trim(); if (!code) return false;
+    const now = Date.now(); if (code === last && now - lastAt < 2500) return false;   // cegah baca ganda barang yang sama
+    last = code; lastAt = now;
+    try { navigator.vibrate && navigator.vibrate(60); } catch (e) {}
+    if (opt.keepOpen) { say('✓ ' + code); cb(code); return false; }
+    close(); cb(code); return true;
+  };
+  const manual = () => { const i = o.querySelector('#scode'); if (got(i.value)) return; i.value = ''; i.focus(); };
+  o.querySelector('#sgo').onclick = manual;
+  o.querySelector('#scode').onkeydown = e => { if (e.key === 'Enter') { e.preventDefault(); manual(); } };
+
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { say('Kamera tidak tersedia (butuh alamat https dan browser yang mendukung kamera). Ketik kodenya di bawah.'); return; }
+  try { st = await navigator.mediaDevices.getUserMedia({video: {facingMode: {ideal: 'environment'}, width: {ideal: 1280}, height: {ideal: 720}}, audio: false}); }
+  catch (e) { say(e && e.name === 'NotAllowedError' ? 'Izin kamera ditolak. Izinkan kamera pada pengaturan browser, atau ketik kodenya di bawah.' : 'Kamera tidak dapat dibuka. Ketik kodenya di bawah.'); return; }
+  if (stop) { st.getTracks().forEach(t => t.stop()); return; }   // modal ditutup saat menunggu izin kamera
+  const v = o.querySelector('#sv'); v.srcObject = st; try { await v.play(); } catch (e) {}
+  const track = st.getVideoTracks()[0];
+  try {
+    const caps = track.getCapabilities ? track.getCapabilities() : {};
+    if (caps.focusMode && caps.focusMode.includes('continuous')) await track.applyConstraints({advanced: [{focusMode: 'continuous'}]});
+    if (caps.torch) { const tb = o.querySelector('#storch'); let on = false; tb.classList.remove('hide'); tb.onclick = async () => { on = !on; try { await track.applyConstraints({advanced: [{torch: on}]}); } catch (e) { on = !on; } }; }
+  } catch (e) {}
+
+  let det = null, zx = null;
+  if ('BarcodeDetector' in window) { try { const sup = await window.BarcodeDetector.getSupportedFormats(), f = SCAN_FMT.filter(x => sup.includes(x)); if (f.length) det = new window.BarcodeDetector({formats: f}); } catch (e) {} }
+  if (!det) { say('Memuat pemindai…'); if (await loadZXing()) { try { zx = zxReader(); } catch (e) { zx = null; } } if (!zx && !window.jsQR) { try { await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js'); } catch (e) {} } }
+  if (stop) return;
+  if (!det && !zx && !window.jsQR) { say('Pemindai gagal dimuat (periksa koneksi internet). Ketik kodenya di bawah.'); return; }
+  say(det || zx ? 'Arahkan barcode ke dalam bingkai (jarak ±10–20 cm, cukup terang, barcode lurus).' : 'Pemindai barcode batang gagal dimuat, hanya QR yang terbaca. Ketik kodenya di bawah.');
+
   const cv = document.createElement('canvas'), cx = cv.getContext('2d', {willReadFrequently: true});
+  let busy = false;
   const tick = async () => {
-    if (stop) return; let code = '';
-    try { if (v.videoWidth) { if (det) { const r = await det.detect(v); if (r.length) code = r[0].rawValue; } else if (window.jsQR) { cv.width = v.videoWidth; cv.height = v.videoHeight; cx.drawImage(v, 0, 0); const im = cx.getImageData(0, 0, cv.width, cv.height), j = jsQR(im.data, im.width, im.height); if (j) code = j.data; } } } catch (e) {}
-    if (code) { close(); cb(code.trim()); return; } setTimeout(tick, 250);
+    if (stop) return;
+    if (!busy && v.videoWidth && v.readyState >= 2) {
+      busy = true;
+      try {
+        let code = '';
+        if (det) { const r = await det.detect(v); if (r.length) code = r[0].rawValue; }
+        else {
+          const sc = Math.min(1, 1280 / v.videoWidth); cv.width = Math.round(v.videoWidth * sc); cv.height = Math.round(v.videoHeight * sc);
+          cx.drawImage(v, 0, 0, cv.width, cv.height);
+          if (zx) code = zx(cv);
+          else if (window.jsQR) { const im = cx.getImageData(0, 0, cv.width, cv.height), j = window.jsQR(im.data, im.width, im.height); if (j) code = j.data; }
+        }
+        if (code && got(code)) return;
+      } catch (e) {}
+      busy = false;
+    }
+    setTimeout(tick, 120);
   };
   tick();
 }
+
+/* Ambil foto langsung dari kamera (mengembalikan File ke callback). Bila kamera tidak bisa dibuka, memakai input file bawaan ponsel. */
+async function camCapture(cb) {
+  const viaFile = () => { const i = document.createElement('input'); i.type = 'file'; i.accept = 'image/*'; i.setAttribute('capture', 'environment'); i.onchange = () => { if (i.files[0]) cb(i.files[0]); }; i.click(); };
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return viaFile();
+  let st = null, facing = 'environment', stopped = false;
+  const stopStream = () => { stopped = true; if (st) st.getTracks().forEach(t => t.stop()); st = null; };
+  const start = async () => {
+    if (st) st.getTracks().forEach(t => t.stop());
+    st = await navigator.mediaDevices.getUserMedia({video: {facingMode: {ideal: facing}, width: {ideal: 1280}, height: {ideal: 960}}, audio: false});
+    if (stopped) { st.getTracks().forEach(t => t.stop()); return; }
+    const v = o.querySelector('#cv_v'); v.srcObject = st; try { await v.play(); } catch (e) {}
+  };
+  const o = modal('Ambil foto produk', `<div class="scanbox"><video id="cv_v" autoplay playsinline muted></video></div><p class="mut" id="cv_m" style="margin:10px 0 0">Posisikan produk di tengah, lalu tekan Ambil foto.</p><div class="kbtn-row" style="margin-top:8px"><button class="btn ghost sm" id="cv_sw" type="button">🔄 Balik kamera</button></div>`, async () => {
+    const v = o.querySelector('#cv_v'); if (!st || !v.videoWidth) throw new Error('Kamera belum siap, tunggu sebentar.');
+    const c = document.createElement('canvas'); c.width = v.videoWidth; c.height = v.videoHeight; c.getContext('2d').drawImage(v, 0, 0);
+    const blob = await new Promise(r => c.toBlob(r, 'image/jpeg', .9));
+    if (!blob) throw new Error('Gagal mengambil gambar.');
+    stopStream(); cb(new File([blob], 'foto-produk.jpg', {type: 'image/jpeg'}));
+  }, '📸 Ambil foto');
+  o.querySelector('#mc').onclick = () => { stopStream(); o.remove(); };
+  o.querySelector('#cv_sw').onclick = async () => { facing = facing === 'environment' ? 'user' : 'environment'; try { await start(); } catch (e) { toast('Kamera tidak dapat dibalik.', true); } };
+  try { await start(); }
+  catch (e) { stopStream(); o.remove(); toast('Kamera tidak dapat dibuka (' + ((e && e.name) || 'error') + '). Memakai pilihan file.', true); viaFile(); }
+}
+
 const turnList = (v, u, p) => { const urls = []; String(v || '').split(/[\s,]+/).filter(Boolean).forEach(h => { if (/^turns?:/i.test(h)) urls.push(h); else { urls.push('turn:' + h); urls.push('turn:' + h + '?transport=tcp'); } }); return {urls, username: u, credential: p}; };
 const testTurn = (v, u, p) => new Promise(res => {
   if (!v || !u || !p) return res({ok: false, m: 'Isi alamat, username, dan password TURN terlebih dahulu.'});
